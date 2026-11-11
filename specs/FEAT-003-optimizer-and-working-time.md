@@ -80,7 +80,7 @@ Work = driving + service + waiting (Core Domain Rule 9). Breaks and rests are no
 
 **FR-6 `DAILY_REST`** lasts 660 min and resets `work_today`, `drive_today`, `work_since_break`, `drive_since_break`, `breaks_today` and `day_start_at`. Its location is the stop where it is taken or "en route" on a leg.
 
-**FR-7 `advance_wait(s, W)`.** If `W ≥ 660`: the wait is taken as a `DAILY_REST` of length `W`. Otherwise the wait counts as work for all work counters and is splittable; a break that falls due inside the wait is taken inside it and does not extend it; a daily limit reached inside the wait starts a 660-minute `DAILY_REST`.
+**FR-7 `advance_wait(s, W)`.** If `W ≥ 660`: the wait is taken as a `DAILY_REST` of length `W`. Otherwise the wait counts as work for all work counters and is splittable; a break that falls due inside the wait overlaps it. If the full break cannot fit before the nominal wait ends, it finishes afterwards and delays service; only the overlapping portion replaces waiting work. The normal time-window validator rejects a plan when this delay misses its window. A daily limit reached inside the wait starts a 660-minute `DAILY_REST`.
 
 **FR-8 Initial state.** Counters come from the driver's `DriverState` snapshot. If `work_today_min > 0`, `day_start_at = last_daily_rest_end`; otherwise it is unset until the first activity. `breaks_today` starts at 0. Weeks run Monday 00:00 – Sunday 24:00 in the time zone of the driver's home base; when the clock crosses that boundary, `drive_prev_week = drive_week` and the weekly counters reset.
 
