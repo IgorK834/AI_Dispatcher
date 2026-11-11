@@ -6,7 +6,7 @@ owner: project owner
 requirements: [REQ-021, REQ-032, REQ-033, NFR-008, NFR-009, NFR-013, NFR-014]
 adrs: [ADR-0001, ADR-0007, ADR-0009, ADR-0015]
 modules: [repo root, apps/api (skeleton), apps/web (skeleton), scripts, .github/workflows]
-revision: 5
+revision: 6
 ---
 
 # FEAT-000: Monorepo, tooling and ci-fast
@@ -53,7 +53,7 @@ The project is built by AI coding agents behind quality gates ([`docs/report.md`
 - **FR-9 Makefile.** Targets: `check` (lint + types + unit tests for both apps), `test-props`, `test-agents`, `test-db`, `openapi`, `trace`, `e2e`, `bench`, `dev-api`, `dev-web`, `seed-fleet`. Targets for later features exist and print "not available until FEAT-xxx" instead of failing silently. The README never requires `make`.
 - **FR-10 pre-commit.** Hooks: ruff format and check, Prettier, ESLint on staged files, gitleaks, end-of-file and trailing-whitespace fixers.
 - **FR-11 `export_openapi.py`.** Imports the app, writes `contracts/openapi.json` with sorted keys and a trailing newline. Running it twice gives byte-identical output. `--check` exits non-zero when the committed file differs.
-- **FR-12 `trace.py`.** Parses `specs/FEAT-*.md` for AC IDs and status, scans tests for `@pytest.mark.ac("…")` and `[AC-…]` titles, optionally reads JUnit XML, writes `docs/traceability.md`. `--check` fails when an AC of an `approved`/`implemented` specification has no test, when a test names an unknown AC, or when an `implemented` specification has a failing test.
+- **FR-12 `trace.py`.** Parses `specs/FEAT-*.md` for AC IDs and status, scans tests for `@pytest.mark.ac("…")` and `[AC-…]` titles, optionally reads JUnit XML, writes `docs/traceability.md`. `--check` fails when an AC of an `implemented` specification has no test, when a test names an unknown AC, when a specification has malformed front matter, or when an `implemented` specification has a failing test. ACs of `approved` specifications without a test are reported as pending, not as errors, so that specifications approved ahead of their slice do not block `ci-fast`.
 - **FR-13 `check_spec_touch.py`.** Given a git diff range, fails when files under `contracts/`, `apps/api/migrations/`, `apps/api/src/routepilot/agents/prompts/` or `apps/api/src/routepilot/agents/tools/` changed and no file under `specs/` changed in the same range.
 - **FR-14 Agent-instruction files in sync.** A check (`check_spec_touch.py --agent-docs`) verifies: `CLAUDE.md` starts with the line `@AGENTS.md`; `AGENTS.md` has at most 150 lines and mentions `context.md`; neither file contains a path listed as a command or file in "Project quick facts" that contradicts the repository (each path marked as existing must exist).
 - **FR-15 Architecture rules.** import-linter contracts encode the backend table of `context.md` → Module Boundaries and the layer order `api → service → domain / repository`. ESLint boundaries encode the frontend feature rules.
@@ -100,7 +100,7 @@ Both endpoints are part of `contracts/openapi.json`.
 - **AC-FEAT-000-05** [integration] Given the repository When `make check` runs Then ruff, mypy `--strict`, ESLint (`--max-warnings=0`), Prettier check, `tsc --noEmit`, pytest unit tests and Vitest all run, and the target fails if any of them fails.
 - **AC-FEAT-000-06** [integration] Given a staged file that contains a string shaped like an API key When `pre-commit run` executes Then the gitleaks hook fails; and Given a badly formatted Python file Then the ruff hook fails or fixes it.
 - **AC-FEAT-000-07** [contract] Given the app When `scripts/export_openapi.py` runs twice Then the two outputs are byte-identical; and Given a committed `contracts/openapi.json` that differs from the app When `export_openapi.py --check` runs Then it exits non-zero.
-- **AC-FEAT-000-08** [unit] Given a fixture specification with status `approved` and an AC without a test When `trace.py --check` runs Then it fails and names the AC; Given a test that references `AC-FEAT-999-01` Then it fails and names the test; Given a `draft` specification with untested ACs Then it passes.
+- **AC-FEAT-000-08** [unit] Given a fixture specification with status `implemented` and an AC without a test When `trace.py --check` runs Then it fails and names the AC; Given a test that references `AC-FEAT-999-01` Then it fails and names the test; Given an `approved` or `draft` specification with untested ACs Then it passes and the approved ones are counted as pending.
 - **AC-FEAT-000-09** [unit] Given a diff that changes `contracts/openapi.json` and no file under `specs/` When `check_spec_touch.py` runs Then it fails; Given the same diff plus a change under `specs/` Then it passes.
 - **AC-FEAT-000-10** [integration] Given a pull request When `ci-fast` runs Then gates 1, 2, 3, 3a, 4, 5, 8a, 8c, 9 and 10 run as separate, named jobs or steps, any failure marks the workflow as failed, and no step uses the network for LLM, ORS or TIMOCOM calls.
 - **AC-FEAT-000-11** [unit] Given the import-linter configuration When a test module adds `import routepilot.agents` inside `routepilot.optimization.engine` (fixture) Then `lint-imports` fails; and the contracts cover every row of the backend Module Boundaries table.
@@ -153,3 +153,4 @@ Both endpoints are part of `contracts/openapi.json`.
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
 | 4 | 2026-11-11 | Owner decision ADR-0015: the web skeleton sets up the design tokens and fonts of `docs/design/` instead of shadcn/ui (§3). No AC changed. Front-matter `revision` aligned with this changelog |
 | 5 | 2026-11-11 | Foundation implementation, tests and `ci-fast` definition added for review. No AC changed; strict repository-wide traceability remains blocking. Validation: `docs/reports/FEAT-000-foundation-and-001-1.md`. |
+| 6 | 2026-11-11 | Owner decision after the first `ci-fast` run: `trace.py --check` blocks untested ACs only for `implemented` specifications; untested ACs of `approved` specifications are reported as pending (FR-12, AC-FEAT-000-08). Unknown ACs, malformed front matter and failing implemented tests still fail. |

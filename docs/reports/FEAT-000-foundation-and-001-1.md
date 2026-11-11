@@ -1,6 +1,6 @@
 # Report: FEAT-000 / slices 1–5 and FEAT-001 / slice 1
 
-- Status: partial — implementation and local validation are available; a GitHub PR run, owner review and branch protection are pending. Repository-wide traceability correctly fails on later, unimplemented slices.
+- Status: partial — implementation and local validation are available; a GitHub PR run, owner review and branch protection are pending. After the first GitHub run, Gate 10 failed on repository-wide traceability; the owner decided that only `implemented` specifications block it (FEAT-000 revision 6).
 - Authorization: the owner approved implementation of `ci-fast` and `0001_initial`, including their missing foundation prerequisites, in this chat on 2026-11-11. This does not record a review of the resulting workflow or migration commit.
 - Scope: FEAT-000 revision 5 (AC-01…13), FEAT-001 revision 4 (AC-01…03). `ci-full` and `ai-evals` remain in FEAT-007/3. No live provider call was made.
 - Allowed paths used: API/web foundation and tests; root package/tooling files; `.github/workflows/ci-fast.yml`; CI and contract/traceability scripts; generated OpenAPI and traceability; README/development run notes and specification changelogs. Existing task branch: `O-2,O-3`.
@@ -45,7 +45,7 @@
 - `actionlint`: workflow definition passes.
 - All pre-commit hooks passed on an isolated staged source snapshot, including the real staged gitleaks hook. The only formatter correction was an extra final blank line in the new API manifest.
 - Locked installs and TypeScript checking passed in a fresh source snapshot. Gitleaks scanned the complete source snapshot (about 1.5 MB) and found no leaks.
-- `trace.py --check`: **fails**, reporting 168 untested approved ACs in later slices; all 16 in-scope ACs are mapped. The checker discovers 191 declared ACs in total. No spec status or assertion was weakened to make this gate pass.
+- `trace.py --check`: first GitHub run failed on 168 untested approved ACs of later slices (plus a front-matter parse error in FEAT-005, now fixed by quoting `modules`). By owner decision (FEAT-000 revision 6, FR-12 and AC-FEAT-000-08 updated) only `implemented` specifications block; approved untested ACs are reported as pending. All 16 in-scope ACs are mapped.
 - Agent collection is intentionally empty under FEAT-000 FR-16; pytest exit code 5 alone is accepted. Import errors and assertion failures remain errors.
 - No GitHub run was dispatched, no PR approval/comment submitted, and branch protection was not changed. After the first green GitHub run, the owner can require the stable `ci-fast` status on `main`.
 - `ci-full`, `ai-evals`, provider budgets, product feature tests and the full MVP clean-clone scenario are outside this scope.
