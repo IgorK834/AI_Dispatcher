@@ -145,7 +145,9 @@ class EngineSnapshot(EngineModel):
     offers: list[OfferSnapshot]
     matrix: TravelMatrix
     params: EngineParams = Field(default_factory=EngineParams)
-    objectives: list[Objective] = Field(default_factory=lambda: ["profit", "fastest", "fuel"])
+    objectives: list[Objective] = Field(
+        default_factory=lambda: list[Objective](("profit", "fastest", "fuel"))
+    )
     co2_factor_kg_per_l: Decimal = Decimal("2.6")
     solver_version: str = "branch_and_bound_v1"
 
