@@ -1,0 +1,291 @@
+{
+  "version": 1,
+  "cities": [
+    {
+      "name": "Katowice",
+      "countryCode": "PL",
+      "lat": 50.2649,
+      "lon": 19.0238,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław",
+      "countryCode": "PL",
+      "lat": 51.1079,
+      "lon": 17.0385,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole",
+      "countryCode": "PL",
+      "lat": 50.6751,
+      "lon": 17.9213,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków",
+      "countryCode": "PL",
+      "lat": 50.0647,
+      "lon": 19.945,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź",
+      "countryCode": "PL",
+      "lat": 51.7592,
+      "lon": 19.456,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań",
+      "countryCode": "PL",
+      "lat": 52.4064,
+      "lon": 16.9252,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa",
+      "countryCode": "PL",
+      "lat": 52.2297,
+      "lon": 21.0122,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk",
+      "countryCode": "PL",
+      "lat": 54.352,
+      "lon": 18.6466,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin",
+      "countryCode": "PL",
+      "lat": 53.4285,
+      "lon": 14.5528,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów",
+      "countryCode": "PL",
+      "lat": 50.0412,
+      "lon": 21.9991,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała",
+      "countryCode": "PL",
+      "lat": 49.8224,
+      "lon": 19.0584,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa",
+      "countryCode": "PL",
+      "lat": 50.8118,
+      "lon": 19.1203,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Dresden",
+      "countryCode": "DE",
+      "lat": 51.0504,
+      "lon": 13.7373,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig",
+      "countryCode": "DE",
+      "lat": 51.3397,
+      "lon": 12.3731,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin",
+      "countryCode": "DE",
+      "lat": 52.52,
+      "lon": 13.405,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg",
+      "countryCode": "DE",
+      "lat": 53.5511,
+      "lon": 9.9937,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München",
+      "countryCode": "DE",
+      "lat": 48.1351,
+      "lon": 11.582,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg",
+      "countryCode": "DE",
+      "lat": 49.4521,
+      "lon": 11.0767,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln",
+      "countryCode": "DE",
+      "lat": 50.9375,
+      "lon": 6.9603,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt",
+      "countryCode": "DE",
+      "lat": 50.1109,
+      "lon": 8.6821,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart",
+      "countryCode": "DE",
+      "lat": 48.7758,
+      "lon": 9.1829,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover",
+      "countryCode": "DE",
+      "lat": 52.3759,
+      "lon": 9.732,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Praha",
+      "countryCode": "CZ",
+      "lat": 50.0755,
+      "lon": 14.4378,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno",
+      "countryCode": "CZ",
+      "lat": 49.1951,
+      "lon": 16.6068,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava",
+      "countryCode": "CZ",
+      "lat": 49.8209,
+      "lon": 18.2625,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Žilina",
+      "countryCode": "SK",
+      "lat": 49.2231,
+      "lon": 18.7394,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava",
+      "countryCode": "SK",
+      "lat": 48.1486,
+      "lon": 17.1077,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Wien",
+      "countryCode": "AT",
+      "lat": 48.2082,
+      "lon": 16.3738,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz",
+      "countryCode": "AT",
+      "lat": 48.3069,
+      "lon": 14.2858,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Budapest",
+      "countryCode": "HU",
+      "lat": 47.4979,
+      "lon": 19.0402,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr",
+      "countryCode": "HU",
+      "lat": 47.6875,
+      "lon": 17.6504,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Venlo",
+      "countryCode": "NL",
+      "lat": 51.3704,
+      "lon": 6.1724,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam",
+      "countryCode": "NL",
+      "lat": 51.9244,
+      "lon": 4.4777,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Antwerpen",
+      "countryCode": "BE",
+      "lat": 51.2194,
+      "lon": 4.4025,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Strasbourg",
+      "countryCode": "FR",
+      "lat": 48.5734,
+      "lon": 7.7521,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon",
+      "countryCode": "FR",
+      "lat": 45.764,
+      "lon": 4.8357,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Verona",
+      "countryCode": "IT",
+      "lat": 45.4384,
+      "lon": 10.9916,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano",
+      "countryCode": "IT",
+      "lat": 45.4642,
+      "lon": 9.19,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Kolding",
+      "countryCode": "DK",
+      "lat": 55.4904,
+      "lon": 9.4722,
+      "timezone": "Europe/Copenhagen"
+    }
+  ],
+  "countryTimezones": {
+    "PL": "Europe/Warsaw",
+    "DE": "Europe/Berlin",
+    "CZ": "Europe/Prague",
+    "SK": "Europe/Bratislava",
+    "AT": "Europe/Vienna",
+    "HU": "Europe/Budapest",
+    "NL": "Europe/Amsterdam",
+    "BE": "Europe/Brussels",
+    "FR": "Europe/Paris",
+    "IT": "Europe/Rome",
+    "DK": "Europe/Copenhagen"
+  }
+}
