@@ -5,16 +5,14 @@ import hashlib
 import hmac
 import json
 import secrets
-from typing import Any, Generic, TypeVar
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
 from routepilot.shared.errors import DomainError
 
-T = TypeVar("T")
 
-
-class Page(BaseModel, Generic[T]):
+class Page[T](BaseModel):
     model_config = ConfigDict(populate_by_name=True)
     items: list[T]
     next_cursor: str | None = Field(default=None, alias="nextCursor")

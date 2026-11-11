@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Any
 from uuid import UUID
 
-from sqlalchemy import JSON, Boolean, ForeignKey, Integer, REAL, Text
+from sqlalchemy import JSON, REAL, Boolean, ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from routepilot.shared.db.base import Base, EditableMixin, IdMixin
