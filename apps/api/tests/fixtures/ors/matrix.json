@@ -1,0 +1,72 @@
+{
+  "_source": {
+    "url": "https://api.openrouteservice.org/v2/matrix/driving-car",
+    "api_version": "v2",
+    "profile": "driving-car",
+    "recorded_at": "2026-11-11T18:50:49.343641+00:00",
+    "approval_issue": "https://github.com/IgorK834/AI_Dispatcher/issues/5",
+    "request": {
+      "locations": [
+        [
+          19.0238,
+          50.2649
+        ],
+        [
+          17.0385,
+          51.1079
+        ],
+        [
+          13.7373,
+          51.0504
+        ]
+      ],
+      "metrics": [
+        "distance",
+        "duration"
+      ],
+      "units": "m"
+    },
+    "attribution": "\u00a9 openrouteservice.org by HeiGIT | \u00a9 OpenStreetMap contributors",
+    "sanitisation": "Only distances, durations, route summary and geometry retained.",
+    "units": {
+      "distance": "metres",
+      "duration": "seconds"
+    }
+  },
+  "response": {
+    "distances": [
+      [
+        0.0,
+        199506.36,
+        450056.19
+      ],
+      [
+        197241.09,
+        0.0,
+        268987.5
+      ],
+      [
+        446348.88,
+        268446.75,
+        0.0
+      ]
+    ],
+    "durations": [
+      [
+        0.0,
+        7178.0,
+        15253.51
+      ],
+      [
+        7382.12,
+        0.0,
+        10615.29
+      ],
+      [
+        15223.85,
+        10546.82,
+        0.0
+      ]
+    ]
+  }
+}
