@@ -2,10 +2,10 @@
 set -euo pipefail
 root="$(cd "$(dirname "$0")/../.." && pwd)"
 scratch="$(mktemp -d)"
-port="${API_SMOKE_PORT:-8000}"
 api_pid=''
 cleanup() {
   if [[ -n "$api_pid" ]]; then
+    pkill -P "$api_pid" 2>/dev/null || true
     kill "$api_pid" 2>/dev/null || true
     wait "$api_pid" 2>/dev/null || true
   fi
@@ -15,13 +15,8 @@ trap cleanup EXIT
 cd "$root/apps/api"
 export APP_ENV=test
 export DATABASE_URL="sqlite:///$scratch/smoke.db"
-uv run python - "$port" <<'PY'
-import socket
-import sys
-
-with socket.socket() as listener:
-    listener.bind(('127.0.0.1', int(sys.argv[1])))
-PY
+# A free port chosen per run: a fixed port can still be in TIME_WAIT from the previous gate.
+port="${API_SMOKE_PORT:-$(uv run python -c "import socket; s = socket.socket(); s.bind(('127.0.0.1', 0)); print(s.getsockname()[1])")}"
 uv run alembic upgrade head
 uv run uvicorn routepilot.main:app --host 127.0.0.1 --port "$port" > "$scratch/api.log" 2>&1 &
 api_pid=$!
