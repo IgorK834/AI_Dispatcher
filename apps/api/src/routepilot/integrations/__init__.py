@@ -1,0 +1,1 @@
+"""Freight provider adapters."""
