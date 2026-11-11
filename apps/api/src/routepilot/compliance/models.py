@@ -1,4 +1,4 @@
-"""Pure working-time state and inserted activity records (FEAT-003 FR-1–9)."""
+"""Pure working-time state and inserted activity records (FEAT-003 FR-1-9)."""
 
 from datetime import datetime
 from typing import Literal
