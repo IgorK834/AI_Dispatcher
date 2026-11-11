@@ -1,5 +1,6 @@
 """Settings shared by the application composition root."""
 
+from decimal import Decimal
 from typing import Literal, Self
 
 from pydantic import Field, model_validator
@@ -27,6 +28,22 @@ class Settings(BaseSettings):
     ors_api_key: str = Field(default="", repr=False)
     mock_seed: int = 42
     mock_reference_date: str = ""
+    session_ttl_hours: int = Field(default=12, ge=1)
+    login_rate_limit_per_ip: str = "10/minute"
+    login_rate_limit_per_account: str = "5/minute"
+    password_min_length: int = Field(default=12, ge=1)
+    ors_base_url: str = "https://api.openrouteservice.org"
+    routing_matrix_path: str = "data/mock/routing-matrix.json"
+    worker_poll_interval_ms: int = Field(default=500, ge=1)
+    job_heartbeat_stale_s: int = Field(default=60, ge=1)
+    van_speed_factor: Decimal = Field(default=Decimal("1.08"), gt=0)
+    agent_recursion_limit: int = Field(default=25, ge=1)
+    agent_max_tool_calls: int = Field(default=6, ge=1)
+    agent_run_timeout_s: float = Field(default=120, gt=0)
+    agent_run_token_budget: int = Field(default=60000, ge=1)
+    agent_daily_token_budget: int = Field(default=500000, ge=1)
+    agent_daily_token_budget_demo: int = Field(default=100000, ge=1)
+    approval_ttl_min: int = Field(default=30, ge=1)
 
     @property
     def origins(self) -> list[str]:

@@ -101,11 +101,25 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @application.exception_handler(DomainError)
     async def domain_error(request: Request, error: DomainError) -> JSONResponse:
-        return problem(request, error.status, error.code)
+        return problem(
+            request, error.status, error.code, errors=error.errors, headers=error.headers
+        )
 
     @application.exception_handler(RequestValidationError)
     async def validation_error(request: Request, error: RequestValidationError) -> JSONResponse:
-        return problem(request, 422, "VALIDATION_ERROR")
+        return problem(
+            request,
+            422,
+            "VALIDATION_ERROR",
+            errors=[
+                {
+                    "field": ".".join(str(part) for part in detail["loc"]),
+                    "message": "Invalid value",
+                    "code": str(detail["type"]),
+                }
+                for detail in error.errors()
+            ],
+        )
 
     @application.exception_handler(HTTPException)
     async def http_error(request: Request, error: HTTPException) -> JSONResponse:
