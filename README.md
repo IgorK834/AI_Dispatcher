@@ -2,8 +2,8 @@
 
 **An AI dispatcher for small van fleets.** · [Polski — krótkie podsumowanie](#polski--krótkie-podsumowanie)
 
-> **Project status (2026-11-11): design complete — the application is not implemented yet.**
-> Every feature, endpoint and command below is **planned** unless it is marked ✅. This README is updated as the code lands.
+> **Project status (2026-11-11): foundation implementation available for review; the MVP is incomplete.**
+> The API health endpoints, initial database schema, EN/PL web shell and tooling are available. Product features below remain **planned**. GitHub CI and owner review are pending.
 > RoutePilot AI is an MVP with a deadline (2026-11-15); afterwards it continues as a portfolio project.
 
 | Item | Status |
@@ -13,7 +13,8 @@
 | Specifications, golden cases, ADRs ([`specs/`](specs/README.md), [`docs/adr/`](docs/adr/README.md)) | ✅ written; P0 specifications approved and ADRs accepted by the owner (2026-11-11), golden cases approved; FEAT-008 (P1) is still a draft |
 | UI design: design system, tokens, mockups of every screen ([`docs/design/`](docs/design/README.md)) | ✅ approved by the owner (2026-11-11); not implemented yet |
 | Implementation backlog: 53 PR-sized slices covering all 210 acceptance criteria ([`backlog.md`](backlog.md)) and a GitHub issue generator ([`scripts/create_github_issues.sh`](scripts/create_github_issues.sh)) | ✅ written |
-| API, optimizer, agents, frontend, tests, CI | ⏳ planned |
+| API health/readiness, initial migration, EN/PL web shell, tooling, `ci-fast` definition | Local implementation; [validation report](docs/reports/FEAT-000-foundation-and-001-1.md); GitHub CI pending |
+| CRUD, generators, optimizer, runtime agents and product screens | ⏳ planned |
 | Demo video (`docs/media/demo.mp4` / `.gif`) and screenshots | ⏳ planned |
 
 ---
@@ -77,16 +78,16 @@ Backend layers: `api` (routers, schemas) → `service` (use cases, transactions)
 
 ## 6. Run locally — step by step
 
-> **Planned.** The commands below are the target. They will be verified on a clean clone before the release (FEAT-007).
+> Steps 1–2 run the foundation: `/health`, `/ready`, API documentation and the EN/PL placeholder page. Login, demo seed, routing and optimization are planned. The full MVP clean-clone check belongs to FEAT-007.
 
 **Prerequisites**
 
 | Tool | Version | Check |
 |---|---|---|
 | Python | 3.13 | `python3 --version` |
-| [uv](https://docs.astral.sh/uv/) | current stable | `uv --version` |
-| Node.js | 22 LTS | `node --version` |
-| pnpm | through Corepack (`corepack enable`) | `pnpm --version` |
+| [uv](https://docs.astral.sh/uv/) | 0.13.6 used for validation | `uv --version` |
+| Node.js | 22.23.4 (`.nvmrc`) | `node --version` |
+| pnpm | 11.3.0 (`packageManager`; `corepack enable`) | `pnpm --version` |
 
 No Docker, no database server and no API keys are required.
 
@@ -100,7 +101,7 @@ uv run alembic upgrade head      # create the SQLite database
 uv run uvicorn routepilot.main:app --reload --port 8000
 ```
 
-On first start the API seeds the demo data (users, 5 drivers and vans, 150 offers, cost profiles). API docs: `http://localhost:8000/docs`. Health check: `http://localhost:8000/health`.
+The migration creates all MVP tables. A local signing key is generated and persisted on first start when `SECRET_KEY` is empty. Demo-data seeding arrives in FEAT-002. API docs: `http://localhost:8000/docs`. Health check: `http://localhost:8000/health`; readiness: `http://localhost:8000/ready`.
 
 **Step 2 — web (terminal 2)**
 
@@ -113,19 +114,19 @@ pnpm dev
 
 Open `http://localhost:3000`.
 
-**Step 3 — log in**
+**Step 3 — log in (planned, FEAT-001/2)**
 
-Two local accounts are created on first start from `apps/api/.env.example`: the demo account (`DEMO_EMAIL` / `DEMO_PASSWORD`, dispatcher-level: chat, fleet, offers, optimizer, approvals) and the admin account (`ADMIN_EMAIL` / `ADMIN_PASSWORD`, also cost profiles and the demo-data generator). Locally the captcha uses Cloudflare's official Turnstile test keys and always passes.
+Two local accounts will be created on first start from `apps/api/.env.example`: the demo account (`DEMO_EMAIL` / `DEMO_PASSWORD`, dispatcher-level: chat, fleet, offers, optimizer, approvals) and the admin account (`ADMIN_EMAIL` / `ADMIN_PASSWORD`, also cost profiles and the demo-data generator). Locally the captcha will use Cloudflare's official Turnstile test keys.
 
-**Optional — enable AI.** Set one provider key in `apps/api/.env` (`GOOGLE_API_KEY`, `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`) and choose models in `AGENT_MODEL_POLICY`. Without a key the chat says that AI is off; the manual optimizer and template explanations still work.
+**Optional — enable AI (planned, FEAT-006).** Provider keys and `AGENT_MODEL_POLICY` are reserved for the later agent implementation; the current foundation does not call an LLM.
 
-**Optional — live routing.** Set `ORS_API_KEY`. Without it the app uses the distance matrix from the repo.
+**Optional — live routing (planned, FEAT-004).** `ORS_API_KEY` is reserved for the later routing adapter; the current foundation does not call ORS.
 
 **Tests**
 
 ```bash
-cd apps/api && uv run pytest
-cd apps/web && pnpm test
+(cd apps/api && uv run pytest)
+(cd apps/web && pnpm test)
 ```
 
 Troubleshooting (ports in use, missing tools, resetting the database): [`DEVELOPMENT.md`](DEVELOPMENT.md) §6.
@@ -155,9 +156,9 @@ RoutePilotAI/
 ├── README.md · DEVELOPMENT.md · context.md · AGENTS.md · CLAUDE.md
 ├── backlog.md               # implementation slices, owner actions, schedule
 ├── apps/
-│   ├── api/                 # FastAPI backend (planned)
-│   └── web/                 # Next.js frontend (planned)
-├── contracts/openapi.json   # generated API contract (planned)
+│   ├── api/                 # FastAPI and SQLite foundation
+│   └── web/                 # Next.js EN/PL shell
+├── contracts/openapi.json   # generated health/readiness contract
 ├── specs/                   # requirements, FEAT specifications, golden cases
 ├── docs/
 │   ├── report.md            # research and architecture report (40 sections)

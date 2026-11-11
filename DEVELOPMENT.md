@@ -324,7 +324,7 @@ Models and queries use no dialect-specific functions, so the same code runs on P
 
 ## 6. Running locally
 
-The steps are the same as in [`README.md` §6](README.md#6-run-locally--step-by-step). They are **planned** and will be verified on a clean clone (FEAT-007, AC-FEAT-007-04).
+The steps are the same as in [`README.md` §6](README.md#6-run-locally--step-by-step). They start the foundation (health/readiness and the EN/PL placeholder page). Authentication, seed data and product screens remain planned. The full MVP clean-clone check belongs to FEAT-007, AC-FEAT-007-04.
 
 ```bash
 # terminal 1 — API

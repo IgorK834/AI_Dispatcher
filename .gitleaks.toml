@@ -1,0 +1,14 @@
+title = "RoutePilot secret scanning"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Official Turnstile test values and local-only demo passwords (OQ-001-04)"
+regexTarget = "secret"
+regexes = [
+  '^1x00000000000000000000AA$',
+  '^1x0000000000000000000000000000000AA$',
+  '^local-admin-password$',
+  '^local-demo-password$',
+]

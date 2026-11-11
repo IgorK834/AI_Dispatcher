@@ -1,0 +1,11 @@
+packages:
+  - apps/web
+allowBuilds:
+  '@parcel/watcher@2.6.0': true
+  '@swc/core@1.16.22': true
+minimumReleaseAgeExclude:
+  - icu-minify@4.15.0
+  - next-intl-swc-plugin-extractor@4.15.0
+  - next-intl@4.15.0
+  - prettier@3.10.0
+  - use-intl@4.15.0

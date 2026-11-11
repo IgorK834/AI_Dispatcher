@@ -1,0 +1,18 @@
+{
+  "common": {
+    "appTitle": "RoutePilot AI",
+    "description": "AI dispatcher for a small van fleet. MVP deadline: 15 November 2026; later a portfolio project.",
+    "language": { "label": "Language", "en": "English", "pl": "Polski" }
+  },
+  "auth": {},
+  "fleet": {},
+  "offers": {},
+  "plans": {},
+  "optimizer": {},
+  "chat": {},
+  "admin": {},
+  "errors": {},
+  "rejections": {},
+  "warnings": {},
+  "legal": {}
+}

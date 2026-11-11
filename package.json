@@ -1,0 +1,16 @@
+{
+  "name": "routepilot-ai",
+  "private": true,
+  "packageManager": "pnpm@11.3.0",
+  "engines": {
+    "node": "22.x",
+    "pnpm": "11.3.0"
+  },
+  "scripts": {
+    "format:check": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "3.10.0"
+  }
+}

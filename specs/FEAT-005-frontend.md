@@ -5,7 +5,7 @@ status: approved
 owner: project owner
 requirements: [REQ-005, REQ-006, REQ-007, REQ-008, REQ-009, REQ-011, REQ-015, REQ-016, REQ-017, REQ-019, REQ-021, REQ-031, NFR-005, NFR-010]
 adrs: [ADR-0001, ADR-0009, ADR-0012, ADR-0015]
-modules: [apps/web: app, features/{auth,agent-chat,fleet,offers,plans,optimizer,admin}, components/{ui,vehicle}, styles, lib/api, lib/format, messages]
+modules: ["apps/web: app, features/{auth,agent-chat,fleet,offers,plans,optimizer,admin}, components/{ui,vehicle}, styles, lib/api, lib/format, messages"]
 revision: 4
 ---
 
