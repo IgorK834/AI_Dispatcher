@@ -1,0 +1,9 @@
+# Existing design/spec documents keep their owner-reviewed formatting.
+**/*.md
+docs/design/**
+pnpm-lock.yaml
+apps/api/**
+contracts/openapi.json
+node_modules
+.next
+apps/web/next-env.d.ts
