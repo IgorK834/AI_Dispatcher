@@ -1,0 +1,18 @@
+{
+  "common": {
+    "appTitle": "RoutePilot AI — dyspozytor",
+    "description": "Dyspozytor AI dla małej floty busów. Termin MVP: 15 listopada 2026; później projekt portfolio.",
+    "language": { "label": "Język", "en": "English", "pl": "Polski" }
+  },
+  "auth": {},
+  "fleet": {},
+  "offers": {},
+  "plans": {},
+  "optimizer": {},
+  "chat": {},
+  "admin": {},
+  "errors": {},
+  "rejections": {},
+  "warnings": {},
+  "legal": {}
+}
