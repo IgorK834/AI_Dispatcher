@@ -1,0 +1,95 @@
+{
+  "_source": {
+    "url": "https://api.stoplight.io/projects/cHJqOjIwMTI4Nw/branches/v3/export/reference/openapi.yaml",
+    "portal_url": "https://developer.timocom.com/docs/freight-exchange/bbf3f610ba4d2-freight-exchange",
+    "api_version": "3.0.6",
+    "openapi_version": "3.0.3",
+    "accessed_on": "2026-11-11",
+    "document_sha256": "f2063fcd603d1f0dcbaeb544090e6c426b08307db12012181b66d8894d1f6723",
+    "approval_issue": "https://github.com/IgorK834/AI_Dispatcher/issues/4",
+    "json_pointer": "#/components/schemas/freightOffersResponse/x-examples/Lookup Freight Offers",
+    "extraction": "Projection of the official response onto FEAT-002 FR-8 fields; retained values are unchanged.",
+    "omitted_offer_fields": [
+      "closedFreightExchangeSetting",
+      "contactPerson",
+      "customer",
+      "deeplink",
+      "internalRemark",
+      "logisticsDocumentTypes",
+      "additionalInformation"
+    ],
+    "known_issue": "Both loadingType values are null; FR-20 rejects the unmodified record."
+  },
+  "example": {
+    "meta": {
+      "requestId": "47-11-request-id",
+      "responseTimestamp": "2022-09-13T13:22:09.3011033Z"
+    },
+    "payload": [
+      {
+        "creationDateTime ": "2022-09-13T13:22:09.3037464Z",
+        "id": "offer-471-publicId",
+        "publicRemark": "This remark is visible to all",
+        "trackable": true,
+        "vehicleProperties": {
+          "body": [
+            "BOX"
+          ],
+          "bodyProperty": [],
+          "equipment": [
+            "ESCORT_VEHICLE_TYPE_3"
+          ],
+          "loadSecuring": [
+            "ANTI_SLIP_MATS"
+          ],
+          "swapBody": [],
+          "type": [
+            "VEHICLE_UP_TO_3_5_T"
+          ]
+        },
+        "acceptQuotes": true,
+        "distance_km": 4711,
+        "freightDescription": "Optional further description of the freight",
+        "length_m": 7.76,
+        "loadingPlaces": [
+          {
+            "address": {
+              "objectType": "address",
+              "city": "Valencia",
+              "country": "ES",
+              "geoCoordinate": null,
+              "geocoded": false,
+              "postalCode": "46001"
+            },
+            "earliestLoadingDate": "2022-09-16",
+            "endTime": null,
+            "latestLoadingDate": "2022-09-17",
+            "loadingType": null,
+            "startTime": null
+          },
+          {
+            "address": {
+              "objectType": "address",
+              "city": "Solingen",
+              "country": "DE",
+              "geoCoordinate": null,
+              "geocoded": false,
+              "postalCode": "42697"
+            },
+            "earliestLoadingDate": "2022-09-18",
+            "endTime": null,
+            "latestLoadingDate": null,
+            "loadingType": null,
+            "startTime": null
+          }
+        ],
+        "paymentDueWithinDays": 45,
+        "price": {
+          "amount": 750,
+          "currency": "EUR"
+        },
+        "weight_t": 3.44
+      }
+    ]
+  }
+}

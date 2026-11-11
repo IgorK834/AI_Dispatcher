@@ -1,0 +1,50 @@
+{
+  "_source": {
+    "url": "https://api.stoplight.io/projects/cHJqOjIwMTI4Nw/branches/v3/export/reference/openapi.yaml",
+    "portal_url": "https://developer.timocom.com/docs/freight-exchange/bbf3f610ba4d2-freight-exchange",
+    "api_version": "3.0.6",
+    "openapi_version": "3.0.3",
+    "accessed_on": "2026-11-11",
+    "document_sha256": "f2063fcd603d1f0dcbaeb544090e6c426b08307db12012181b66d8894d1f6723",
+    "approval_issue": "https://github.com/IgorK834/AI_Dispatcher/issues/4",
+    "json_pointer": "#/components/schemas/loadingPlace/x-examples"
+  },
+  "example": {
+    "example-1": {
+      "loadingType": "LOADING",
+      "address": {
+        "objectType": "address",
+        "city": "Gerona",
+        "country": "ES",
+        "geoCoordinate": {
+          "longitude": 2.82493,
+          "latitude": 41.98311
+        },
+        "geocoded": true,
+        "postalCode": "17001"
+      },
+      "startTime": "08:15:22Z",
+      "endTime": "17:15:22Z",
+      "earliestLoadingDate": "2019-08-24",
+      "latestLoadingDate": "2019-08-26"
+    },
+    "example-2": {
+      "loadingType": "UNLOADING",
+      "address": {
+        "objectType": "address",
+        "city": "Gerona",
+        "country": "ES",
+        "geoCoordinate": {
+          "longitude": 2.82495,
+          "latitude": 41.98317
+        },
+        "geocoded": true,
+        "postalCode": "17001"
+      },
+      "startTime": "08:15:22Z",
+      "endTime": "17:15:22Z",
+      "earliestLoadingDate": "2019-08-24",
+      "latestLoadingDate": "2019-08-26"
+    }
+  }
+}
