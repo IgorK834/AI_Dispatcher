@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Edit driver</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7}
+</style>
+</helmet>
+<div class="rp-root" style="position: relative; min-height: 1040px;">
+<dc-import name="TopBar" active="fleet" role="admin" hint-size="100%,80px"></dc-import>
+<div style="max-width: 1440px; margin: 0 auto; box-sizing: border-box; padding: 16px 40px 40px; display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch;">
+
+<div aria-hidden="true" style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px; opacity: 0.45;">
+<span class="rp-h1">Fleet</span>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 14px;">
+<span style="display: block; height: 44px; background: #F6F6F4; border-radius: 12px;"></span>
+<span style="display: block; height: 44px; background: #F6F6F4; border-radius: 12px;"></span>
+<span style="display: block; height: 44px; background: #F6F6F4; border-radius: 12px;"></span>
+<span style="display: block; height: 44px; background: #F6F6F4; border-radius: 12px;"></span>
+<span style="display: block; height: 44px; background: #F6F6F4; border-radius: 12px;"></span>
+</div>
+</div>
+
+<aside role="dialog" aria-modal="true" aria-labelledby="sheet-h" class="rp-card" style="flex: 1 1 480px; max-width: 540px; padding: 0; display: flex; flex-direction: column; box-shadow: 0 24px 48px rgba(21, 21, 21, 0.10);">
+<div style="padding: 24px 28px 16px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<h1 id="sheet-h" class="rp-h1" style="font-size: 26px;">Edit driver</h1>
+<span class="rp-small">Paweł Kurek · version 3</span>
+</div>
+<a href="Fleet.dc.html" class="rp-icon-btn" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg></a>
+</div>
+
+<form style="padding: 8px 28px 24px; display: flex; flex-direction: column; gap: 18px; flex: 1 1 auto;">
+<div class="rp-banner rp-banner--warn" role="alert" style="flex-direction: column; gap: 8px;">
+<strong style="font-weight: 600;">This record was changed elsewhere.</strong>
+<span>Your edits below are kept. Reload to see the newest version, then save again.</span>
+<button type="button" class="rp-btn rp-btn--sm" style="align-self: flex-start;">Reload</button>
+</div>
+
+<div class="rp-field"><label for="d-name" class="rp-label">Name</label><input id="d-name" class="rp-input" value="Paweł Kurek"></div>
+<div class="rp-field"><label for="d-phone" class="rp-label">Phone <span style="color: #6B6B67; font-weight: 400;">(optional)</span></label><input id="d-phone" class="rp-input" value="+48 000 000 101"></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;">
+<div class="rp-field"><label for="d-city" class="rp-label">Home base</label><select id="d-city" class="rp-select"><option>Katowice</option><option>Kraków</option></select></div>
+<div class="rp-field"><label for="d-country" class="rp-label">Country</label><select id="d-country" class="rp-select"><option>Poland (PL)</option></select></div>
+<div class="rp-field">
+<label for="d-lat" class="rp-label">Latitude</label>
+<input id="d-lat" class="rp-input rp-mono" value="123" aria-invalid="true" aria-describedby="d-lat-err">
+<span id="d-lat-err" class="rp-error"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"></circle><path d="M8 4.8v3.6M8 10.8v.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>Latitude must be between −90 and 90.</span>
+</div>
+<div class="rp-field"><label for="d-lon" class="rp-label">Longitude</label><input id="d-lon" class="rp-input rp-mono" value="19.0238"></div>
+</div>
+
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+<legend class="rp-label" style="margin-bottom: 8px;">Default working-time profile</legend>
+<label class="rp-choice rp-choice--on"><input type="radio" name="profile" checked="checked" class="rp-check" style="margin-top: 2px;"><span style="display: flex; flex-direction: column;"><span style="font-weight: 500;">Domestic employee (PL)</span><span class="rp-small">Polish Act on Drivers’ Working Time</span></span></label>
+<label class="rp-choice"><input type="radio" name="profile" class="rp-check" style="margin-top: 2px;"><span style="display: flex; flex-direction: column;"><span style="font-weight: 500;">International van (EU 561)</span><span class="rp-small">Used automatically for any plan that crosses a border</span></span></label>
+</fieldset>
+
+<div class="rp-field"><label for="d-van" class="rp-label">Van</label><select id="d-van" class="rp-select"><option>BUS-01 · 10 EP · 1 085 kg</option><option>No van</option></select><span class="rp-hint">Each van can belong to one driver.</span></div>
+</form>
+
+<div style="padding: 16px 28px 24px; border-top: 1px solid #ECECE9; display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap;">
+<a href="Fleet.dc.html" class="rp-btn">Cancel</a>
+<button type="submit" class="rp-btn rp-btn--primary">Save changes</button>
+</div>
+</aside>
+</div>
+
+<div role="status" class="rp-toast" style="position: absolute; left: 40px; bottom: 32px;">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3 8.5 3 3 7-7" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+Example toast: Driver Ewa Sowa saved.
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1040}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

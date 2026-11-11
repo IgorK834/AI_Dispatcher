@@ -1,0 +1,46 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-11-11T12:00:00Z"},
+  "title": "RoutePilot AI — screens",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Login.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 900, "title": "/login — Sign in", "expand": "fill"},
+    "Main.dc.html": {"x": 1520, "y": 0, "w": 1440, "h": 1180, "title": "/ — AI Dispatcher (waiting for approval)", "expand": "fill"},
+    "AiOff.dc.html": {"x": 3040, "y": 0, "w": 1440, "h": 720, "title": "/ — AI Dispatcher, AI is off", "expand": "fill"},
+    "Fleet.dc.html": {"x": 0, "y": 1480, "w": 1440, "h": 1080, "title": "/fleet — Drivers and vans", "expand": "fill"},
+    "DriverForm.dc.html": {"x": 1520, "y": 1480, "w": 1440, "h": 1040, "title": "/fleet — Edit driver (validation + conflict)", "expand": "fill"},
+    "DeleteDialog.dc.html": {"x": 3040, "y": 1480, "w": 560, "h": 360, "title": "/fleet — Delete confirmation"},
+    "Offers.dc.html": {"x": 3680, "y": 1480, "w": 1440, "h": 1140, "title": "/offers — Offers with detail", "expand": "fill"},
+    "Plan.dc.html": {"x": 0, "y": 3040, "w": 1440, "h": 2700, "title": "/plans/[id] — Plan with variants and top-view load plan", "expand": "fill", "is_interactive": true},
+    "Optimizer.dc.html": {"x": 1520, "y": 3040, "w": 1440, "h": 1500, "title": "/optimizer — Manual optimizer result", "expand": "fill"},
+    "Admin.dc.html": {"x": 3040, "y": 3040, "w": 1440, "h": 1180, "title": "/admin — Demo data and settings", "expand": "fill"},
+    "DesignSystem.dc.html": {"x": 0, "y": 6160, "w": 1440, "h": 1960, "title": "Design system — Clear Route v3", "expand": "fill"},
+    "TopBar.dc.html": {"x": 1520, "y": 6160, "w": 1440, "h": 80, "title": "Shared top bar (imported by every screen)"},
+    "VanTopView.dc.html": {"x": 1520, "y": 6360, "w": 1200, "h": 640, "title": "Load plan · top view (component, click the stops)", "is_interactive": true},
+    "VanSide.dc.html": {"x": 2800, "y": 6360, "w": 360, "h": 180, "title": "Van side view (component)"}
+  },
+  "order": [
+    "Main.dc.html",
+    "Login.dc.html",
+    "AiOff.dc.html",
+    "Fleet.dc.html",
+    "DriverForm.dc.html",
+    "DeleteDialog.dc.html",
+    "Offers.dc.html",
+    "Plan.dc.html",
+    "Optimizer.dc.html",
+    "Admin.dc.html",
+    "DesignSystem.dc.html",
+    "TopBar.dc.html",
+    "VanTopView.dc.html",
+    "VanSide.dc.html"
+  ],
+  "notes": {
+    "row1": {"x": 0, "y": -300, "text": "Sign in and the AI Dispatcher", "kind": "title1", "maxW": 4480},
+    "row2": {"x": 0, "y": 1180, "text": "Fleet and offers", "kind": "title1", "maxW": 5120},
+    "row3": {"x": 0, "y": 2740, "text": "Plans, manual optimizer and admin", "kind": "title1", "maxW": 4480},
+    "row4": {"x": 0, "y": 5860, "text": "Design system and shared components", "kind": "title1", "maxW": 3160}
+  },
+  "designSystems": []
+}

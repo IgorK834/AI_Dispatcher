@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Manual optimizer</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7}
+summary{cursor:pointer}
+</style>
+</helmet>
+<div class="rp-root" style="min-height: 1480px;">
+<dc-import name="TopBar" active="optimizer" role="dispatcher" hint-size="100%,80px"></dc-import>
+<main class="rp-page" style="padding-top: 16px;">
+
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h1 class="rp-h1">Manual optimizer</h1>
+<p class="rp-sub">Works without AI. The same engine and validators as the AI Dispatcher.</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;">
+
+<form class="rp-card" aria-labelledby="run-h" style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+<h2 id="run-h" class="rp-h2">New run</h2>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+<legend class="rp-label" style="margin-bottom: 8px;">Scope</legend>
+<label class="rp-choice rp-choice--on"><input type="radio" name="scope" checked="checked" class="rp-check" style="margin-top: 2px;"><span style="display: flex; flex-direction: column;"><span style="font-weight: 500;">Whole fleet</span><span class="rp-small">Best assignment of offers to all drivers</span></span></label>
+<label class="rp-choice"><input type="radio" name="scope" class="rp-check" style="margin-top: 2px;"><span style="display: flex; flex-direction: column;"><span style="font-weight: 500;">One driver</span><span class="rp-small">Top plans for a single driver</span></span></label>
+</fieldset>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+<legend class="rp-label" style="margin-bottom: 8px;">Drivers</legend>
+<label style="display: flex; gap: 10px; align-items: center;"><input type="checkbox" class="rp-check" checked="checked">Paweł Kurek · BUS-01</label>
+<label style="display: flex; gap: 10px; align-items: center;"><input type="checkbox" class="rp-check" checked="checked">Ewa Sowa · BUS-02</label>
+<label style="display: flex; gap: 10px; align-items: center;"><input type="checkbox" class="rp-check" checked="checked">Marta Lis-Wrona · BUS-03</label>
+<label style="display: flex; gap: 10px; align-items: center;"><input type="checkbox" class="rp-check" checked="checked">Jan Bielak · BUS-04</label>
+<label style="display: flex; gap: 10px; align-items: center;"><input type="checkbox" class="rp-check" checked="checked">Kamil Dąb · BUS-05</label>
+</fieldset>
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px;">
+<legend class="rp-label" style="margin-bottom: 8px;">Objectives</legend>
+<label style="display: flex; gap: 10px; align-items: center;"><input type="checkbox" class="rp-check" checked="checked">Most profitable</label>
+<label style="display: flex; gap: 10px; align-items: center;"><input type="checkbox" class="rp-check" checked="checked">Fastest</label>
+<label style="display: flex; gap: 10px; align-items: center;"><input type="checkbox" class="rp-check" checked="checked">Lowest fuel</label>
+</fieldset>
+<div class="rp-field"><label for="hz" class="rp-label">Horizon</label><select id="hz" class="rp-select"><option>5 days</option><option>3 days</option></select><span class="rp-hint">Plans end at base before each driver’s home-by time.</span></div>
+<button type="submit" class="rp-btn rp-btn--primary" style="min-height: 48px;">Run optimisation</button>
+</form>
+
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+<section class="rp-card" aria-labelledby="prog-h" style="display: flex; flex-direction: column; gap: 12px;">
+<div class="rp-card-head"><h2 id="prog-h" class="rp-h2">Fleet run Mon 16 Nov 05:12</h2><span class="rp-pill rp-pill--ok">Succeeded</span></div>
+<div role="progressbar" aria-label="Optimisation progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="5" class="rp-meter" style="height: 8px;"><span style="width: 100%;"></span></div>
+<div style="display: flex; gap: 20px; flex-wrap: wrap;" class="rp-small"><span>5 of 5 drivers</span><span>150 offers checked</span><span>All plans passed validation</span></div>
+</section>
+
+<section class="rp-card rp-card--flush" aria-labelledby="sol-h">
+<div class="rp-card-head" style="padding: 20px 24px 12px;">
+<h2 id="sol-h" class="rp-h2">Fleet solution</h2>
+<div class="rp-seg" role="tablist" aria-label="Objective"><button type="button" role="tab" aria-selected="true">Most profitable</button><button type="button" role="tab" aria-selected="false">Fastest</button><button type="button" role="tab" aria-selected="false">Lowest fuel</button></div>
+</div>
+<div class="rp-table-wrap">
+<table class="rp-table" style="min-width: 860px; font-size: 13px;">
+<thead><tr><th scope="col" style="padding-left: 24px;">Driver</th><th scope="col">Plan</th><th scope="col" class="rp-r">Net profit</th><th scope="col">Finish</th><th scope="col" class="rp-r">Fuel est.</th><th scope="col" class="rp-r">CO₂ est.</th><th scope="col">Home in time</th><th scope="col" style="padding-right: 24px;"><span class="rp-sr">Open</span></th></tr></thead>
+<tbody>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+<tr>
+<td style="padding-left: 24px;"><div style="display: flex; align-items: center; gap: 12px;"><dc-import name="VanSide" label="{{r.van}}" width="88" hint-size="88px,41px"></dc-import><span style="display: flex; flex-direction: column;"><span style="font-weight: 500;">{{r.driver}}</span><span class="rp-small">{{r.van}}</span></span></div></td>
+<td><div style="display: flex; flex-direction: column;"><span class="rp-mono">{{r.plan}}</span><span class="rp-small">{{r.route}}</span></div></td>
+<td class="rp-r rp-num">{{r.net}}</td>
+<td style="white-space: nowrap;">{{r.finish}}</td>
+<td class="rp-r rp-num">{{r.fuel}}</td>
+<td class="rp-r rp-num">{{r.co2}}</td>
+<td><span class="{{r.homeCls}}">{{r.home}}</span></td>
+<td style="padding-right: 24px; text-align: right;"><sc-if value="{{r.hasPlan}}" hint-placeholder-val="{{true}}"><a href="Plan.dc.html" class="rp-btn rp-btn--sm">Open</a></sc-if></td>
+</tr>
+</sc-for>
+</tbody>
+<tfoot><tr><th scope="row" colspan="2" style="padding: 16px 16px 16px 24px; text-align: left; color: #151515; font-size: 13px;">Fleet total · 4 drivers</th><td class="rp-r rp-num" style="padding: 16px; font-weight: 500;">€950.79</td><td style="padding: 16px;"></td><td class="rp-r rp-num" style="padding: 16px;">231.4 l</td><td class="rp-r rp-num" style="padding: 16px;">601.64 kg</td><td colspan="2" style="padding: 16px 24px 16px 16px;"></td></tr></tfoot>
+</table>
+</div>
+<p class="rp-legal" style="padding: 0 24px 20px;">The work/driving/rest schedule is a planning estimate based on a simplified model of selected rules (Polish Act on Drivers' Working Time; Regulation (EC) No 561/2006). It does not certify legal compliance.</p>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch;">
+<section class="rp-card" aria-labelledby="base-h" style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+<div class="rp-card-head"><h2 id="base-h" class="rp-h2">Compared with baselines</h2></div>
+<div role="img" aria-label="Fleet net profit: engine €950.79, greedy baseline €861.30, best single offer €702.15" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: end; height: 200px;">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: flex-end; height: 100%;"><span class="rp-num" style="font-size: 15px;">€950.79</span><span style="display: block; width: 56px; height: 140px; border-radius: 28px 28px 8px 8px; background: linear-gradient(180deg, #D42A22, #F6BDB9);"></span><span class="rp-small">Engine</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: flex-end; height: 100%;"><span class="rp-num" style="font-size: 15px;">€861.30</span><span style="display: block; width: 56px; height: 127px; border-radius: 28px 28px 8px 8px; background: linear-gradient(180deg, #B6BCC6, #E9EBEF);"></span><span class="rp-small">Greedy</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: flex-end; height: 100%;"><span class="rp-num" style="font-size: 15px;">€702.15</span><span style="display: block; width: 56px; height: 103px; border-radius: 28px 28px 8px 8px; background: linear-gradient(180deg, #B6BCC6, #E9EBEF);"></span><span class="rp-small">Best single</span></div>
+</div>
+<div class="rp-well" style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;"><span style="display: flex; flex-direction: column;"><span class="rp-small">Uplift vs best baseline</span><span class="rp-num" style="font-size: 22px; font-weight: 600;">+€89.49 · +10.4 %</span></span><span style="display: flex; flex-direction: column;"><span class="rp-small">vs best single offer</span><span class="rp-num" style="font-size: 22px; font-weight: 600;">+35.4 %</span></span></div>
+</section>
+
+<section class="rp-card" aria-labelledby="rej-h" style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+<div class="rp-card-head"><h2 id="rej-h" class="rp-h2">Why offers were left out</h2><span class="rp-small">grouped by reason</span></div>
+<details open="open" class="rp-well" style="padding: 12px 14px;">
+<summary style="display: flex; justify-content: space-between; gap: 8px; font-weight: 500;"><span>Pickup window can’t be reached</span><span class="rp-pill rp-pill--mute">31</span></summary>
+<ul style="margin: 10px 0 0; padding-left: 18px; font-size: 13px; color: #4A4A47; display: flex; flex-direction: column; gap: 4px;">
+<li><span class="rp-mono">MOCK-000052</span> · D3 · window ends before the van can arrive</li>
+<li><span class="rp-mono">MOCK-000088</span> · D5 · window ends before the van can arrive</li>
+</ul>
+</details>
+<details class="rp-well" style="padding: 12px 14px;"><summary style="display: flex; justify-content: space-between; gap: 8px; font-weight: 500;"><span>Outside the 5-day horizon</span><span class="rp-pill rp-pill--mute">12</span></summary></details>
+<details class="rp-well" style="padding: 12px 14px;"><summary style="display: flex; justify-content: space-between; gap: 8px; font-weight: 500;"><span>Too heavy for the van</span><span class="rp-pill rp-pill--mute">9</span></summary></details>
+<details class="rp-well" style="padding: 12px 14px;"><summary style="display: flex; justify-content: space-between; gap: 8px; font-weight: 500;"><span>No price given</span><span class="rp-pill rp-pill--mute">6</span></summary></details>
+<details class="rp-well" style="padding: 12px 14px;"><summary style="display: flex; justify-content: space-between; gap: 8px; font-weight: 500;"><span>Body type doesn’t match</span><span class="rp-pill rp-pill--mute">5</span></summary></details>
+<button type="button" class="rp-btn rp-btn--sm" style="align-self: flex-start; border: 0;">Show all 9 reasons</button>
+</section>
+</div>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1480}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const ok = 'rp-pill rp-pill--ok', mute = 'rp-pill rp-pill--mute';
+    const rows = [
+      ['Paweł Kurek', 'PLAN-1a2b3c4d', 'Katowice → Leipzig · 3 offers', '€323.54', 'Tue 07:55', '76.6 l', '199.16 kg', 'Yes', ok, true],
+      ['Ewa Sowa', 'PLAN-7e01c5b2', 'Wrocław → Brno → Wrocław · 2 offers', '€287.10', 'Wed 15:40', '64.8 l', '168.48 kg', 'Yes', ok, true],
+      ['Marta Lis-Wrona', '—', 'No feasible plan within the horizon', '—', '—', '—', '—', 'n/a', mute, false],
+      ['Jan Bielak', 'PLAN-c4d90e17', 'Łódź → Berlin → Łódź · 2 offers', '€198.40', 'Thu 12:15', '52.3 l', '135.98 kg', 'Yes', ok, true],
+      ['Kamil Dąb', 'PLAN-5b2fa803', 'Kraków → Ostrava · 1 offer', '€141.75', 'Tue 18:20', '37.7 l', '98.02 kg', 'Yes', ok, true]
+    ].map((r, i) => ({ van: 'BUS-0' + (i + 1), driver: r[0], plan: r[1], route: r[2], net: r[3], finish: r[4], fuel: r[5], co2: r[6], home: r[7], homeCls: r[8], hasPlan: r[9] }));
+    return { rows };
+  }
+}
+</script>
+</body>
+</html>

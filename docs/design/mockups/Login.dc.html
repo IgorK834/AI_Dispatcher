@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sign in</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7}
+</style>
+</helmet>
+<div class="rp-root" style="min-height: 900px; display: flex; flex-direction: column;">
+
+<header style="max-width: 1440px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+<span style="display: flex; align-items: center; gap: 10px;">
+<svg width="34" height="24" viewBox="0 0 34 24" fill="none" aria-hidden="true"><rect x="1" y="2" width="19" height="14" rx="2" fill="#D42A22"></rect><path d="M20 6h6.5l4.5 5.5V16H20Z" fill="#1A1D23"></path><path d="M22.5 8h3.4l2.5 3h-5.9Z" fill="#FFFFFF"></path><circle cx="7" cy="18" r="3.2" fill="#1A1D23"></circle><circle cx="7" cy="18" r="1.2" fill="#FFFFFF"></circle><circle cx="26" cy="18" r="3.2" fill="#1A1D23"></circle><circle cx="26" cy="18" r="1.2" fill="#FFFFFF"></circle></svg>
+<span style="font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -0.02em;">Route<span style="color: #D42A22;">Pilot</span></span>
+</span>
+<div class="rp-seg" role="group" aria-label="Language"><button type="button" aria-pressed="true">EN</button><button type="button" aria-pressed="false">PL</button></div>
+</header>
+
+<main style="flex: 1 1 auto; max-width: 1440px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 24px 40px; display: flex; flex-wrap: wrap; align-items: stretch; gap: 16px;">
+
+<section aria-label="About" class="rp-card" style="flex: 999 1 520px; min-width: 0; padding: 48px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; position: relative; overflow: hidden;">
+<div style="display: flex; flex-direction: column; gap: 18px; max-width: 560px; position: relative;">
+<span class="rp-pill rp-pill--synthetic" style="align-self: flex-start;">SYNTHETIC DEMO DATA</span>
+<h1 class="rp-h1" style="font-size: 48px; line-height: 1.08;">Profitable van routes, planned with an AI dispatcher.</h1>
+<p class="rp-sub" style="font-size: 16px;">Agents search offers and check drivers’ time. A deterministic engine builds and verifies every plan. You approve each assignment.</p>
+</div>
+<dc-import name="VanSide" label="BUS-01" width="460" hint-size="460px,215px"></dc-import>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; position: relative;">
+<div class="rp-well" style="display: flex; flex-direction: column; gap: 4px;"><span class="rp-small">Vans</span><span class="rp-num" style="font-size: 20px;">8 · 9 · 10 EP</span><span class="rp-small">up to 3.5 t</span></div>
+<div class="rp-well" style="display: flex; flex-direction: column; gap: 4px;"><span class="rp-small">Variants</span><span class="rp-num" style="font-size: 20px;">3 per plan</span><span class="rp-small">profit · fastest · fuel</span></div>
+<div class="rp-well" style="display: flex; flex-direction: column; gap: 4px;"><span class="rp-small">Without AI</span><span class="rp-num" style="font-size: 20px;">Still works</span><span class="rp-small">manual optimizer</span></div>
+</div>
+</section>
+
+<section aria-labelledby="signin-h" class="rp-card" style="flex: 1 1 400px; max-width: 480px; padding: 40px; display: flex; flex-direction: column; gap: 22px; justify-content: center;">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h2 id="signin-h" class="rp-h1" style="font-size: 28px;">Sign in</h2>
+<p class="rp-sub">Use the account your administrator gave you.</p>
+</div>
+<form style="display: flex; flex-direction: column; gap: 16px;">
+<div class="rp-field"><label for="email" class="rp-label">Email</label><input id="email" class="rp-input" type="email" autocomplete="username" value="demo@routepilot.local"></div>
+<div class="rp-field">
+<div style="display: flex; justify-content: space-between; align-items: center;"><label for="password" class="rp-label">Password</label><button type="button" class="rp-btn rp-btn--sm" style="border: 0; min-height: 32px; padding: 0 8px;">Show</button></div>
+<input id="password" class="rp-input" type="password" autocomplete="current-password" value="••••••••••••">
+</div>
+<div class="rp-well" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px;">
+<span style="display: flex; align-items: center; gap: 10px;"><span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 50%; background: #1A1D23; display: inline-flex; align-items: center; justify-content: center;"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="m3 8.5 3 3 7-7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Verification passed</span>
+<span class="rp-small" style="font-size: 11px;">Cloudflare Turnstile</span>
+</div>
+<button type="submit" class="rp-btn rp-btn--primary" style="min-height: 50px; font-size: 15px;">Sign in</button>
+</form>
+<div class="rp-banner rp-banner--info" role="note" style="flex-direction: column; gap: 4px;">
+<strong style="font-weight: 600;">Local demo</strong>
+<span><span class="rp-mono">demo@routepilot.local</span> or <span class="rp-mono">admin@routepilot.local</span> — passwords are in <span class="rp-mono">apps/api/.env.example</span>.</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<span class="rp-eyebrow">Error states (replace the banner above)</span>
+<p role="alert" class="rp-banner rp-banner--bad" style="margin: 0;">Wrong email or password. Try again.</p>
+<p class="rp-banner rp-banner--warn" style="margin: 0;">Too many attempts. Wait 30 seconds and try again.</p>
+</div>
+</section>
+</main>
+
+<footer style="max-width: 1440px; width: 100%; margin: 0 auto; box-sizing: border-box; padding: 16px 40px 24px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+<span class="rp-small">All drivers, vans and offers in this app are synthetic demo data.</span>
+<span class="rp-small">MVP · 2026</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

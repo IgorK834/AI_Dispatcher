@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Dispatcher</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7}
+</style>
+</helmet>
+<div class="rp-root" style="min-height: 1140px;">
+<dc-import name="TopBar" active="dispatcher" role="admin" hint-size="100%,80px"></dc-import>
+<main class="rp-page" style="padding-top: 16px;">
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h1 class="rp-h1">AI Dispatcher</h1>
+<p class="rp-sub">Ask in plain language. Agents read the data, the engine computes every number, you approve every assignment.</p>
+</div>
+<button type="button" class="rp-btn">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
+New conversation</button>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;">
+
+<section class="rp-card" aria-labelledby="conv-h" style="flex: 999 1 500px; min-width: 0; display: flex; flex-direction: column; gap: 20px;">
+<div class="rp-card-head">
+<h2 id="conv-h" class="rp-h2">Conversation</h2>
+<span class="rp-small">Today, 05:10</span>
+</div>
+
+<div style="display: flex; justify-content: flex-end;">
+<div style="max-width: 82%; background: #1A1D23; color: #FFFFFF; border-radius: 14px 14px 4px 14px; padding: 12px 16px;">
+<p style="margin: 0;">Find the best loads for all vans for tomorrow; everyone must get home for the weekend.</p>
+</div>
+</div>
+
+<article style="display: flex; flex-direction: column; gap: 14px;">
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+<span class="rp-row-icon" aria-hidden="true" style="width: 32px; height: 32px;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M7 1.5 8.4 5.6 12.5 7 8.4 8.4 7 12.5 5.6 8.4 1.5 7 5.6 5.6 7 1.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></path></svg></span>
+<span class="rp-h3">Dispatcher</span>
+<span class="rp-pill rp-pill--ok"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3 8.5 3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Verified numbers</span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6;">I found plans for 4 of 5 drivers. The best fleet solution earns <strong class="rp-num" style="font-weight: 500;">€950.79</strong> net, <strong class="rp-num" style="font-weight: 500;">€89.49</strong> more than the best simple baseline. Everyone with a weekend deadline is home before Friday 18:00. D3 has no feasible plan in the horizon.</p>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+<a href="Plan.dc.html" class="rp-well" style="display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: #151515;">
+<span style="display: flex; justify-content: space-between; gap: 8px;"><span style="font-weight: 500;">D1 · Paweł Kurek</span><span class="rp-mono" style="color: #6B6B67;">PLAN-1a2b3c4d</span></span>
+<span style="display: flex; align-items: center; gap: 12px;"><dc-import name="VanSide" label="BUS-01" width="120" hint-size="120px,56px"></dc-import><span class="rp-small">Katowice → Opole → Wrocław → Dresden → Leipzig</span></span>
+<span style="display: flex; gap: 20px; flex-wrap: wrap;">
+<span style="display: flex; flex-direction: column;"><span class="rp-small">Net profit</span><span class="rp-num" style="font-size: 18px;">€323.54</span></span>
+<span style="display: flex; flex-direction: column;"><span class="rp-small">Finish</span><span class="rp-num" style="font-size: 18px;">Tue 07:55</span></span>
+<span style="display: flex; flex-direction: column;"><span class="rp-small">CO₂ est.</span><span class="rp-num" style="font-size: 18px;">199.16 kg</span></span>
+</span>
+</a>
+<a href="Plan.dc.html" class="rp-well" style="display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: #151515;">
+<span style="display: flex; justify-content: space-between; gap: 8px;"><span style="font-weight: 500;">D2 · Ewa Sowa</span><span class="rp-mono" style="color: #6B6B67;">PLAN-7e01c5b2</span></span>
+<span style="display: flex; align-items: center; gap: 12px;"><dc-import name="VanSide" label="BUS-02" width="120" hint-size="120px,56px"></dc-import><span class="rp-small">Wrocław → Praha → Brno → Wrocław</span></span>
+<span style="display: flex; gap: 20px; flex-wrap: wrap;">
+<span style="display: flex; flex-direction: column;"><span class="rp-small">Net profit</span><span class="rp-num" style="font-size: 18px;">€287.10</span></span>
+<span style="display: flex; flex-direction: column;"><span class="rp-small">Finish</span><span class="rp-num" style="font-size: 18px;">Wed 15:40</span></span>
+<span style="display: flex; flex-direction: column;"><span class="rp-small">CO₂ est.</span><span class="rp-num" style="font-size: 18px;">168.48 kg</span></span>
+</span>
+</a>
+</div>
+<span class="rp-small">+ 2 more plans (D4, D5) in the approval request.</span>
+
+<div class="rp-banner rp-banner--warn" role="note">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"></circle><path d="M8 4.8v3.6M8 10.8v.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>
+<span>Excluded <span class="rp-mono">MOCK-000117</span>: its remark contains instruction-like text. It was treated as data and never followed.</span>
+</div>
+<p class="rp-legal">The work/driving/rest schedule is a planning estimate based on a simplified model of selected rules (Polish Act on Drivers' Working Time; Regulation (EC) No 561/2006). It does not certify legal compliance.</p>
+</article>
+
+<form style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #ECECE9; padding-top: 16px;">
+<label for="msg" class="rp-label">Message</label>
+<div style="display: flex; gap: 10px; align-items: flex-end;">
+<textarea id="msg" class="rp-textarea" rows="2" disabled="disabled" placeholder="Waiting for your decision on the approval request…" style="flex: 1 1 0; min-width: 0;"></textarea>
+<button type="submit" class="rp-btn rp-btn--primary" disabled="disabled">Send</button>
+</div>
+<span class="rp-hint">Unlocks when the run finishes. Answers may only use numbers returned by tools in this run.</span>
+</form>
+</section>
+
+<div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+<section class="rp-card" aria-labelledby="appr-h" style="display: flex; flex-direction: column; gap: 16px; box-shadow: inset 0 0 0 2px #D42A22;">
+<div class="rp-card-head">
+<h2 id="appr-h" class="rp-h2">Approve 4 assignments?</h2>
+<span class="rp-pill rp-pill--warn">Expires in 27 min</span>
+</div>
+<p class="rp-sub" style="font-size: 13px;">Nothing is assigned until you approve. Rejecting saves nothing.</p>
+<div class="rp-table-wrap">
+<table class="rp-table" style="font-size: 13px;">
+<thead><tr><th scope="col" style="padding-left: 0;">Driver</th><th scope="col" class="rp-r">Net</th><th scope="col">Finish</th><th scope="col" style="padding-right: 0;">Home in time</th></tr></thead>
+<tbody>
+<tr><td style="padding: 12px 16px 12px 0;">D1 Paweł Kurek</td><td class="rp-r rp-num" style="padding: 12px 16px;">€323.54</td><td style="padding: 12px 16px;">Tue 07:55</td><td style="padding: 12px 0;"><span class="rp-pill rp-pill--ok">Yes</span></td></tr>
+<tr><td style="padding: 12px 16px 12px 0;">D2 Ewa Sowa</td><td class="rp-r rp-num" style="padding: 12px 16px;">€287.10</td><td style="padding: 12px 16px;">Wed 15:40</td><td style="padding: 12px 0;"><span class="rp-pill rp-pill--ok">Yes</span></td></tr>
+<tr><td style="padding: 12px 16px 12px 0;">D4 Jan Bielak</td><td class="rp-r rp-num" style="padding: 12px 16px;">€198.40</td><td style="padding: 12px 16px;">Thu 12:15</td><td style="padding: 12px 0;"><span class="rp-pill rp-pill--ok">Yes</span></td></tr>
+<tr><td style="padding: 12px 16px 12px 0;">D5 Kamil Dąb</td><td class="rp-r rp-num" style="padding: 12px 16px;">€141.75</td><td style="padding: 12px 16px;">Tue 18:20</td><td style="padding: 12px 0;"><span class="rp-pill rp-pill--ok">Yes</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="rp-well" style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+<span style="display: flex; flex-direction: column;"><span class="rp-small">Total net</span><span class="rp-num" style="font-size: 22px;">€950.79</span></span>
+<span style="display: flex; flex-direction: column;"><span class="rp-small">Fuel est.</span><span class="rp-num" style="font-size: 22px;">231.4 l</span></span>
+<span style="display: flex; flex-direction: column;"><span class="rp-small">CO₂ est.</span><span class="rp-num" style="font-size: 22px;">601.64 kg</span></span>
+</div>
+<div class="rp-field">
+<label for="appr-comment" class="rp-label">Comment <span style="color: #6B6B67; font-weight: 400;">(optional, sent with a rejection)</span></label>
+<textarea id="appr-comment" class="rp-textarea" rows="2"></textarea>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+<button type="button" class="rp-btn rp-btn--primary" style="flex: 1 1 160px;">Approve and assign</button>
+<button type="button" class="rp-btn" style="flex: 1 1 120px;">Reject</button>
+</div>
+<p class="rp-legal">The work/driving/rest schedule is a planning estimate based on a simplified model of selected rules (Polish Act on Drivers' Working Time; Regulation (EC) No 561/2006). It does not certify legal compliance.</p>
+</section>
+
+<section class="rp-card" aria-labelledby="trace-h" style="display: flex; flex-direction: column; gap: 8px;">
+<div class="rp-card-head">
+<h2 id="trace-h" class="rp-h2">Agent trace</h2>
+<span class="rp-small">10 steps · 9 812 tokens</span>
+</div>
+<p aria-live="polite" style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 13px;"><span class="rp-dot" aria-hidden="true" style="background: #D42A22;"></span>Waiting for your approval</p>
+<ol style="list-style: none; margin: 0; padding: 0;">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="10">
+<li class="rp-row" style="padding: 11px 0; align-items: center;">
+<span style="display: flex; flex-direction: column; flex: 1 1 0; min-width: 0;">
+<span style="font-size: 13px;"><span style="font-weight: 500;">{{s.agent}}</span> · <span class="rp-mono">{{s.tool}}</span></span>
+<span class="rp-small">{{s.result}}</span>
+</span>
+<span class="{{s.pill}}">{{s.status}}</span>
+</li>
+</sc-for>
+</ol>
+</section>
+</div>
+
+<section class="rp-card" aria-labelledby="map-h" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+<div class="rp-card-head">
+<h2 id="map-h" class="rp-h2">Map</h2>
+<div class="rp-seg" role="group" aria-label="Map view"><button type="button" aria-pressed="true">Map</button><button type="button" aria-pressed="false">List</button></div>
+</div>
+<div class="rp-map" style="height: 420px;">
+<svg viewBox="0 0 360 420" role="img" aria-label="Proposed D1 route: 1 Katowice, 2 Opole, 3 and 4 Wrocław, 5 Dresden, 6 Leipzig" style="width: 100%; height: 100%; display: block;">
+<g stroke="#FFFFFF" stroke-width="5" fill="none"><path d="M0 70H360M0 160H360M0 250H360M0 340H360M60 0V420M150 0V420M240 0V420M320 0V420"></path></g>
+<g stroke="#F8F8F6" stroke-width="2" fill="none"><path d="M0 115H360M0 205H360M0 295H360M105 0V420M195 0V420M285 0V420"></path></g>
+<path d="M0 300 C70 280 120 330 200 305 S320 270 360 285" stroke="#DCE0E6" stroke-width="12" fill="none"></path>
+<path d="M330 330 L282 250 L240 160 L92 172 L34 112" stroke="#D42A22" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-dasharray="0"></path>
+<g font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+<circle cx="330" cy="330" r="12" fill="#D42A22"></circle><text x="330" y="334">1</text>
+<circle cx="282" cy="250" r="12" fill="#D42A22"></circle><text x="282" y="254">2</text>
+<circle cx="240" cy="160" r="12" fill="#D42A22"></circle><text x="240" y="164">3</text>
+<circle cx="92" cy="172" r="12" fill="#D42A22"></circle><text x="92" y="176">5</text>
+<circle cx="34" cy="112" r="12" fill="#D42A22"></circle><text x="34" y="116">6</text>
+</g>
+<g font-family="Inter, sans-serif" font-size="11" fill="#4A4A47">
+<text x="300" y="360">Katowice</text><text x="296" y="244">Opole</text><text x="252" y="148">Wrocław (3·4)</text><text x="70" y="198">Dresden</text><text x="16" y="94">Leipzig</text>
+</g>
+<rect x="180" y="40" width="132" height="28" rx="14" fill="#FFFFFF"></rect>
+<circle cx="196" cy="54" r="5" fill="#D42A22"></circle>
+<text x="208" y="58" font-family="Inter, sans-serif" font-size="12" fill="#D42A22">D1 · selected plan</text>
+</svg>
+<div class="rp-map-controls">
+<div class="rp-map-stack"><button type="button" aria-label="Zoom in"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg></button><button type="button" aria-label="Zoom out"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg></button></div>
+<div class="rp-map-stack"><button type="button" aria-label="Fit route"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="5" stroke="currentColor" stroke-width="1.4"></circle><circle cx="9" cy="9" r="1.6" fill="currentColor"></circle><path d="M9 1.5V4M9 14v2.5M1.5 9H4M14 9h2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></button></div>
+</div>
+<span class="rp-map-attr">© OpenStreetMap contributors</span>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4A4A47;">
+<li style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 18px; height: 3px; background: #D42A22;"></span>Proposed route with numbered stops</li>
+<li style="display: flex; align-items: center; gap: 8px;"><span class="rp-dot" aria-hidden="true" style="background: #D42A22;"></span>Selected proposal</li>
+</ul>
+</section>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1140}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const steps = [
+      ['Dispatcher', 'model', 'Delegates to Fleet & Compliance · 1.1 s', 'ok', 'rp-pill rp-pill--ok'],
+      ['Fleet & Compliance', 'list_drivers', '5 drivers · 0.1 s', 'ok', 'rp-pill rp-pill--ok'],
+      ['Fleet & Compliance', 'driver_availability', 'D1–D5 remaining time · 0.2 s', 'ok', 'rp-pill rp-pill--ok'],
+      ['Freight Scout', 'search_offers', '20 of 150 matching · 0.2 s', 'ok', 'rp-pill rp-pill--ok'],
+      ['Freight Scout', 'get_offer', 'MOCK-000117 · suspicious text', 'flagged', 'rp-pill rp-pill--warn'],
+      ['Freight Scout', 'optimize_fleet', 'Not in this agent’s tools', 'rejected', 'rp-pill rp-pill--bad'],
+      ['Route Planner', 'optimize_fleet', '3 objectives with baselines · 4.6 s', 'ok', 'rp-pill rp-pill--ok'],
+      ['PlanValidator', 'check', '4 of 4 plans valid', 'ok', 'rp-pill rp-pill--ok'],
+      ['Grounding', 'check', 'Every number found in tool results', 'ok', 'rp-pill rp-pill--ok'],
+      ['ApprovalGate', 'interrupt', 'Assign 4 plans', 'waiting for you', 'rp-pill rp-pill--info']
+    ].map((s) => ({ agent: s[0], tool: s[1], result: s[2], status: s[3], pill: s[4] }));
+    return { steps };
+  }
+}
+</script>
+</body>
+</html>

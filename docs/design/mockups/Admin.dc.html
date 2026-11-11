@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7}
+</style>
+</helmet>
+<div class="rp-root" style="min-height: 1180px;">
+<dc-import name="TopBar" active="admin" role="admin" hint-size="100%,80px"></dc-import>
+<main class="rp-page" style="padding-top: 16px;">
+
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h1 class="rp-h1">Admin</h1>
+<p class="rp-sub">Demo data, cost profile and AI status. Visible to administrators only.</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+
+<form class="rp-card" aria-labelledby="gen-h" style="display: flex; flex-direction: column; gap: 18px;">
+<div style="display: flex; flex-direction: column; gap: 4px;"><h2 id="gen-h" class="rp-h2">Generate demo data</h2><p class="rp-sub" style="font-size: 13px;">Re-runs the fleet and offer generators. The same seed always gives the same data.</p></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+<div class="rp-field"><label for="g-seed" class="rp-label">Seed</label><input id="g-seed" class="rp-input rp-mono" inputmode="numeric" value="20261109"></div>
+<div class="rp-field"><label for="g-date" class="rp-label">Reference date</label><input id="g-date" class="rp-input" type="date" value="2026-11-16"></div>
+<div class="rp-field"><label for="g-n" class="rp-label">Offers</label><input id="g-n" class="rp-input" inputmode="numeric" value="150"><span class="rp-hint">1 to 500</span></div>
+</div>
+<button type="submit" class="rp-btn rp-btn--primary" style="align-self: flex-start;">Generate</button>
+<div class="rp-banner rp-banner--ok" role="status" style="flex-direction: column; gap: 10px;">
+<strong style="font-weight: 600;">Last run · Mon 16 Nov 05:02</strong>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+<span style="display: flex; flex-direction: column;"><span style="font-size: 12px;">Imported</span><span class="rp-num" style="font-size: 20px;">147</span></span>
+<span style="display: flex; flex-direction: column;"><span style="font-size: 12px;">Updated</span><span class="rp-num" style="font-size: 20px;">0</span></span>
+<span style="display: flex; flex-direction: column;"><span style="font-size: 12px;">Unchanged</span><span class="rp-num" style="font-size: 20px;">0</span></span>
+<span style="display: flex; flex-direction: column;"><span style="font-size: 12px;">Failed</span><span class="rp-num" style="font-size: 20px;">3</span></span>
+</div>
+<span style="font-size: 12px;">5 drivers · 5 vans · 5 driver states</span>
+</div>
+</form>
+
+<form class="rp-card" aria-labelledby="reset-h" style="display: flex; flex-direction: column; gap: 16px; box-shadow: inset 0 0 0 1px #F3C9C8;">
+<div style="display: flex; flex-direction: column; gap: 4px;"><h2 id="reset-h" class="rp-h2" style="color: #B5221B;">Reset demo data</h2><p class="rp-sub" style="font-size: 13px;">Restores the exact first-start state.</p></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; font-size: 13px;">
+<div class="rp-well"><span class="rp-label">Deleted</span><ul style="margin: 6px 0 0; padding-left: 18px; color: #4A4A47;"><li>Generated drivers, vans, offers</li><li>Manual offers and added fleet rows</li><li>Jobs, plans, assignments</li><li>Agent conversations and approvals</li></ul></div>
+<div class="rp-well"><span class="rp-label">Kept</span><ul style="margin: 6px 0 0; padding-left: 18px; color: #4A4A47;"><li>User accounts and sessions</li><li>Audit log</li></ul></div>
+</div>
+<div class="rp-field"><label for="r-confirm" class="rp-label">Type RESET to confirm</label><input id="r-confirm" class="rp-input rp-mono" placeholder="RESET" autocomplete="off" style="max-width: 280px;"></div>
+<button type="submit" class="rp-btn rp-btn--danger" disabled="disabled" style="align-self: flex-start;">Reset demo data</button>
+</form>
+</div>
+
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+<section class="rp-card" aria-labelledby="ai-h" style="display: flex; flex-direction: column; gap: 14px;">
+<div class="rp-card-head"><h2 id="ai-h" class="rp-h2">AI status</h2><span class="rp-pill rp-pill--ok"><span class="rp-dot" style="background: #1A1D23;"></span>On</span></div>
+<p class="rp-sub" style="font-size: 13px;">Models are set per role in <span class="rp-mono">AGENT_MODEL_POLICY</span> on the server.</p>
+<div style="display: flex; flex-direction: column; gap: 6px;"><div style="display: flex; justify-content: space-between; font-size: 13px;"><span>Today’s token budget</span><span class="rp-num">12 340 of 500 000</span></div><span class="rp-meter" aria-hidden="true"><span style="width: 3%;"></span></span></div>
+<div style="display: flex; justify-content: space-between; font-size: 13px;"><span>Demo account budget</span><span class="rp-num">100 000 / day</span></div>
+</section>
+
+<section class="rp-card rp-card--flush" aria-labelledby="cp-h">
+<div class="rp-card-head" style="padding: 20px 24px 8px;"><h2 id="cp-h" class="rp-h2">Cost profile DEMO-DEFAULT</h2><span class="rp-pill rp-pill--mute">Read-only</span></div>
+<table class="rp-table" style="font-size: 13px;">
+<thead><tr><th scope="col" style="padding-left: 24px;">Parameter</th><th scope="col" class="rp-r">Value</th><th scope="col" style="padding-right: 24px;">Basis</th></tr></thead>
+<tbody>
+<sc-for list="{{params}}" as="p" hint-placeholder-count="9">
+<tr><td style="padding: 12px 16px 12px 24px;">{{p.label}}</td><td class="rp-r rp-num" style="padding: 12px 16px;">{{p.value}}</td><td style="padding: 12px 24px 12px 16px;"><span class="{{p.cls}}">{{p.basis}}</span></td></tr>
+</sc-for>
+</tbody>
+</table>
+<p class="rp-small" style="margin: 0; padding: 12px 24px 20px;">Values marked “assumption” are demo estimates, not market data. Edit through the API docs page.</p>
+</section>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const src = 'rp-pill rp-pill--mute', asm = 'rp-pill rp-pill--warn';
+    const params = [
+      ['Fuel price', '€1.81 / l', 'source', src],
+      ['Driver cost', '€14.00 / h', 'assumption', asm],
+      ['Vehicle cost', '€0.12 / km', 'assumption', asm],
+      ['Accommodation', '€55.00 / night', 'assumption', asm],
+      ['Per diem (domestic plans)', '€10.59 / day', 'source', src],
+      ['Tolls PL, DE (≤ 3.5 t)', '€0.00 / km', 'source', src],
+      ['Tolls FR, IT', '€0.12 / km', 'assumption', asm],
+      ['Vignettes AT, CZ, SK, HU', 'annual, €0 per trip', 'assumption', asm],
+      ['Exchange rate PLN', '4.25', 'assumption', asm],
+      ['Minimum profit', '€0.00', 'assumption', asm]
+    ].map((p) => ({ label: p[0], value: p[1], basis: p[2], cls: p[3] }));
+    return { params };
+  }
+}
+</script>
+</body>
+</html>

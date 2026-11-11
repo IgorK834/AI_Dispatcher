@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Plan PLAN-1a2b3c4d</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7}
+</style>
+</helmet>
+<div class="rp-root" style="min-height: 2700px;">
+<dc-import name="TopBar" active="optimizer" role="dispatcher" hint-size="100%,80px"></dc-import>
+<main class="rp-page" style="padding-top: 24px;">
+
+<nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #656C76;">
+<a href="Optimizer.dc.html" class="rp-icon-btn rp-icon-btn--sm" aria-label="Back to the optimizer result"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+<a href="Optimizer.dc.html" style="color: #474C55; text-decoration: none;">Optimizer</a><span aria-hidden="true">/</span><a href="Optimizer.dc.html" style="color: #474C55; text-decoration: none;">Fleet run Mon 16 Nov 05:12</a><span aria-hidden="true">/</span><span aria-current="page" style="color: #1A1D23; font-weight: 500;">D1 Paweł Kurek</span>
+</nav>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;">
+<div style="display: flex; flex-direction: column; gap: 12px; flex: 1 1 520px;">
+<span class="rp-mono" style="color: #656C76;">PLAN-1a2b3c4d</span>
+<h1 class="rp-h1" style="font-size: 40px;">Katowice → Leipzig</h1>
+<div style="display: flex; gap: 8px; flex-wrap: wrap;"><span class="rp-pill rp-pill--brand">Most profitable</span><span class="rp-pill rp-pill--info">EU 561 international profile</span><span class="rp-pill rp-pill--mute">3 offers · 6 stops</span><span class="rp-pill rp-pill--mute">Paweł Kurek · BUS-01</span></div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px;">
+<button type="button" class="rp-btn rp-btn--primary">Assign this plan</button>
+<button type="button" class="rp-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M7 1.5 8.4 5.6 12.5 7 8.4 8.4 7 12.5 5.6 8.4 1.5 7 5.6 5.6 7 1.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></path></svg>Explain this plan</button>
+</div>
+</div>
+<div style="flex: 0 1 420px; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+<dc-import name="VanSide" label="BUS-01" width="400" hint-size="400px,188px"></dc-import>
+<span class="rp-small">BUS-01 · curtain-sider up to 3.5 t · 10 pallet places</span>
+</div>
+</div>
+
+<section aria-labelledby="var-h" style="display: flex; flex-direction: column; gap: 12px;">
+<h2 id="var-h" class="rp-h2">Variants</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;">
+<sc-for list="{{variants}}" as="v" hint-placeholder-count="3">
+<article class="rp-card" style="{{v.cardStyle}}">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;"><h3 class="rp-h3">{{v.name}}</h3><span class="{{v.tagCls}}">{{v.tag}}</span></div>
+<div style="display: flex; flex-direction: column;"><span class="rp-small">Net profit</span><span class="rp-num" style="font-size: 34px; font-weight: 500; letter-spacing: -0.02em;">{{v.profit}}</span><span class="rp-small">{{v.dProfit}}</span></div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+<div><dt class="rp-small">Finish</dt><dd style="margin: 0; font-weight: 500;">{{v.finish}}</dd><dd class="rp-small" style="margin: 0;">{{v.dFinish}}</dd></div>
+<div><dt class="rp-small">Distance</dt><dd style="margin: 0; font-weight: 500;">{{v.km}}</dd></div>
+<div><dt class="rp-small">Fuel (estimate)</dt><dd style="margin: 0; font-weight: 500;">{{v.fuel}}</dd><dd class="rp-small" style="margin: 0;">{{v.dFuel}}</dd></div>
+<div><dt class="rp-small">CO₂ (estimate)</dt><dd style="margin: 0; font-weight: 500;">{{v.co2}}</dd><dd class="rp-small" style="margin: 0;">{{v.dCo2}}</dd></div>
+</dl>
+<span class="rp-small">{{v.note}}</span>
+</article>
+</sc-for>
+</div>
+<p class="rp-banner rp-banner--info" style="margin: 0;">The work/driving/rest schedule is a planning estimate based on a simplified model of selected rules (Polish Act on Drivers' Working Time; Regulation (EC) No 561/2006). It does not certify legal compliance.</p>
+</section>
+
+<dc-import name="VanTopView" hint-size="100%,620px"></dc-import>
+
+<section class="rp-card" aria-labelledby="tl-h" style="display: flex; flex-direction: column; gap: 16px;">
+<div class="rp-card-head"><h2 id="tl-h" class="rp-h2">Timeline</h2><span class="rp-small">Mon 16 Nov 06:00 → Tue 17 Nov 07:55 CET · 25 h 55 min</span></div>
+<div aria-hidden="true" style="display: flex; height: 36px; gap: 3px; padding: 4px; border-radius: 10px; background: #F7F8FA; box-shadow: inset 0 0 0 1px #E9EBEF;">
+<sc-for list="{{segments}}" as="s" hint-placeholder-count="15"><span style="{{s.style}}"></span></sc-for>
+</div>
+<div aria-hidden="true" style="display: flex; justify-content: space-between; font-size: 11px; color: #656C76;"><span>Mon 06:00</span><span>12:00</span><span>18:00</span><span>Tue 00:00</span><span>06:00</span><span>07:55</span></div>
+<div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px;">
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: #D42A22;"></span>Driving 10 h 25 min</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: #F5AAA6;"></span>Loading / unloading 3 h</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: #B6BCC6;"></span>Breaks 2 × 45 min</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: repeating-linear-gradient(135deg, #E3E6EA 0 3px, #F1F2F4 3px 6px); box-shadow: inset 0 0 0 1px #E3E6EA;"></span>Daily rest 11 h</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: #FFFFFF; box-shadow: inset 0 0 0 1px #D5D9E0;"></span>Waiting 0 min</span>
+</div>
+<p class="rp-sr">Breaks at Mon 12:00 and Mon 17:45, 45 minutes each; daily rest Mon 19:00 to Tue 06:00.</p>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;">
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+
+<section class="rp-card rp-card--flush" aria-labelledby="stops-h">
+<div class="rp-card-head" style="padding: 20px 24px 14px;"><h2 id="stops-h" class="rp-h2">Stops</h2><span class="rp-small">Local time of each stop</span></div>
+<div class="rp-table-wrap">
+<table class="rp-table" style="min-width: 720px; font-size: 13px;">
+<thead><tr><th scope="col" style="padding-left: 24px;">#</th><th scope="col">Action</th><th scope="col">Place</th><th scope="col">Arrive</th><th scope="col">Service</th><th scope="col">Leave</th><th scope="col" class="rp-r">Leg</th><th scope="col" style="padding-right: 24px;">Load after</th></tr></thead>
+<tbody>
+<sc-for list="{{stops}}" as="s" hint-placeholder-count="7">
+<tr>
+<td style="padding-left: 24px;"><span aria-hidden="true" style="width: 26px; height: 26px; border-radius: 50%; background: #D42A22; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600;">{{s.n}}</span></td>
+<td><div style="display: flex; flex-direction: column; gap: 4px;"><span class="{{s.cls}}" style="align-self: flex-start;">{{s.action}}</span><span class="rp-small">{{s.inserted}}</span></div></td>
+<td style="font-weight: 500;">{{s.place}}</td>
+<td style="white-space: nowrap;">{{s.arrive}}</td>
+<td style="white-space: nowrap;">{{s.service}}</td>
+<td style="white-space: nowrap;">{{s.leave}}</td>
+<td class="rp-r" style="white-space: nowrap;">{{s.leg}}</td>
+<td style="padding-right: 24px; white-space: nowrap;">{{s.load}}</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<div style="padding: 14px 24px 20px; border-top: 1px solid #E9EBEF; display: flex; gap: 8px; flex-wrap: wrap;">
+<span class="rp-pill rp-pill--warn">Loading order is not modelled for curtain-siders</span>
+<span class="rp-pill rp-pill--warn">Service time defaulted to 30 min per stop</span>
+</div>
+</section>
+
+<section class="rp-card" aria-labelledby="exp-h" style="display: flex; flex-direction: column; gap: 14px;">
+<div class="rp-card-head"><h2 id="exp-h" class="rp-h2">Why this plan</h2><span class="rp-pill rp-pill--mute">Template explanation</span></div>
+<p style="margin: 0; font-size: 16px; line-height: 1.5;">Three offers along one corridor fill the van to 8 of 10 pallet places and earn €323.54 after all costs.</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; color: #474C55;">
+<li>Pick-ups in Katowice and Opole share the first leg; Wrocław is both a delivery and a pick-up.</li>
+<li>Peak load is 8.0 of 10 pallet places and 800 of 1 085 kg, after the second pick-up.</li>
+<li>Two 45-minute breaks and one 11-hour daily rest are planned; the rest is paid as accommodation (€55.00), no sleeper cab.</li>
+</ul>
+<div class="rp-well" style="font-size: 13px;"><strong style="font-weight: 600;">Trade-off:</strong> finishes 21 h 25 min later than the fastest variant, for €267.43 more profit.</div>
+</section>
+
+<section class="rp-card" aria-labelledby="cost-h" style="display: flex; flex-direction: column; gap: 10px;">
+<div class="rp-card-head"><h2 id="cost-h" class="rp-h2">Costs</h2><span class="rp-small">EUR</span></div>
+<table class="rp-table" style="font-size: 13px;">
+<caption class="rp-sr">Cost breakdown</caption>
+<tbody>
+<sc-for list="{{costs}}" as="c" hint-placeholder-count="7">
+<tr><th scope="row" style="padding: 11px 0; font-size: 13px; color: #1A1D23; font-weight: 400; text-transform: none; letter-spacing: 0; background: transparent; border-bottom: 1px solid #E9EBEF;">{{c.label}} <span class="{{c.cls}}" style="margin-left: 6px;">{{c.tag}}</span></th><td class="rp-r rp-num" style="padding: 11px 0;">{{c.value}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+<div class="rp-well" style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap;"><span style="display: flex; flex-direction: column;"><span class="rp-small">Net profit · margin 41.48 %</span><span class="rp-num" style="font-size: 28px; font-weight: 600; color: #D42A22;">€323.54</span></span><span class="rp-small">Revenue €780.00 − costs €456.46</span></div>
+</section>
+</div>
+
+<div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+<section class="rp-card" aria-labelledby="pmap-h" style="display: flex; flex-direction: column; gap: 12px;">
+<div class="rp-card-head"><h2 id="pmap-h" class="rp-h2">Route</h2><span class="rp-small">625 km</span></div>
+<div class="rp-map" style="height: 280px;">
+<svg viewBox="0 0 400 280" role="img" aria-label="Route: 1 Katowice, 2 Opole, 3 and 4 Wrocław, 5 Dresden, 6 Leipzig" style="width: 100%; height: 100%; display: block;">
+<g stroke="#F6F7F9" stroke-width="5" fill="none"><path d="M0 60H400M0 140H400M0 220H400M70 0V280M170 0V280M270 0V280M350 0V280"></path></g>
+<path d="M0 210 C80 190 130 240 210 215 S340 180 400 195" stroke="#DCE0E6" stroke-width="12" fill="none"></path>
+<path d="M370 226 L314 166 L269 100 L100 108 L36 62" stroke="#D42A22" stroke-width="3" fill="none" stroke-linejoin="round"></path>
+<g font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+<circle cx="370" cy="226" r="12" fill="#D42A22" stroke="#FFFFFF" stroke-width="2"></circle><text x="370" y="230">1</text>
+<circle cx="314" cy="166" r="12" fill="#D42A22" stroke="#FFFFFF" stroke-width="2"></circle><text x="314" y="170">2</text>
+<circle cx="269" cy="100" r="12" fill="#D42A22" stroke="#FFFFFF" stroke-width="2"></circle><text x="269" y="104">3</text>
+<circle cx="100" cy="108" r="12" fill="#D42A22" stroke="#FFFFFF" stroke-width="2"></circle><text x="100" y="112">5</text>
+<circle cx="36" cy="62" r="12" fill="#D42A22" stroke="#FFFFFF" stroke-width="2"></circle><text x="36" y="66">6</text>
+</g>
+<g font-family="Inter, sans-serif" font-size="11" fill="#474C55"><text x="318" y="256">Katowice</text><text x="330" y="160">Opole</text><text x="284" y="90">Wrocław</text><text x="76" y="136">Dresden</text><text x="22" y="44">Leipzig</text></g>
+</svg>
+<div class="rp-map-controls"><div class="rp-map-stack"><button type="button" aria-label="Zoom in"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></button><button type="button" aria-label="Zoom out"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></button></div></div>
+<span class="rp-map-attr">© OpenStreetMap contributors</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 500;">Katowice PL</span><span style="font-weight: 500;">Leipzig DE</span></div>
+<div class="rp-track"><span style="width: 0%;"></span><i style="left: 0%;"></i></div>
+<span class="rp-small">Not started · departs Mon 06:00 · distances from the demo city matrix</span>
+</div>
+</section>
+
+<section class="rp-card" aria-labelledby="veh-h" style="display: flex; flex-direction: column; gap: 12px;">
+<div class="rp-card-head"><div style="display: flex; align-items: center; gap: 10px;"><span class="rp-row-icon" aria-hidden="true"><svg width="18" height="14" viewBox="0 0 34 24" fill="none"><rect x="1" y="2" width="19" height="14" rx="2" stroke="currentColor" stroke-width="2.4"></rect><path d="M20 6h6.5l4.5 5.5V16H20" stroke="currentColor" stroke-width="2.4"></path><circle cx="7" cy="19" r="3" fill="currentColor"></circle><circle cx="26" cy="19" r="3" fill="currentColor"></circle></svg></span><h2 id="veh-h" class="rp-h2">Vehicle</h2></div><a href="Fleet.dc.html" class="rp-link" style="font-size: 13px;">Open in fleet</a></div>
+<dl style="margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; font-size: 13px;">
+<sc-for list="{{vehicle}}" as="v" hint-placeholder-count="7">
+<dt style="padding: 9px 0; border-top: 1px solid #E9EBEF; color: #474C55;">{{v.k}}</dt><dd style="margin: 0; padding: 9px 0; border-top: 1px solid #E9EBEF; text-align: right; font-weight: 500;">{{v.v}}</dd>
+</sc-for>
+</dl>
+</section>
+
+<section class="rp-card" aria-labelledby="occ-h" style="display: flex; flex-direction: column; gap: 14px;">
+<div class="rp-card-head"><h2 id="occ-h" class="rp-h2">Occupancy after each stop</h2></div>
+<div style="display: flex; gap: 16px; font-size: 12px; color: #474C55;"><span style="display: flex; align-items: center; gap: 6px;"><span class="rp-dot" style="background: #D42A22;"></span>Pallet places (of 10)</span><span style="display: flex; align-items: center; gap: 6px;"><span class="rp-dot" style="background: #B6BCC6;"></span>Mass (of 1 085 kg)</span></div>
+<div role="img" aria-label="Pallet places after each stop: 4, 8, 4, 6, 2, 0 of 10. Mass: 380, 800, 420, 620, 200, 0 of 1085 kg." style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; align-items: end; height: 180px;">
+<sc-for list="{{occ}}" as="o" hint-placeholder-count="6">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end;">
+<span style="font-size: 11px; color: #474C55;">{{o.ep}}</span>
+<div style="display: flex; gap: 4px; align-items: flex-end; height: 130px;"><span style="{{o.epBar}}"></span><span style="{{o.kgBar}}"></span></div>
+<span style="font-size: 11px; color: #656C76;">{{o.n}}</span>
+</div>
+</sc-for>
+</div>
+<span class="rp-small">Peak 8.0 / 10 EP and 800 / 1 085 kg after stop 2.</span>
+</section>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const sel = "display: flex; flex-direction: column; gap: 16px; box-shadow: inset 0 0 0 2px #D42A22;";
+    const card = "display: flex; flex-direction: column; gap: 16px;";
+    const variants = [
+      { name: 'Most profitable', tag: 'Shown', tagCls: 'rp-pill rp-pill--brand', cardStyle: sel, profit: '€323.54', dProfit: 'Reference variant', finish: 'Tue 07:55', dFinish: '', km: '625 km', fuel: '76.6 l', dFuel: '', co2: '199.16 kg', dCo2: '', note: 'Offers A, B and C · EU 561 profile' },
+      { name: 'Fastest', tag: 'Same as lowest fuel', tagCls: 'rp-pill rp-pill--mute', cardStyle: card, profit: '€56.11', dProfit: '−€267.43 vs most profitable', finish: 'Mon 10:30', dFinish: '21 h 25 min earlier', km: '210 km', fuel: '25.2 l', dFuel: '−51.4 l', co2: '65.56 kg', dCo2: '−133.60 kg', note: 'Offer A only · PL domestic profile' },
+      { name: 'Lowest fuel', tag: 'Same as fastest', tagCls: 'rp-pill rp-pill--mute', cardStyle: card, profit: '€56.11', dProfit: '−€267.43 vs most profitable', finish: 'Mon 10:30', dFinish: '21 h 25 min earlier', km: '210 km', fuel: '25.2 l', dFuel: '−51.4 l', co2: '65.56 kg', dCo2: '−133.60 kg', note: 'These two variants are the same plan' }
+    ];
+    const col = { d: '#D42A22', s: '#F5AAA6', b: '#B6BCC6', r: 'repeating-linear-gradient(135deg, #E3E6EA 0 5px, #F1F2F4 5px 10px)' };
+    const seq = [['s',30],['d',113],['s',30],['d',98],['s',60],['d',29],['b',45],['d',259],['s',30],['d',11],['b',45],['d',30],['r',660],['d',85],['s',30]];
+    const segments = seq.map((x) => ({ style: 'display: block; flex: ' + x[1] + ' 1 0; min-width: 4px; border-radius: 5px; background: ' + col[x[0]] + ';' }));
+    const P = 'rp-pill rp-pill--mute', D = 'rp-pill rp-pill--ok';
+    const stops = [
+      ['0', 'Start', '', 'Katowice', '—', '—', 'Mon 06:00', '—', '0.0 EP · 0 kg', P],
+      ['1', 'Pick up A', '', 'Katowice', 'Mon 06:00', 'Mon 06:00', 'Mon 06:30', '0 km', '4.0 EP · 380 kg', P],
+      ['2', 'Pick up B', '', 'Opole', 'Mon 08:23', 'Mon 08:23', 'Mon 08:53', '113 km', '8.0 EP · 800 kg', P],
+      ['3', 'Deliver A', '', 'Wrocław', 'Mon 10:31', 'Mon 10:31', 'Mon 11:01', '98 km', '4.0 EP · 420 kg', D],
+      ['4', 'Pick up C', '', 'Wrocław', 'Mon 11:01', 'Mon 11:01', 'Mon 11:31', '0 km', '6.0 EP · 620 kg', P],
+      ['5', 'Deliver B', 'Break 45 min at 12:00', 'Dresden', 'Mon 17:04', 'Mon 17:04', 'Mon 17:34', '288 km', '2.0 EP · 200 kg', D],
+      ['6', 'Deliver C', 'Break 45 min · daily rest 19:00–06:00', 'Leipzig', 'Tue 07:25', 'Tue 07:25', 'Tue 07:55', '125 km', '0.0 EP · 0 kg', D]
+    ].map((s) => ({ n: s[0], action: s[1], inserted: s[2], place: s[3], arrive: s[4], service: s[5], leave: s[6], leg: s[7], load: s[8], cls: s[9] }));
+    const occ = [[4,380],[8,800],[4,420],[6,620],[2,200],[0,0]].map((o, i) => ({
+      n: 'Stop ' + (i + 1), ep: o[0] + ' EP',
+      epBar: 'display: block; width: 14px; border-radius: 7px 7px 3px 3px; height: ' + Math.max(4, Math.round(o[0] / 10 * 130)) + 'px; background: linear-gradient(180deg, #D42A22, #F6BDB9);',
+      kgBar: 'display: block; width: 14px; border-radius: 7px 7px 3px 3px; height: ' + Math.max(4, Math.round(o[1] / 1085 * 130)) + 'px; background: linear-gradient(180deg, #B6BCC6, #E3E6EA);'
+    }));
+    const A = 'rp-pill rp-pill--warn', S = 'rp-pill rp-pill--mute';
+    const costs = [
+      ['Revenue', '', '', '€780.00'],
+      ['Fuel 76.601 l × €1.81', 'consumption assumed', A, '€138.65'],
+      ['Tolls (PL, DE ≤ 3.5 t)', 'source', S, '€0.00'],
+      ['Driver 805 min × €14.00/h', 'assumption', A, '€187.83'],
+      ['Per diem', 'international plan', S, '€0.00'],
+      ['Accommodation, 1 rest', 'assumption', A, '€55.00'],
+      ['Vehicle 624.81 km × €0.12', 'assumption', A, '€74.98']
+    ].map((c) => ({ label: c[0], tag: c[1], cls: c[1] ? c[2] : '', value: c[3] }));
+    const vehicle = [
+      ['Label', 'BUS-01'], ['Type', 'Van up to 3.5 t'], ['Body', 'Curtain-sider, both sides'],
+      ['Pallet places', '10 EP · EUR mixed 6 + 4'], ['Payload', '1 085 kg'],
+      ['Interior', '4.85 × 2.10 × 2.10 m'], ['Sleeper cab', 'No'], ['Fuel (assumption)', '11.0–13.0 l / 100 km']
+    ].map((v) => ({ k: v[0], v: v[1] }));
+    return { variants, segments, stops, occ, costs, vehicle };
+  }
+}
+</script>
+</body>
+</html>

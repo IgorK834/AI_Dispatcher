@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fleet</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7}
+</style>
+</helmet>
+<div class="rp-root" style="min-height: 1040px;">
+<dc-import name="TopBar" active="fleet" role="admin" hint-size="100%,80px"></dc-import>
+<main class="rp-page" style="padding-top: 16px;">
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h1 class="rp-h1">Fleet</h1>
+<p class="rp-sub">Drivers, vans and remaining working time · state as of Mon 16 Nov 05:00</p>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+<button type="button" class="rp-btn">Add vehicle</button>
+<a href="DriverForm.dc.html" class="rp-btn rp-btn--primary"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>Add driver</a>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 6px;"><span class="rp-small">Drivers</span><span class="rp-num" style="font-size: 30px; font-weight: 500; letter-spacing: -0.02em;">5</span><span class="rp-small">5 vans · 45 pallet places</span></div>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 6px;"><span class="rp-small">Free today</span><span class="rp-num" style="font-size: 30px; font-weight: 500; letter-spacing: -0.02em;">4</span><span class="rp-small">1 assigned</span></div>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 6px;"><span class="rp-small">Lowest weekly time left</span><span class="rp-num" style="font-size: 30px; font-weight: 500; letter-spacing: -0.02em;">25 h 30 min</span><span class="rp-small">Marta Lis-Wrona</span></div>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 6px;"><span class="rp-small">Home by</span><span class="rp-num" style="font-size: 30px; font-weight: 500; letter-spacing: -0.02em;">Fri 18:00</span><span class="rp-small">all drivers, base time</span></div>
+</div>
+
+<section class="rp-card rp-card--flush" aria-labelledby="drivers-h">
+<div class="rp-card-head" style="padding: 20px 24px 12px;">
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+<h2 id="drivers-h" class="rp-sr">Drivers</h2>
+<div class="rp-seg" role="tablist" aria-label="Fleet view"><button type="button" role="tab" aria-selected="true">Drivers · 5</button><button type="button" role="tab" aria-selected="false">Vehicles · 5</button></div>
+</div>
+<form style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+<label for="f-base" class="rp-sr">Base</label>
+<select id="f-base" class="rp-select" style="width: 170px; border-radius: 999px;"><option>All bases</option><option>Katowice</option><option>Wrocław</option></select>
+<label for="f-avail" class="rp-sr">Available before</label>
+<input id="f-avail" class="rp-input" type="datetime-local" value="2026-11-16T12:00" style="width: 220px; border-radius: 999px;">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px;"><input type="checkbox" class="rp-check" checked="checked">Has a van</label>
+</form>
+</div>
+<div class="rp-table-wrap">
+<table class="rp-table" style="min-width: 1260px;">
+<thead><tr>
+<th scope="col" style="width: 40px; padding-left: 24px;"><input type="checkbox" class="rp-check" aria-label="Select all drivers"></th>
+<th scope="col"><span class="rp-sort">Driver <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true"><path d="m2 4.5 3-3 3 3M2 7.5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></th>
+<th scope="col">Van</th><th scope="col">Base · position</th>
+<th scope="col"><span class="rp-sort">Available from <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true"><path d="m2 4.5 3-3 3 3M2 7.5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></th>
+<th scope="col">Work left today</th><th scope="col"><span class="rp-sort">Work left this week <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true"><path d="m2 4.5 3-3 3 3M2 7.5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></th>
+<th scope="col">Status</th><th scope="col" style="padding-right: 24px;"><span class="rp-sr">Actions</span></th>
+</tr></thead>
+<tbody>
+<sc-for list="{{drivers}}" as="d" hint-placeholder-count="5">
+<tr>
+<td style="padding-left: 24px;"><input type="checkbox" class="rp-check" aria-label="{{d.selectLabel}}"></td>
+<td><div style="display: flex; align-items: center; gap: 12px;"><span aria-hidden="true" style="width: 36px; height: 36px; border-radius: 50%; background: #F6F6F4; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: #4A4A47; flex: none;">{{d.initials}}</span><span style="display: flex; flex-direction: column;"><span style="font-weight: 500;">{{d.name}}</span><span class="rp-small">{{d.phone}}</span></span></div></td>
+<td><div style="display: flex; align-items: center; gap: 12px;"><dc-import name="VanSide" label="{{d.van}}" width="96" hint-size="96px,45px"></dc-import><div style="display: flex; flex-direction: column;"><span class="rp-mono">{{d.van}}</span><span class="rp-small">{{d.cap}}</span></div></div></td>
+<td><div style="display: flex; flex-direction: column;"><span>{{d.base}}</span><span class="rp-small">{{d.pos}}</span></div></td>
+<td style="white-space: nowrap;">{{d.avail}}</td>
+<td style="min-width: 150px;"><div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px;">{{d.dayText}}</span><span class="rp-meter" aria-hidden="true"><span style="{{d.dayBar}}"></span></span></div></td>
+<td style="min-width: 170px;"><div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px;">{{d.weekText}}</span><span class="rp-meter" aria-hidden="true"><span style="{{d.weekBar}}"></span></span></div></td>
+<td><span class="{{d.pill}}">{{d.status}}</span></td>
+<td style="padding-right: 24px;"><div style="display: flex; gap: 6px; justify-content: flex-end;">
+<a href="DriverForm.dc.html" class="rp-icon-btn rp-icon-btn--sm" aria-label="{{d.editLabel}}"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10.5 2.5 13.5 5.5 5.5 13.5H2.5V10.5L10.5 2.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path></svg></a>
+<a href="DeleteDialog.dc.html" class="rp-icon-btn rp-icon-btn--sm" aria-label="{{d.deleteLabel}}" style="color: #B5221B;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.6 8.5h5.8l.6-8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+</div></td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 24px 20px; border-top: 1px solid #ECECE9;">
+<p class="rp-legal" style="max-width: 820px;">The work/driving/rest schedule is a planning estimate based on a simplified model of selected rules (Polish Act on Drivers' Working Time; Regulation (EC) No 561/2006). It does not certify legal compliance.</p>
+<button type="button" class="rp-btn rp-btn--sm" disabled="disabled">All drivers loaded</button>
+</div>
+</section>
+
+<section aria-labelledby="states-h" style="display: flex; flex-direction: column; gap: 12px;">
+<h2 id="states-h" class="rp-eyebrow" style="margin: 0;">Other list states</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;">
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 12px;"><span class="rp-small">Loading</span><span aria-hidden="true" style="height: 12px; width: 70%; background: #F6F6F4; border-radius: 6px; display: block;"></span><span aria-hidden="true" style="height: 12px; width: 92%; background: #F6F6F4; border-radius: 6px; display: block;"></span><span aria-hidden="true" style="height: 12px; width: 56%; background: #F6F6F4; border-radius: 6px; display: block;"></span></div>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;"><span class="rp-small">Empty</span><span class="rp-h3">No drivers yet</span><span class="rp-sub" style="font-size: 13px;">Add a driver, or generate demo data in Admin.</span><button type="button" class="rp-btn rp-btn--primary rp-btn--sm">Add driver</button></div>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start; box-shadow: inset 0 0 0 1px #F3C9C8;"><span class="rp-small">Error</span><span class="rp-h3" style="color: #B5221B;">Could not load drivers</span><span class="rp-sub" style="font-size: 13px;">Something went wrong on the server. Reference <span class="rp-mono">req_8f3a21c0</span></span><button type="button" class="rp-btn rp-btn--sm">Try again</button></div>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1040}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const bar = (left, total, low) => "width: " + Math.round(left / total * 100) + "%; background: " + (low ? "#D42A22" : "#1A1D23") + ";";
+    const rows = [
+      ['Paweł Kurek', '+48 000 000 101', 'BUS-01', '10 EP · 1 085 kg', 'Katowice', 'at base', 'Mon 06:00', 720, 3600, 'Assigned', 'rp-pill rp-pill--ok'],
+      ['Ewa Sowa', '+48 000 000 102', 'BUS-02', '10 EP · 1 050 kg · sleeper cab', 'Wrocław', 'at base', 'Mon 07:15', 720, 2340, 'Free', 'rp-pill rp-pill--mute'],
+      ['Marta Lis-Wrona', '+48 000 000 103', 'BUS-03', '9 EP · 1 000 kg', 'Poznań', 'now in Łódź', 'Mon 13:30', 720, 1530, 'Free', 'rp-pill rp-pill--mute'],
+      ['Jan Bielak', '+48 000 000 104', 'BUS-04', '8 EP · 880 kg', 'Łódź', 'at base', 'Mon 06:45', 720, 2880, 'Free', 'rp-pill rp-pill--mute'],
+      ['Kamil Dąb', '+48 000 000 105', 'BUS-05', '8 EP · 765 kg', 'Kraków', 'now in Katowice', 'Mon 09:00', 720, 1785, 'Free', 'rp-pill rp-pill--mute']
+    ];
+    const hm = (m) => Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0') + ' min';
+    const drivers = rows.map((r) => ({
+      name: r[0], phone: r[1], van: r[2], cap: r[3], base: r[4], pos: r[5], avail: r[6],
+      initials: r[0].split(/[ -]/).map((p) => p.charAt(0)).slice(0, 2).join(''),
+      dayText: hm(r[7]) + ' of 12 h', dayBar: bar(r[7], 720, false),
+      weekText: hm(r[8]) + ' of 60 h', weekBar: bar(r[8], 3600, r[8] < 1800),
+      status: r[9], pill: r[10],
+      selectLabel: 'Select ' + r[0], editLabel: 'Edit ' + r[0], deleteLabel: 'Delete ' + r[0]
+    }));
+    return { drivers };
+  }
+}
+</script>
+</body>
+</html>

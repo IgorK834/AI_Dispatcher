@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Delete driver</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="rp-root" style="width: 560px; height: 360px; min-height: 0; box-sizing: border-box; padding: 24px; background: rgba(26, 29, 35, 0.45); display: flex; align-items: center; justify-content: center;">
+<div role="alertdialog" aria-modal="true" aria-labelledby="del-h" aria-describedby="del-d" class="rp-card" style="width: 100%; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+<h2 id="del-h" class="rp-h2" style="font-size: 21px;">Delete driver Ewa Sowa?</h2>
+<p id="del-d" class="rp-sub">The driver and their state history are removed. Past assignments stay in the history. This cannot be undone.</p>
+<p class="rp-banner rp-banner--bad" style="margin: 0;">If the driver has an active assignment, deleting is blocked: cancel the assignment first.</p>
+<div style="display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 4px;">
+<a href="Fleet.dc.html" class="rp-btn">Cancel</a>
+<a href="Fleet.dc.html" class="rp-btn rp-btn--danger">Delete driver</a>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":560,"height":360}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

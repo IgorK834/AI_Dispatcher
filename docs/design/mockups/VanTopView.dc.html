@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Load plan — top view</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<section class="rp-card rp-root" aria-labelledby="ltv-h" style="min-height: 0; background: #FFFFFF; font-family: 'Inter', system-ui, sans-serif; color: #1A1D23; display: flex; flex-direction: column; gap: 20px;">
+
+<div class="rp-card-head" style="align-items: flex-start;">
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<h2 id="ltv-h" class="rp-h2">Load plan · top view</h2>
+<span class="rp-small">BUS-01 · EUR mixed layout 6 + 4 · interior 4.85 × 2.10 m · payload 1 085 kg</span>
+</div>
+<div class="rp-seg" role="group" aria-label="Show load after stop" style="flex-wrap: wrap;">
+<sc-for list="{{stops}}" as="s" hint-placeholder-count="7">
+<button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}">{{s.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: center;">
+
+<dl style="flex: 1 1 200px; max-width: 240px; margin: 0; display: flex; flex-direction: column; gap: 18px;">
+<div style="display: flex; flex-direction: column; gap: 2px;"><dt class="rp-small">Now</dt><dd style="margin: 0; font-weight: 600;">{{now}}</dd><dd class="rp-small" style="margin: 0;">{{place}}</dd></div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><dt class="rp-small">Weight loaded</dt><dd class="rp-num" style="margin: 0; font-size: 28px; font-weight: 500; letter-spacing: -0.02em;">{{kg}} kg <span class="rp-small" style="font-size: 13px; font-weight: 400;">of 1 085</span></dd><dd style="margin: 0;"><span class="rp-meter rp-meter--brand" aria-hidden="true"><span style="{{kgBar}}"></span></span></dd></div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><dt class="rp-small">Pallet places</dt><dd class="rp-num" style="margin: 0; font-size: 28px; font-weight: 500; letter-spacing: -0.02em;">{{ep}} / 10 <span class="rp-small" style="font-size: 13px; font-weight: 400;">EP</span></dd><dd style="margin: 0;"><span class="rp-meter rp-meter--brand" aria-hidden="true"><span style="{{epBar}}"></span></span></dd></div>
+<div style="display: flex; flex-direction: column; gap: 2px;"><dt class="rp-small">Space used</dt><dd class="rp-num" style="margin: 0; font-size: 28px; font-weight: 500; letter-spacing: -0.02em;">{{pct}} %</dd></div>
+</dl>
+
+<div role="img" aria-label="{{aria}}" style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; justify-content: space-between; font-size: 12px; color: #656C76;">
+<span style="display: flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 4 6 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Rear doors</span>
+<span>Curtain sides open on both sides</span>
+<span style="display: flex; align-items: center; gap: 6px;">Front · cab<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 4 4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+</div>
+
+<div style="position: relative; display: flex; align-items: center; padding: 16px 0;">
+<span aria-hidden="true" style="position: absolute; top: 4px; left: 12%; width: 64px; height: 14px; border-radius: 4px; background: #2A2F38;"></span>
+<span aria-hidden="true" style="position: absolute; bottom: 4px; left: 12%; width: 64px; height: 14px; border-radius: 4px; background: #2A2F38;"></span>
+<span aria-hidden="true" style="position: absolute; top: 4px; right: 40px; width: 58px; height: 14px; border-radius: 4px; background: #2A2F38;"></span>
+<span aria-hidden="true" style="position: absolute; bottom: 4px; right: 40px; width: 58px; height: 14px; border-radius: 4px; background: #2A2F38;"></span>
+
+<div style="position: relative; flex: 1 1 0; min-width: 0; box-sizing: border-box; padding: 10px; border: 3px solid #2A2F38; border-radius: 10px 4px 4px 10px; background: #F7F8FA; display: flex; flex-direction: column; gap: 6px;">
+<span aria-hidden="true" style="position: absolute; left: -9px; top: 22%; bottom: 22%; width: 6px; border-radius: 3px; background: #2A2F38;"></span>
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px;">
+<sc-for list="{{rowT}}" as="c" hint-placeholder-count="6">
+<div style="{{c.style}}">
+<span style="display: flex; justify-content: space-between; gap: 4px; font-size: 11px; color: #1A1D23;"><span style="font-weight: 600;">{{c.id}}</span><span>{{c.kg}}</span></span>
+<span style="display: flex; flex-direction: column; gap: 2px;"><span class="rp-mono" style="font-size: 11px; font-weight: 500; color: #1A1D23;">{{c.offer}}</span><span style="font-size: 11px; color: #1A1D23;">{{c.note}}</span></span>
+</div>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px;">
+<sc-for list="{{rowL}}" as="c" hint-placeholder-count="4">
+<div style="{{c.style}}">
+<span style="display: flex; justify-content: space-between; gap: 4px; font-size: 11px; color: #1A1D23;"><span style="font-weight: 600;">{{c.id}}</span><span>{{c.kg}}</span></span>
+<span style="display: flex; flex-direction: column; gap: 2px;"><span class="rp-mono" style="font-size: 11px; font-weight: 500; color: #1A1D23;">{{c.offer}}</span><span style="font-size: 11px; color: #1A1D23;">{{c.note}}</span></span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div aria-hidden="true" style="position: relative; flex: none; width: 128px; height: 268px; margin-left: 6px; box-sizing: border-box; border: 3px solid #2A2F38; border-radius: 12px 52px 52px 12px; background: #FFFFFF;">
+<span style="position: absolute; left: 14px; top: 26px; bottom: 26px; width: 44px; border-radius: 6px; background: #EFF1F4;"></span>
+<span style="position: absolute; right: 14px; top: 40px; bottom: 40px; width: 30px; border-radius: 4px 40px 40px 4px; background: #CFE3F5; border: 2px solid #2A2F38;"></span>
+<span style="position: absolute; right: 30px; top: -16px; width: 10px; height: 16px; border-radius: 4px 4px 0 0; background: #2A2F38;"></span>
+<span style="position: absolute; right: 30px; bottom: -16px; width: 10px; height: 16px; border-radius: 0 0 4px 4px; background: #2A2F38;"></span>
+<span style="position: absolute; right: -3px; top: 30px; width: 6px; height: 16px; border-radius: 3px; background: #E3E6EA;"></span>
+<span style="position: absolute; right: -3px; bottom: 30px; width: 6px; height: 16px; border-radius: 3px; background: #E3E6EA;"></span>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; border-top: 1px solid #E9EBEF; padding-top: 16px; font-size: 13px;">
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 16px; height: 16px; border-radius: 4px; background: #EC7A74;"></span>A · <span class="rp-mono">MOCK-000123</span> Katowice → Wrocław</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 16px; height: 16px; border-radius: 4px; background: #F5AAA6;"></span>B · <span class="rp-mono">MOCK-000124</span> Opole → Dresden</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 16px; height: 16px; border-radius: 4px; background: #FAD4D1;"></span>C · <span class="rp-mono">MOCK-000131</span> Wrocław → Leipzig</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span aria-hidden="true" style="width: 16px; height: 16px; border-radius: 4px; background: #FFFFFF; border: 1.5px dashed #B9BFC8; box-sizing: border-box;"></span>Free place</span>
+</div>
+<p class="rp-banner rp-banner--warn" style="margin: 0;">Positions are illustrative. The engine checks pallet places and mass; it does not model loading order for curtain-siders, which open on both sides.</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":640}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { stop: 2 }; }
+  renderVals() {
+    const stop = this.state.stop;
+    const offers = {
+      A: { id: 'MOCK-000123', name: 'Offer A', kg: 95, color: '#EC7A74' },
+      B: { id: 'MOCK-000124', name: 'Offer B', kg: 105, color: '#F5AAA6' },
+      C: { id: 'MOCK-000131', name: 'Offer C', kg: 100, color: '#FAD4D1' }
+    };
+    const plan = [
+      { label: 'Start', now: 'Start', place: 'Katowice, Mon 06:00', on: [] },
+      { label: '1', now: 'After pick-up A', place: 'Katowice, Mon 06:30', on: ['A'] },
+      { label: '2', now: 'After pick-up B', place: 'Opole, Mon 08:53', on: ['A', 'B'] },
+      { label: '3', now: 'After delivery A', place: 'Wrocław, Mon 11:01', on: ['B'] },
+      { label: '4', now: 'After pick-up C', place: 'Wrocław, Mon 11:31', on: ['B', 'C'] },
+      { label: '5', now: 'After delivery B', place: 'Dresden, Mon 17:34', on: ['C'] },
+      { label: '6', now: 'After delivery C', place: 'Leipzig, Tue 07:55', on: [] }
+    ];
+    const where = { T1: 'A', T2: 'A', T3: 'A', T4: 'A', T5: 'B', T6: 'B', L1: 'B', L2: 'B', L3: 'C', L4: 'C' };
+    const cur = plan[stop];
+    const base = 'box-sizing: border-box; border-radius: 6px; padding: 8px 9px; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; overflow: hidden;';
+    const cell = (id, h) => {
+      const k = where[id];
+      const on = cur.on.indexOf(k) >= 0;
+      if (!on) return { id, kg: '', offer: 'Free', note: '', style: base + ' height: ' + h + 'px; background: #FFFFFF; border: 1.5px dashed #C3C9D2;' };
+      const o = offers[k];
+      return {
+        id, kg: o.kg + ' kg', offer: o.id, note: o.name + ' · EUR',
+        style: base + ' height: ' + h + 'px; background: repeating-linear-gradient(90deg, rgba(255,255,255,0) 0 9px, rgba(255,255,255,0.45) 9px 11px), ' + o.color + ';'
+      };
+    };
+    const rowT = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'].map((id) => cell(id, 150));
+    const rowL = ['L1', 'L2', 'L3', 'L4'].map((id) => cell(id, 96));
+    const kg = cur.on.reduce((s, k) => s + offers[k].kg * (k === 'C' ? 2 : 4), 0);
+    const ep = cur.on.reduce((s, k) => s + (k === 'C' ? 2 : 4), 0);
+    const stops = plan.map((p, i) => ({
+      label: p.label,
+      pressed: i === stop ? 'true' : 'false',
+      pick: () => this.setState({ stop: i })
+    }));
+    return {
+      stops, rowT, rowL, now: cur.now, place: cur.place,
+      kg: kg.toLocaleString('en-US').replace(',', ' '), ep, pct: Math.round(ep * 10),
+      kgBar: 'width: ' + Math.round(kg / 1085 * 100) + '%;',
+      epBar: 'width: ' + (ep * 10) + '%;',
+      aria: 'Van floor from above, ' + cur.now + ': ' + ep + ' of 10 pallet places used, ' + kg + ' of 1085 kg'
+    };
+  }
+}
+</script>
+</body>
+</html>

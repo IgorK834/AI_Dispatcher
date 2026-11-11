@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design system</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7}
+</style>
+</helmet>
+<div class="rp-root" style="min-height: 1960px;">
+<main class="rp-page" style="gap: 28px;">
+
+<header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 760px;">
+<span class="rp-eyebrow">RoutePilot · design system</span>
+<h1 class="rp-h1" style="font-size: 44px;">Clear Route v3</h1>
+<p class="rp-sub" style="font-size: 15px;">Neutrals plus one accent. Red marks actions, the active page, routes, stops, cargo and anything that needs attention; greys carry everything else. Everything lives in <span class="rp-mono">routepilot.css</span>; vehicles are two shared components.</p>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap;"><span class="rp-pill rp-pill--mute">Inter + Inter Tight</span><span class="rp-pill rp-pill--mute">8 px grid</span><span class="rp-pill rp-pill--mute">WCAG AA text</span></div>
+</header>
+
+<section aria-labelledby="pr-h" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+<h2 id="pr-h" class="rp-sr">Principles</h2>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 6px;"><span class="rp-h3">Red means “act here”</span><span class="rp-sub" style="font-size: 13px;">Primary buttons, the active page, the route and its stops. Never decoration.</span></div>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 6px;"><span class="rp-h3">Numbers first</span><span class="rp-sub" style="font-size: 13px;">Large tabular figures with units, and an “estimate” label on fuel, CO₂ and tolls.</span></div>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 6px;"><span class="rp-h3">Show the vehicle</span><span class="rp-sub" style="font-size: 13px;">A van drawing marks who drives a route; the top view shows where pallets sit.</span></div>
+<div class="rp-card" style="display: flex; flex-direction: column; gap: 6px;"><span class="rp-h3">Honest by design</span><span class="rp-sub" style="font-size: 13px;">Synthetic badge, legal notice and value provenance are components, not afterthoughts.</span></div>
+</section>
+
+<section class="rp-card" aria-labelledby="col-h" style="display: flex; flex-direction: column; gap: 18px;">
+<h2 id="col-h" class="rp-h2">Colour</h2>
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;">
+<sc-for list="{{core}}" as="c" hint-placeholder-count="6">
+<div style="display: flex; flex-direction: column; gap: 8px;"><span style="{{c.sw}}"></span><span style="font-size: 13px; font-weight: 600;">{{c.name}}</span><span class="rp-mono" style="color: #656C76;">{{c.token}} · {{c.hex}}</span><span class="rp-small">{{c.use}}</span></div>
+</sc-for>
+</div>
+<hr class="rp-divider">
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px;">
+<sc-for list="{{status}}" as="c" hint-placeholder-count="6">
+<div style="display: flex; flex-direction: column; gap: 8px;"><span style="{{c.sw}}">{{c.sample}}</span><span style="font-size: 13px; font-weight: 600;">{{c.name}}</span><span class="rp-mono" style="color: #656C76;">{{c.hex}}</span><span class="rp-small">{{c.use}}</span></div>
+</sc-for>
+</div>
+<hr class="rp-divider">
+<div style="display: flex; gap: 22px; flex-wrap: wrap; align-items: center; font-size: 13px;">
+<span class="rp-label">Data and cargo</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; border-radius: 4px; background: #D42A22;"></span>#D42A22 route, driving, pallet places</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; border-radius: 4px; background: #F5AAA6;"></span>#F5AAA6 loading time</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; border-radius: 4px; background: #B6BCC6;"></span>#B6BCC6 breaks, mass, baselines</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; border-radius: 4px; background: repeating-linear-gradient(135deg, #E3E6EA 0 3px, #F1F2F4 3px 6px); box-shadow: inset 0 0 0 1px #E3E6EA;"></span>rest</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; border-radius: 4px; background: #EC7A74;"></span>#EC7A74 offer A</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; border-radius: 4px; background: #F5AAA6;"></span>#F5AAA6 offer B</span>
+<span style="display: flex; align-items: center; gap: 8px;"><span style="width: 14px; height: 14px; border-radius: 4px; background: #FAD4D1;"></span>#FAD4D1 offer C</span>
+</div>
+</section>
+
+<section class="rp-card" aria-labelledby="veh-h" style="display: flex; flex-direction: column; gap: 18px;">
+<div class="rp-card-head"><h2 id="veh-h" class="rp-h2">Vehicles</h2><span class="rp-small">Drawn components, no photos: they scale and recolour with the system</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end;">
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;"><dc-import name="VanSide" label="BUS-01" width="320" hint-size="320px,150px"></dc-import><span class="rp-small">VanSide · 320 px · plan header, sign-in</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;"><dc-import name="VanSide" label="BUS-02" width="120" hint-size="120px,56px"></dc-import><span class="rp-small">120 px · proposal cards</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;"><dc-import name="VanSide" label="BUS-04" width="96" hint-size="96px,45px"></dc-import><span class="rp-small">96 px · table rows</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;"><dc-import name="VanSide" label="BUS-05" width="120" accent="#1A1D23" hint-size="120px,56px"></dc-import><span class="rp-small">Dark accent · inactive vehicle</span></div>
+</div>
+<div class="rp-well" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+<span class="rp-label">Load plan · top view</span>
+<span style="color: #474C55;">Van from above with the cab at the front, both curtain sides, rear doors and wheels. Pallet places follow the vehicle’s layout template (10 EP = 6 transverse + 4 longitudinal; 8 EP = 5 + 3; 9 EP has declared places only and shows a counter). Each place shows its id, the offer and kg; free places are dashed. A stop selector steps through the plan. See the “Load plan · top view” board and the plan screen.</span>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch;">
+<section class="rp-card" aria-labelledby="ty-h" style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+<h2 id="ty-h" class="rp-h2">Type</h2>
+<div style="display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 14px 24px; align-items: baseline;">
+<span class="rp-mono" style="color: #656C76;">Display 40 / 500</span><span class="rp-h1" style="font-size: 40px;">Katowice → Leipzig</span>
+<span class="rp-mono" style="color: #656C76;">H1 32 / 500</span><span class="rp-h1">AI Dispatcher</span>
+<span class="rp-mono" style="color: #656C76;">H2 18 / 600</span><span class="rp-h2">Approve 4 assignments?</span>
+<span class="rp-mono" style="color: #656C76;">H3 15 / 600</span><span class="rp-h3">Most profitable</span>
+<span class="rp-mono" style="color: #656C76;">Body 14 / 400</span><span>Agents read the data, the engine computes every number.</span>
+<span class="rp-mono" style="color: #656C76;">Table head 11.5 / 600</span><span class="rp-eyebrow">Freight unit · weight · status</span>
+<span class="rp-mono" style="color: #656C76;">Mono 12.5 / 400</span><span class="rp-mono">PLAN-1a2b3c4d · MOCK-000117</span>
+</div>
+</section>
+<section class="rp-card" aria-labelledby="sh-h" style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+<h2 id="sh-h" class="rp-h2">Shape and space</h2>
+<div style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
+<span style="display: flex; flex-direction: column; gap: 6px; align-items: center;"><span style="width: 72px; height: 56px; background: #FFFFFF; border-radius: 16px; box-shadow: 0 0 0 1px #E9EBEF;"></span><span class="rp-small">Card 16</span></span>
+<span style="display: flex; flex-direction: column; gap: 6px; align-items: center;"><span style="width: 72px; height: 56px; background: #F7F8FA; border-radius: 12px; box-shadow: 0 0 0 1px #E9EBEF;"></span><span class="rp-small">Inner 12</span></span>
+<span style="display: flex; flex-direction: column; gap: 6px; align-items: center;"><span style="width: 72px; height: 44px; background: #FFFFFF; border-radius: 10px; box-shadow: 0 0 0 1px #D5D9E0;"></span><span class="rp-small">Control 10</span></span>
+<span style="display: flex; flex-direction: column; gap: 6px; align-items: center;"><span style="width: 72px; height: 22px; background: #FDEDEC; border-radius: 6px;"></span><span class="rp-small">Pill 6</span></span>
+</div>
+<span class="rp-small">Spacing 4 · 8 · 12 · 16 · 24 · 32 · 40. Card padding 24, page gutter 40, gaps 16. Touch targets 44 px. Cards carry a 1 px hairline shadow; only sheets and dialogs float.</span>
+</section>
+</div>
+
+<section class="rp-card" aria-labelledby="cmp-h" style="display: flex; flex-direction: column; gap: 22px;">
+<h2 id="cmp-h" class="rp-h2">Components</h2>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+
+<div style="display: flex; flex-direction: column; gap: 12px;">
+<span class="rp-eyebrow">Buttons and controls</span>
+<div style="display: flex; gap: 8px; flex-wrap: wrap;"><button type="button" class="rp-btn rp-btn--primary">Approve and assign</button><button type="button" class="rp-btn">Reject</button></div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;"><button type="button" class="rp-btn rp-btn--danger">Delete driver</button><button type="button" class="rp-btn" disabled="disabled">Disabled</button><button type="button" class="rp-btn rp-btn--sm">Small</button></div>
+<div style="display: flex; gap: 8px; align-items: center;">
+<button type="button" class="rp-icon-btn" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.4"></circle><path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg></button>
+<button type="button" class="rp-icon-btn" aria-label="Notifications, 3 new"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 11V7a4 4 0 0 1 8 0v4l1 1.5H3L4 11ZM6.5 14h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="rp-count" style="position: absolute; top: -6px; right: -6px;">3</span></button>
+<div class="rp-map-stack" style="flex-direction: row;"><button type="button" aria-label="Zoom in"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></button><button type="button" aria-label="Zoom out"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></button></div>
+</div>
+<div class="rp-seg" role="group" aria-label="Example segmented control" style="align-self: flex-start;"><button type="button" aria-pressed="true">Most profitable</button><button type="button" aria-pressed="false">Fastest</button><button type="button" aria-pressed="false">Lowest fuel</button></div>
+<div style="display: flex; gap: 4px;"><a href="#cmp-h" style="display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 10px; background: #FDEDEC; color: #D42A22; font-weight: 600; text-decoration: none; font-size: 14px;">Active page</a><a href="#cmp-h" style="display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 10px; color: #474C55; font-weight: 500; text-decoration: none; font-size: 14px;">Other page</a></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px;">
+<span class="rp-eyebrow">Fields</span>
+<div class="rp-field"><label for="ds-a" class="rp-label">Default</label><input id="ds-a" class="rp-input" value="Paweł Kurek"></div>
+<div class="rp-field"><label for="ds-b" class="rp-label">Focused</label><input id="ds-b" class="rp-input" value="Katowice" style="border-color: #D42A22; box-shadow: 0 0 0 3px #FDEDEC;"></div>
+<div class="rp-field"><label for="ds-c" class="rp-label">Error</label><input id="ds-c" class="rp-input" value="123" aria-invalid="true" aria-describedby="ds-c-e"><span id="ds-c-e" class="rp-error">Latitude must be between −90 and 90.</span></div>
+<label class="rp-choice rp-choice--on"><input type="radio" checked="checked" class="rp-check" name="ds-r" style="margin-top: 2px;"><span style="display: flex; flex-direction: column;"><span style="font-weight: 600;">Choice, selected</span><span class="rp-small">Radio and checkbox cards</span></span></label>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px;">
+<span class="rp-eyebrow">Status and notices</span>
+<div style="display: flex; gap: 6px; flex-wrap: wrap;"><span class="rp-pill rp-pill--ok">Assigned</span><span class="rp-pill rp-pill--warn">Assumption</span><span class="rp-pill rp-pill--bad">Rejected</span><span class="rp-pill rp-pill--info">Derived</span><span class="rp-pill rp-pill--mute">Free</span><span class="rp-pill rp-pill--brand">Most profitable</span><span class="rp-pill rp-pill--synthetic">SYNTHETIC DATA</span></div>
+<div class="rp-banner rp-banner--warn">This record was changed elsewhere. Your edits are kept.</div>
+<div class="rp-banner rp-banner--info">Schedules are planning estimates — the legal notice component.</div>
+<span class="rp-toast" style="align-self: flex-start;">Driver saved</span>
+<div style="display: flex; flex-direction: column; gap: 6px;"><div style="display: flex; justify-content: space-between; font-size: 13px;"><span style="font-weight: 600;">Katowice PL</span><span style="font-weight: 600;">Leipzig DE</span></div><div class="rp-track"><span style="width: 58%;"></span><i style="left: 58%;"></i></div><span class="rp-small">Route progress track</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px;"><span class="rp-meter rp-meter--brand"><span style="width: 74%;"></span></span><span class="rp-meter"><span style="width: 65%;"></span></span><span class="rp-meter rp-meter--low"><span style="width: 42%;"></span></span></div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1960}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const sw = (bg, ring) => 'display: block; height: 72px; border-radius: 12px; background: ' + bg + ';' + (ring ? ' box-shadow: inset 0 0 0 1px #D5D9E0;' : '');
+    const core = [
+      ['Ground', '--rp-ground', '#F4F5F7', 'Page background', true],
+      ['Surface', '--rp-surface', '#FFFFFF', 'Cards, sheets', true],
+      ['Well', '--rp-well', '#F7F8FA', 'Table heads, inner panels', true],
+      ['Ink', '--rp-ink', '#1A1D23', 'Text, driving, vehicle lines', false],
+      ['Brand red', '--rp-red', '#D42A22', 'Actions, active, route', false],
+      ['Red tint', '--rp-red-tint', '#FDEDEC', 'Active and selected fill', true]
+    ].map((c) => ({ name: c[0], token: c[1], hex: c[2], use: c[3], sw: sw(c[2], c[4]) }));
+    const pill = (bg, fg) => 'display: flex; align-items: center; justify-content: center; height: 72px; border-radius: 12px; background: ' + bg + '; color: ' + fg + '; font-size: 13px; font-weight: 600;';
+    const status = [
+      ['Done', '#E6E8EC / #1A1D23', 'Assigned, valid, yes', '#E6E8EC', '#1A1D23', 'Assigned'],
+      ['Attention', '#FDEDEC / #B5221B', 'Assumptions, conflicts', '#FDEDEC', '#B5221B', 'Assumption'],
+      ['Error', '#D42A22 / #FFFFFF', 'Errors, rejected', '#D42A22', '#FFFFFF', 'Rejected'],
+      ['Info', '#EFF1F4 / #474C55', 'Derived values, waiting', '#EFF1F4', '#474C55', 'Derived'],
+      ['Quiet', '#F4F5F7 / #5B626C', 'Free, read-only, source', '#F4F5F7', '#5B626C', 'Free'],
+      ['Synthetic', 'white + grey outline', 'Demo data badge', '#FFFFFF; box-shadow: inset 0 0 0 1px #D5D9E0', '#474C55', 'SYNTHETIC']
+    ].map((c) => ({ name: c[0], hex: c[1], use: c[2], sw: pill(c[3], c[4]), sample: c[5] }));
+    return { core, status };
+  }
+}
+</script>
+</body>
+</html>

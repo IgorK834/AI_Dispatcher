@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Dispatcher — AI is off</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="routepilot.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Inter+Tight:wght@300;400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F5F7}
+</style>
+</helmet>
+<div class="rp-root" style="min-height: 720px;">
+<dc-import name="TopBar" active="dispatcher" role="dispatcher" hint-size="100%,80px"></dc-import>
+<main class="rp-page" style="padding-top: 16px;">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h1 class="rp-h1">AI Dispatcher</h1>
+<p class="rp-sub">Ask in plain language. Agents read the data, the engine computes every number, you approve every assignment.</p>
+</div>
+<section class="rp-card" aria-labelledby="off-h" style="padding: 56px 40px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center; justify-content: center;">
+<span aria-hidden="true" style="width: 112px; height: 112px; border-radius: 50%; background: #F6F6F4; display: inline-flex; align-items: center; justify-content: center; flex: none;">
+<svg width="52" height="52" viewBox="0 0 52 52" fill="none"><path d="M24 6 27.6 16.4 38 20 27.6 23.6 24 34 20.4 23.6 10 20 20.4 16.4 24 6Z" stroke="#6B6B67" stroke-width="2" stroke-linejoin="round"></path><path d="M8 44 44 8" stroke="#D42A22" stroke-width="2.6" stroke-linecap="round"></path></svg>
+</span>
+<div style="flex: 0 1 560px; display: flex; flex-direction: column; gap: 16px;">
+<h2 id="off-h" class="rp-h1" style="font-size: 26px;">AI is off — no model key is configured</h2>
+<p class="rp-sub" style="font-size: 15px;">The chat needs a model key on the server. Everything else works without it: run the same optimisation by hand, open plans with template explanations and assign plans.</p>
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+<a href="Optimizer.dc.html" class="rp-btn rp-btn--primary">Open the manual optimizer</a>
+<a href="Fleet.dc.html" class="rp-btn">Go to fleet</a>
+</div>
+<details class="rp-well" style="font-size: 13px; color: #4A4A47;">
+<summary style="cursor: pointer; font-weight: 500; color: #151515;">How to turn AI on (administrator)</summary>
+<p style="margin: 8px 0 0;">Add a provider key and <span class="rp-mono">AGENT_MODEL_POLICY</span> to <span class="rp-mono">apps/api/.env</span>, then restart the API.</p>
+</details>
+</div>
+</section>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">
+<div class="rp-banner rp-banner--warn"><strong style="font-weight: 600;">Budget used (429)</strong><span>You have used today’s AI budget. The manual optimizer is still available.</span></div>
+<div class="rp-banner rp-banner--info"><strong style="font-weight: 600;">Busy (409)</strong><span>Another question is still running in this conversation. Wait for it to finish.</span></div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":720}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
