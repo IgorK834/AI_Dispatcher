@@ -68,9 +68,13 @@ def main() -> int:
                 tests.setdefault(identifier, []).append(str(path.relative_to(args.root)))
                 if identifier not in criteria:
                     errors.append(f"{path}: unknown {identifier}")
+    pending = 0
     for identifier, status in criteria.items():
         if status in {"approved", "implemented"} and identifier not in tests:
-            errors.append(f"{identifier}: no test ({status})")
+            if status == "implemented":
+                errors.append(f"{identifier}: no test ({status})")
+            else:
+                pending += 1
     for path in args.junit:
         for testcase in ET.parse(path).iter("testcase"):
             if testcase.find("failure") is not None or testcase.find("error") is not None:
@@ -98,7 +102,7 @@ def main() -> int:
         print(error)
     print(
         f"{len(criteria)} ACs; {sum(identifier in tests for identifier in criteria)} mapped; "
-        f"{len(errors)} errors"
+        f"{pending} approved ACs pending a test; {len(errors)} errors"
     )
     return 1 if args.check and errors else 0
 

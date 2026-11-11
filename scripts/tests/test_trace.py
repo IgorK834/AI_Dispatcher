@@ -13,7 +13,8 @@ SCRIPT = Path(__file__).resolve().parents[1] / "trace.py"
 @pytest.mark.parametrize(
     "status, test_ac, expected",
     [
-        ("approved", "", 1),
+        ("implemented", "", 1),
+        ("approved", "", 0),
         ("draft", "", 0),
         ("approved", "AC-FEAT-000-01", 0),
         ("approved", "AC-FEAT-999-01", 1),
