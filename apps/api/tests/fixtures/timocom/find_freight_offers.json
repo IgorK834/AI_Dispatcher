@@ -1,0 +1,102 @@
+{
+  "_source": {
+    "url": "https://api.stoplight.io/projects/cHJqOjIwMTI4Nw/branches/v3/export/reference/openapi.yaml",
+    "portal_url": "https://developer.timocom.com/docs/freight-exchange/bbf3f610ba4d2-freight-exchange",
+    "api_version": "3.0.6",
+    "openapi_version": "3.0.3",
+    "accessed_on": "2026-11-11",
+    "document_sha256": "f2063fcd603d1f0dcbaeb544090e6c426b08307db12012181b66d8894d1f6723",
+    "approval_issue": "https://github.com/IgorK834/AI_Dispatcher/issues/4",
+    "json_pointer": "#/components/schemas/freightOffersResponse/x-examples/Find Freight Offers",
+    "extraction": "Projection of the official response onto FEAT-002 FR-8 fields; retained values are unchanged.",
+    "omitted_offer_fields": [
+      "closedFreightExchangeSetting",
+      "customer",
+      "deeplink",
+      "internalRemark",
+      "logisticsDocumentTypes",
+      "additionalInformation"
+    ],
+    "known_issue": "Both stops are LOADING; FR-20 rejects the unmodified record."
+  },
+  "example": {
+    "meta": {
+      "requestId": "47-11-request-id",
+      "responseTimestamp": "2022-09-13T13:22:09.3011033Z"
+    },
+    "payload": [
+      {
+        "creationDateTime": "2019-08-24T14:15:22Z",
+        "id": "offer-471-publicId",
+        "publicRemark": "This remark is visible to all",
+        "trackable": true,
+        "vehicleProperties": {
+          "body": [
+            "MOVING_FLOOR"
+          ],
+          "bodyProperty": [
+            "FOLDING_SIDE_BOX"
+          ],
+          "equipment": [
+            "PORTABLE_FORKLIFT"
+          ],
+          "loadSecuring": [
+            "BOARD_WALL"
+          ],
+          "swapBody": [
+            "FORTY_FIVE_FEET_CONTAINER"
+          ],
+          "type": [
+            "VEHICLE_UP_TO_12_T"
+          ]
+        },
+        "acceptQuotes": true,
+        "distance_km": 55,
+        "freightDescription": "Optional further description of the freight",
+        "length_m": 12.31,
+        "loadingPlaces": [
+          {
+            "loadingType": "LOADING",
+            "address": {
+              "city": "Gerona",
+              "country": "ES",
+              "geoCoordinate": {
+                "longitude": 2.82493,
+                "latitude": 41.98311
+              },
+              "geocoded": false,
+              "postalCode": "17001"
+            },
+            "startTime": "08:15",
+            "endTime": "17:15",
+            "earliestLoadingDate": "2019-08-24",
+            "latestLoadingDate": "2019-08-26"
+          },
+          {
+            "loadingType": "LOADING",
+            "address": {
+              "city": "Gerona",
+              "country": "ES",
+              "geoCoordinate": {
+                "longitude": 2.82493,
+                "latitude": 41.98311
+              },
+              "geocoded": false,
+              "postalCode": "17001"
+            },
+            "startTime": "08:15",
+            "endTime": "17:15",
+            "earliestLoadingDate": "2019-08-24",
+            "latestLoadingDate": "2019-08-26"
+          }
+        ],
+        "paymentDueWithinDays": 30,
+        "price": {
+          "amount": 1.5,
+          "currency": "EUR"
+        },
+        "weight_t": 5.55
+      }
+    ]
+  }
+}
