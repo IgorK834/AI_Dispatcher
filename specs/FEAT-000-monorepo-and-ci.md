@@ -6,12 +6,12 @@ owner: project owner
 requirements: [REQ-021, REQ-032, REQ-033, NFR-008, NFR-009, NFR-013, NFR-014]
 adrs: [ADR-0001, ADR-0007, ADR-0009, ADR-0015]
 modules: [repo root, apps/api (skeleton), apps/web (skeleton), scripts, .github/workflows]
-revision: 4
+revision: 5
 ---
 
 # FEAT-000: Monorepo, tooling and ci-fast
 
-Priority: **P0**. Nothing in this specification is implemented yet.
+Priority: **P0**. Foundation implementation is available for review; GitHub CI and owner review are pending. Status remains `approved`.
 
 ## 1. Goal
 
@@ -152,3 +152,4 @@ Both endpoints are part of `contracts/openapi.json`.
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11); TypeScript 6.0.x |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
 | 4 | 2026-11-11 | Owner decision ADR-0015: the web skeleton sets up the design tokens and fonts of `docs/design/` instead of shadcn/ui (§3). No AC changed. Front-matter `revision` aligned with this changelog |
+| 5 | 2026-11-11 | Foundation implementation, tests and `ci-fast` definition added for review. No AC changed; strict repository-wide traceability remains blocking. Validation: `docs/reports/FEAT-000-foundation-and-001-1.md`. |

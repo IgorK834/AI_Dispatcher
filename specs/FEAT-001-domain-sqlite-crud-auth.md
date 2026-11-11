@@ -6,12 +6,12 @@ owner: project owner
 requirements: [REQ-001, REQ-005, REQ-006, REQ-007, REQ-008, REQ-032, NFR-008, NFR-009, NFR-011, NFR-015]
 adrs: [ADR-0001, ADR-0002, ADR-0009, ADR-0010, ADR-0012]
 modules: [shared, identity, fleet, freight, main.py, apps/api/migrations]
-revision: 1
+revision: 4
 ---
 
 # FEAT-001: Domain model, SQLite, CRUD API, CORS/CSRF and authentication
 
-Priority: **P0**. Nothing in this specification is implemented yet.
+Priority: **P0**. Slice 001/1 (shared types and the initial schema) is available for review. CRUD and authentication remain planned; status remains `approved`.
 
 ## 1. Goal
 
@@ -326,3 +326,4 @@ No test calls Cloudflare: the verifier's HTTP transport is stubbed to return the
 | 1 | 2026-11-09 | Initial draft |
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11); fleet writes opened to `dispatcher` and `demo` (§6.2, §6.5) |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
+| 4 | 2026-11-11 | Slice 001/1 implementation and migration-cycle tests added for review. No AC changed. Front-matter revision aligned with the changelog. Validation: `docs/reports/FEAT-000-foundation-and-001-1.md`. |
