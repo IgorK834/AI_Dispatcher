@@ -40,11 +40,20 @@ MATRIX: dict[tuple[str, str], str] = {
     ("GET", "/api/v1/freight-offers/{offer_id}"): "demo",
     ("PATCH", "/api/v1/freight-offers/{offer_id}"): "demo",
     ("DELETE", "/api/v1/freight-offers/{offer_id}"): "demo",
+    # FEAT-004 section 6.1: "minimum role dispatcher (dispatcher, demo, admin)" for every endpoint.
+    ("POST", "/api/v1/optimization-jobs"): "demo",
+    ("GET", "/api/v1/optimization-jobs/{job_id}"): "demo",
+    ("GET", "/api/v1/optimization-jobs/{job_id}/result"): "demo",
+    ("GET", "/api/v1/route-plans/{plan_id}"): "demo",
+    ("GET", "/api/v1/assignments"): "demo",
+    ("POST", "/api/v1/assignments"): "demo",
+    ("GET", "/api/v1/assignments/{assignment_id}"): "demo",
+    ("DELETE", "/api/v1/assignments/{assignment_id}"): "demo",
 }
 PUBLIC = {("GET", "/api/v1/auth/captcha-config"), ("POST", "/api/v1/auth/login")}
 # Endpoints of later features join the full matrix in their own slices. Until then they must at
 # least refuse anonymous callers, and `/admin/*` must refuse every non-admin role (§6.5).
-LATER = ("/api/v1/admin/", "/api/v1/agent/", "/api/v1/assignments", "/api/v1/optimization-jobs")
+LATER = ("/api/v1/admin/", "/api/v1/agent/")
 LATER_EXACT = ("/api/v1/route-plans/",)
 
 
