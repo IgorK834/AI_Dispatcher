@@ -48,7 +48,7 @@ e2e:
 	@echo "not available until FEAT-007"
 
 bench:
-	@echo "not available until FEAT-003"
+	cd apps/api && uv run pytest -c pyproject.toml -m bench ../../bench/fleet_5x60.py -q -s
 
 dev-api:
 	cd apps/api && uv run uvicorn routepilot.main:app --reload --port 8000

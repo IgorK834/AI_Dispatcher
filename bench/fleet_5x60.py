@@ -11,6 +11,8 @@ from statistics import median, quantiles
 from time import perf_counter
 from typing import Any
 
+import pytest
+
 from routepilot.compliance.models import DriverState
 from routepilot.fleet.generator import generate_fleet
 from routepilot.freight.domain.models import NormalizedOffer, RawOfferRecord
@@ -34,6 +36,8 @@ from routepilot.routing.haversine import HaversineRoutingProvider
 
 REFERENCE_DATE = date(2026, 11, 16)
 SEEDS = tuple(range(20261116, 20261136))
+TARGET_P95_MS = 15000
+RESULTS_FILE = Path(__file__).resolve().parent / "results" / "fleet_5x60.json"
 
 
 def build_instance(seed: int, *, fallback_parameters: bool = False) -> EngineSnapshot:
@@ -188,15 +192,24 @@ def run(seeds: tuple[int, ...], *, fallback_parameters: bool = False) -> dict[st
         runs.append(row)
     runtimes = [row["runtime_ms"] for row in runs]
     p95 = quantiles(runtimes, n=20, method="inclusive")[18] if len(runtimes) > 1 else runtimes[0]
+    node_counts = [row["nodes"] for row in runs]
+    target_met = p95 <= TARGET_P95_MS
     summary = dict(
         count=len(runs),
         p50_ms=round(median(runtimes), 3),
         p95_ms=round(p95, 3),
-        target_p95_ms=15000,
-        target_met=p95 <= 15000,
+        nodes_p50=int(median(node_counts)),
+        nodes_max=max(node_counts),
+        target_p95_ms=TARGET_P95_MS,
+        target_met=target_met,
         truncated_runs=sum(row["truncated"] for row in runs),
+        target_line=(
+            f"target p95 <= {TARGET_P95_MS / 1000:g} s: "
+            f"{'MET' if target_met else 'NOT MET'} (p95 = {p95 / 1000:.1f} s)"
+        ),
     )
     print(json.dumps(summary, sort_keys=True), flush=True)
+    print(summary["target_line"], flush=True)
     return dict(
         reference_date=REFERENCE_DATE.isoformat(),
         is_synthetic=True,
@@ -211,15 +224,43 @@ def run(seeds: tuple[int, ...], *, fallback_parameters: bool = False) -> dict[st
     )
 
 
+def write_results(result: dict[str, Any], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(result, sort_keys=True, indent=2) + "\n")
+
+
+@pytest.mark.bench
+@pytest.mark.ac("AC-FEAT-003-29")
+def test_fleet_5x60() -> None:
+    """20 seeded runs; records p50/p95, nodes, truncated flags and whether p95 <= 15 s.
+
+    The target is recorded, never asserted: a miss is reported with its numbers (NFR-002).
+    """
+    result = run(SEEDS)
+    write_results(result, RESULTS_FILE)
+    stored = json.loads(RESULTS_FILE.read_text())
+    summary = stored["summary"]
+    problems = []
+    if [row["seed"] for row in stored["runs"]] != list(SEEDS):
+        problems.append("runs do not use the 20 fixed seeds")
+    if not all({"runtime_ms", "nodes", "truncated"} <= row.keys() for row in stored["runs"]):
+        problems.append("a run lacks runtime_ms, nodes or truncated")
+    if not {"p50_ms", "p95_ms", "nodes_p50", "truncated_runs", "target_met"} <= summary.keys():
+        problems.append("summary lacks p50, p95, nodes, truncated count or the target flag")
+    if not summary["target_line"].startswith("target p95 <= 15 s: "):
+        problems.append("the met / not met line is missing")
+    if problems:
+        pytest.fail("; ".join(problems))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runs", type=int, choices=range(1, 21), default=20)
     parser.add_argument("--fallback-parameters", action="store_true")
-    parser.add_argument("--out", type=Path, default=Path("bench/results/fleet_5x60.json"))
+    parser.add_argument("--out", type=Path, default=RESULTS_FILE)
     args = parser.parse_args()
     result = run(SEEDS[: args.runs], fallback_parameters=args.fallback_parameters)
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(result, sort_keys=True, indent=2) + "\n")
+    write_results(result, args.out)
 
 
 if __name__ == "__main__":
