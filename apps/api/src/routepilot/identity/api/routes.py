@@ -63,12 +63,12 @@ def create_identity_router(service: IdentityService, settings: Settings) -> APIR
             "rp_session", result.token, httponly=True, samesite="lax", secure=secure, path="/"
         )
         response.set_cookie("rp_csrf", result.csrf_token, samesite="lax", secure=secure, path="/")
-        return LoginBody(user=result.user, csrf_token=result.csrf_token)
+        return LoginBody(user=result.user, csrfToken=result.csrf_token)
 
     @router.get("/me", response_model=LoginBody)
     def me(principal: Annotated[Principal, Depends(user_dependency)]) -> LoginBody:
         return LoginBody(
-            user=service.public_user(principal.id), csrf_token=service.csrf_token(principal)
+            user=service.public_user(principal.id), csrfToken=service.csrf_token(principal)
         )
 
     @router.post("/logout", status_code=204)

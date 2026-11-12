@@ -97,7 +97,7 @@ class IdentityService:
         with Session(self.engine) as session, session.begin():
             user = session.scalar(select(User).where(User.email == email, User.is_active.is_(True)))
             try:
-                valid = self.password_hasher.verify(
+                valid: bool = self.password_hasher.verify(
                     user.password_hash if user else self.dummy_hash, password
                 )
             except VerificationError:
