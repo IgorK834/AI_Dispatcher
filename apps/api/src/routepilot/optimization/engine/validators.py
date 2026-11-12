@@ -1,22 +1,95 @@
 """Independent timeline and fleet checks; this module never calls the scheduler/search."""
 
+from collections.abc import Mapping, Sequence
 from datetime import timedelta
-from decimal import Decimal
+from decimal import ROUND_CEILING, Decimal
 
 from routepilot.compliance.models import DriverState
-from routepilot.compliance.rules import advance_clock, choose_profile, next_week_boundary
-from routepilot.optimization.engine.costs import CostModel
+from routepilot.compliance.rules import (
+    advance_clock,
+    choose_profile,
+    next_week_boundary,
+    rules_for_profile,
+)
+from routepilot.optimization.engine.cost_model import CostModel
 from routepilot.optimization.engine.models import (
+    EngineInvariantError,
+    EngineModel,
     EngineSnapshot,
     FleetSolution,
+    OfferSnapshot,
     RoutePlan,
     ValidationResult,
 )
-from routepilot.optimization.engine.prefilter import pallet_equivalents
+
+
+class Violation(EngineModel):
+    invariant: int
+    code: str
+    message: str
+
+
+class ValidationReport(ValidationResult):
+    ok: bool
+    violations: tuple[Violation, ...] = ()
+
+
+_VIOLATIONS: dict[str, tuple[int, str]] = {
+    "UNKNOWN_REFERENCE": (2, "The plan references an unknown driver or offer."),
+    "WRONG_PROFILE": (14, "An international plan must use the 561 profile."),
+    "TIMELINE_INVALID": (5, "Recorded times are not monotonic or internally consistent."),
+    "ACTION_ORDER_INVALID": (2, "Pickup and delivery actions are missing or out of order."),
+    "CAPACITY_INVALID": (1, "Recorded load is outside vehicle capacity."),
+    "WINDOW_MISSED": (4, "Service starts outside the offer time window."),
+    "HOME_END_MISSING": (13, "A required return-to-base END stop is missing or late."),
+    "HOME_END_INVALID": (13, "The plan records an END stop when no return is required."),
+    "LEG_INVALID": (5, "A recorded leg disagrees with the matrix or timeline."),
+    "BREAK_OR_LIMIT_INVALID": (6, "The replay violates a break, rest, or work limit."),
+    "COUNTERS_INVALID": (6, "Recorded counters disagree with the independent replay."),
+    "PROFIT_INVALID": (7, "Revenue, costs, margin, or net profit do not reconstruct."),
+    "CO2_INVALID": (17, "Recorded CO2 does not reconstruct from fuel and the configured factor."),
+    "COST_INPUT_INVALID": (7, "Recorded fuel, distance, or paid minutes do not reconstruct."),
+    "UNKNOWN_PLAN": (12, "The fleet solution references an unknown or mismatched plan."),
+    "DUPLICATED_ASSIGNMENT": (12, "A driver or offer occurs more than once in the fleet."),
+    "INVALID_ROUTE": (12, "A fleet assignment references a route that failed validation."),
+    "FLEET_TOTALS_INVALID": (12, "Fleet totals do not equal the selected plan totals."),
+}
+
+
+def _report(codes: list[str]) -> ValidationReport:
+    unique = list(dict.fromkeys(codes))
+    return ValidationReport(
+        ok=not unique,
+        valid=not unique,
+        errors=unique,
+        violations=tuple(
+            Violation(invariant=_VIOLATIONS[code][0], code=code, message=_VIOLATIONS[code][1])
+            for code in unique
+        ),
+    )
+
+
+def _pallet_equivalents(offer: OfferSnapshot) -> Decimal | None:
+    count = offer.pallet_count
+    derived = (
+        int((offer.loading_length_m * Decimal("2.4")).to_integral_value(rounding=ROUND_CEILING))
+        if offer.loading_length_m is not None
+        else None
+    )
+    if count is None or offer.pallet_provenance == "ai":
+        if derived is None:
+            return None
+        count = max(derived, count or 0)
+    factors = {
+        "EUR_1200x800": Decimal("1"),
+        "HALF_800x600": Decimal(".5"),
+        "IND_1200x1000": Decimal("1.5"),
+    }
+    return Decimal(count) * factors.get(offer.pallet_type, Decimal("1"))
 
 
 class RouteValidator:
-    def validate(self, snapshot: EngineSnapshot, plan: RoutePlan) -> ValidationResult:
+    def validate(self, snapshot: EngineSnapshot, plan: RoutePlan) -> ValidationReport:
         errors: list[str] = []
 
         def fail(code: str) -> None:
@@ -27,7 +100,7 @@ class RouteValidator:
         offers = {o.id: o for o in snapshot.offers}
         driver = drivers.get(plan.driver_id)
         if driver is None or any(oid not in offers for oid in plan.offer_ids):
-            return ValidationResult(valid=False, errors=["UNKNOWN_REFERENCE"])
+            return _report(["UNKNOWN_REFERENCE"])
         home_required = (
             driver.home_by is not None
             and driver.home_by
@@ -72,7 +145,7 @@ class RouteValidator:
                     fail("ACTION_ORDER_INVALID")
                 done.add(stop.offer_id)
                 sign, source = -1, offer.stops[1]
-            pallets, _ = pallet_equivalents(offer)
+            pallets = _pallet_equivalents(offer)
             kg += sign * (offer.weight_kg or 0)
             eq += sign * (pallets or Decimal("0"))
             if (
@@ -124,7 +197,7 @@ class RouteValidator:
             recorded_drive = sum(a.minutes for a in leg_activities if a.kind == "DRIVE")
             load = sum(offers[oid].weight_kg or 0 for oid in onboard)
             load_eq = sum(
-                (pallet_equivalents(offers[oid])[0] or Decimal("0") for oid in onboard),
+                (_pallet_equivalents(offers[oid]) or Decimal("0") for oid in onboard),
                 Decimal("0"),
             )
             if (
@@ -171,6 +244,7 @@ class RouteValidator:
             )
         checkpoints: dict[object, DriverState] = {state.t: state}
         international = profile == "eu561_van_international_v1"
+        rules = rules_for_profile(profile, snapshot.params.max_daily_work_min)
         for activity_index, entry in enumerate(plan.activities):
             activity = entry.activity
             if activity.start_at != state.t or activity.minutes <= 0:
@@ -186,35 +260,29 @@ class RouteValidator:
                         remaining, int((next_week_boundary(state) - state.t).total_seconds() // 60)
                     )
                     driving = activity.kind == "DRIVE"
-                    if state.work_week + step > 3600 or (
-                        international
-                        and driving
-                        and (
-                            state.drive_week + step > 3360
-                            or state.drive_week + state.drive_prev_week + step > 5400
+                    limits = rules.remaining(state)
+                    if (
+                        step > limits.work_break_min
+                        or step > limits.span_min
+                        or step > limits.weekly_work_min
+                        or (limits.daily_work_min is not None and step > limits.daily_work_min)
+                        or (
+                            driving
+                            and any(
+                                limit is not None and step > limit
+                                for limit in (
+                                    limits.drive_break_min,
+                                    limits.daily_drive_min,
+                                    limits.weekly_drive_min,
+                                    limits.two_week_drive_min,
+                                )
+                            )
                         )
                     ):
                         fail("BREAK_OR_LIMIT_INVALID")
                     state = advance_clock(state, step, work=True, driving=driving)
                     remaining -= step
-                    if (
-                        state.work_since_break > 360
-                        or (
-                            state.day_start_at is not None
-                            and state.t - state.day_start_at > timedelta(minutes=780)
-                        )
-                        or (
-                            not international
-                            and (
-                                state.work_today > snapshot.params.max_daily_work_min
-                                or (state.work_today > 540 and state.breaks_today < 45)
-                            )
-                        )
-                        or (
-                            international
-                            and (state.drive_since_break > 270 or state.drive_today > 540)
-                        )
-                    ):
+                    if not international and state.work_today > 540 and state.breaks_today < 45:
                         fail("BREAK_OR_LIMIT_INVALID")
             else:
                 if state.day_start_at is not None and state.t - state.day_start_at > timedelta(
@@ -311,15 +379,18 @@ class RouteValidator:
             != (costs.work_min, costs.drive_min, costs.service_min, costs.wait_min)
         ):
             fail("COST_INPUT_INVALID")
-        return ValidationResult(valid=not errors, errors=errors)
+        return _report(errors)
 
 
 class FleetValidator:
     def validate(
-        self, snapshot: EngineSnapshot, solution: FleetSolution, plans: list[RoutePlan]
-    ) -> ValidationResult:
+        self,
+        snapshot: EngineSnapshot,
+        solution: FleetSolution,
+        plans: Mapping[str, RoutePlan] | Sequence[RoutePlan],
+    ) -> ValidationReport:
         errors: list[str] = []
-        by_ref = {p.plan_ref: p for p in plans}
+        by_ref = dict(plans) if isinstance(plans, Mapping) else {p.plan_ref: p for p in plans}
         drivers: set[str] = set()
         offers: set[str] = set()
         selected: list[RoutePlan] = []
@@ -344,4 +415,13 @@ class FleetValidator:
             or totals.drivers_with_plan != len(selected)
         ):
             errors.append("FLEET_TOTALS_INVALID")
-        return ValidationResult(valid=not errors, errors=sorted(set(errors)))
+        return _report(sorted(set(errors)))
+
+
+__all__ = [
+    "EngineInvariantError",
+    "FleetValidator",
+    "RouteValidator",
+    "ValidationReport",
+    "Violation",
+]
