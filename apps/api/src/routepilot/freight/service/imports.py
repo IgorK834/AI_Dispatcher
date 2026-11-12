@@ -34,7 +34,14 @@ class ImportService:
             )
             session.add(batch)
             session.flush()
+            seen: set[str] = set()
             for record in provider.search(query or FreightSearchQuery()):
+                if record.source_offer_id in seen:
+                    # FEAT-002 §8, DUPLICATE_IN_BATCH: only the first record of an id in one
+                    # payload counts; the later one is a mapping failure and stores nothing.
+                    counts["failed"] += 1
+                    continue
+                seen.add(record.source_offer_id)
                 digest = hashlib.sha256(
                     json.dumps(
                         record.payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False
