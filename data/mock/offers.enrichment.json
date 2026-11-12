@@ -1,0 +1,2922 @@
+{
+  "MOCK-000001": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 426.84,
+      "lane": "CZ->PL",
+      "noise": 0.9101422684118328,
+      "rate_eur_per_km": 0.651,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ]
+  },
+  "MOCK-000002": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 634.06,
+      "lane": "PL->PL",
+      "noise": 1.2104777251136858,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ]
+  },
+  "MOCK-000003": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 564.83,
+      "lane": "PL->DE",
+      "noise": 0.8455041339917678,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ]
+  },
+  "MOCK-000004": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 505.4,
+      "lane": "DE->PL",
+      "noise": 1.2809719487677442,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ]
+  },
+  "MOCK-000005": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1333.37,
+      "lane": "DE->PL",
+      "noise": 1.2047020826649613,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ]
+  },
+  "MOCK-000006": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 834.62,
+      "lane": "DE->PL",
+      "noise": 0.8895630718238176,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ]
+  },
+  "MOCK-000007": {
+    "is_synthetic": true,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 159.55,
+      "lane": "SK->PL",
+      "noise": 1.2526230877201194,
+      "rate_eur_per_km": 0.651,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PALLETS"
+    ]
+  },
+  "MOCK-000008": {
+    "is_synthetic": true,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 1353.05,
+      "lane": "IT->PL",
+      "noise": 0.8125798452798876,
+      "rate_eur_per_km": 0.42,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PALLETS"
+    ]
+  },
+  "MOCK-000009": {
+    "is_synthetic": true,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 414.71,
+      "lane": "AT->PL",
+      "noise": 1.1704519186979787,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PALLETS"
+    ]
+  },
+  "MOCK-000010": {
+    "is_synthetic": true,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 594.71,
+      "lane": "CZ->PL",
+      "noise": 1.2584495873415749,
+      "rate_eur_per_km": 0.651,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PALLETS"
+    ]
+  },
+  "MOCK-000011": {
+    "is_synthetic": true,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 438.57,
+      "lane": "PL->AT",
+      "noise": 1.248268079286628,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PALLETS"
+    ]
+  },
+  "MOCK-000012": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 323.25,
+      "lane": "PL->PL",
+      "noise": 0.9718592998156963,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_COORDINATES"
+    ]
+  },
+  "MOCK-000013": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 234.12,
+      "lane": "PL->PL",
+      "noise": 1.0803915471555767,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_COORDINATES"
+    ]
+  },
+  "MOCK-000014": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 436.42,
+      "lane": "PL->CZ",
+      "noise": 1.321712159640157,
+      "rate_eur_per_km": 0.93,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_COORDINATES"
+    ]
+  },
+  "MOCK-000015": {
+    "is_synthetic": true,
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1086.0,
+      "lane": "PL->IT",
+      "noise": 0.8221928177858487,
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_COORDINATES"
+    ]
+  },
+  "MOCK-000016": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 780.52,
+      "lane": "PL->DE",
+      "noise": 1.1529552102896292,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_BODY"
+    ]
+  },
+  "MOCK-000017": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 827.76,
+      "lane": "PL->DE",
+      "noise": 0.9969252328738023,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_BODY"
+    ]
+  },
+  "MOCK-000018": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 354.42,
+      "lane": "PL->PL",
+      "noise": 1.0533022799076002,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_BODY"
+    ]
+  },
+  "MOCK-000019": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 445.39,
+      "lane": "PL->HU",
+      "noise": 0.9317541989403967,
+      "rate_eur_per_km": 0.79,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_BODY"
+    ]
+  },
+  "MOCK-000020": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 872.51,
+      "lane": "PL->SK",
+      "noise": 1.0217221479438316,
+      "rate_eur_per_km": 0.93,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_BODY"
+    ]
+  },
+  "MOCK-000021": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 255.58,
+      "lane": "PL->PL",
+      "noise": 1.202111501238672,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_EQUIPMENT"
+    ]
+  },
+  "MOCK-000022": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 615.9,
+      "lane": "AT->PL",
+      "noise": 1.2047466877523303,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_EQUIPMENT"
+    ]
+  },
+  "MOCK-000023": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 568.98,
+      "lane": "PL->PL",
+      "noise": 0.8713867616195636,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_EQUIPMENT"
+    ]
+  },
+  "MOCK-000024": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 239.39,
+      "lane": "PL->PL",
+      "noise": 1.1581512443242672,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_EQUIPMENT"
+    ]
+  },
+  "MOCK-000025": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 86.61,
+      "lane": "PL->PL",
+      "noise": 0.7375263922750392,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TOO_HEAVY_ALL"
+    ]
+  },
+  "MOCK-000026": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 565.11,
+      "lane": "PL->AT",
+      "noise": 0.8133453795592244,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TOO_HEAVY_ALL"
+    ]
+  },
+  "MOCK-000027": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 86.61,
+      "lane": "PL->PL",
+      "noise": 1.3334726860236874,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TOO_HEAVY_ALL"
+    ]
+  },
+  "MOCK-000028": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 493.69,
+      "lane": "PL->PL",
+      "noise": 1.1774985889164475,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TOO_HEAVY_ALL"
+    ]
+  },
+  "MOCK-000029": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 882.11,
+      "lane": "DE->PL",
+      "noise": 1.1027174971791676,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000030": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 898.78,
+      "lane": "FR->PL",
+      "noise": 1.2120125904330241,
+      "rate_eur_per_km": 0.42,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000031": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 571.39,
+      "lane": "PL->AT",
+      "noise": 0.9941237042269462,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000032": {
+    "is_synthetic": true,
+    "pallet_count": 10,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 835.05,
+      "lane": "DE->PL",
+      "noise": 0.9388878248071186,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000033": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 794.64,
+      "lane": "PL->PL",
+      "noise": 1.0307636419995951,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000034": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "HALF_800x600",
+    "price_formula": {
+      "distance_km": 1525.75,
+      "lane": "PL->FR",
+      "noise": 1.2463180074683313,
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000035": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1333.37,
+      "lane": "PL->DE",
+      "noise": 1.080695710151899,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000036": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 606.05,
+      "lane": "PL->PL",
+      "noise": 1.0962145059029487,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000037": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 858.07,
+      "lane": "DE->PL",
+      "noise": 0.9255479665369899,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000038": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1082.2,
+      "lane": "PL->DE",
+      "noise": 0.8843631415769914,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ]
+  },
+  "MOCK-000039": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "HALF_800x600",
+    "price_formula": {
+      "distance_km": 76.49,
+      "lane": "PL->PL",
+      "noise": 0.9368095452543039,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000040": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 268.63,
+      "lane": "CZ->PL",
+      "noise": 0.9326227697682995,
+      "rate_eur_per_km": 0.651,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000041": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 180.75,
+      "lane": "PL->PL",
+      "noise": 0.8884410810686781,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000042": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1139.6,
+      "lane": "PL->DE",
+      "noise": 0.9284063627414536,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000043": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 323.56,
+      "lane": "HU->PL",
+      "noise": 1.256730609922414,
+      "rate_eur_per_km": 0.5529999999999999,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000044": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 414.69,
+      "lane": "CZ->PL",
+      "noise": 0.9863271020018758,
+      "rate_eur_per_km": 0.651,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000045": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 930.38,
+      "lane": "PL->HU",
+      "noise": 1.2261991709028277,
+      "rate_eur_per_km": 0.79,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000046": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 112.98,
+      "lane": "PL->PL",
+      "noise": 1.098745155231069,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000047": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 264.84,
+      "lane": "PL->PL",
+      "noise": 1.0766000154814277,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000048": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 201.38,
+      "lane": "PL->PL",
+      "noise": 0.8754279621265773,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000049": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 384.6,
+      "lane": "PL->HU",
+      "noise": 1.275875629188019,
+      "rate_eur_per_km": 0.79,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000050": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 749.14,
+      "lane": "PL->DK",
+      "noise": 0.9675358010532373,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000051": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 641.68,
+      "lane": "PL->DE",
+      "noise": 1.075065980120905,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000052": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 404.48,
+      "lane": "PL->PL",
+      "noise": 0.8162854205171086,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000053": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "HALF_800x600",
+    "price_formula": {
+      "distance_km": 694.4,
+      "lane": "PL->AT",
+      "noise": 1.141196976158997,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ]
+  },
+  "MOCK-000054": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 244.35,
+      "lane": "PL->PL",
+      "noise": 0.8536095383289605,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000055": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 794.64,
+      "lane": "PL->PL",
+      "noise": 1.2092683265449404,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000056": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1047.23,
+      "lane": "PL->DK",
+      "noise": 1.1120958594679324,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000057": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 569.03,
+      "lane": "PL->AT",
+      "noise": 1.023215794421162,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000058": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 737.43,
+      "lane": "DE->PL",
+      "noise": 0.9850527153996399,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000059": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 198.45,
+      "lane": "PL->PL",
+      "noise": 1.1081986385381994,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000060": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 634.06,
+      "lane": "PL->PL",
+      "noise": 0.5984181735763092,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000061": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 463.22,
+      "lane": "PL->SK",
+      "noise": 0.7982214141979862,
+      "rate_eur_per_km": 0.93,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000062": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 385.62,
+      "lane": "PL->PL",
+      "noise": 1.0903512975578742,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000063": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1525.75,
+      "lane": "FR->PL",
+      "noise": 0.9986941000076479,
+      "rate_eur_per_km": 0.42,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ]
+  },
+  "MOCK-000064": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 323.25,
+      "lane": "PL->PL",
+      "noise": 0.8510038347685348,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000065": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 228.19,
+      "lane": "PL->PL",
+      "noise": 0.9375219604812198,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000066": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 112.98,
+      "lane": "PL->PL",
+      "noise": 0.8846613702875123,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000067": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 366.66,
+      "lane": "PL->PL",
+      "noise": 0.8798954311185591,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000068": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 568.98,
+      "lane": "PL->PL",
+      "noise": 0.8523555077997874,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000069": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 86.61,
+      "lane": "PL->PL",
+      "noise": 1.0946973774151374,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000070": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 234.12,
+      "lane": "PL->PL",
+      "noise": 1.0114607878248776,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000071": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 228.19,
+      "lane": "PL->PL",
+      "noise": 0.8013407568398174,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000072": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 239.39,
+      "lane": "PL->PL",
+      "noise": 1.0010525225222286,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000073": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 86.61,
+      "lane": "PL->PL",
+      "noise": 0.9423059278311259,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000074": {
+    "is_synthetic": true,
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 180.75,
+      "lane": "PL->PL",
+      "noise": 0.9902357058787076,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000075": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 418.26,
+      "lane": "PL->PL",
+      "noise": 1.0303211584478196,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000076": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 239.39,
+      "lane": "PL->PL",
+      "noise": 0.8232848053574996,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000077": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 180.75,
+      "lane": "PL->PL",
+      "noise": 0.9514963995625333,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000078": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 98.03,
+      "lane": "PL->PL",
+      "noise": 1.0174090121395,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ]
+  },
+  "MOCK-000079": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1456.88,
+      "lane": "PL->FR",
+      "noise": 0.13727966613585196,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 1.2024804799745097
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "UNPROFITABLE_DETOUR"
+    ]
+  },
+  "MOCK-000080": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1456.88,
+      "lane": "PL->FR",
+      "noise": 0.13727966613585196,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 1.1573238438099576
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "UNPROFITABLE_DETOUR"
+    ]
+  },
+  "MOCK-000081": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1456.88,
+      "lane": "PL->FR",
+      "noise": 0.13727966613585196,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 0.7726535345884291
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "UNPROFITABLE_DETOUR"
+    ]
+  },
+  "MOCK-000082": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "HALF_800x600",
+    "price_formula": {
+      "distance_km": 1456.88,
+      "lane": "PL->FR",
+      "noise": 0.13727966613585196,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 0.8988901636566259
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "UNPROFITABLE_DETOUR"
+    ]
+  },
+  "MOCK-000083": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1456.88,
+      "lane": "PL->FR",
+      "noise": 0.13727966613585196,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 0.8760625731072111
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "UNPROFITABLE_DETOUR"
+    ]
+  },
+  "MOCK-000084": {
+    "is_synthetic": true,
+    "pair_id": "MOCK-PAIR-1",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1157.2,
+      "lane": "PL->DK",
+      "noise": 0.8390537707625874,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ]
+  },
+  "MOCK-000085": {
+    "is_synthetic": true,
+    "pair_id": "MOCK-PAIR-1",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1157.2,
+      "lane": "PL->DK",
+      "noise": 0.7469714323470729,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ]
+  },
+  "MOCK-000086": {
+    "is_synthetic": true,
+    "pair_id": "MOCK-PAIR-2",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 348.98,
+      "lane": "PL->PL",
+      "noise": 1.0877619375681562,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ]
+  },
+  "MOCK-000087": {
+    "is_synthetic": true,
+    "pair_id": "MOCK-PAIR-2",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 348.98,
+      "lane": "PL->PL",
+      "noise": 0.7109676632157234,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ]
+  },
+  "MOCK-000088": {
+    "is_synthetic": true,
+    "pair_id": "MOCK-PAIR-3",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 183.34,
+      "lane": "PL->PL",
+      "noise": 0.7784352492609563,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ]
+  },
+  "MOCK-000089": {
+    "is_synthetic": true,
+    "pair_id": "MOCK-PAIR-3",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 183.34,
+      "lane": "PL->PL",
+      "noise": 1.0948158910918167,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ]
+  },
+  "MOCK-000090": {
+    "is_synthetic": true,
+    "pair_id": "MOCK-PAIR-4",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 794.64,
+      "lane": "PL->PL",
+      "noise": 1.1884362060077953,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ]
+  },
+  "MOCK-000091": {
+    "is_synthetic": true,
+    "pair_id": "MOCK-PAIR-4",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 794.64,
+      "lane": "PL->PL",
+      "noise": 0.8756669051512981,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ]
+  },
+  "MOCK-000092": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1305.07,
+      "lane": "FR->PL",
+      "noise": 0.9354750364523686,
+      "rate_eur_per_km": 0.42,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "PROMPT_INJECTION"
+    ]
+  },
+  "MOCK-000093": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 453.19,
+      "lane": "PL->HU",
+      "noise": 1.1864920741887224,
+      "rate_eur_per_km": 0.79,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "PROMPT_INJECTION"
+    ]
+  },
+  "MOCK-000094": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 323.1,
+      "lane": "PL->HU",
+      "noise": 1.2252405067419556,
+      "rate_eur_per_km": 0.79,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "PROMPT_INJECTION"
+    ]
+  },
+  "MOCK-000095": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 210.45,
+      "lane": "PL->PL",
+      "noise": 0.9658070967703835,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "ALT_TIME_FORMAT"
+    ]
+  },
+  "MOCK-000096": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 411.37,
+      "lane": "PL->SK",
+      "noise": 0.9504544352163252,
+      "rate_eur_per_km": 0.93,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "ALT_TIME_FORMAT"
+    ]
+  },
+  "MOCK-000097": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 343.99,
+      "lane": "PL->PL",
+      "noise": 1.0337325692103545,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "ALT_TIME_FORMAT"
+    ]
+  },
+  "MOCK-000098": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 898.78,
+      "lane": "PL->FR",
+      "noise": 1.2411881317784135,
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "ALT_TIME_FORMAT"
+    ]
+  },
+  "MOCK-000099": {
+    "is_synthetic": true,
+    "pallet_count": 10,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 462.19,
+      "lane": "PL->PL",
+      "noise": 1.1208911267285884,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "ALT_TIME_FORMAT"
+    ]
+  },
+  "MOCK-000100": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 880.75,
+      "lane": "DE->PL",
+      "noise": 1.0934006684798732,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "KEY_WITH_SPACE"
+    ]
+  },
+  "MOCK-000101": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1004.62,
+      "lane": "IT->PL",
+      "noise": 0.9796319960290907,
+      "rate_eur_per_km": 0.42,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "KEY_WITH_SPACE"
+    ]
+  },
+  "MOCK-000102": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 335.68,
+      "lane": "PL->CZ",
+      "noise": 0.7642104183707178,
+      "rate_eur_per_km": 0.93,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000103": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 572.72,
+      "lane": "PL->CZ",
+      "noise": 1.201933360267102,
+      "rate_eur_per_km": 0.93,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000104": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 838.62,
+      "lane": "DE->PL",
+      "noise": 1.0231553046456263,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000105": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 314.97,
+      "lane": "PL->PL",
+      "noise": 0.7589843614247398,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000106": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 1040.42,
+      "lane": "FR->PL",
+      "noise": 1.07706818227893,
+      "rate_eur_per_km": 0.42,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000107": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 372.13,
+      "lane": "PL->PL",
+      "noise": 1.1355455607671279,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000108": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 941.08,
+      "lane": "PL->DE",
+      "noise": 0.8954843927126962,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000109": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 508.37,
+      "lane": "PL->AT",
+      "noise": 1.399066627507311,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000110": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 593.56,
+      "lane": "DE->PL",
+      "noise": 1.1253459532416883,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000111": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 343.99,
+      "lane": "PL->PL",
+      "noise": 1.0947828944034703,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000112": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1353.05,
+      "lane": "IT->PL",
+      "noise": 0.9112401980006446,
+      "rate_eur_per_km": 0.42,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000113": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 744.64,
+      "lane": "DK->PL",
+      "noise": 1.0762563768826485,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000114": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1103.6,
+      "lane": "PL->IT",
+      "noise": 1.2638959842759032,
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000115": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 137.63,
+      "lane": "PL->PL",
+      "noise": 0.8219524445537753,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000116": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 592.03,
+      "lane": "SK->PL",
+      "noise": 0.8217987353692437,
+      "rate_eur_per_km": 0.651,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000117": {
+    "is_synthetic": true,
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 276.48,
+      "lane": "PL->PL",
+      "noise": 1.062468294537318,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000118": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 663.58,
+      "lane": "PL->PL",
+      "noise": 0.9920856595149731,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000119": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 493.82,
+      "lane": "DE->PL",
+      "noise": 1.0590933778566747,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000120": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 389.58,
+      "lane": "PL->CZ",
+      "noise": 1.019784886941881,
+      "rate_eur_per_km": 0.93,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000121": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 887.21,
+      "lane": "PL->DE",
+      "noise": 1.0339353899559314,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000122": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 478.33,
+      "lane": "DE->PL",
+      "noise": 1.0449867701112807,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000123": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 550.38,
+      "lane": "PL->PL",
+      "noise": 1.1106177280310683,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000124": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 514.73,
+      "lane": "PL->PL",
+      "noise": 0.958450120567848,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000125": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 155.76,
+      "lane": "PL->PL",
+      "noise": 0.8027055701437141,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000126": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 323.56,
+      "lane": "PL->HU",
+      "noise": 1.1834208161793565,
+      "rate_eur_per_km": 0.79,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000127": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 550.38,
+      "lane": "PL->PL",
+      "noise": 0.94990807066108,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000128": {
+    "is_synthetic": true,
+    "pallet_count": 8,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 234.12,
+      "lane": "PL->PL",
+      "noise": 0.9318285246007976,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000129": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 1047.23,
+      "lane": "PL->DK",
+      "noise": 0.8943739377083534,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000130": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 343.99,
+      "lane": "PL->PL",
+      "noise": 0.9854068827053654,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000131": {
+    "is_synthetic": true,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 316.12,
+      "lane": "PL->PL",
+      "noise": 1.1980945601681905,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000132": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 348.98,
+      "lane": "PL->PL",
+      "noise": 1.0823733876363042,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000133": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 305.76,
+      "lane": "PL->PL",
+      "noise": 1.0237084107047973,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000134": {
+    "is_synthetic": true,
+    "pallet_count": 10,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 372.13,
+      "lane": "PL->PL",
+      "noise": 0.8630830927466021,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000135": {
+    "is_synthetic": true,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 592.03,
+      "lane": "SK->PL",
+      "noise": 1.0057607342628938,
+      "rate_eur_per_km": 0.651,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000136": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 134.88,
+      "lane": "PL->PL",
+      "noise": 0.973531246870084,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000137": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 906.16,
+      "lane": "PL->DE",
+      "noise": 1.0125553607168514,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000138": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 344.18,
+      "lane": "PL->DE",
+      "noise": 0.9745933547483944,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000139": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 464.74,
+      "lane": "PL->AT",
+      "noise": 0.9391318732802011,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000140": {
+    "is_synthetic": true,
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 271.46,
+      "lane": "PL->PL",
+      "noise": 0.994259904663288,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000141": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 663.58,
+      "lane": "PL->PL",
+      "noise": 0.8418440780564419,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000142": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1089.43,
+      "lane": "PL->DE",
+      "noise": 0.9164315794112059,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000143": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 876.39,
+      "lane": "AT->PL",
+      "noise": 1.0037932082978884,
+      "rate_eur_per_km": 0.476,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000144": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 618.83,
+      "lane": "PL->DE",
+      "noise": 1.0064813690932368,
+      "rate_eur_per_km": 0.68,
+      "rate_provenance": "source"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000145": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 1429.88,
+      "lane": "PL->IT",
+      "noise": 1.123188699306324,
+      "rate_eur_per_km": 0.6,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000146": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 292.87,
+      "lane": "SK->PL",
+      "noise": 0.9366311229182727,
+      "rate_eur_per_km": 0.651,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000147": {
+    "is_synthetic": true,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 550.38,
+      "lane": "PL->PL",
+      "noise": 1.0964991999988625,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000148": {
+    "is_synthetic": true,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 474.43,
+      "lane": "PL->PL",
+      "noise": 1.0211812755273602,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000149": {
+    "is_synthetic": true,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 348.98,
+      "lane": "PL->PL",
+      "noise": 1.2406674626258913,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  },
+  "MOCK-000150": {
+    "is_synthetic": true,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 343.99,
+      "lane": "PL->PL",
+      "noise": 0.9179158027017155,
+      "rate_eur_per_km": 0.85,
+      "rate_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": []
+  }
+}
