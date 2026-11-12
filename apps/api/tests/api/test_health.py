@@ -44,6 +44,20 @@ def test_request_id_and_unexpected_errors(tmp_path: Path) -> None:
 
 
 @pytest.mark.ac("AC-FEAT-000-02")
+@pytest.mark.parametrize("supplied", ["x" * 129, "bad id\twith spaces", "id;drop", "ü"])
+def test_unsafe_request_id_is_replaced(supplied: str) -> None:
+    with TestClient(create_app(Settings(database_url="sqlite://"))) as client:
+        sent = {"X-Request-ID": supplied}
+        try:
+            response = client.get("/health", headers=sent)
+        except UnicodeEncodeError:
+            return  # a non-latin-1 header cannot even be sent
+        returned = response.headers["X-Request-ID"]
+        assert returned != supplied
+        assert len(returned) == 36  # generated UUID
+
+
+@pytest.mark.ac("AC-FEAT-000-02")
 def test_method_not_allowed_preserves_allow_header() -> None:
     with TestClient(create_app(Settings(database_url="sqlite://"))) as client:
         response = client.request("TRACE", "/health")

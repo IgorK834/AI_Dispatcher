@@ -59,6 +59,9 @@ from routepilot.shared.logging import configure_logging
 from routepilot.shared.pagination import CursorCodec
 from routepilot.shared.problem import Problem, problem
 
+# A client-supplied id ends up in logs and headers: accept only short, plain identifiers.
+REQUEST_ID_PATTERN = re.compile(r"[A-Za-z0-9._-]{1,128}")
+
 
 class HealthResponse(BaseModel):
     status: Literal["ok"]
@@ -251,7 +254,10 @@ def create_app(
     async def request_context(
         request: Request, call_next: Callable[[Request], Awaitable[Response]]
     ) -> Response:
-        request.state.request_id = request.headers.get("X-Request-ID") or str(uuid4())
+        supplied = request.headers.get("X-Request-ID", "")
+        request.state.request_id = (
+            supplied if REQUEST_ID_PATTERN.fullmatch(supplied) else str(uuid4())
+        )
         tokens = structlog.contextvars.bind_contextvars(request_id=request.state.request_id)
         try:
             try:
