@@ -1,0 +1,18 @@
+{
+  "_note": "Synthetic ORS-shaped matrix file for unit tests; these numbers are not an ORS response.",
+  "version": 1,
+  "source": "ors_driving_car_v1",
+  "profile": "driving-car",
+  "generatedAt": "2026-11-11T00:00:00Z",
+  "cities": ["Katowice", "Wrocław", "Dresden"],
+  "distanceM": [
+    [0, 187450, 372310],
+    [187450, 0, 213990],
+    [372310, 213990, 0]
+  ],
+  "durationS": [
+    [0, 6000, 12000],
+    [6000, 0, 8123],
+    [12000, 8123, 0]
+  ]
+}
