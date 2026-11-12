@@ -66,13 +66,22 @@ def test_campaign_ledger_is_immutable_once_and_hard_capped(tmp_path: Path) -> No
 
 
 @pytest.mark.ac("AC-FEAT-006-40")
-def test_unknown_provider_outcome_closes_the_campaign(tmp_path: Path) -> None:
+def test_unknown_provider_outcome_is_charged_in_full_but_keeps_the_campaign_open(
+    tmp_path: Path,
+) -> None:
     ledger = CampaignLedger(tmp_path / "ledger.json")
     ledger.start_phase("evals", ["a"], "fingerprint")
     budget = DurableBudget(ledger, "evals")
     budget.unknown(budget.reserve(100, 100))
+    assert ledger.usage(ledger.snapshot(), "evals") == (100, 100)  # the whole reservation
+    assert ledger.snapshot()["closed"] is False
+    DurableBudget(ledger, "evals").reserve(1, 1)  # the fallback may still be reserved
+    # Usage above its reservation still closes the campaign.
+    over = DurableBudget(ledger, "evals")
+    ticket = over.reserve(10, 10)
     with pytest.raises(BudgetExceeded):
-        DurableBudget(ledger, "evals").reserve(1, 1)
+        over.settle(ticket, 50, 5)
+    assert ledger.snapshot()["closed"] is True
 
 
 @pytest.mark.ac("AC-FEAT-007-09")
@@ -114,7 +123,8 @@ def test_phase_caps_sum_to_the_approved_campaign_and_reopen_is_recorded(tmp_path
         ledger.reopen("not closed")
     ledger.start_phase("smoke", ["a"], "fingerprint")
     budget = DurableBudget(ledger, "smoke")
-    budget.unknown(budget.reserve(10, 10))
+    with pytest.raises(BudgetExceeded):
+        budget.settle(budget.reserve(10, 10), 50, 5)  # usage above its reservation closes it
     assert ledger.snapshot()["closed"] is True
     ledger.reopen("test reason")
     assert ledger.snapshot()["closed"] is False

@@ -41,6 +41,8 @@ from routepilot.shared.pagination import CursorCodec
 ROOT = Path(__file__).resolve().parent
 REPOSITORY = ROOT.parent
 DEFAULT_ENV = REPOSITORY / "apps/api/.env"
+# Below this much phase allowance left, another live scenario cannot complete; stop and report.
+MIN_SCENARIO_TOKENS = 10_000
 SUSPICIOUS_WORDS = ("suspicious", "podejrz")
 
 
@@ -295,7 +297,8 @@ def render_markdown(
         "",
         f"- Run: {meta['started']}  ·  models: {', '.join(meta['models'])}",
         f"- Prompts and scenarios fingerprint: `{meta['fingerprint'][:16]}`",
-        f"- Scenarios: {summary['scenarios']}  ·  stopped early: {meta['stopped_early']}",
+        f"- Scenarios run: {summary['scenarios']}  ·  stopped early: {meta['stopped_early']}",
+        f"- Not run (token cap): {', '.join(meta.get('not_run', [])) or 'none'}",
         "",
         "| Metric | Value |",
         "|---|---|",
@@ -333,6 +336,9 @@ async def run_batch(args: argparse.Namespace) -> int:
     scenarios = load_scenarios(ROOT, smoke=args.phase == "smoke")
     if args.only:
         scenarios = [s for s in scenarios if s.id in set(args.only)]
+    # Injection scenarios are cheap and safety-critical (AC-41): they run first so a batch that
+    # stops at its token cap can never leave them unevaluated.
+    scenarios.sort(key=lambda scenario: not scenario.injection)
     if not scenarios:
         print("No scenarios selected", file=sys.stderr)
         return 2
@@ -377,7 +383,9 @@ async def run_batch(args: argparse.Namespace) -> int:
             f"{scenario.id}: {outcome.status} pass={outcome.passed} "
             f"tokens={outcome.tokens_in + outcome.tokens_out}"
         )
-        if budget is not None and budget.closed:
+        if budget is not None and (
+            budget.closed or budget.limit - budget.used < MIN_SCENARIO_TOKENS
+        ):
             stopped_early = True
             break
     if ledger is not None:
@@ -395,6 +403,7 @@ async def run_batch(args: argparse.Namespace) -> int:
         models=models,
         fingerprint=fingerprint(scenarios, base.agent_model_policy),
         stopped_early=stopped_early,
+        not_run=[item.id for item in scenarios[len(results) :]],
     )
     output = args.output / f"{args.phase}-{args.mode}-{started.replace(':', '')}"
     output.mkdir(parents=True, exist_ok=True)

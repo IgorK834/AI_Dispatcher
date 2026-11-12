@@ -170,7 +170,8 @@ class DurableBudget(TokenBudget):
     def unknown(self, ticket: Reservation) -> None:
         entry = self.entries.pop(ticket.id)
         super().unknown(ticket)
-        self.closed = True
+        # Owner decision 2026-11-12: an unknown outcome (for example a provider 504) is charged at
+        # its full reservation but does not close the campaign, so the configured fallback can
+        # still run. Only usage that exceeds its reservation (settle) closes it.
         with self.ledger.transaction() as state:
             state["calls"][entry]["status"] = "unknown"
-            state["closed"] = True
