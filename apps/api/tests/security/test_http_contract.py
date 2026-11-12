@@ -41,6 +41,23 @@ def test_supported_state_changing_method_still_needs_an_allowed_origin(tmp_path:
         assert unauthenticated.json()["code"] == "UNAUTHENTICATED"
 
 
+@pytest.mark.ac("AC-FEAT-001-33")
+@pytest.mark.parametrize(
+    "path",
+    ["/api/v1/auth/register", "/api/v1/auth/signup", "/api/v1/register", "/api/v1/users"],
+)
+def test_no_endpoint_registers_a_user(tmp_path: Path, path: str) -> None:
+    with client(tmp_path) as http:
+        paths = http.get("/openapi.json").json()["paths"]
+        assert path not in paths
+        assert not [p for p in paths if "regist" in p or "signup" in p]
+        # An unknown path is answered by routing (404), with or without an Origin or session.
+        for headers in ({}, ORIGIN):
+            response = http.post(path, json={}, headers=headers)
+            assert response.status_code == 404
+            assert response.json()["code"] == "NOT_FOUND"
+
+
 @pytest.mark.ac("AC-FEAT-000-07")
 def test_contract_documents_problem_responses_without_defs(tmp_path: Path) -> None:
     with client(tmp_path) as http:

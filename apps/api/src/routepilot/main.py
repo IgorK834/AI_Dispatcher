@@ -244,11 +244,13 @@ def create_app(
         finally:
             await jobs.start()
 
-    def method_not_allowed(request: Request) -> bool:
-        # A path that exists but not for this method is answered `405` by routing; no handler
-        # runs, so the Origin/CSRF check has nothing to protect and must not mask it as `403`.
-        matches = [route.matches(request.scope)[0] for route in application.router.routes]
-        return Match.FULL not in matches and Match.PARTIAL in matches
+    def handled_by_a_route(request: Request) -> bool:
+        # A path that exists but not for this method (`405`) or that no route serves (`404`) is
+        # answered by routing; no handler runs, so the Origin/CSRF check has nothing to protect
+        # and must not mask the answer as `403` or `401`.
+        return any(
+            route.matches(request.scope)[0] == Match.FULL for route in application.router.routes
+        )
 
     @application.middleware("http")
     async def request_context(
@@ -265,7 +267,7 @@ def create_app(
                     request.url.path.startswith("/api/v1/")
                     and request.method in {"POST", "PATCH", "PUT", "DELETE"}
                     and request.url.path != "/api/v1/auth/login"
-                    and not method_not_allowed(request)
+                    and handled_by_a_route(request)
                 ):
                     if request.headers.get("Origin") not in settings.origins:
                         raise DomainError("ORIGIN_NOT_ALLOWED", 403)
