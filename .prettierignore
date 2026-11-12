@@ -2,6 +2,8 @@
 **/*.md
 docs/design/**
 pnpm-lock.yaml
+# Seeded generator output; byte-stable by contract (FEAT-002), never reformatted by hand.
+data/mock/*.json
 apps/api/**
 contracts/openapi.json
 node_modules

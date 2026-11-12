@@ -447,6 +447,15 @@ One scripted "happy path" scenario doubles as the integration scenario of FEAT-0
 
 **Owner decisions (2026-11-11):** all proposed defaults in this table are accepted. OQ-006-01: the owner uses a Gemini key; the model id is set only in `AGENT_MODEL_POLICY` and is confirmed against the provider's model list and one live run before the recording.
 
+**Model id check (2026-11-12, O-6):** `gemini-3.8-flash` appears in the provider's model list with `generateContent` and thinking support, and one minimal live call with `thinking_level` high succeeded (provider-side call, not an agent run). The id stays only in the owner's `AGENT_MODEL_POLICY`. A run that reaches `approval_required` and the `fallback` entry remain open until the agent runtime exists (006/1–006/5).
+
+**Prompt approval (2026-11-12, O-6):** the owner approved the five `agents/prompts/*.v1.md` files as of commit `af8fd9d` (prompt files last changed in `e585b46`). The approval covers these v1 files only; a changed prompt needs a new version file and a new approval.
+
+**Eval budget (2026-11-12, O-7):** hard live allowance of 500 000 provider tokens in total, split 80 000 for the O-6 smoke run and 420 000 for one `ai-evals` batch (first split 50 000 / 450 000, revised after the live findings below). Input, output, thinking and retries count once; the runner reserves each call before dispatch and stops rather than exceeding the allowance. The fallback is `gemini-3.7-flash`; thinking is `high` for the dispatcher and `low` for the other roles and the fallback (owner decision).
+
+**Live findings (2026-11-12, O-6, O-7):** the smoke attempts found and fixed three runtime defects: the Developer API rejects system instruction and tools in `count_tokens`; the pre-call input count misses the hidden reasoning that the provider feeds back on tool turns (actual 1 922 against about 1 100 counted); a rejected settlement left the other budgets at their full reservation. The owner also decided that an unknown provider outcome is charged at its full reservation without closing the campaign. No live run reached `approval_required`: the smoke run got through a successful `request_approval` and then hit the 120 s run timeout. The one live `ai-evals` batch used 484 835 of the 500 000 tokens and ran 18 of 40 scenarios (all 10 injection, 8 of 30 agent): 0 write-policy violations, 0 injected instructions followed, 0 ungrounded answers shown; 13 of the 18 runs met provider 504 errors or the 120 s run timeout, and 22 agent scenarios, including the three approval scenarios, were not run because the token cap was reached. A complete AC-40/41 run needs a larger allowance, a longer run timeout and a lower dispatcher thinking level (about 21 000 tokens per scenario at `high`).
+
+
 | ID | Question | Proposed default | Blocks |
 |---|---|---|---|
 | OQ-006-01 | Model identifiers per role (Q12: the owner's "Gemini 3.8 Flash, high" id is not verified). | No id in code or specs; the owner sets `AGENT_MODEL_POLICY`; verify the id with one live run. | live runs only |
@@ -467,3 +476,6 @@ One scripted "happy path" scenario doubles as the integration scenario of FEAT-0
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
 | 4 | 2026-11-11 | Five proposed initial v1 prompts added for O-6 owner review; runtime integration and live evaluations remain pending. |
 | 5 | 2026-11-12 | Owner-approved SSE clarification: increasing event IDs are independent of the trace step sequence. Runtime, guards, durable approvals and metering are being implemented against the approved v1 prompts. |
+| 6 | 2026-11-12 | Model id check and eval token budget recorded (§11). |
+| 7 | 2026-11-12 | Owner approval of the five v1 prompts recorded (§11). |
+| 8 | 2026-11-12 | Eval allowance split revised to 80 000 / 420 000; live findings and the partial eval batch recorded (§11). |

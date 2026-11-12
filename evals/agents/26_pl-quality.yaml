@@ -5,14 +5,14 @@ locale: pl
 fleet_fixture: fixtures/fleet/one.yaml
 offer_fixture: fixtures/offers/quality.yaml
 expected_tools:
-- get_offer
-- offer_quality
+  - get_offer
+  - offer_quality
 expected_approval: false
 key_facts:
-- kind: tool_called
-  value: get_offer
-- kind: tool_called
-  value: offer_quality
-- kind: no_assignment
-- kind: answer_grounded
+  - kind: tool_called
+    value: get_offer
+  - kind: tool_called
+    value: offer_quality
+  - kind: no_assignment
+  - kind: answer_grounded
 smoke: false
