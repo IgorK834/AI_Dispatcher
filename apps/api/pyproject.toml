@@ -49,7 +49,7 @@ dev = [
 testpaths = ["tests", "../../scripts/tests"]
 addopts = "--strict-markers"
 pythonpath = [".", "../.."]
-markers = ["ac(id): acceptance criterion ID", "integration: integration scenarios"]
+markers = ["ac(id): acceptance criterion ID", "integration: integration scenarios", "bench: engine benchmark, not part of ci-fast"]
 
 [tool.mypy]
 python_version = "3.13"
@@ -119,6 +119,15 @@ name = "optimization engine is pure"
 type = "forbidden"
 source_modules = ["routepilot.optimization.engine"]
 forbidden_modules = ["sqlalchemy", "fastapi", "httpx", "sqlite3", "os", "routepilot.agents", "routepilot.routing", "routepilot.optimization.jobs", "routepilot.integrations", "routepilot.identity", "routepilot.fleet", "routepilot.freight"]
+
+[[tool.importlinter.contracts]]
+name = "oracles are test-only"
+type = "forbidden"
+# import-linter skips a source that contains the forbidden module, so every source is listed;
+# tests/unit/test_import_contracts.py fails when a new module is missing from this list.
+source_modules = ["routepilot.agent_persistence", "routepilot.agents", "routepilot.bootstrap", "routepilot.compliance", "routepilot.fleet", "routepilot.freight", "routepilot.identity", "routepilot.integrations", "routepilot.main", "routepilot.routing", "routepilot.shared", "routepilot.optimization.jobs", "routepilot.optimization.engine.cost_model", "routepilot.optimization.engine.costs", "routepilot.optimization.engine.fleet", "routepilot.optimization.engine.fuel", "routepilot.optimization.engine.models", "routepilot.optimization.engine.optimizer", "routepilot.optimization.engine.prefilter", "routepilot.optimization.engine.schedule", "routepilot.optimization.engine.search", "routepilot.optimization.engine.validators"]
+forbidden_modules = ["routepilot.optimization.engine.oracle", "routepilot.optimization.engine.fleet_oracle"]
+allow_indirect_imports = true
 
 [[tool.importlinter.contracts]]
 name = "jobs boundaries"
