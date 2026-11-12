@@ -447,6 +447,12 @@ One scripted "happy path" scenario doubles as the integration scenario of FEAT-0
 
 **Owner decisions (2026-11-11):** all proposed defaults in this table are accepted. OQ-006-01: the owner uses a Gemini key; the model id is set only in `AGENT_MODEL_POLICY` and is confirmed against the provider's model list and one live run before the recording.
 
+**Model id check (2026-11-12, O-6):** `gemini-3.8-flash` appears in the provider's model list with `generateContent` and thinking support, and one minimal live call with `thinking_level` high succeeded (provider-side call, not an agent run). The id stays only in the owner's `AGENT_MODEL_POLICY`. A run that reaches `approval_required` and the `fallback` entry remain open until the agent runtime exists (006/1–006/5).
+
+**Prompt approval (2026-11-12, O-6):** the owner approved the five `agents/prompts/*.v1.md` files as of commit `af8fd9d` (prompt files last changed in `e585b46`). The approval covers these v1 files only; a changed prompt needs a new version file and a new approval.
+
+**Eval budget (2026-11-12, O-7):** hard live allowance of 500 000 provider tokens in total: at most 50 000 for the O-6 smoke run and 450 000 for one `ai-evals` batch (≥ 40 scenarios; the 60 000 per-run cap applies to each scenario). Input, output, thinking and retries count once; the runner reserves each call before dispatch and stops rather than exceeding the allowance.
+
 | ID | Question | Proposed default | Blocks |
 |---|---|---|---|
 | OQ-006-01 | Model identifiers per role (Q12: the owner's "Gemini 3.8 Flash, high" id is not verified). | No id in code or specs; the owner sets `AGENT_MODEL_POLICY`; verify the id with one live run. | live runs only |
@@ -467,3 +473,5 @@ One scripted "happy path" scenario doubles as the integration scenario of FEAT-0
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
 | 4 | 2026-11-11 | Five proposed initial v1 prompts added for O-6 owner review; runtime integration and live evaluations remain pending. |
 | 5 | 2026-11-12 | Owner-approved SSE clarification: increasing event IDs are independent of the trace step sequence. Runtime, guards, durable approvals and metering are being implemented against the approved v1 prompts. |
+| 6 | 2026-11-12 | Model id check and eval token budget recorded (§11). |
+| 7 | 2026-11-12 | Owner approval of the five v1 prompts recorded (§11). |
