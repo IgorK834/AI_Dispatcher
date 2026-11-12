@@ -16,6 +16,7 @@ from routepilot.freight.service.models import (
 from routepilot.freight.service.offers import FreightService
 from routepilot.shared.auth import Principal
 from routepilot.shared.pagination import Page
+from routepilot.shared.problem import problem_responses
 
 
 class OfferQuery(BaseModel):
@@ -56,17 +57,19 @@ def create_freight_router(
         response.headers["Location"] = f"/api/v1/freight-offers/{offer.id}"
         return offer
 
-    @router.get("/{offer_id}", response_model=FreightOfferView)
+    @router.get("/{offer_id}", response_model=FreightOfferView, responses=problem_responses(404))
     def offer(offer_id: UUID, principal: Principal = user) -> FreightOfferView:
         return service.get_offer(offer_id)
 
-    @router.patch("/{offer_id}", response_model=FreightOfferView)
+    @router.patch(
+        "/{offer_id}", response_model=FreightOfferView, responses=problem_responses(404, 409)
+    )
     def update_offer(
         offer_id: UUID, body: FreightOfferUpdate, principal: Principal = user
     ) -> FreightOfferView:
         return service.update_offer(offer_id, body, str(principal.id))
 
-    @router.delete("/{offer_id}", status_code=204)
+    @router.delete("/{offer_id}", status_code=204, responses=problem_responses(404, 409))
     def delete_offer(offer_id: UUID, principal: Principal = user) -> Response:
         service.delete_offer(offer_id, str(principal.id))
         return Response(status_code=204)

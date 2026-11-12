@@ -41,3 +41,18 @@ def problem(
             "errors": errors or [],
         },
     )
+
+
+PROBLEM_DESCRIPTIONS = {
+    400: "Request rejected (captcha)",
+    404: "Resource not found",
+    409: "Conflict: version, duplicate, resource in use or read-only",
+}
+
+
+def problem_responses(*statuses: int) -> dict[int | str, dict[str, Any]]:
+    """OpenAPI entries for the problem+json answers an endpoint can give."""
+    return {
+        status: {"model": Problem, "description": PROBLEM_DESCRIPTIONS[status]}
+        for status in statuses
+    }

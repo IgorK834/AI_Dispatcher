@@ -8,9 +8,11 @@ from typing import Any
 
 from alembic import command
 from fastapi.testclient import TestClient
-from sqlalchemy import text
+from sqlalchemy import select, text
+from sqlalchemy.orm import Session
 
 from routepilot.identity.ports import CaptchaResult
+from routepilot.identity.repository.models import User
 from routepilot.main import create_app
 from routepilot.shared.config import Settings
 from routepilot.shared.db.engine import make_engine, migration_config
@@ -24,13 +26,33 @@ class PassCaptcha:
 
 
 def login(client: TestClient, role: str = "admin") -> str:
-    """Log in with a seeded account; returns the CSRF token."""
-    settings = client.app.state.services.identity.settings
-    email, password = (
-        (settings.admin_email, settings.admin_password)
-        if role == "admin"
-        else (settings.demo_email, settings.demo_password)
-    )
+    """Log in with a seeded account (a dispatcher account is created on demand).
+
+    Returns the CSRF token.
+    """
+    identity = client.app.state.services.identity
+    settings = identity.settings
+    if role == "dispatcher":
+        email, password = "dispatcher@example.invalid", "dispatcher-test-password"
+        with Session(identity.engine) as session, session.begin():
+            if session.scalar(select(User.id).where(User.email == email)) is None:
+                now = identity.clock.now()
+                session.add(
+                    User(
+                        email=email,
+                        password_hash=identity.password_hasher.hash(password),
+                        role="dispatcher",
+                        locale="en",
+                        is_active=True,
+                        failed_logins=0,
+                        created_at=now,
+                        updated_at=now,
+                    )
+                )
+    elif role == "admin":
+        email, password = settings.admin_email, settings.admin_password
+    else:
+        email, password = settings.demo_email, settings.demo_password
     response = client.post(
         "/api/v1/auth/login",
         json={"email": email, "password": password, "captchaToken": "pass"},
@@ -141,5 +163,33 @@ def driver_state(latitude: float = 50.0, **extra: Any) -> dict[str, Any]:
         "currentLon": 19.0,
         "availableFrom": "2026-11-16T08:00:00Z",
         **counters,
+        **extra,
+    }
+
+
+def offer(**extra: Any) -> dict[str, Any]:
+    return {
+        "description": "Pallets Katowice to Berlin",
+        "revenue": {"amountMinor": 15000, "currency": "EUR"},
+        "weightKg": 500,
+        "palletCount": 3,
+        "palletType": "EUR_1200x800",
+        "requiredBodyTypes": ["CURTAIN_SIDER"],
+        "stops": [
+            {
+                "stopType": "LOADING",
+                "city": "Katowice",
+                "countryCode": "PL",
+                "windowStart": "2026-11-16T08:00:00Z",
+                "windowEnd": "2026-11-16T12:00:00Z",
+            },
+            {
+                "stopType": "UNLOADING",
+                "city": "Berlin",
+                "countryCode": "DE",
+                "windowStart": "2026-11-17T08:00:00Z",
+                "windowEnd": "2026-11-17T12:00:00Z",
+            },
+        ],
         **extra,
     }

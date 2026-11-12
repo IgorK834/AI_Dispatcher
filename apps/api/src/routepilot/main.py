@@ -1,6 +1,7 @@
 """Application composition, health endpoints and middleware."""
 
 import asyncio
+import json
 import re
 import secrets
 import sqlite3
@@ -370,12 +371,20 @@ def create_app(
     def problem_media_type() -> dict[str, Any]:
         if application.openapi_schema is None:
             schema = FastAPI.openapi(application)
+            problem_ref = {"$ref": "#/components/schemas/Problem"}
             for path_item in schema["paths"].values():
                 for operation in path_item.values():
-                    for code in ("401", "403", "429"):
-                        content = operation.get("responses", {}).get(code, {}).get("content", {})
+                    responses = operation.get("responses", {})
+                    if "422" in responses:  # replace FastAPI's default validation-error schema
+                        responses["422"]["content"] = {"application/json": {"schema": problem_ref}}
+                    for code in ("400", "401", "403", "404", "409", "422", "429"):
+                        content = responses.get(code, {}).get("content", {})
                         if "application/json" in content:
                             content["application/problem+json"] = content.pop("application/json")
+            components = schema.get("components", {}).get("schemas", {})
+            if "HTTPValidationError" not in json.dumps(schema["paths"]):
+                for unused in ("HTTPValidationError", "ValidationError"):
+                    components.pop(unused, None)
         return application.openapi_schema or {}
 
     application.openapi = problem_media_type  # type: ignore[method-assign]  # reason: contract hook
