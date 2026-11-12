@@ -16,7 +16,7 @@ from routepilot.optimization.engine.models import (
 )
 from routepilot.optimization.engine.prefilter import offer_pool
 from routepilot.optimization.engine.schedule import build_plan
-from routepilot.optimization.engine.search import OBJECTIVES, search_driver
+from routepilot.optimization.engine.search import search_driver
 from routepilot.optimization.engine.validators import FleetValidator, RouteValidator
 
 
@@ -55,19 +55,32 @@ def optimize(
             rejections.append(
                 Rejection(driver_id=driver.id, offer_id=offer.id, stage=stage, code=code)
             )
+    baselines, baseline_plans = build_baselines(snapshot, pools)
+    listed = {
+        p.plan_ref: p for groups in per_driver.values() for plans in groups.values() for p in plans
+    }
+    extra_candidates = {}
+    drivers = {driver.id: driver for driver in snapshot.drivers}
+    for baseline in baseline_plans:
+        candidate, _ = build_plan(snapshot, drivers[baseline.driver_id], baseline.actions)
+        if candidate is None:
+            raise EngineInvariantError("validated baseline could not be copied as optimized")
+        if candidate.plan_ref not in listed:
+            extra_candidates[candidate.plan_ref] = candidate
+    profit_candidates = {
+        d: [*groups["profit"], *[p for p in extra_candidates.values() if p.driver_id == d]]
+        for d, groups in per_driver.items()
+    }
     fleet: dict[Objective, FleetSolution] = {
-        "profit": assign_fleet(
-            {d: p["profit"] for d, p in per_driver.items()}, "profit", snapshot.reference_time
-        )
+        "profit": assign_fleet(profit_candidates, "profit", snapshot.reference_time)
     }
     required = frozenset(a.driver_id for a in fleet["profit"].assignments)
     for objective in ("fastest", "fuel"):
-        candidates = {d: [*plans[objective], *plans["profit"]] for d, plans in per_driver.items()}
+        candidates = {
+            d: [*groups[objective], *profit_candidates[d]] for d, groups in per_driver.items()
+        }
         fleet[objective] = assign_fleet(candidates, objective, snapshot.reference_time, required)
-    baselines, baseline_plans = build_baselines(snapshot, pools)
-    plans = [
-        p for by_obj in per_driver.values() for obj in OBJECTIVES for p in by_obj[obj]
-    ] + baseline_plans
+    plans = [*listed.values(), *extra_candidates.values(), *baseline_plans]
     unique = {p.plan_ref: p for p in plans}
     for plan in unique.values():
         validation = RouteValidator().validate(snapshot, plan)
@@ -87,6 +100,7 @@ def optimize(
         fleet=fleet,
         baselines=baselines,
         baseline_plans=baseline_plans,
+        fleet_candidates=sorted(extra_candidates.values(), key=lambda p: (p.driver_id, p.plan_ref)),
         rejections=rejections,
         warnings=["POOL_TRUNCATED"] if pool_truncated else [],
         stats=EngineStats(

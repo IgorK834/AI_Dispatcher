@@ -151,8 +151,9 @@ Formulas: report §19.1; parameters: `CostProfile` and vehicle (report §17.4). 
 ### 4.6 Fleet assignment
 
 - **FR-29.** For each objective choose at most one plan per driver (or none) so that no offer appears twice.
+  - Candidate pool: the per-driver top-K lists are supplemented with optimized-kind copies of the plans from both baselines. These additional plans are returned in `EngineResult.fleet_candidates` when absent from the top-K lists; the per-driver top-K cap stays unchanged. This preserves invariant 15 even when the top-K lists overlap on the same offers.
   - `profit`: maximise Σ `net_profit`; ties → smaller Σ `finish_at` offset → smaller Σ `fuel_l` → driver/plan ids.
-  - `fastest` / `fuel`: the candidate plans of a driver are the union of its top-K lists for that objective and for `profit`. Every driver that has a plan in the `profit` solution must have a plan. Minimise Σ (`finish_at` − reference time) for `fastest`, Σ `fuel_l` for `fuel`; ties → larger Σ `net_profit` → ids.
+  - `fastest` / `fuel`: the candidate plans of a driver are the union of its top-K list for that objective and the supplemented `profit` candidate pool. Every driver that has a plan in the `profit` solution must have a plan. Minimise Σ (`finish_at` − reference time) for `fastest`, Σ `fuel_l` for `fuel`; ties → larger Σ `net_profit` → ids.
 - **FR-30.** Exact depth-first search over drivers in the order of increasing candidate count (ties by driver id), with conflict pruning and a bound equal to the sum of each remaining driver's best candidate value.
 - **FR-31.** The result per objective is a `FleetSolution {objective, assignments: [{driver_id, plan_ref}], totals: {net_profit, fuel_l, co2_kg, distance_km, drivers_with_plan}}`.
 
@@ -220,7 +221,7 @@ Default parameters (configurable assumptions, not facts): `horizon_days=5`, `max
 - **AC-FEAT-003-09** [property] **P9** Given instances with N ≤ 5 offers and K ≤ 3 When the Branch-and-Bound result is compared with `oracle.py` Then for each objective the offer sets, sequences and objective values of the top-K are identical (invariant 11).
 - **AC-FEAT-003-10** [property] **P10** Given any fleet solution When it is inspected Then no offer occurs in two plans and no driver has two plans, and for ≤ 3 drivers × ≤ 4 plans the solution equals `fleet_oracle.py` (invariant 12).
 - **AC-FEAT-003-11** [property] **P11** Given a driver whose `home_by` is inside the horizon When the engine returns plans for that driver Then every returned plan ends with an `END` stop at the home base with arrival ≤ `home_by` and `home_reached = true`; when no such plan exists the list is empty (invariant 13).
-- **AC-FEAT-003-12** [property] **P12** Given a result with `truncated = false` When the fleet totals are compared Then the fleet profit of the `profit` solution is ≥ the fleet profit of `baseline_single` and of `baseline_greedy` (invariant 15).
+- **AC-FEAT-003-12** [property] **P12** Given a result with `truncated = false` When the fleet totals are compared Then the fleet profit of the `profit` solution is ≥ the fleet profit of `baseline_single` and of `baseline_greedy`, including when a small top-K list would exclude a baseline plan (invariant 15).
 - **AC-FEAT-003-13** [property] **P13** Given a result with `truncated = false` When the variants are compared Then for every driver the rank 1 `fastest` plan finishes no later than the rank 1 `profit` plan and the rank 1 `fuel` plan burns no more fuel; and over the drivers of the `profit` fleet solution Σ finish offsets (`fastest`) ≤ Σ finish offsets (`profit`) and Σ litres (`fuel`) ≤ Σ litres (`profit`) (invariant 16).
 
 **Working-time rules**
@@ -326,3 +327,5 @@ Each row is a detail that the existing documents do not fix. The proposed defaul
 | 1 | 2026-11-09 | Initial draft |
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11); FR-12 per-diem rule replaced; warning `PER_DIEM_DEFAULTED` removed |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
+
+- 2026-11-12 owner clarification (FR-29, P12): include optimized-kind copies of both baselines in fleet candidates, expose additional copies in `fleet_candidates`, and keep the per-driver top-K cap unchanged. This resolves the finite-top-K counterexample without changing golden values.

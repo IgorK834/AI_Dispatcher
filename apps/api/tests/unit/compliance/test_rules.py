@@ -112,3 +112,13 @@ def test_atomic_service_rest_and_wait_extension() -> None:
     )
     assert isinstance(span, Ok)
     assert span.events[0].kind == "DAILY_REST"
+
+
+@pytest.mark.ac("AC-FEAT-003-18")
+def test_top_up_precedes_atomic_service_crossing_nine_hours() -> None:
+    state = DriverState(t=T, work_today=530, work_since_break=170, breaks_today=30)
+    outcome = PlDomesticRules().advance_work(state, 30)
+    assert isinstance(outcome, Ok)
+    assert [(e.kind, e.minutes) for e in outcome.events] == [("BREAK", 15)]
+    assert outcome.activities[-1].kind == "WORK"
+    assert outcome.state.work_today == 560
