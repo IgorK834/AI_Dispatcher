@@ -1,6 +1,6 @@
 """Stable domain error codes at the API boundary."""
 
-from pydantic import JsonValue
+from typing import Any
 
 
 class DomainError(Exception):
@@ -10,7 +10,7 @@ class DomainError(Exception):
         status: int = 409,
         *,
         headers: dict[str, str] | None = None,
-        errors: list[dict[str, JsonValue]] | None = None,
+        errors: list[dict[str, Any]] | None = None,
     ) -> None:
         self.code = code
         self.status = status
