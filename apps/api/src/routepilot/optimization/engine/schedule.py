@@ -1,7 +1,7 @@
 """Incremental schedule construction, shared by search, baselines and test oracles."""
 
 from dataclasses import dataclass, replace
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from hashlib import sha256
 
@@ -20,6 +20,21 @@ from routepilot.optimization.engine.models import (
     RoutePlan,
 )
 from routepilot.optimization.engine.prefilter import pallet_equivalents
+
+
+class FailureCode(str):
+    """A schedule failure code that also carries the detail of the rejection report (FR-19)."""
+
+    detail: str
+
+    def __new__(cls, code: str, detail: str = "") -> "FailureCode":
+        value = super().__new__(cls, code)
+        value.detail = detail
+        return value
+
+
+def _utc_minute(moment: datetime) -> str:
+    return moment.astimezone(UTC).strftime("%Y-%m-%dT%H:%MZ")
 
 
 def recorded_state(state: DriverState, activity: RuleActivity, profile: ProfileId) -> DriverState:
@@ -210,7 +225,11 @@ class ScheduleBuilder:
             return None, worked.code
         actual_start = worked.state.t - timedelta(minutes=service)
         if actual_start > stop.window_end:
-            return None, "PICKUP_WINDOW_MISSED" if pickup else "DELIVERY_WINDOW_MISSED"
+            return None, FailureCode(
+                "PICKUP_WINDOW_MISSED" if pickup else "DELIVERY_WINDOW_MISSED",
+                f"earliest service start {_utc_minute(actual_start)}, "
+                f"window end {_utc_minute(stop.window_end)}",
+            )
         label = self._append(label, worked, stop.point, None)
         wait_min = sum(
             activity.activity.minutes
