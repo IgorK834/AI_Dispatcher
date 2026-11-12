@@ -342,3 +342,19 @@ def test_manual_offer_http_contract(client: TestClient) -> None:
     assert client.delete(f"/api/v1/freight-offers/{offer_id}").status_code == 204
     assert client.get(f"/api/v1/freight-offers/{offer_id}").json()["status"] == "withdrawn"
     assert client.get(f"/api/v1/freight-offers/{uuid4()}").status_code == 404
+
+
+@pytest.mark.ac("AC-FEAT-001-09", "AC-FEAT-001-14")
+def test_datetime_filters_and_decimal_values_reject_invalid_input(client: TestClient) -> None:
+    assert client.get("/api/v1/drivers?availableBefore=2026-11-16T10:00:00").status_code == 422
+    assert client.get("/api/v1/freight-offers?pickupFrom=2026-11-16T10:00:00").status_code == 422
+    assert (
+        client.post(
+            "/api/v1/cost-profiles", json={**cost(), "fxRates": {"PLN": "not-a-number"}}
+        ).status_code
+        == 422
+    )
+    assert (
+        client.post("/api/v1/cost-profiles", json={**cost(), "minMarginPct": "NaN"}).status_code
+        == 422
+    )

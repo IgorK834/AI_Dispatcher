@@ -1,12 +1,11 @@
 """Fleet HTTP adapters; all roles may edit drivers and vehicles."""
 
 from collections.abc import Callable
-from datetime import datetime
 from typing import Annotated
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query, Response
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
 from routepilot.fleet.domain.models import (
     CostProfileCreate,
@@ -34,7 +33,7 @@ class PageQuery(BaseModel):
 
 class DriverQuery(PageQuery):
     home_city: str | None = Field(default=None, alias="homeCity")
-    available_before: datetime | None = Field(default=None, alias="availableBefore")
+    available_before: AwareDatetime | None = Field(default=None, alias="availableBefore")
     has_vehicle: bool | None = Field(default=None, alias="hasVehicle")
 
 

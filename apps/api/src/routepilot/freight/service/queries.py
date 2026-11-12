@@ -74,6 +74,10 @@ class OfferQueryService:
         only_complete: bool = False,
         limit: int = 20,
     ) -> dict[str, Any]:
+        if any(
+            value is not None and value.utcoffset() is None for value in (pickup_from, pickup_to)
+        ):
+            raise DomainError("VALIDATION_ERROR", 422)
         if not 1 <= limit <= 20 or (radius_km is not None and not 0 <= radius_km <= 500):
             raise DomainError("VALIDATION_ERROR", 422)
         if pickup_from and pickup_to and pickup_from > pickup_to:

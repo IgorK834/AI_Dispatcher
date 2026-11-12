@@ -146,6 +146,10 @@ class FreightService:
         min_completeness: float | None = None,
         has_price: bool | None = None,
     ) -> Page[FreightOfferView]:
+        if any(
+            value is not None and value.utcoffset() is None for value in (pickup_from, pickup_to)
+        ):
+            raise DomainError("VALIDATION_ERROR", 422)
         if not 1 <= limit <= 100:
             raise DomainError("VALIDATION_ERROR", 422)
         filters = {

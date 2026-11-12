@@ -150,6 +150,8 @@ class FleetService:
         available_before: datetime | None = None,
         has_vehicle: bool | None = None,
     ) -> Page[DriverView]:
+        if available_before is not None and available_before.utcoffset() is None:
+            raise DomainError("VALIDATION_ERROR", 422)
         with Session(self.engine) as session:
             query = select(Driver).where(Driver.deleted_at.is_(None)).order_by(Driver.id)
             if home_city is not None:

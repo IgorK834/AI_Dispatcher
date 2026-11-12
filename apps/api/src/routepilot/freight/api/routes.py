@@ -1,12 +1,11 @@
 """Manual freight CRUD HTTP adapters."""
 
 from collections.abc import Callable
-from datetime import datetime
 from typing import Annotated, Literal
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query, Response
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
 from routepilot.freight.domain.models import (
@@ -29,8 +28,8 @@ class OfferQuery(BaseModel):
     destination_country: str | None = None
     origin_city: str | None = None
     destination_city: str | None = None
-    pickup_from: datetime | None = None
-    pickup_to: datetime | None = None
+    pickup_from: AwareDatetime | None = None
+    pickup_to: AwareDatetime | None = None
     max_weight_kg: int | None = Field(default=None, ge=1)
     max_pallets: int | None = Field(default=None, ge=1)
     min_completeness: float | None = Field(default=None, ge=0, le=1)

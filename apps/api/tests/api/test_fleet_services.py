@@ -136,3 +136,31 @@ def test_seed_idempotent(fleet: FleetService) -> None:
     fleet.seed(20261109, date(2026, 11, 16))
     assert [d.id for d in fleet.list_drivers().items] == ids
     assert all(d.state and d.vehicle and d.is_synthetic for d in fleet.list_drivers().items)
+
+
+@pytest.mark.ac("AC-FEAT-001-08")
+@pytest.mark.ac("AC-FEAT-006-29")
+@pytest.mark.ac("AC-FEAT-006-30")
+def test_active_historical_usage_and_query_helpers(fleet: FleetService) -> None:
+    from uuid import UUID
+
+    class Usage:
+        answer = "active"
+
+        def assignment_usage(self, driver_id: UUID):
+            return self.answer
+
+    usage = Usage()
+    fleet.usage_checker = usage
+    item = fleet.create_driver(driver(), "test")
+    assert fleet.has_active_assignment(item.id)
+    assert fleet.list_active()[0].id == item.id
+    with pytest.raises(DomainError, match="NOT_FOUND"):
+        fleet.latest_state(item.id)
+    with pytest.raises(DomainError, match="DRIVER_HAS_ACTIVE_ASSIGNMENT"):
+        fleet.delete_driver(item.id, "test")
+    usage.answer = "historical"
+    fleet.delete_driver(item.id, "test")
+    assert not fleet.list_active()
+    with pytest.raises(DomainError, match="NOT_FOUND"):
+        fleet.get_driver(item.id)
