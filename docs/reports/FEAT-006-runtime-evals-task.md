@@ -42,7 +42,9 @@ Parallel coding agents were explicitly authorised by the owner.
 ## Live allowance
 
 The agreed hard campaign allowance is 500,000 total provider tokens: at most
-50,000 for the O-6 smoke run and 450,000 for one O-7 eval batch. Input, output,
+50,000 for the O-6 smoke run and 450,000 for one O-7 eval batch (owner revised on
+2026-11-12 to 80,000 and 420,000, same 500,000 total, after live runs showed the approval
+path needs more than 50,000 tokens). Input, output,
 thinking and retries count once. Reserve each call's input and maximum output
 before dispatch; stop rather than extending the allowance. No paid generation
 has run at task start. Keys remain only in ignored local environment files and

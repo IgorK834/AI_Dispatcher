@@ -50,11 +50,13 @@ def test_provider_error_only_retries_configured_fallback() -> None:
         policy,
         {"fake:primary": lambda: primary, "fake:fallback": lambda: fallback},
     )
-    budget = TokenBudget(100)
+    budget = TokenBudget(200)
     result = registry.call("dispatcher", [HumanMessage("q")], schema=Decision, budgets=[budget])
     assert result.fallback
     assert len(primary.recorded) == len(fallback.recorded) == 1
-    assert budget.used == 75  # uncertain first request: its entire reservation is charged
+    # Uncertain first request: its entire reservation (20 counted + 25 % margin + 30 output cap
+    # = 55) is charged, then the fallback's exact usage of 25.
+    assert budget.used == 80
 
 
 @pytest.mark.ac("AC-FEAT-006-11")
@@ -71,4 +73,42 @@ def test_insufficient_allowance_prevents_request_and_missing_usage_fails_closed(
     budget = TokenBudget(100)
     with pytest.raises(ProviderFailure):
         registry.call("dispatcher", [HumanMessage("q")], budgets=[budget])
-    assert budget.used == 50
+    assert budget.used == 55  # missing usage: the whole reservation (20 + 5 margin + 30) is kept
+
+
+@pytest.mark.ac("AC-FEAT-006-11")
+def test_every_budget_records_actual_usage_even_when_one_rejects_it() -> None:
+    model = ScriptedModel(script=[response("ok")])
+    model.script[0].usage_metadata = {"input_tokens": 40, "output_tokens": 5, "total_tokens": 45}
+    policy = ModelPolicy.model_validate({"default": {"model": "fake:script", "maxTokens": 30}})
+    registry = ModelRegistry(
+        Settings(app_env="test", _env_file=None), policy, {"fake:script": lambda: model}
+    )
+    # Counted 20 (+5 margin) = 25 reserved input; the provider reports 40 tokens in.
+    first, second = TokenBudget(1000), TokenBudget(1000)
+    with pytest.raises(BudgetExceeded):
+        registry.call("dispatcher", [HumanMessage("q")], budgets=[first, second])
+    assert first.closed and first.used == 45
+    assert second.used == 45  # settled at the actual usage, not left at the full reservation
+    assert not second._pending
+
+
+@pytest.mark.ac("AC-FEAT-006-11")
+def test_reservation_includes_hidden_reasoning_of_earlier_turns() -> None:
+    from langchain_core.messages import AIMessage
+
+    model = ScriptedModel(script=[response("ok")])
+    model.script[0].usage_metadata = {"input_tokens": 120, "output_tokens": 5, "total_tokens": 125}
+    policy = ModelPolicy.model_validate({"default": {"model": "fake:script", "maxTokens": 30}})
+    registry = ModelRegistry(
+        Settings(app_env="test", _env_file=None), policy, {"fake:script": lambda: model}
+    )
+    earlier = AIMessage(
+        "",
+        tool_calls=[{"id": "1", "name": "t", "args": {}}],
+        usage_metadata={"input_tokens": 10, "output_tokens": 100, "total_tokens": 110},
+    )
+    budget = TokenBudget(1000)
+    # Counted 20 + 5 margin + 100 reported earlier output = 125 reserved >= 120 actual input.
+    registry.call("dispatcher", [HumanMessage("q"), earlier], budgets=[budget])
+    assert budget.used == 125 and not budget.closed

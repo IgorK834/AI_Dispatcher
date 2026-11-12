@@ -1,0 +1,72 @@
+name: ai-evals
+
+# Manual only (FEAT-007 FR-10). Never runs on pull requests or pushes. Paid provider calls
+# run under the hard campaign ledger: smoke 80 000 and evals 420 000 tokens (O-6, O-7).
+'on':
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'smoke = O-6 run to approval_required; evals = the AC-40/41 batch'
+        type: choice
+        options:
+          - smoke
+          - evals
+        default: smoke
+      confirm:
+        description: 'Type run-paid-evals to confirm paid provider calls'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-evals
+  cancel-in-progress: false
+
+jobs:
+  evals:
+    name: Live agent evaluation (${{ inputs.phase }})
+    if: ${{ inputs.confirm == 'run-paid-evals' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      APP_ENV: local
+      PHASE: ${{ inputs.phase }}
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+      # Model ids live only in this repository variable (OQ-006-01); no id in code or specs.
+      AGENT_MODEL_POLICY: ${{ vars.AGENT_MODEL_POLICY }}
+    steps:
+      - name: Stop early without provider configuration
+        run: |
+          if [ -z "$GOOGLE_API_KEY" ] || [ -z "$AGENT_MODEL_POLICY" ]; then
+            echo "GOOGLE_API_KEY secret and AGENT_MODEL_POLICY variable are required; no call was made."
+            exit 1
+          fi
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.13'
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: '0.13.6'
+          enable-cache: true
+          cache-dependency-glob: apps/api/uv.lock
+      - name: Install locked dependencies
+        run: uv sync --project apps/api --locked
+      - name: Run scenarios under the token ledger
+        run: |
+          cd apps/api
+          PYTHONPATH=../.. uv run python -m evals.runner --mode live --phase "$PHASE" \
+            --confirm-live --ledger "$RUNNER_TEMP/ledger.json" --output "$RUNNER_TEMP/reports"
+      - name: Upload report and ledger
+        if: ${{ always() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ai-evals-${{ inputs.phase }}
+          path: |
+            ${{ runner.temp }}/reports
+            ${{ runner.temp }}/ledger.json
+          if-no-files-found: warn

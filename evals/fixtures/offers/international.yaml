@@ -7,4 +7,4 @@ offers:
     weight_kg: 200
     revenue_minor: 100000
     pickup_minutes: [0, 240]
-    delivery_minutes: [240, 1400]
+    delivery_minutes: [240, 3000]

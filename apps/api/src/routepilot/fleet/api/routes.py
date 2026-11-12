@@ -7,7 +7,8 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Query, Response
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 
-from routepilot.fleet.domain.models import (
+from routepilot.fleet.service.fleet import FleetService
+from routepilot.fleet.service.models import (
     CostProfileCreate,
     CostProfileUpdate,
     CostProfileView,
@@ -20,7 +21,6 @@ from routepilot.fleet.domain.models import (
     VehicleUpdate,
     VehicleView,
 )
-from routepilot.fleet.service.fleet import FleetService
 from routepilot.shared.auth import Principal
 from routepilot.shared.pagination import Page
 

@@ -48,6 +48,7 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests", "../../scripts/tests"]
 addopts = "--strict-markers"
+pythonpath = [".", "../.."]
 markers = ["ac(id): acceptance criterion ID", "integration: integration scenarios"]
 
 [tool.mypy]

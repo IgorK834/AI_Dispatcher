@@ -159,27 +159,26 @@ class ModelRegistry:
         from langchain_google_genai import ChatGoogleGenerativeAI
 
         if isinstance(model, ChatGoogleGenerativeAI):
-            from google.genai.types import CountTokensConfig, GenerationConfig
+            from google.genai.types import Content, Part
 
             request = model._prepare_request(messages, **kwargs)
             config = request["config"]
             if model.client is None:
                 raise ProviderFailure("Count client unavailable")
-            generation = GenerationConfig.model_validate(
-                {
-                    key: value
-                    for key, value in config.model_dump(exclude_none=True).items()
-                    if key in GenerationConfig.model_fields
-                }
-            )
+            contents = list(request["contents"])
+            # The Developer API counts `contents` only; system instruction and tool schemas are
+            # rejected by that endpoint. Count their JSON as extra text instead: this can only
+            # overcount, which is the safe direction for a reservation. The ledger still settles
+            # on the provider's exact usage metadata after the call.
+            extra = [
+                item.model_dump_json(exclude_none=True)
+                for item in (config.system_instruction, *(config.tools or []))
+                if item is not None
+            ]
+            if extra:
+                contents.append(Content(role="user", parts=[Part(text="\n".join(extra))]))
             count = model.client.models.count_tokens(
-                model=model.model,
-                contents=request["contents"],
-                config=CountTokensConfig(
-                    system_instruction=config.system_instruction,
-                    tools=config.tools,
-                    generation_config=generation,
-                ),
+                model=model.model, contents=contents
             ).total_tokens
             if count is None or count <= 0:
                 raise ProviderFailure("Input token count unavailable")
@@ -262,8 +261,18 @@ class ModelRegistry:
             )
             kwargs = dict(bound.kwargs) if isinstance(bound, RunnableBinding) else {}
             count = self._count(model, messages, kwargs, live_campaign=live_campaign)
+            # The provider feeds earlier turns' hidden reasoning back as input, which no
+            # pre-call count can see (a live tool turn: 986 in + 832 out earlier, 1 922 in now).
+            # Reserve the earlier turns' reported output plus a margin; settlement always
+            # charges the provider's reported usage, never the reservation.
+            hidden = sum(
+                item.usage_metadata["output_tokens"] if item.usage_metadata else 0
+                for item in messages
+                if isinstance(item, AIMessage)
+            )
+            reserved_input = count + count // 4 + hidden
             for budget in budgets:
-                tickets.append((budget, budget.reserve(count, spec.max_tokens)))
+                tickets.append((budget, budget.reserve(reserved_input, spec.max_tokens)))
             message = bound.invoke(messages)
         except BudgetExceeded:
             for budget, ticket in tickets:
@@ -280,8 +289,16 @@ class ModelRegistry:
         usage = message.usage_metadata
         tokens_in, tokens_out = usage["input_tokens"], usage["output_tokens"]
         # LangChain output_tokens already includes reasoning; do not count it twice.
+        # Every budget must record the actual usage even when one of them rejects it, or the
+        # others would keep a full reservation for a call that has already finished.
+        rejected: BudgetExceeded | None = None
         for budget, ticket in tickets:
-            budget.settle(ticket, tokens_in, tokens_out)
+            try:
+                budget.settle(ticket, tokens_in, tokens_out)
+            except BudgetExceeded as error:
+                rejected = rejected or error
+        if rejected is not None:
+            raise rejected
         parsed = None
         if schema is not None:
             try:
