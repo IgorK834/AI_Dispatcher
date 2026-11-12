@@ -1,15 +1,20 @@
 """Persistence and application-service ports injected by the composition root."""
 
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from typing import Any, Literal, Protocol
 from uuid import UUID
 
-from routepilot.agents.models import Role
+from langchain_core.messages import BaseMessage
+from pydantic import BaseModel
+
+from routepilot.agents.models import ModelResult, Role
 from routepilot.agents.schemas import TraceStep
 
 RecordKind = Literal[
     "agent_threads", "agent_runs", "agent_steps", "approval_requests", "route_explanations"
 ]
+
+ModelCall = Callable[[list[BaseMessage], type[BaseModel]], ModelResult]
 
 
 class AgentStore(Protocol):
@@ -26,9 +31,15 @@ class AgentStore(Protocol):
 
 
 class ToolExecutor(Protocol):
+    def prepare(self, state: dict[str, Any]) -> None: ...
     def schemas(self, role: Role) -> list[dict[str, Any]]: ...
     def execute(
-        self, role: Role, name: str, args: dict[str, Any], state: dict[str, Any]
+        self,
+        role: Role,
+        name: str,
+        args: dict[str, Any],
+        state: dict[str, Any],
+        model_call: ModelCall | None = None,
     ) -> dict[str, Any]: ...
     def validate_plans(self, state: dict[str, Any]) -> list[str]: ...
     def assign(

@@ -216,6 +216,7 @@ class GraphContext:
         )
 
     def turn(self, state: AgentState, role: Role) -> dict[str, Any]:
+        self.tools.prepare(cast(dict[str, Any], state))
         reports = {
             key: state[key]
             for key in ("scout_report", "fleet_report", "planner_report")
@@ -263,7 +264,11 @@ class GraphContext:
                 counts[role] = counts.get(role, 0) + 1
                 trace = self.trace(role, "tool", f"Call {call['name']}", tool=call["name"])
                 facts = self.tools.execute(
-                    role, call["name"], call["args"], cast(dict[str, Any], state)
+                    role,
+                    call["name"],
+                    call["args"],
+                    cast(dict[str, Any], state),
+                    lambda messages, schema: self.call(state, "explainer", messages, schema=schema),
                 )
                 rejected = facts.get("error", {}).get("code") == "TOOL_NOT_ALLOWED"
                 self.end_trace(
@@ -363,13 +368,7 @@ def approval_gate(state: AgentState, runtime: Runtime[GraphContext]) -> AgentSta
         approval = existing[0]
     else:
         context.guard(state)
-        payload = {
-            "plans": [
-                {**state["plan_facts"][ref], "routePlanId": state["aliases"]["plans"][ref]}
-                for ref in pending["plan_refs"]
-            ],
-            "totals": pending.get("totals", {}),
-        }
+        payload = pending["payload"]
         approval = context.store.create(
             "approval_requests",
             {

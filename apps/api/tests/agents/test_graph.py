@@ -20,6 +20,9 @@ from tests.agents.memory_store import MemoryStore
 
 
 class Tools:
+    def prepare(self, state: dict[str, Any]) -> None:
+        return None
+
     def __init__(self) -> None:
         self.writes: list[UUID] = []
         self.plan_id = uuid4()
@@ -28,7 +31,12 @@ class Tools:
         return []
 
     def execute(
-        self, role: str, name: str, args: dict[str, Any], state: dict[str, Any]
+        self,
+        role: str,
+        name: str,
+        args: dict[str, Any],
+        state: dict[str, Any],
+        model_call: Any = None,
     ) -> dict[str, Any]:
         allowed = {
             "fleet_compliance": ["list_drivers"],
@@ -57,6 +65,26 @@ class Tools:
             state["pending_approval"] = {
                 "plan_refs": ["PLAN-1a2b3c4d"],
                 "plan_ids": [str(self.plan_id)],
+                "payload": {
+                    "plans": [
+                        {
+                            "planRef": "PLAN-1a2b3c4d",
+                            "routePlanId": str(self.plan_id),
+                            "driverRef": "D1",
+                            "driverLabel": "Synthetic driver",
+                            "offerIds": ["MOCK-000001"],
+                            "variant": "profit",
+                            "netProfit": {"amountMinor": 32354, "currency": "EUR"},
+                            "finishAt": "2026-11-17T06:55:00Z",
+                            "homeReached": True,
+                        }
+                    ],
+                    "totals": {
+                        "netProfit": {"amountMinor": 32354, "currency": "EUR"},
+                        "fuelL": "76.601",
+                        "co2Kg": "199.16",
+                    },
+                },
             }
             return {"accepted": True, "problems": []}
         return (
