@@ -4,7 +4,7 @@ import asyncio
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 import httpx
 import pytest
@@ -21,23 +21,20 @@ from routepilot.shared.db.engine import make_engine, migration_config
 from routepilot.shared.errors import DomainError
 
 
-@pytest.fixture
-def worker(tmp_path):
-    url = f"sqlite:///{tmp_path / 'worker.db'}"
-    command.upgrade(migration_config(url), "head")
-    engine = make_engine(url)
-    clock = FixedClock(datetime(2026, 11, 16, tzinfo=UTC))
-    service = JobService(engine, clock, HaversineRoutingProvider(), poll_interval_ms=10)
+def add_dispatcher(service: JobService) -> UUID:
+    """Insert one dispatcher account directly, as the API's identity service would."""
     user = uuid4()
-    table = service.repository.table("users")
-    with engine.begin() as connection:
+    now = service.clock.now().isoformat()
+    with service.repository.engine.begin() as connection:
         connection.execute(
-            table.insert().values(
+            service.repository.table("users")
+            .insert()
+            .values(
                 id=str(user),
                 version=1,
-                created_at=clock.now().isoformat(),
-                updated_at=clock.now().isoformat(),
-                email="worker@example.test",
+                created_at=now,
+                updated_at=now,
+                email=f"{user}@example.test",
                 password_hash=str(uuid4()),
                 role="dispatcher",
                 locale="en",
@@ -45,7 +42,17 @@ def worker(tmp_path):
                 failed_logins=0,
             )
         )
-    yield service, user
+    return user
+
+
+@pytest.fixture
+def worker(tmp_path):
+    url = f"sqlite:///{tmp_path / 'worker.db'}"
+    command.upgrade(migration_config(url), "head")
+    engine = make_engine(url)
+    clock = FixedClock(datetime(2026, 11, 16, tzinfo=UTC))
+    service = JobService(engine, clock, HaversineRoutingProvider(), poll_interval_ms=10)
+    yield service, add_dispatcher(service)
     engine.dispose()
 
 
@@ -150,3 +157,68 @@ def test_engine_failure_is_persisted_without_exception_text(worker, monkeypatch)
     assert "untrusted" not in failed.error.message
     with pytest.raises(DomainError, match="NOT_FOUND"):
         service.result(job.id)
+
+
+@pytest.mark.integration
+@pytest.mark.ac("AC-FEAT-004-14")
+def test_application_start_requeues_a_stale_job_and_fails_the_exhausted_one(tmp_path):
+    from fastapi.testclient import TestClient
+    from sqlalchemy import text
+
+    from routepilot.main import create_app
+    from routepilot.shared.config import Settings
+    from tests.factories import PassCaptcha
+
+    url = f"sqlite:///{tmp_path / 'app.db'}"
+    command.upgrade(migration_config(url), "head")
+    engine = make_engine(url)
+    with engine.begin() as connection:  # no demo seed: the interrupted jobs see an empty fleet
+        connection.execute(
+            text("INSERT INTO app_meta (key, value, updated_at) VALUES (:k, :v, :t)"),
+            {"k": "seed_version", "v": '{"version": 1}', "t": "2026-11-16T00:00:00+00:00"},
+        )
+    clock = FixedClock(datetime(2026, 11, 16, tzinfo=UTC))
+    service = JobService(engine, clock, HaversineRoutingProvider())
+    user = add_dispatcher(service)
+    retried, exhausted = (service.create(JobCreate(scope="fleet"), user) for _ in range(2))
+    with service.repository.session() as session:
+        for job, attempts in ((retried, 1), (exhausted, 2)):
+            row = session.get(JobRow, job.id)
+            row.status, row.attempts = "running", attempts
+            row.heartbeat_at = datetime(2026, 1, 1, tzinfo=UTC)  # far older than 60 s
+    engine.dispose()
+
+    settings = Settings(
+        _env_file=None,
+        app_env="test",
+        database_url=url,
+        agents_db_path=str(tmp_path / "agents.db"),
+        secret_key="0" * 64,
+        worker_poll_interval_ms=10,
+    )
+    with TestClient(create_app(settings, captcha=PassCaptcha())) as client:
+        jobs = client.app.state.services.jobs
+        for _ in range(400):
+            if jobs.get(retried.id).status == "succeeded":
+                break
+            time.sleep(0.05)
+        assert jobs.get(retried.id).status == "succeeded", "attempts = 1 is re-queued and completes"
+        failed = jobs.get(exhausted.id)
+        assert failed.status == "failed", "attempts = 2 is not run again"
+        assert failed.error.code == "WORKER_RESTARTED"
+
+
+@pytest.mark.integration
+@pytest.mark.ac("AC-FEAT-004-15")
+def test_stopping_an_idle_worker_does_not_wait_for_the_poll_interval(worker):
+    service, _user = worker
+    service.poll_interval = 5.0
+
+    async def scenario() -> float:
+        await service.start()
+        await asyncio.sleep(0.1)  # the loop is now idle, sleeping for its poll interval
+        began = time.perf_counter()
+        await service.stop()
+        return time.perf_counter() - began
+
+    assert asyncio.run(scenario()) < 1.0, "shutdown interrupts the idle wait"
