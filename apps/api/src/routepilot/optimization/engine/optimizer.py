@@ -15,7 +15,7 @@ from routepilot.optimization.engine.models import (
     Rejection,
 )
 from routepilot.optimization.engine.prefilter import offer_pool
-from routepilot.optimization.engine.schedule import build_plan
+from routepilot.optimization.engine.schedule import FailureCode, build_plan
 from routepilot.optimization.engine.search import search_driver
 from routepilot.optimization.engine.validators import FleetValidator, RouteValidator
 
@@ -40,6 +40,7 @@ def optimize(
             if offer.id in returned:
                 continue
             stage: Literal["prefilter", "search"]
+            detail = ""
             if offer.id in rejected:
                 stage, code = "prefilter", rejected[offer.id]
             else:
@@ -52,8 +53,11 @@ def optimize(
                     ],
                 )
                 stage, code = "search", failure or "NOT_IN_TOP_K"
+                detail = failure.detail if isinstance(failure, FailureCode) else ""
             rejections.append(
-                Rejection(driver_id=driver.id, offer_id=offer.id, stage=stage, code=code)
+                Rejection(
+                    driver_id=driver.id, offer_id=offer.id, stage=stage, code=code, detail=detail
+                )
             )
     baselines, baseline_plans = build_baselines(snapshot, pools)
     listed = {
