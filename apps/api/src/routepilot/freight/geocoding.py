@@ -51,7 +51,9 @@ def timezone_for_country(country: str) -> str:
 
 
 def geocode(city: str, country: str) -> tuple[float, float] | None:
+    """Exact match on (name, country) after trimming and case folding (FEAT-002 §8)."""
+    name, code = city.strip().casefold(), country.strip().upper()
     for item in city_table()["cities"]:
-        if item["name"].casefold() == city.casefold() and item["countryCode"] == country.upper():
+        if item["name"].casefold() == name and item["countryCode"] == code:
             return float(item["lat"]), float(item["lon"])
     return None
