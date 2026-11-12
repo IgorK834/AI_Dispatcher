@@ -181,3 +181,51 @@ def test_agent_query_projection_filters_and_quality(freight: FreightService) -> 
     assert "id" not in detail and "public_remark" not in detail
     quality = queries.quality([created.source_offer_id, "unknown"])["items"]
     assert quality[0]["usable_by_engine"] and quality[1]["reason_code"] == "NOT_FOUND"
+
+
+@pytest.mark.ac("AC-FEAT-002-13")
+@pytest.mark.ac("AC-FEAT-002-18")
+@pytest.mark.ac("AC-FEAT-002-19")
+@pytest.mark.ac("AC-FEAT-002-20")
+def test_generated_import_and_offline_provider(
+    freight: FreightService, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import socket
+    from datetime import date
+
+    from routepilot.freight.generator import generate_offers
+    from routepilot.integrations.timocom.mock import MockFreightProvider
+
+    def forbidden(*args: object, **kwargs: object) -> None:
+        raise AssertionError("network is forbidden in generator/provider/import")
+
+    monkeypatch.setattr(socket, "socket", forbidden)
+    payload, enrichment = generate_offers(20261109, date(2026, 11, 16))
+    provider = MockFreightProvider(payload, enrichment, freight.clock.now())
+    service = ImportService(freight.engine, freight.clock, TimocomV3Mapper())
+    first = service.run(provider)
+    assert first.counts == dict(imported=150, updated=0, unchanged=0, failed=0)
+    assert service.run(provider).counts["unchanged"] == 150
+    offers = freight.all_offers()
+    assert len(offers) == 150 and all(
+        offer.is_synthetic and offer.source == "mock_timocom_v3" for offer in offers
+    )
+    poisoned = [
+        offer for offer in offers if "PROMPT_INJECTION" in enrichment[offer.source_offer_id]["tags"]
+    ]
+    assert len(poisoned) == 3 and all(
+        "SUSPICIOUS_TEXT" in offer.quality_flags for offer in poisoned
+    )
+    assert all(
+        offer.public_remark
+        == next(
+            raw["publicRemark"] for raw in payload["payload"] if raw["id"] == offer.source_offer_id
+        )
+        for offer in poisoned
+    )
+    records = list(provider.search(FreightSearchQuery(origin="PL")))
+    assert records and all(
+        record.payload["loadingPlaces"][0]["address"]["country"] == "PL" for record in records
+    )
+    assert not list(provider.search(FreightSearchQuery(vehicle_type="VEHICLE_UP_TO_12_T")))
+    assert provider.lookup(["anything"]) == []
