@@ -29,6 +29,9 @@ Parallel coding agents were explicitly authorised by the owner.
 - Clarify FEAT-003 FR-7: a full break may finish after a short wait's nominal
   end and delay service. Only the overlapping part replaces waiting work;
   ordinary time-window validation rejects a late plan.
+- Clarify FEAT-006 FR-20: SSE event IDs increase independently of step sequence
+  numbers, which remain in the payload. This preserves every start/finish event
+  on reconnect. The owner approved this clarification on 2026-11-11.
 
 ## Live allowance
 
