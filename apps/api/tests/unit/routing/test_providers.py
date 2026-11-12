@@ -106,3 +106,18 @@ def test_unroutable_or_incomplete_matrix_is_a_failure_with_fallback() -> None:
                 ors=OrsRoutingProvider(api_key="offline-test-value", client=client)
             ).matrix(POINTS)
             assert result.fallback
+
+
+@pytest.mark.ac("AC-FEAT-004-08")
+def test_committed_matrix_covers_exact_city_fixture() -> None:
+    root = Path(__file__).resolve().parents[5]
+    cities = json.loads((root / "data/mock/cities.json").read_text())["cities"]
+    matrix = json.loads((root / "data/mock/routing-matrix.json").read_text())
+    assert matrix["cities"] == [city["name"] for city in cities]
+    assert len(matrix["cities"]) == 39
+    assert matrix["source"] in {"ors_driving_car_v1", "haversine_v1"}
+    for name in ("distanceM", "durationS"):
+        assert len(matrix[name]) == 39
+        for i, row in enumerate(matrix[name]):
+            assert len(row) == 39 and row[i] == 0
+            assert all(type(value) is int and value >= 0 for value in row)

@@ -216,3 +216,37 @@ class Assignment(Schema):
     approved_at: datetime
     agent_run_id: UUID | None
     created_at: datetime
+
+
+class RemainingWork(Schema):
+    work_today_min: int | None
+    work_week_min: int
+
+
+class Remaining561(Schema):
+    drive_before_break_min: int | None
+    drive_today_min: int | None
+    drive_week_min: int | None
+    drive_two_weeks_min: int | None
+
+
+class DriverAvailability(Schema):
+    driver_id: UUID
+    profile_domestic: str
+    remaining: RemainingWork
+    remaining_561: Remaining561
+    must_be_home_by: datetime | None
+    has_active_assignment: bool
+
+
+class PlanRules(Schema):
+    plan_id: UUID
+    rules_profile: str
+    valid: bool
+    violations: list[dict[str, str]]
+    inserted_breaks: int
+    inserted_daily_rests: int
+    max_work_day_min: int
+    max_drive_day_min: int
+    finish_at: datetime
+    home_reached: bool
