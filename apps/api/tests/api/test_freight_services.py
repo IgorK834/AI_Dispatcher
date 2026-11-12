@@ -24,13 +24,15 @@ from routepilot.shared.errors import DomainError
 
 
 @pytest.fixture
-def freight(tmp_path: Path) -> FreightService:
+def freight(tmp_path: Path) -> Iterator[FreightService]:
     url = f"sqlite:///{tmp_path}/freight.db"
     config = Config(str(Path(__file__).parents[2] / "alembic.ini"))
     config.set_main_option("script_location", str(Path(__file__).parents[2] / "migrations"))
     config.set_main_option("sqlalchemy.url", url)
     command.upgrade(config, "head")
-    return FreightService(make_engine(url), FixedClock(datetime(2026, 11, 16, tzinfo=UTC)))
+    engine = make_engine(url)
+    yield FreightService(engine, FixedClock(datetime(2026, 11, 16, tzinfo=UTC)))
+    engine.dispose()
 
 
 def body() -> FreightOfferCreate:
