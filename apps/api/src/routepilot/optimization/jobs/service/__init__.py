@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import hashlib
 import json
 import threading
@@ -113,6 +114,7 @@ class JobService:
         self._task: asyncio.Task[None] | None = None
         self._pool: ProcessPoolExecutor | None = None
         self._stopping = False
+        self._wake: asyncio.Event | None = None
         self._create_lock = threading.Lock()
         self._completion: dict[UUID, asyncio.Event] = {}
 
@@ -254,11 +256,14 @@ class JobService:
             return
         self.recover()
         self._stopping = False
+        self._wake = asyncio.Event()
         self._pool = ProcessPoolExecutor(max_workers=1)
         self._task = asyncio.create_task(self._loop())
 
     async def stop(self) -> None:
         self._stopping = True
+        if self._wake is not None:
+            self._wake.set()  # an idle worker must not sleep out its poll interval
         if self._task is not None:
             await self._task
             self._task = None
@@ -273,6 +278,9 @@ class JobService:
         return self.result(job_id)
 
     async def _loop(self) -> None:
+        wake = self._wake
+        if wake is None:
+            return
         while not self._stopping:
             with self.repository.session() as session:
                 row = session.scalar(
@@ -283,7 +291,8 @@ class JobService:
                 )
                 job_id = row.id if row else None
             if job_id is None:
-                await asyncio.sleep(self.poll_interval)
+                with contextlib.suppress(TimeoutError):
+                    await asyncio.wait_for(wake.wait(), self.poll_interval)
             else:
                 await self.run_one(job_id)
 
