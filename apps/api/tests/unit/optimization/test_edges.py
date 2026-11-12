@@ -185,3 +185,31 @@ def test_injected_timer_sets_runtime_and_truncates_without_reading_a_clock() -> 
     assert result.stats.truncated
     assert result.stats.nodes == 4
     assert result.stats.runtime_ms == tick == 7
+
+
+@pytest.mark.ac("AC-FEAT-003-12")
+def test_baseline_candidates_preserve_profit_with_top_k_one() -> None:
+    a = point("A")
+    source = snapshot(
+        [driver(a, identifier="D1"), driver(a, identifier="D2")],
+        [
+            offer("X", a, a, revenue=30000, delivery=(T, T + timedelta(days=1))),
+            offer("Y", a, a, revenue=29000, delivery=(T, T + timedelta(days=1))),
+        ],
+    )
+    source = source.model_copy(
+        update={
+            "params": source.params.model_copy(
+                update={"max_offers_per_plan": 1, "top_k_per_driver": 1}
+            )
+        }
+    )
+    result = optimize(source)
+    assert result.fleet["profit"].totals.net_profit_minor == 56200
+    assert all(len(groups["profit"]) == 1 for groups in result.per_driver.values())
+    assert result.fleet_candidates
+    assert all(p.kind == "optimized" for p in result.fleet_candidates)
+    assert all(
+        result.fleet["profit"].totals.net_profit_minor >= b.totals.net_profit_minor
+        for b in result.baselines.values()
+    )

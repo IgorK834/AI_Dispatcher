@@ -4,7 +4,7 @@ from datetime import timedelta
 from decimal import Decimal
 
 from routepilot.compliance.models import DriverState
-from routepilot.compliance.rules import advance_clock, choose_profile
+from routepilot.compliance.rules import advance_clock, choose_profile, next_week_boundary
 from routepilot.optimization.engine.costs import CostModel
 from routepilot.optimization.engine.models import (
     EngineSnapshot,
@@ -171,19 +171,34 @@ class RouteValidator:
             )
         checkpoints: dict[object, DriverState] = {state.t: state}
         international = profile == "eu561_van_international_v1"
-        for entry in plan.activities:
+        for activity_index, entry in enumerate(plan.activities):
             activity = entry.activity
             if activity.start_at != state.t or activity.minutes <= 0:
                 fail("TIMELINE_INVALID")
             if activity.kind in ("WORK", "WAIT", "DRIVE"):
                 if state.day_start_at is None:
                     state = state.model_copy(update={"day_start_at": state.t})
-                # Check both sides of a home-zone week boundary, independently of the scheduler.
-                for _ in range(activity.minutes):
-                    state = advance_clock(state, 1, work=True, driving=activity.kind == "DRIVE")
+                # Every charged counter grows monotonically until a weekly boundary. Checking
+                # each maximal segment proves the same minute limits without minute-wise loops.
+                remaining = activity.minutes
+                while remaining:
+                    step = min(
+                        remaining, int((next_week_boundary(state) - state.t).total_seconds() // 60)
+                    )
+                    driving = activity.kind == "DRIVE"
+                    if state.work_week + step > 3600 or (
+                        international
+                        and driving
+                        and (
+                            state.drive_week + step > 3360
+                            or state.drive_week + state.drive_prev_week + step > 5400
+                        )
+                    ):
+                        fail("BREAK_OR_LIMIT_INVALID")
+                    state = advance_clock(state, step, work=True, driving=driving)
+                    remaining -= step
                     if (
                         state.work_since_break > 360
-                        or state.work_week > 3600
                         or (
                             state.day_start_at is not None
                             and state.t - state.day_start_at > timedelta(minutes=780)
@@ -192,17 +207,13 @@ class RouteValidator:
                             not international
                             and (
                                 state.work_today > snapshot.params.max_daily_work_min
-                                or (state.work_today > 540 and state.breaks_today < 45)
+                                or (state.work_today > 540
+                                and state.breaks_today < 45)
                             )
                         )
                         or (
                             international
-                            and (
-                                state.drive_since_break > 270
-                                or state.drive_today > 540
-                                or state.drive_week > 3360
-                                or state.drive_week + state.drive_prev_week > 5400
-                            )
+                            and (state.drive_since_break > 270 or state.drive_today > 540)
                         )
                     ):
                         fail("BREAK_OR_LIMIT_INVALID")
@@ -232,7 +243,16 @@ class RouteValidator:
                         and not (
                             activity.minutes >= 15
                             and state.breaks_today >= 30
-                            and state.work_today >= 540
+                            and (
+                                state.work_today >= 540
+                                or (
+                                    activity_index + 1 < len(plan.activities)
+                                    and plan.activities[activity_index + 1].activity.kind == "WORK"
+                                    and state.work_today
+                                    + plan.activities[activity_index + 1].activity.minutes
+                                    > 540
+                                )
+                            )
                         )
                     ):
                         fail("BREAK_OR_LIMIT_INVALID")

@@ -1,7 +1,7 @@
 """P1-P13: random synthetic instances checked independently and against exhaustive oracles."""
 
 from datetime import timedelta
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 
 import pytest
 from golden.factories import T, driver, offer, point, snapshot
@@ -87,6 +87,7 @@ def test_p1_to_p13_engine_invariants(source: EngineSnapshot) -> None:
     all_plans = [
         plan for groups in result.per_driver.values() for plans in groups.values() for plan in plans
     ]
+    all_plans.extend(result.fleet_candidates)
     for driver_snapshot in source.drivers:
         groups = result.per_driver[driver_snapshot.id]
         oracle = brute_force(source, driver_snapshot)
@@ -98,7 +99,7 @@ def test_p1_to_p13_engine_invariants(source: EngineSnapshot) -> None:
                 assert RouteValidator().validate(source, plan).valid
                 assert plan.net_profit_minor == plan.revenue_minor - plan.calculation.total
                 assert plan.co2_kg == (plan.fuel_l * source.co2_factor_kg_per_l).quantize(
-                    Decimal(".01")
+                    Decimal(".01"), rounding=ROUND_HALF_UP
                 )
                 for stop in plan.stops:
                     assert 0 <= stop.load_kg_after <= driver_snapshot.vehicle.payload_kg
@@ -114,7 +115,14 @@ def test_p1_to_p13_engine_invariants(source: EngineSnapshot) -> None:
         assert FleetValidator().validate(source, solution, all_plans).valid
         # Four candidate slots suffice for the <=3-offer instances after deduplication by ref.
         candidates = {
-            d: list({p.plan_ref: p for p in groups[objective] + groups["profit"]}.values())
+            d: list(
+                {
+                    p.plan_ref: p
+                    for p in groups[objective]
+                    + groups["profit"]
+                    + [p for p in result.fleet_candidates if p.driver_id == d]
+                }.values()
+            )
             for d, groups in result.per_driver.items()
         }
         required = (
