@@ -17,3 +17,22 @@ def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
     for item in items:
         for marker in item.iter_markers(name="ac"):
             item.user_properties.extend(("ac", identifier) for identifier in marker.args)
+
+
+@pytest.fixture
+def no_network(monkeypatch: pytest.MonkeyPatch) -> list[str]:
+    """Forbid every socket and name lookup; returns the list of attempts (empty when clean)."""
+    import socket
+
+    attempts: list[str] = []
+
+    def forbidden(name: str) -> object:
+        def refuse(*args: object, **kwargs: object) -> None:
+            attempts.append(name)
+            raise AssertionError(f"network access attempted: socket.{name}")
+
+        return refuse
+
+    for name in ("socket", "create_connection", "getaddrinfo", "gethostbyname", "socketpair"):
+        monkeypatch.setattr(socket, name, forbidden(name))
+    return attempts

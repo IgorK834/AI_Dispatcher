@@ -56,5 +56,13 @@ dev-api:
 dev-web:
 	pnpm --filter web dev
 
+# Regenerates the committed demo data; the defaults reproduce the files in data/mock/ byte for byte.
+SEED ?= 20261109
+REFERENCE_DATE ?= 2026-11-16
+FLEET_OUT ?= ../../data/mock/fleet.json
+OFFERS_OUT ?= ../../data/mock/offers.timocom.json
+ENRICHMENT_OUT ?= ../../data/mock/offers.enrichment.json
+
 seed-fleet:
-	@echo "not available until FEAT-002"
+	cd apps/api && uv run python -m routepilot.fleet.generator --seed $(SEED) --reference-date $(REFERENCE_DATE) --out $(FLEET_OUT)
+	cd apps/api && uv run python -m routepilot.freight.generator --seed $(SEED) --reference-date $(REFERENCE_DATE) --out $(OFFERS_OUT) --enrichment-out $(ENRICHMENT_OUT)
