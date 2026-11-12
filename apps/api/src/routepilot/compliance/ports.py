@@ -2,7 +2,7 @@
 
 from typing import Protocol
 
-from routepilot.compliance.models import DriverState, Outcome, ProfileId, Remaining
+from routepilot.compliance.state import DriverState, Outcome, ProfileId, Remaining
 
 
 class DriverRules(Protocol):
