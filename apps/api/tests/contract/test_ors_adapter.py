@@ -188,3 +188,54 @@ def test_recorder_refuses_overwrites_and_incomplete_recordings(
         assert not calls and (tmp_path / "matrix.json").read_text() == "existing fixture\n"
     else:
         assert not list(tmp_path.glob("*.json"))
+
+
+@pytest.mark.ac("AC-FEAT-004-04", "AC-FEAT-004-07")
+def test_provider_maps_genuine_recorded_success_responses() -> None:
+    """Real captured successes; rate-limit behavior is separately synthetic."""
+    from decimal import ROUND_CEILING, ROUND_HALF_UP, Decimal
+
+    from routepilot.routing.domain import GeoPoint
+    from routepilot.routing.ors import OrsRoutingProvider
+
+    fixtures = Path(__file__).resolve().parents[1] / "fixtures" / "ors"
+    matrix = json.loads((fixtures / "matrix.json").read_text())["response"]
+    directions = json.loads((fixtures / "directions.json").read_text())["response"]
+    requests = []
+
+    def reply(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        body = matrix if "/matrix/" in request.url.path else directions
+        return httpx.Response(200, json=body)
+
+    points = [
+        GeoPoint(lat=50.2649, lon=19.0238),
+        GeoPoint(lat=51.1079, lon=17.0385),
+        GeoPoint(lat=51.0504, lon=13.7373),
+    ]
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        provider = OrsRoutingProvider(api_key="offline-fixture-credential", client=client)
+        mapped = provider.matrix(points)
+        assert mapped.provider_id == "ors_driving_car_v1"
+        for i in range(3):
+            for j in range(3):
+                assert mapped.distance_km[i][j] == (
+                    Decimal(str(matrix["distances"][i][j])) / 1000
+                ).quantize(Decimal(".01"), rounding=ROUND_HALF_UP)
+                assert mapped.duration_min[i][j] == int(
+                    (
+                        Decimal(str(matrix["durations"][i][j])) * Decimal("1.08") / 60
+                    ).to_integral_value(rounding=ROUND_CEILING)
+                )
+        route = provider.route(points, variant="FASTEST")
+    feature = directions["features"][0]
+    assert route.geometry == feature["geometry"]
+    assert route.distance_km == (
+        Decimal(str(feature["properties"]["summary"]["distance"])) / 1000
+    ).quantize(Decimal(".01"), rounding=ROUND_HALF_UP)
+    assert route.duration_min == int(
+        (
+            Decimal(str(feature["properties"]["summary"]["duration"])) * Decimal("1.08") / 60
+        ).to_integral_value(rounding=ROUND_CEILING)
+    )
+    assert not route.approximate and len(requests) == 2

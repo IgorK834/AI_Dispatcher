@@ -92,13 +92,10 @@ The three-offer plan is the most profitable. At Wrocław `DELIVERY A` and `PICKU
 | 2 | {A, B} | pick A → pick B → drop A → drop B | `eu561_van_international_v1` | 175.48 | Mon 17:04 | 60.866 |
 | 3 | {B, C} | pick B → pick C → drop B → drop C | `eu561_van_international_v1` | 145.62 | Tue 06:30 | 75.085 |
 | 4 | {A} | pick A → drop A | `pl_domestic_employee_v1` | 56.11 | Mon 10:30 | 25.215 |
-| 5 | {B} | pick B → drop B | `eu561_van_international_v1` | 11.29 | Mon 15:48 | 57.440 |
+| 5 | {A, C} | pick A → drop A → pick C → drop C | `eu561_van_international_v1` | 40.85 | Tue 06:30 | 72.664 |
+| 6 | {B} | pick B → drop B | `eu561_van_international_v1` | 11.29 | Mon 15:48 | 57.440 |
 
-Infeasible combinations (every order fails):
-
-| Offer set | Sequences tried | Failure codes |
-|---|---|---|
-| {A, C} | 4 infeasible | `DELIVERY_WINDOW_MISSED`, `PICKUP_WINDOW_MISSED` |
+The feasible {A, C} sequence delivers A in Wrocław on Monday at 10:00 and picks C there at 10:30. On the 407-minute leg to Leipzig, a 45-minute break starts Monday 12:00 and an 11-hour daily rest starts Monday 17:15. Arrival is Tuesday 05:32; 28 minutes of waiting precede delivery at 06:00–06:30. Fuel is 72.664 l, total cost is 439.15 €, and profit is 40.85 €. The other orders of {A, C} may miss windows, but that does not make the offer set infeasible.
 
 ### 3.2 Rank 1 plan — schedule, load and costs (profile `eu561_van_international_v1`)
 
@@ -160,10 +157,14 @@ Counter trace (minutes): after `PICKUP C` at Mon 11:31 — work since break 331,
 8. `RouteValidator` accepts the plan; running the optimisation twice on the same snapshot gives an identical result (invariant 8).
 9. Inserted events: `BREAK` 45 min at Mon 12:00 (6 h of work reached before 4 h 30 min of driving), `BREAK` 45 min at Mon 17:45 (4 h 30 min of driving since the previous break), `DAILY_REST` 660 min at Mon 19:00 (9 h of daily driving and the 13-hour span are both reached).
 10. The plan carries the warning flags `LOADING_ORDER_NOT_MODELLED` and `SERVICE_TIME_DEFAULTED`.
-11. The returned top-K list has 5 entries with distinct offer sets in the order of §3.1 (invariant 10).
+11. The returned top-K list has 6 entries with distinct offer sets in the order of §3.1 (invariant 10).
 12. Objective `fastest` ranks {A} first (`finish_at` Mon 10:30); objective `fuel` ranks {A} first (25.215 l). Both satisfy invariant 16 against the `profit` plan.
 
 ## 5. Open questions
 
-- The per-diem line is 0 because the plan is international (convention G9, decided 2026-11-11). For the same reason the single-offer plan {B} is profitable (11.29 €: revenue 300.00 − fuel 103.97 − driver 126.70 − vehicle 58.04; 543 min of work, one 45-minute break, no rest) and is returned as rank 5; {C} alone still loses money.
+- The per-diem line is 0 because the plan is international (convention G9, decided 2026-11-11). For the same reason the single-offer plan {B} is profitable (11.29 €: revenue 300.00 − fuel 103.97 − driver 126.70 − vehicle 58.04; 543 min of work, one 45-minute break, no rest) and is returned as rank 6; {C} alone still loses money.
 - The second 45-minute break starts 11 minutes into the last leg and is followed 30 minutes later by the daily rest. This is what the as-soon-as-possible forward schedule produces (convention G6); a smarter placement is out of MVP scope.
+
+## 6. Changelog
+
+- 2026-11-11: Owner approved correction of the exhaustive ranking: the feasible sequence `pick A → drop A → pick C → drop C` is rank 5 (40.85 €, finish Tuesday 06:30, fuel 72.664 l); {B} moves to rank 6. The three-offer winner and every one of its values are unchanged.
