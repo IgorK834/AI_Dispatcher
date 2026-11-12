@@ -145,6 +145,13 @@ class TimocomV3Mapper:
             pallet_type="generated_mock" if "pallet_type" in enrichment else "default",
             loading_length_meaning="inferred",
         )
+        weight_kg = (
+            int((raw.weight_t * 1000).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+            if raw.weight_t is not None
+            else None
+        )
+        if weight_kg == 0:  # FEAT-002 §8: the engine treats it as missing capacity data
+            flags.append("ZERO_WEIGHT")
         revenue = (
             Revenue(
                 amount_minor=int(
@@ -162,9 +169,7 @@ class TimocomV3Mapper:
                 description=raw.freightDescription,
                 public_remark=raw.publicRemark,
                 revenue=revenue,
-                weight_kg=int((raw.weight_t * 1000).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
-                if raw.weight_t is not None
-                else None,
+                weight_kg=weight_kg,
                 loading_length_m=raw.length_m,
                 pallet_count=pallets,
                 pallet_type=enrichment.get("pallet_type", "UNKNOWN"),
