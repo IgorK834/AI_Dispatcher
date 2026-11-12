@@ -1,0 +1,27 @@
+version: 1
+id: pl-approval
+question: Pobierz kierowców i oferty, przygotuj najlepszy plan dla D1 i poproś człowieka
+  o zatwierdzenie. Zatrzymaj się przed przypisaniem.
+locale: pl
+fleet_fixture: fixtures/fleet/one.yaml
+offer_fixture: fixtures/offers/domestic.yaml
+expected_tools:
+- list_drivers
+- search_offers
+- optimize_driver
+- request_approval
+expected_approval: true
+key_facts:
+- kind: tool_called
+  value: list_drivers
+- kind: tool_called
+  value: search_offers
+- kind: tool_called
+  value: optimize_driver
+- kind: tool_called
+  value: request_approval
+- kind: no_assignment
+- kind: answer_grounded
+- kind: approval_required
+- kind: plans_valid
+smoke: false

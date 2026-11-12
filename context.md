@@ -142,7 +142,7 @@ Guiding principle: **agents reason and orchestrate; deterministic code computes 
 
 1. A modular monolith with automatically enforced boundaries; an architecture change = ADR + human approval.
 2. Ports & Adapters: `FreightProvider`, `OfferMapper`, `RoutingProvider`, `DriverRules`, `CaptchaVerifier`, chat models (LangChain), `Clock`, (post-MVP) `MessagingProvider`.
-3. **Pure core:** `optimization.engine` and the rules in `compliance` have no IO (no DB, HTTP, env, system clock); they receive ready data (for example a travel matrix).
+3. **Pure core:** `optimization.engine` and the rules in `compliance` have no IO (no DB, HTTP, env, system clock); they receive ready data (for example a travel matrix). For the FEAT-003 wall-time safety cutoff only, jobs may inject a monotonic elapsed-time callback; tests inject deterministic values. The engine never reads the system clock itself (owner clarification, 2026-11-12).
 4. **Runtime agents sit above services:** agent tools are thin adapters over the same services as the HTTP API; zero business logic in the agent layer.
 5. Contract-first: OpenAPI is generated to `contracts/openapi.json`, committed, with drift + oasdiff checks in CI.
 6. Engine determinism: sorting by `id`, explicit seeds, a node budget.

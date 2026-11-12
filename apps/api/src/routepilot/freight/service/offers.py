@@ -28,6 +28,7 @@ from routepilot.shared.pagination import CursorCodec, Page
 
 def offer_values(offer: NormalizedOffer) -> dict[str, Any]:
     values = offer.model_dump(exclude={"revenue", "stops", "loading_length_m"})
+    values["retention_until"] = offer.retention_until
     values["revenue_amount_minor"] = offer.revenue.amount_minor if offer.revenue else None
     values["revenue_currency"] = offer.revenue.currency if offer.revenue else None
     values["loading_length_mm"] = (

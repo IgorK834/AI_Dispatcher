@@ -1,0 +1,26 @@
+version: 1
+id: international-profile
+question: Get fleet and offer facts, optimize D1 for the international offer and inspect
+  the resulting rules profile. Do not request approval.
+locale: en
+fleet_fixture: fixtures/fleet/one.yaml
+offer_fixture: fixtures/offers/international.yaml
+expected_tools:
+- list_drivers
+- search_offers
+- optimize_driver
+- check_plan_rules
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: list_drivers
+- kind: tool_called
+  value: search_offers
+- kind: tool_called
+  value: optimize_driver
+- kind: tool_called
+  value: check_plan_rules
+- kind: no_assignment
+- kind: answer_grounded
+- kind: plans_valid
+smoke: false

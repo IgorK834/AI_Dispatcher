@@ -57,7 +57,7 @@ def store_result(session: Session, job: JobRow, result: EngineResult) -> None:
         for variants_plans in variants.values():
             for plan in variants_plans:
                 plans[plan.plan_ref] = plan
-    for plan in result.baseline_plans:
+    for plan in [*result.fleet_candidates, *result.baseline_plans]:
         plans[plan.plan_ref] = plan
     ids = {ref: uuid4() for ref in sorted(plans)}
     rows = {}

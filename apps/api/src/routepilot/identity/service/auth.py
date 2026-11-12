@@ -42,6 +42,10 @@ class IdentityService:
         self.audit = SqlAuditWriter(engine, clock)
         self.limiter = Limiter(key_func=lambda: "login")
 
+    def close(self) -> None:
+        if isinstance(self.captcha, TurnstileVerifier):
+            self.captcha.close()
+
     def seed_accounts(self) -> None:
         with Session(self.engine) as session, session.begin():
             if session.scalar(select(User.id).limit(1)) is not None:

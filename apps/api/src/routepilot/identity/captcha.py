@@ -8,6 +8,7 @@ from routepilot.identity.ports import CaptchaResult
 class TurnstileVerifier:
     def __init__(self, secret: str, client: httpx.Client | None = None) -> None:
         self.secret = secret
+        self.owns_client = client is None
         self.client = client or httpx.Client(timeout=5, trust_env=False)
 
     def verify(self, token: str, remote_ip: str | None) -> CaptchaResult:
@@ -27,3 +28,7 @@ class TurnstileVerifier:
             )
         except (httpx.RequestError, ValueError):
             return CaptchaResult(False, ["verification-unavailable"])
+
+    def close(self) -> None:
+        if self.owns_client:
+            self.client.close()

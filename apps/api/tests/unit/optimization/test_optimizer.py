@@ -56,9 +56,7 @@ def test_consolidation_baselines_and_validation() -> None:
     source = snapshot(
         [driver(a, payload=880, pallets=8)],
         [
-            offer(
-                "P", a, b, weight=320, pallets=4, revenue=21000, pallet_type="INDUSTRIAL_1200x1000"
-            ),
+            offer("P", a, b, weight=320, pallets=4, revenue=21000, pallet_type="IND_1200x1000"),
             offer("Q", a, b, weight=240, pallets=3, revenue=15000),
             offer("R", a, b, weight=160, pallets=2, revenue=10000),
         ],

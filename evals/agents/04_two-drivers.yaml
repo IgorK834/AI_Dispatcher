@@ -1,0 +1,18 @@
+version: 1
+id: two-drivers
+question: List both drivers and compare their availability without choosing freight.
+locale: en
+fleet_fixture: fixtures/fleet/two.yaml
+offer_fixture: fixtures/offers/domestic.yaml
+expected_tools:
+- list_drivers
+- driver_availability
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: list_drivers
+- kind: tool_called
+  value: driver_availability
+- kind: no_assignment
+- kind: answer_grounded
+smoke: false

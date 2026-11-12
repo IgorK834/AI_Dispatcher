@@ -466,3 +466,4 @@ One scripted "happy path" scenario doubles as the integration scenario of FEAT-0
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11); example profit in AC-09/10 aligned with GOLD-001 |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
 | 4 | 2026-11-11 | Five proposed initial v1 prompts added for O-6 owner review; runtime integration and live evaluations remain pending. |
+| 5 | 2026-11-12 | Owner-approved SSE clarification: increasing event IDs are independent of the trace step sequence. Runtime, guards, durable approvals and metering are being implemented against the approved v1 prompts. |

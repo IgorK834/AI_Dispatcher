@@ -110,3 +110,53 @@ def test_domestic_per_diem_foreign_exemption_and_currency_conversion() -> None:
     assert model.per_diem_multiplier(1441) == Decimal("1.5")
     assert model.per_diem_multiplier(1921) == 2
     assert revenue_in_profile_currency(42500, "PLN", CostProfile(fx_rates={"PLN": "4.25"})) == 10000
+
+
+@pytest.mark.ac("AC-FEAT-003-19")
+def test_rest_at_same_home_coordinates_and_vignette_components() -> None:
+    home = Point(key="home:D", country="PL", lat=50.2649, lon=19.0238)
+    same_place = home.model_copy(update={"key": "offer:X:0"})
+    foreign = Point(key="CZ", country="CZ", lat=50, lon=14)
+    driver = DriverSnapshot(
+        id="D",
+        home=home,
+        position=home,
+        available_from=T,
+        vehicle=VehicleSnapshot(),
+        cost_profile=CostProfile(annual_vignettes=["CZ"]),
+        rules_state=DriverState(t=T),
+    )
+    stop = Stop(point=home, window_start=T, window_end=T + timedelta(days=2))
+    offer = OfferSnapshot(
+        id="X", weight_kg=100, pallet_count=1, revenue_minor=100000, stops=(stop, stop)
+    )
+    leg = PlanLeg(
+        start=same_place,
+        end=foreign,
+        distance_km=Decimal("100"),
+        drive_min=100,
+        load_kg=100,
+        load_pallet_eq=Decimal("1"),
+        departed_at=T,
+        arrived_at=T + timedelta(minutes=100),
+    )
+    rest = PlanActivity(
+        activity=RuleActivity(kind="DAILY_REST", start_at=T, end_at=T + timedelta(minutes=660)),
+        point_key=same_place.key,
+    )
+    costs = CostModel().calculate(driver, [offer], [leg], [rest], T, T + timedelta(minutes=800))
+    assert costs.calculation.accommodation == 0
+    assert costs.calculation.per_diem == costs.calculation.toll == 0
+    assert costs.warnings == ["VIGNETTE_ASSUMED_ANNUAL"]
+    away = rest.model_copy(update={"point_key": None})
+    assert (
+        CostModel()
+        .calculate(driver, [offer], [leg], [away], T, T + timedelta(minutes=800))
+        .calculation.accommodation
+        == 5500
+    )
+    with pytest.raises(ValueError, match="convertible revenue"):
+        CostModel().calculate(
+            driver, [offer.model_copy(update={"revenue_minor": None})], [], [], T, T
+        )
+    assert revenue_in_profile_currency(10000, "USD", driver.cost_profile) is None

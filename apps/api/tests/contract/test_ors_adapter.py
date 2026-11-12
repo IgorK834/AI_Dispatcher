@@ -195,6 +195,7 @@ def test_provider_maps_genuine_recorded_success_responses() -> None:
     """Real captured successes; rate-limit behavior is separately synthetic."""
     from decimal import ROUND_CEILING, ROUND_HALF_UP, Decimal
 
+    from routepilot.routing.composite import CompositeRoutingProvider
     from routepilot.routing.domain import GeoPoint
     from routepilot.routing.ors import OrsRoutingProvider
 
@@ -215,7 +216,8 @@ def test_provider_maps_genuine_recorded_success_responses() -> None:
     ]
     with httpx.Client(transport=httpx.MockTransport(reply)) as client:
         provider = OrsRoutingProvider(api_key="offline-fixture-credential", client=client)
-        mapped = provider.matrix(points)
+        composite = CompositeRoutingProvider(ors=provider)
+        mapped = composite.matrix(points)
         assert mapped.provider_id == "ors_driving_car_v1"
         for i in range(3):
             for j in range(3):
@@ -227,7 +229,7 @@ def test_provider_maps_genuine_recorded_success_responses() -> None:
                         Decimal(str(matrix["durations"][i][j])) * Decimal("1.08") / 60
                     ).to_integral_value(rounding=ROUND_CEILING)
                 )
-        route = provider.route(points, variant="FASTEST")
+        route = composite.route(points, variant="FASTEST")
     feature = directions["features"][0]
     assert route.geometry == feature["geometry"]
     assert route.distance_km == (

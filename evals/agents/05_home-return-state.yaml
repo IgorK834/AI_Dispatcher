@@ -1,0 +1,21 @@
+version: 1
+id: home-return-state
+question: Check D1 availability and home-by constraint.
+locale: en
+fleet_fixture: fixtures/fleet/home.yaml
+offer_fixture: fixtures/offers/domestic.yaml
+expected_tools:
+- list_drivers
+- driver_state
+- driver_availability
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: list_drivers
+- kind: tool_called
+  value: driver_state
+- kind: tool_called
+  value: driver_availability
+- kind: no_assignment
+- kind: answer_grounded
+smoke: false

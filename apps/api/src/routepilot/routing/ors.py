@@ -4,7 +4,7 @@ import time
 from collections import deque
 from collections.abc import Callable, Sequence
 from decimal import ROUND_CEILING, Decimal, InvalidOperation
-from typing import Any
+from typing import Any, cast
 
 import httpx
 
@@ -153,10 +153,7 @@ class OrsRoutingProvider:
         payload = self._request(
             "matrix", points, {"metrics": ["distance", "duration"], "units": "m"}
         )
-        result = self._parse("matrix", points, payload)
-        if not isinstance(result, TravelMatrix):
-            raise RoutingFailure("ORS returned the wrong routing kind")
-        return result
+        return cast(TravelMatrix, self._parse("matrix", points, payload))
 
     def route(
         self, waypoints: Sequence[GeoPoint], *, variant: RouteVariant = "FASTEST"
@@ -164,7 +161,4 @@ class OrsRoutingProvider:
         payload = self._request(
             "route", waypoints, {"preference": "fastest", "instructions": False, "units": "m"}
         )
-        result = self._parse("route", waypoints, payload)
-        if not isinstance(result, RouteResult):
-            raise RoutingFailure("ORS returned the wrong routing kind")
-        return result
+        return cast(RouteResult, self._parse("route", waypoints, payload))

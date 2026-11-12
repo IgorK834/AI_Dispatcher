@@ -121,3 +121,120 @@ def test_committed_matrix_covers_exact_city_fixture() -> None:
         for i, row in enumerate(matrix[name]):
             assert len(row) == 39 and row[i] == 0
             assert all(type(value) is int and value >= 0 for value in row)
+
+
+@pytest.mark.ac("AC-FEAT-004-03", "AC-FEAT-004-06", "AC-FEAT-004-08")
+def test_composite_prefers_committed_matrix_and_falls_back_for_off_grid_points() -> None:
+    root = Path(__file__).resolve().parents[5]
+    cities = json.loads((root / "data/mock/cities.json").read_text())["cities"]
+    file_provider = MatrixFileRoutingProvider(root / "data/mock/routing-matrix.json", cities=cities)
+    composite = CompositeRoutingProvider(matrix_file=file_provider)
+    assert composite.matrix(POINTS).provider_id == "matrix_repo_v1"
+    assert composite.matrix([GeoPoint(lat=0, lon=0)]).fallback
+    assert file_provider.route(POINTS, variant="FASTEST").approximate
+
+
+@pytest.mark.ac("AC-FEAT-004-08")
+@pytest.mark.parametrize(
+    "corruption", ["source", "cities", "dimensions", "negative", "bool", "diagonal", "missing"]
+)
+def test_malformed_matrix_is_explicitly_unavailable(tmp_path: Path, corruption: str) -> None:
+    from routepilot.routing.domain import RoutingFailure
+    from routepilot.routing.matrix_file import build_matrix_document
+
+    cities = [
+        {"name": str(i), "lat": point.lat, "lon": point.lon} for i, point in enumerate(POINTS)
+    ]
+    data = build_matrix_document(cities, generated_at="2026-11-11T00:00:00Z")
+    if corruption == "source":
+        data["source"] = "unknown"
+    elif corruption == "cities":
+        data["cities"] = list(reversed(data["cities"]))
+    elif corruption == "dimensions":
+        data["distanceM"] = []
+    elif corruption == "negative":
+        data["durationS"][0][1] = -1
+    elif corruption == "bool":
+        data["durationS"][0][1] = True
+    elif corruption == "diagonal":
+        data["durationS"][0][0] = 1
+    path = tmp_path / "matrix.json"
+    if corruption != "missing":
+        path.write_text(json.dumps(data))
+    with pytest.raises(RoutingFailure, match="unavailable"):
+        MatrixFileRoutingProvider(path, cities=cities)
+
+
+@pytest.mark.ac("AC-FEAT-004-04", "AC-FEAT-004-06")
+@pytest.mark.parametrize(
+    "failure", ["transport", "authentication", "list_json", "distance", "duration", "geometry"]
+)
+def test_ors_failures_fall_back_with_bounded_requests(failure: str) -> None:
+    calls = []
+    delays = []
+
+    def reply(request: httpx.Request) -> httpx.Response:
+        calls.append(request)
+        if failure == "transport":
+            raise httpx.ReadTimeout("offline timeout", request=request)
+        if failure == "authentication":
+            return httpx.Response(401)
+        if failure == "list_json":
+            return httpx.Response(200, json=[])
+        if failure == "geometry":
+            return httpx.Response(
+                200, json={"features": [{"geometry": {"type": "Point", "coordinates": [0, 0]}}]}
+            )
+        body = {"distances": [[0] * 3 for _ in range(3)], "durations": [[0] * 3 for _ in range(3)]}
+        body["distances" if failure == "distance" else "durations"][0][1] = -1
+        return httpx.Response(200, json=body)
+
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        composite = CompositeRoutingProvider(
+            ors=OrsRoutingProvider(api_key="offline-credential", client=client, sleep=delays.append)
+        )
+        if failure == "geometry":
+            assert composite.route(POINTS, variant="FASTEST").approximate
+        else:
+            assert composite.matrix(POINTS).fallback
+    assert len(calls) == (3 if failure == "transport" else 1)
+    assert delays == ([0.25, 0.5] if failure == "transport" else [])
+
+
+@pytest.mark.ac("AC-FEAT-004-04", "AC-FEAT-004-07")
+def test_ors_request_limit_and_matrix_element_limit_are_enforced_locally() -> None:
+    from routepilot.routing.domain import RoutingFailure
+
+    class Timer:
+        def __init__(self):
+            self.seconds = 0.0
+            self.waits = []
+
+        def now(self):
+            return self.seconds
+
+        def sleep(self, seconds):
+            self.waits.append(seconds)
+            self.seconds += seconds
+
+    timer = Timer()
+    calls = []
+
+    def reply(request: httpx.Request) -> httpx.Response:
+        calls.append(request)
+        return httpx.Response(200, json={"distances": [[0]], "durations": [[0]]})
+
+    with httpx.Client(transport=httpx.MockTransport(reply)) as client:
+        provider = OrsRoutingProvider(
+            api_key="offline-credential", client=client, sleep=timer.sleep, monotonic=timer.now
+        )
+        for _ in range(35):
+            provider.matrix(POINTS[:1])
+        assert len(calls) == 35 and timer.waits == [60]
+        with pytest.raises(RoutingFailure, match="3500"):
+            provider.matrix([POINTS[0]] * 60)
+        assert len(calls) == 35
+        disabled = OrsRoutingProvider(api_key="", client=client)
+        with pytest.raises(RoutingFailure, match="disabled"):
+            disabled.matrix(POINTS[:1])
+        assert len(calls) == 35

@@ -11,22 +11,22 @@ from routepilot.shared.errors import DomainError
 
 
 def pallet_equivalents(offer: FreightOfferView) -> Decimal | None:
+    count = offer.pallet_count
     derived = (
-        (offer.loading_length_m * Decimal("2.4")).to_integral_value(rounding=ROUND_CEILING)
+        int((offer.loading_length_m * Decimal("2.4")).to_integral_value(rounding=ROUND_CEILING))
         if offer.loading_length_m is not None
         else None
     )
-    if offer.pallet_count is None:
-        return derived
+    if count is None or offer.field_provenance.get("pallet_count") == "ai":
+        if derived is None:
+            return None
+        count = max(count or 0, derived)
     factor = {
         "EUR_1200x800": Decimal("1"),
         "IND_1200x1000": Decimal("1.5"),
         "HALF_800x600": Decimal("0.5"),
     }.get(offer.pallet_type, Decimal("1"))
-    explicit = Decimal(offer.pallet_count) * factor
-    if offer.field_provenance.get("pallet_count") == "ai":
-        return max(explicit, derived or Decimal("0"))
-    return explicit
+    return Decimal(count) * factor
 
 
 def haversine_km(first: tuple[float, float], second: tuple[float, float]) -> float:

@@ -24,7 +24,7 @@ def pallet_equivalents(offer: OfferSnapshot) -> tuple[Decimal | None, list[str]]
     factors = {
         "EUR_1200x800": Decimal("1"),
         "HALF_800x600": Decimal(".5"),
-        "INDUSTRIAL_1200x1000": Decimal("1.5"),
+        "IND_1200x1000": Decimal("1.5"),
     }
     factor = factors.get(offer.pallet_type)
     if factor is None:

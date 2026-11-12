@@ -3,6 +3,7 @@
 from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import datetime
+from threading import Lock
 from typing import Any
 from uuid import UUID
 
@@ -110,22 +111,13 @@ class JobsRepository:
         # Reflection stays at the repository edge and supports the reviewed schema
         # without importing identity, agents, or other domains' ORM registries.
         self.metadata = MetaData()
-        self.metadata.reflect(
-            engine,
-            only=[
-                "users",
-                "drivers",
-                "driver_states",
-                "vehicles",
-                "cost_profiles",
-                "freight_offers",
-                "freight_stops",
-                "raw_freight_records",
-            ],
-        )
+        self._reflection_lock = Lock()
 
     def table(self, name: str) -> Table:
-        return self.metadata.tables[name]
+        with self._reflection_lock:
+            if name not in self.metadata.tables:
+                Table(name, self.metadata, autoload_with=self.engine)
+            return self.metadata.tables[name]
 
     @contextmanager
     def session(self) -> Iterator[Session]:

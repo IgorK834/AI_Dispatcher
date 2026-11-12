@@ -9,6 +9,7 @@ import threading
 from concurrent.futures import ProcessPoolExecutor
 from datetime import timedelta
 from decimal import Decimal
+from time import perf_counter
 from typing import Any, Literal, cast
 from uuid import UUID, uuid4
 
@@ -69,7 +70,8 @@ def _optimize(snapshot: EngineSnapshot) -> EngineResult:
     # The pure function, and only its ready snapshot, cross the process boundary.
     from routepilot.optimization.engine import optimize
 
-    return optimize(snapshot)
+    began = perf_counter()
+    return optimize(snapshot, elapsed_ms=lambda: int((perf_counter() - began) * 1000))
 
 
 def _job(row: JobRow) -> Job:
@@ -187,6 +189,34 @@ class JobService:
                 raise DomainError("JOB_NOT_FINISHED")
             return JobResult.model_validate(row.result["public"])
 
+    def result_metrics(self, job_id: UUID) -> dict[str, Any]:
+        result = self.result(job_id)
+        single = result.baselines.baseline_single.totals.net_profit.amount_minor
+        greedy = result.baselines.baseline_greedy.totals.net_profit.amount_minor
+        best = max(single, greedy)
+        profit = result.fleet.get("profit")
+        return {
+            "baselines": {
+                "single_profit_eur": str(Decimal(single) / 100),
+                "greedy_profit_eur": str(Decimal(greedy) / 100),
+            },
+            "uplift_vs_best_baseline_eur": str(
+                Decimal(profit.totals.net_profit.amount_minor - best) / 100
+            )
+            if profit
+            else None,
+            "totals": {
+                objective: {
+                    "net_profit_eur": str(Decimal(solution.totals.net_profit.amount_minor) / 100),
+                    "fuel_l": str(solution.totals.fuel_l),
+                    "co2_kg": str(solution.totals.co2_kg),
+                    "distance_km": str(solution.totals.distance_km),
+                    "drivers_with_plan": solution.totals.drivers_with_plan,
+                }
+                for objective, solution in result.fleet.items()
+            },
+        }
+
     def get_snapshot(self, job_id: UUID) -> EngineSnapshot:
         with self.repository.session() as session:
             row = session.get(JobRow, job_id)
@@ -302,6 +332,7 @@ class JobService:
             row.started_at = row.heartbeat_at = row.updated_at = self.clock.now()
             snapshot = EngineSnapshot.model_validate(row.request["snapshot"])
             row.progress = {**row.progress, "phase": "routing"}
+        context_tokens = structlog.contextvars.bind_contextvars(job_id=str(job_id))
         log = structlog.get_logger().bind(job_id=str(job_id))
         log.info("optimization_started")
         try:
@@ -353,6 +384,7 @@ class JobService:
             log.error("optimization_failed", error_code=code, exception_type=type(exc).__name__)
         finally:
             self._completion.setdefault(job_id, asyncio.Event()).set()
+            structlog.contextvars.reset_contextvars(**context_tokens)
 
 
 class PlanService:
@@ -454,12 +486,16 @@ class PlanService:
             ref = next(
                 key for key, value in job.result["plan_ids"].items() if value == str(plan_id)
             )
-            plans = [
-                plan
-                for variants in result.per_driver.values()
-                for items in variants.values()
-                for plan in items
-            ] + result.baseline_plans
+            plans = (
+                [
+                    plan
+                    for variants in result.per_driver.values()
+                    for items in variants.values()
+                    for plan in items
+                ]
+                + result.fleet_candidates
+                + result.baseline_plans
+            )
             plan = next(plan for plan in plans if plan.plan_ref == ref)
             return RouteValidator().validate(snapshot, plan)
 
@@ -560,12 +596,16 @@ class PlanService:
             ref = next(
                 key for key, value in job.result["plan_ids"].items() if value == str(plan_id)
             )
-            plans = [
-                plan
-                for variants in result.per_driver.values()
-                for items in variants.values()
-                for plan in items
-            ] + result.baseline_plans
+            plans = (
+                [
+                    plan
+                    for variants in result.per_driver.values()
+                    for items in variants.values()
+                    for plan in items
+                ]
+                + result.fleet_candidates
+                + result.baseline_plans
+            )
             plan = next(plan for plan in plans if plan.plan_ref == ref)
             snapshot = EngineSnapshot.model_validate(job.request["snapshot"])
             driver = next(driver for driver in snapshot.drivers if driver.id == plan.driver_id)
@@ -595,6 +635,59 @@ class PlanService:
                 finish_at=plan.finish_at,
                 home_reached=plan.home_reached,
             )
+
+    def tool_facts(self, plan_id: UUID) -> dict[str, Any]:
+        """Unit conversion and schedule facts; adapters only replace identifiers."""
+        plan = self.get(plan_id)
+        return {
+            "plan_id": str(plan.id),
+            "driver_id": str(plan.driver_id),
+            "kind": plan.kind,
+            "variant": plan.variant,
+            "rank": plan.rank,
+            "offer_ids": [str(value) for value in plan.offer_ids],
+            "rules_profile": plan.rules_profile,
+            "net_profit_eur": str(Decimal(plan.net_profit.amount_minor) / 100),
+            "revenue_eur": str(Decimal(plan.revenue.amount_minor) / 100),
+            "cost_eur": str(Decimal(plan.cost_total.amount_minor) / 100),
+            "distance_km": str(plan.distance_km),
+            "empty_km": str(plan.empty_km),
+            "fuel_l": str(plan.fuel_l),
+            "co2_kg": str(plan.co2_kg),
+            "duration_min": plan.duration_min,
+            "finish_at": plan.finish_at.isoformat(),
+            "home_reached": plan.home_reached,
+            "warnings": plan.warnings,
+            "cost_breakdown": {
+                key: str(Decimal(getattr(plan.calculation, key).amount_minor) / 100)
+                for key in ("fuel", "toll", "driver", "per_diem", "accommodation", "vehicle")
+            },
+            "stops": [
+                {
+                    "seq": stop.sequence,
+                    "kind": stop.kind,
+                    "city": stop.label,
+                    "offer_id": str(stop.offer_id) if stop.offer_id else None,
+                    "arrival_at": stop.arrival_at.isoformat(),
+                    "service_start_at": stop.service_start_at.isoformat(),
+                    "departure_at": stop.departure_at.isoformat(),
+                    "load_pallet_eq_after": str(stop.load_pallet_eq_after),
+                    "load_kg_after": stop.load_kg_after,
+                }
+                for stop in plan.stops
+            ],
+        }
+
+    def approval_totals(self, plan_ids: list[UUID]) -> dict[str, Any]:
+        plans = [self.get(value) for value in plan_ids]
+        return {
+            "netProfit": {
+                "amountMinor": sum(plan.net_profit.amount_minor for plan in plans),
+                "currency": "EUR",
+            },
+            "fuelL": str(sum((plan.fuel_l for plan in plans), Decimal(0))),
+            "co2Kg": str(sum((plan.co2_kg for plan in plans), Decimal(0))),
+        }
 
     def plan_facts(self, plan_id: UUID) -> RoutePlan:
         return self.get(plan_id)

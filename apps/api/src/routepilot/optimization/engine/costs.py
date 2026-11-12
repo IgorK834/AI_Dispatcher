@@ -122,10 +122,24 @@ class CostModel:
         drive_min = sum(a.activity.minutes for a in activities if a.activity.kind == "DRIVE")
         service_min = sum(a.activity.minutes for a in activities if a.activity.kind == "WORK")
         wait_min = sum(a.activity.minutes for a in activities if a.activity.kind == "WAIT")
+        points = {point.key: point for leg in legs for point in (leg.start, leg.end)}
+        points[driver.home.key] = driver.home
+
+        def at_home(point_key: str | None) -> bool:
+            point = points.get(point_key) if point_key is not None else None
+            return point is not None and (
+                point.key == driver.home.key
+                or (
+                    point.lat is not None
+                    and point.lon is not None
+                    and point.lat == driver.home.lat
+                    and point.lon == driver.home.lon
+                    and point.country == driver.home.country
+                )
+            )
+
         rest_count = sum(
-            1
-            for a in activities
-            if a.activity.kind == "DAILY_REST" and a.point_key != driver.home.key
+            1 for a in activities if a.activity.kind == "DAILY_REST" and not at_home(a.point_key)
         )
         foreign = any(
             point.country != driver.home.country for leg in legs for point in (leg.start, leg.end)

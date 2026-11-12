@@ -213,3 +213,41 @@ def test_baseline_candidates_preserve_profit_with_top_k_one() -> None:
         result.fleet["profit"].totals.net_profit_minor >= b.totals.net_profit_minor
         for b in result.baselines.values()
     )
+
+
+@pytest.mark.ac("AC-FEAT-003-09")
+def test_exhaustive_oracle_matches_international_consolidation() -> None:
+    from golden.cases import case
+
+    source = case(1)
+    source = source.model_copy(
+        update={"params": source.params.model_copy(update={"top_k_per_driver": 3})}
+    )
+    expected = brute_force(source, source.drivers[0])
+    assert optimize(source).per_driver["D1"] == expected
+
+
+@pytest.mark.ac("AC-FEAT-003-12")
+def test_baseline_already_in_fuel_list_still_enters_profit_candidate_pool() -> None:
+    a, b = point("A"), point("B", 52.2297, 21.0122)
+    source = snapshot(
+        [driver(a, identifier="D1"), driver(a, identifier="D2")],
+        [
+            offer("X", a, b, revenue=40000, delivery=(T, T + timedelta(days=1))),
+            offer("Y", a, a, revenue=15000, delivery=(T, T + timedelta(days=1))),
+        ],
+    )
+    source = source.model_copy(
+        update={
+            "params": source.params.model_copy(
+                update={"max_offers_per_plan": 1, "top_k_per_driver": 1}
+            )
+        }
+    )
+    result = optimize(source)
+    assert result.per_driver["D1"]["profit"][0].offer_ids == ["X"]
+    assert result.per_driver["D1"]["fuel"][0].offer_ids == ["Y"]
+    assert all(
+        result.fleet["profit"].totals.net_profit_minor >= b.totals.net_profit_minor
+        for b in result.baselines.values()
+    )

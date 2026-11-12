@@ -1,0 +1,10 @@
+offers:
+  - id: MOCK-000001
+    origin: Katowice
+    destination: Dresden
+    pallet_count: 2
+    pallet_type: EUR_1200x800
+    weight_kg: 200
+    revenue_minor: 100000
+    pickup_minutes: [0, 240]
+    delivery_minutes: [240, 1400]

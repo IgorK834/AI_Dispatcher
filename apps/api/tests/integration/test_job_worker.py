@@ -54,6 +54,7 @@ def worker(tmp_path):
 def test_single_real_process_worker_keeps_api_responsive(worker):
     service, user = worker
     first = service.create(JobCreate(scope="fleet"), user)
+    service.clock = FixedClock(service.clock.now() + timedelta(seconds=1))
     second = service.create(JobCreate(scope="fleet"), user)
     running_counts = []
 

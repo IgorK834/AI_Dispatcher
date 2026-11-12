@@ -183,7 +183,7 @@ def case(number: int) -> EngineSnapshot:
         )
     if number == 10:
         industrial = load("P", "Lodz", "Warszawa", 4, 320, 21000, (0, 6, 7), (0, 8, 14))
-        industrial = industrial.model_copy(update={"pallet_type": "INDUSTRIAL_1200x1000"})
+        industrial = industrial.model_copy(update={"pallet_type": "IND_1200x1000"})
         return snapshot(
             [driver(p["Lodz"], identifier="D4", payload=880, pallets=8)],
             [

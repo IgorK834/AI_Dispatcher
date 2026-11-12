@@ -38,6 +38,7 @@ def test_offline_worker_persists_readable_schedules(routed_job):
     assert job.status == "succeeded"
     assert job.progress.drivers_done == job.progress.drivers_total == 1
     assert job.stats is not None and job.stats.nodes > 0
+    assert job.stats.runtime_ms > 0
     result = service.result(job_id)
     assert set(result.fleet) == {"profit", "fastest", "fuel"}
     assert result.disclaimer.endswith("It does not certify legal compliance.")

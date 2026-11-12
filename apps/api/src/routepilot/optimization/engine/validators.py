@@ -207,8 +207,7 @@ class RouteValidator:
                             not international
                             and (
                                 state.work_today > snapshot.params.max_daily_work_min
-                                or (state.work_today > 540
-                                and state.breaks_today < 45)
+                                or (state.work_today > 540 and state.breaks_today < 45)
                             )
                         )
                         or (

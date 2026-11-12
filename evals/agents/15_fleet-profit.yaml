@@ -1,0 +1,23 @@
+version: 1
+id: fleet-profit
+question: Get fleet and offer facts, optimize the two-driver fleet for profit without
+  assigning.
+locale: en
+fleet_fixture: fixtures/fleet/two.yaml
+offer_fixture: fixtures/offers/domestic.yaml
+expected_tools:
+- list_drivers
+- search_offers
+- optimize_fleet
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: list_drivers
+- kind: tool_called
+  value: search_offers
+- kind: tool_called
+  value: optimize_fleet
+- kind: no_assignment
+- kind: answer_grounded
+- kind: plans_valid
+smoke: false

@@ -60,15 +60,17 @@ def optimize(
         p.plan_ref: p for groups in per_driver.values() for plans in groups.values() for p in plans
     }
     extra_candidates = {}
+    baseline_candidates = {}
     drivers = {driver.id: driver for driver in snapshot.drivers}
     for baseline in baseline_plans:
         candidate, _ = build_plan(snapshot, drivers[baseline.driver_id], baseline.actions)
         if candidate is None:
             raise EngineInvariantError("validated baseline could not be copied as optimized")
+        baseline_candidates[candidate.plan_ref] = candidate
         if candidate.plan_ref not in listed:
             extra_candidates[candidate.plan_ref] = candidate
     profit_candidates = {
-        d: [*groups["profit"], *[p for p in extra_candidates.values() if p.driver_id == d]]
+        d: [*groups["profit"], *[p for p in baseline_candidates.values() if p.driver_id == d]]
         for d, groups in per_driver.items()
     }
     fleet: dict[Objective, FleetSolution] = {

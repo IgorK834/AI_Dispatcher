@@ -8,6 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from routepilot.compliance.models import DriverState
+from routepilot.freight.geocoding import city_table, timezone_for_country
 from routepilot.optimization.engine.models import (
     CostProfile,
     DriverSnapshot,
@@ -21,6 +22,8 @@ from routepilot.optimization.engine.models import (
 )
 from routepilot.optimization.jobs.domain import JobCreate
 from routepilot.optimization.jobs.repository import JobsRepository
+from routepilot.routing.domain import GeoPoint
+from routepilot.routing.haversine import haversine_km
 from routepilot.shared.errors import DomainError
 
 
@@ -31,26 +34,6 @@ def utc(value: Any) -> datetime:
 
 def metres(value: Any) -> Decimal | None:
     return Decimal(value) / 1000 if value is not None else None
-
-
-def _timezone(country: str) -> str:
-    # IANA zones used by the approved city fixture. Offer stops retain their own
-    # stored zone; driver homes use the same country mapping as the geocoder.
-    return {
-        "PL": "Europe/Warsaw",
-        "DE": "Europe/Berlin",
-        "CZ": "Europe/Prague",
-        "AT": "Europe/Vienna",
-        "SK": "Europe/Bratislava",
-        "NL": "Europe/Amsterdam",
-        "BE": "Europe/Brussels",
-        "FR": "Europe/Paris",
-        "IT": "Europe/Rome",
-        "ES": "Europe/Madrid",
-        "HU": "Europe/Budapest",
-        "LT": "Europe/Vilnius",
-        "DK": "Europe/Copenhagen",
-    }.get(country, "UTC")
 
 
 def build_snapshot(
@@ -111,15 +94,24 @@ def build_snapshot(
             country=row["home_country"],
             lat=row["home_lat"],
             lon=row["home_lon"],
-            timezone=_timezone(row["home_country"]),
+            timezone=timezone_for_country(row["home_country"]),
+        )
+        coordinates = GeoPoint(lat=state["current_lat"], lon=state["current_lon"])
+        known_city = next(
+            (
+                city
+                for city in city_table()["cities"]
+                if haversine_km(coordinates, GeoPoint(lat=city["lat"], lon=city["lon"])) <= 1
+            ),
+            None,
         )
         position = Point(
             key=f"position:{row['id']}",
-            city=state["current_city"] or "",
-            country=None,
+            city=state["current_city"] or (known_city["name"] if known_city else ""),
+            country=known_city["countryCode"] if known_city else None,
             lat=state["current_lat"],
             lon=state["current_lon"],
-            timezone=home.timezone,
+            timezone=known_city["timezone"] if known_city else "UTC",
         )
         available = utc(state["available_from"])
         tolls = cost["tolls"]
@@ -203,8 +195,8 @@ def build_snapshot(
             .all()
         )
         if len(stops) != 2:
-            # Multi-stop offers have already been tagged as unsupported by the
-            # mapper; retain that rejection rather than silently truncating them.
+            # Multi-stop offers are outside the MVP: never truncate a route to
+            # two stops and present the resulting partial offer as assignable.
             continue
         required_equipment: list[str] = []
         if row["raw_record_id"]:
@@ -227,7 +219,9 @@ def build_snapshot(
                 window_start=utc(stop["window_start"]),
                 window_end=utc(stop["window_end"]),
                 service_min=stop["service_minutes"],
-                service_provenance=stop["provenance"].get("serviceMinutes", "default"),
+                service_provenance=stop["provenance"].get(
+                    "service_minutes", stop["provenance"].get("serviceMinutes", "default")
+                ),
             )
             for stop in stops
         ]
@@ -240,7 +234,9 @@ def build_snapshot(
                 weight_kg=row["weight_kg"],
                 pallet_count=row["pallet_count"],
                 pallet_type=row["pallet_type"] or "UNKNOWN",
-                pallet_provenance=row["field_provenance"].get("palletCount", "source"),
+                pallet_provenance=row["field_provenance"].get(
+                    "pallet_count", row["field_provenance"].get("palletCount", "source")
+                ),
                 loading_length_m=metres(row["loading_length_mm"]),
                 revenue_minor=row["revenue_amount_minor"],
                 revenue_currency=row["revenue_currency"] or "EUR",
@@ -252,7 +248,7 @@ def build_snapshot(
                 field_provenance=row["field_provenance"],
             )
         )
-    params = params.model_copy(update=body.params.model_dump())
+    params = params.model_copy(update=body.params.model_dump(exclude_unset=True))
     return EngineSnapshot(
         reference_time=now,
         drivers=driver_inputs,

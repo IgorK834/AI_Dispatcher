@@ -32,6 +32,12 @@ Parallel coding agents were explicitly authorised by the owner.
 - Clarify FEAT-006 FR-20: SSE event IDs increase independently of step sequence
   numbers, which remain in the payload. This preserves every start/finish event
   on reconnect. The owner approved this clarification on 2026-11-11.
+- The owner approved an injected monotonic timer for the engine safety cutoff
+  on 2026-11-12. System-clock access stays in jobs; deterministic tests supply
+  the elapsed values. `bench/**` is included in the prerequisite scope.
+- The owner approved minimum-fare overrides with recorded effective multipliers
+  for the five detour examples, and baseline candidates in the fleet search
+  pool when per-driver top-K alone would break the baseline profit invariant.
 
 ## Live allowance
 

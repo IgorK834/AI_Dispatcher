@@ -99,7 +99,7 @@ class NormalizedOffer(Schema):
     quality_flags: list[str] = Field(default_factory=list)
     field_provenance: dict[str, str] = Field(default_factory=dict)
     stops: list[StopView]
-    retention_until: AwareDatetime | None = None
+    retention_until: AwareDatetime | None = Field(default=None, exclude=True)
 
 
 class FreightOfferView(NormalizedOffer):

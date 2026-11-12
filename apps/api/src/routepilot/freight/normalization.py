@@ -28,6 +28,8 @@ def completeness(offer: NormalizedOffer) -> NormalizedOffer:
         )
     offer.missing_fields = sorted(key for key, value in present.items() if not value)
     offer.completeness_score = sum(present.values()) / 7
+    if offer.pallet_type == "UNKNOWN":
+        offer.quality_flags.append("PALLET_TYPE_UNKNOWN")
     if suspicious_text(offer.description, offer.public_remark):
         offer.quality_flags.append("SUSPICIOUS_TEXT")
     offer.quality_flags = sorted(set(offer.quality_flags))

@@ -50,6 +50,7 @@ def test_availability_rule_summary_and_comparison_are_computed_by_services(route
     assert not availability.has_active_assignment
     rules = plans.check_plan_rules(ids[0])
     assert rules.valid and not rules.violations
+    assert rules.rules_profile == "pl_domestic_employee_v1"
     assert rules.max_work_day_min >= rules.max_drive_day_min
     comparison = plans.compare(ids)
     base, other = plans.get(ids[0]), plans.get(ids[1])

@@ -231,3 +231,75 @@ def test_generated_import_and_offline_provider(
     )
     assert not list(provider.search(FreightSearchQuery(vehicle_type="VEHICLE_UP_TO_12_T")))
     assert provider.lookup(["anything"]) == []
+
+
+@pytest.mark.ac("AC-FEAT-006-26", "AC-FEAT-006-28")
+def test_query_quality_precedence_and_conservative_pallets(freight: FreightService) -> None:
+    from datetime import timedelta
+    from decimal import Decimal
+
+    from routepilot.freight.service.queries import OfferQueryService, pallet_equivalents
+
+    queries = OfferQueryService(freight)
+    complete = freight.create_offer(body(), "test")
+    missing_price = freight.create_offer(body().model_copy(update={"revenue": None}), "test")
+    unknown_stops = [
+        stop.model_copy(update={"city": "Unknown generated city"}) for stop in body().stops
+    ]
+    missing_coords = freight.create_offer(
+        body().model_copy(update={"stops": unknown_stops}), "test"
+    )
+    missing_pallets = freight.create_offer(body().model_copy(update={"pallet_count": None}), "test")
+    result = queries.quality(
+        [
+            item.source_offer_id
+            for item in (complete, missing_price, missing_coords, missing_pallets)
+        ]
+    )["items"]
+    assert [item["reason_code"] for item in result] == [
+        None,
+        "MISSING_REVENUE",
+        "MISSING_COORDINATES",
+        "MISSING_CAPACITY_DATA",
+    ]
+    assert queries.search(origin_country="DE")["total_matching"] == 0
+    assert queries.search(destination_city="unknown")["total_matching"] == 0
+    assert queries.search(destination_country="FR")["total_matching"] == 0
+    assert queries.search(origin_city="Berlin")["total_matching"] == 0
+    assert (
+        queries.search(pickup_from=complete.stops[0].window_end + timedelta(days=1))[
+            "total_matching"
+        ]
+        == 0
+    )
+    assert (
+        queries.search(pickup_to=complete.stops[0].window_start - timedelta(days=1))[
+            "total_matching"
+        ]
+        == 0
+    )
+    assert queries.search(max_pallet_eq=Decimal("2"))["total_matching"] == 0
+    assert queries.search(only_complete=True)["total_matching"] == 1
+    for arguments in (
+        {"limit": 21},
+        {"radius_km": 501},
+        {"pickup_from": datetime(2026, 1, 1)},
+        {"pickup_from": complete.stops[-1].window_end, "pickup_to": complete.stops[0].window_start},
+    ):
+        with pytest.raises(DomainError, match="VALIDATION_ERROR"):
+            queries.search(**arguments)
+    with pytest.raises(DomainError, match="VALIDATION_ERROR"):
+        queries.quality(["x"] * 21)
+    conservative = complete.model_copy(
+        update={
+            "pallet_count": 3,
+            "pallet_type": "IND_1200x1000",
+            "loading_length_m": Decimal("1.7"),
+            "field_provenance": {"pallet_count": "ai"},
+        }
+    )
+    assert pallet_equivalents(conservative) == Decimal("7.5")
+    assert pallet_equivalents(conservative.model_copy(update={"loading_length_m": None})) is None
+    assert pallet_equivalents(
+        conservative.model_copy(update={"pallet_count": None, "pallet_type": "HALF_800x600"})
+    ) == Decimal("2.5")
