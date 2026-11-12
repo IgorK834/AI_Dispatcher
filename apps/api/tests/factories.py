@@ -65,7 +65,11 @@ def login(client: TestClient, role: str = "admin") -> str:
 
 @contextmanager
 def api_client(
-    tmp_path: Path, role: str = "admin", *, seeded: bool = False
+    tmp_path: Path,
+    role: str = "admin",
+    *,
+    seeded: bool = False,
+    settings_overrides: dict[str, Any] | None = None,
 ) -> Iterator[TestClient]:
     """The real application on a migrated temporary database, logged in with Origin and CSRF.
 
@@ -87,6 +91,7 @@ def api_client(
         database_url=url,
         agents_db_path=str(tmp_path / "agents.db"),
         secret_key=secrets.token_hex(32),
+        **(settings_overrides or {}),
     )
     with TestClient(create_app(settings, captcha=PassCaptcha())) as client:
         token = login(client, role)
