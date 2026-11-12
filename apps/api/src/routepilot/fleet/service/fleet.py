@@ -177,6 +177,31 @@ class FleetService:
                 },
             )
 
+    def list_active(self, limit: int = 20) -> list[DriverView]:
+        if not 1 <= limit <= 20:
+            raise DomainError("VALIDATION_ERROR", 422)
+        with Session(self.engine) as session:
+            rows = session.scalars(
+                select(Driver)
+                .where(Driver.deleted_at.is_(None))
+                .order_by(Driver.created_at, Driver.id)
+                .limit(limit)
+            )
+            return [self._driver_view(row, session) for row in rows]
+
+    def latest_state(self, driver_id: UUID) -> DriverStateView:
+        driver = self.get_driver(driver_id)
+        if driver.state is None:
+            raise DomainError("NOT_FOUND", 404)
+        return driver.state
+
+    def has_active_assignment(self, driver_id: UUID) -> bool:
+        self.get_driver(driver_id)
+        return (
+            self.usage_checker is not None
+            and self.usage_checker.assignment_usage(driver_id) == "active"
+        )
+
     def get_driver(self, driver_id: UUID) -> DriverView:
         with Session(self.engine) as session:
             return self._driver_view(self._driver(session, driver_id), session)
