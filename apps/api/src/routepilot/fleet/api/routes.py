@@ -23,6 +23,7 @@ from routepilot.fleet.service.models import (
 )
 from routepilot.shared.auth import Principal
 from routepilot.shared.pagination import Page
+from routepilot.shared.problem import problem_responses
 
 
 class PageQuery(BaseModel):
@@ -57,7 +58,12 @@ def create_fleet_router(
     ) -> Page[DriverView]:
         return service.list_drivers(**query.model_dump())
 
-    @router.post("/drivers", status_code=201, response_model=DriverView)
+    @router.post(
+        "/drivers",
+        status_code=201,
+        response_model=DriverView,
+        responses=problem_responses(404, 409),
+    )
     def create_driver(
         body: DriverCreate, response: Response, principal: Principal = user
     ) -> DriverView:
@@ -65,28 +71,39 @@ def create_fleet_router(
         response.headers["Location"] = f"/api/v1/drivers/{item.id}"
         return item
 
-    @router.get("/drivers/{driver_id}", response_model=DriverView)
+    @router.get("/drivers/{driver_id}", response_model=DriverView, responses=problem_responses(404))
     def driver(driver_id: UUID, principal: Principal = user) -> DriverView:
         return service.get_driver(driver_id)
 
-    @router.patch("/drivers/{driver_id}", response_model=DriverView)
+    @router.patch(
+        "/drivers/{driver_id}", response_model=DriverView, responses=problem_responses(404, 409)
+    )
     def update_driver(
         driver_id: UUID, body: DriverUpdate, principal: Principal = user
     ) -> DriverView:
         return service.update_driver(driver_id, body, str(principal.id))
 
-    @router.delete("/drivers/{driver_id}", status_code=204)
+    @router.delete("/drivers/{driver_id}", status_code=204, responses=problem_responses(404, 409))
     def delete_driver(driver_id: UUID, principal: Principal = user) -> Response:
         service.delete_driver(driver_id, str(principal.id))
         return Response(status_code=204)
 
-    @router.get("/drivers/{driver_id}/state", response_model=Page[DriverStateView])
+    @router.get(
+        "/drivers/{driver_id}/state",
+        response_model=Page[DriverStateView],
+        responses=problem_responses(404),
+    )
     def states(
         driver_id: UUID, query: Annotated[PageQuery, Query()], principal: Principal = user
     ) -> Page[DriverStateView]:
         return service.list_states(driver_id, **query.model_dump())
 
-    @router.post("/drivers/{driver_id}/state", status_code=201, response_model=DriverStateView)
+    @router.post(
+        "/drivers/{driver_id}/state",
+        status_code=201,
+        response_model=DriverStateView,
+        responses=problem_responses(404),
+    )
     def state(
         driver_id: UUID, body: DriverStateCreate, response: Response, principal: Principal = user
     ) -> DriverStateView:
@@ -100,7 +117,12 @@ def create_fleet_router(
     ) -> Page[VehicleView]:
         return service.list_vehicles(**query.model_dump())
 
-    @router.post("/vehicles", status_code=201, response_model=VehicleView)
+    @router.post(
+        "/vehicles",
+        status_code=201,
+        response_model=VehicleView,
+        responses=problem_responses(404, 409),
+    )
     def create_vehicle(
         body: VehicleCreate, response: Response, principal: Principal = user
     ) -> VehicleView:
@@ -108,17 +130,21 @@ def create_fleet_router(
         response.headers["Location"] = f"/api/v1/vehicles/{item.id}"
         return item
 
-    @router.get("/vehicles/{vehicle_id}", response_model=VehicleView)
+    @router.get(
+        "/vehicles/{vehicle_id}", response_model=VehicleView, responses=problem_responses(404)
+    )
     def vehicle(vehicle_id: UUID, principal: Principal = user) -> VehicleView:
         return service.get_vehicle(vehicle_id)
 
-    @router.patch("/vehicles/{vehicle_id}", response_model=VehicleView)
+    @router.patch(
+        "/vehicles/{vehicle_id}", response_model=VehicleView, responses=problem_responses(404, 409)
+    )
     def update_vehicle(
         vehicle_id: UUID, body: VehicleUpdate, principal: Principal = user
     ) -> VehicleView:
         return service.update_vehicle(vehicle_id, body, str(principal.id))
 
-    @router.delete("/vehicles/{vehicle_id}", status_code=204)
+    @router.delete("/vehicles/{vehicle_id}", status_code=204, responses=problem_responses(404, 409))
     def delete_vehicle(vehicle_id: UUID, principal: Principal = user) -> Response:
         service.delete_vehicle(vehicle_id, str(principal.id))
         return Response(status_code=204)
@@ -129,7 +155,12 @@ def create_fleet_router(
     ) -> Page[CostProfileView]:
         return service.list_cost_profiles(**query.model_dump())
 
-    @router.post("/cost-profiles", status_code=201, response_model=CostProfileView)
+    @router.post(
+        "/cost-profiles",
+        status_code=201,
+        response_model=CostProfileView,
+        responses=problem_responses(409),
+    )
     def create_profile(
         body: CostProfileCreate, response: Response, principal: Principal = admin
     ) -> CostProfileView:
@@ -137,17 +168,27 @@ def create_fleet_router(
         response.headers["Location"] = f"/api/v1/cost-profiles/{item.id}"
         return item
 
-    @router.get("/cost-profiles/{profile_id}", response_model=CostProfileView)
+    @router.get(
+        "/cost-profiles/{profile_id}",
+        response_model=CostProfileView,
+        responses=problem_responses(404),
+    )
     def profile(profile_id: UUID, principal: Principal = user) -> CostProfileView:
         return service.get_cost_profile(profile_id)
 
-    @router.patch("/cost-profiles/{profile_id}", response_model=CostProfileView)
+    @router.patch(
+        "/cost-profiles/{profile_id}",
+        response_model=CostProfileView,
+        responses=problem_responses(404, 409),
+    )
     def update_profile(
         profile_id: UUID, body: CostProfileUpdate, principal: Principal = admin
     ) -> CostProfileView:
         return service.update_cost_profile(profile_id, body, str(principal.id))
 
-    @router.delete("/cost-profiles/{profile_id}", status_code=204)
+    @router.delete(
+        "/cost-profiles/{profile_id}", status_code=204, responses=problem_responses(404, 409)
+    )
     def delete_profile(profile_id: UUID, principal: Principal = admin) -> Response:
         service.delete_cost_profile(profile_id, str(principal.id))
         return Response(status_code=204)

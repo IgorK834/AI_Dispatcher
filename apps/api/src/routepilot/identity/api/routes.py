@@ -9,6 +9,7 @@ from routepilot.identity.service import IdentityService, LoginBody, LoginInput
 from routepilot.shared.auth import Principal
 from routepilot.shared.config import Settings
 from routepilot.shared.errors import DomainError
+from routepilot.shared.problem import problem_responses
 
 
 def require_user(service: IdentityService) -> Callable[[Request], Principal]:
@@ -48,7 +49,12 @@ def create_identity_router(service: IdentityService, settings: Settings) -> APIR
     def captcha_config() -> dict[str, str]:
         return {"provider": "turnstile", "siteKey": settings.turnstile_site_key}
 
-    @router.post("/login", response_model=LoginBody, dependencies=[Depends(check_login)])
+    @router.post(
+        "/login",
+        response_model=LoginBody,
+        dependencies=[Depends(check_login)],
+        responses=problem_responses(400),
+    )
     def login(body: LoginInput, request: Request, response: Response) -> LoginBody:
         result = service.login(
             body.email,
