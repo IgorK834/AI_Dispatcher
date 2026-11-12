@@ -451,7 +451,10 @@ One scripted "happy path" scenario doubles as the integration scenario of FEAT-0
 
 **Prompt approval (2026-11-12, O-6):** the owner approved the five `agents/prompts/*.v1.md` files as of commit `af8fd9d` (prompt files last changed in `e585b46`). The approval covers these v1 files only; a changed prompt needs a new version file and a new approval.
 
-**Eval budget (2026-11-12, O-7):** hard live allowance of 500 000 provider tokens in total: at most 50 000 for the O-6 smoke run and 450 000 for one `ai-evals` batch (≥ 40 scenarios; the 60 000 per-run cap applies to each scenario). Input, output, thinking and retries count once; the runner reserves each call before dispatch and stops rather than exceeding the allowance.
+**Eval budget (2026-11-12, O-7):** hard live allowance of 500 000 provider tokens in total, split 80 000 for the O-6 smoke run and 420 000 for one `ai-evals` batch (first split 50 000 / 450 000, revised after the live findings below). Input, output, thinking and retries count once; the runner reserves each call before dispatch and stops rather than exceeding the allowance. The fallback is `gemini-3.7-flash`; thinking is `high` for the dispatcher and `low` for the other roles and the fallback (owner decision).
+
+**Live findings (2026-11-12, O-6):** four smoke attempts on `approval-driver` found and fixed three runtime defects: the Developer API rejects system instruction and tools in `count_tokens`; the pre-call input count misses the hidden reasoning that the provider feeds back on tool turns (actual 1 922 against about 1 100 counted); a rejected settlement left the other budgets at their full reservation. Attempt 4 ran the whole flow through a successful `request_approval` but stopped at the 120 s run timeout before `approval_required`; a full approval path costs about 45 000 tokens with a `high` dispatcher. 70 700 of 500 000 tokens are counted. Open for the owner: raise the allowance or the run timeout (`AGENT_RUN_TIMEOUT_S`), because 40 scenarios at this cost do not fit in 420 000 tokens.
+
 
 | ID | Question | Proposed default | Blocks |
 |---|---|---|---|
@@ -475,3 +478,4 @@ One scripted "happy path" scenario doubles as the integration scenario of FEAT-0
 | 5 | 2026-11-12 | Owner-approved SSE clarification: increasing event IDs are independent of the trace step sequence. Runtime, guards, durable approvals and metering are being implemented against the approved v1 prompts. |
 | 6 | 2026-11-12 | Model id check and eval token budget recorded (§11). |
 | 7 | 2026-11-12 | Owner approval of the five v1 prompts recorded (§11). |
+| 8 | 2026-11-12 | Eval allowance split revised to 80 000 / 420 000; live findings of the O-6 smoke attempts recorded (§11). |
