@@ -1,7 +1,7 @@
 """Validated fleet API contracts, stored units converted at the service boundary."""
 
 from datetime import datetime
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from typing import Annotated, Literal, Self
 from uuid import UUID
 
@@ -16,7 +16,11 @@ RulesProfile = Literal["pl_domestic_employee_v1", "eu561_van_international_v1"]
 
 class Schema(BaseModel):
     model_config = ConfigDict(
-        extra="forbid", populate_by_name=True, alias_generator=to_camel, from_attributes=True
+        extra="forbid",
+        populate_by_name=True,
+        alias_generator=to_camel,
+        from_attributes=True,
+        allow_inf_nan=False,
     )
 
 
@@ -50,7 +54,10 @@ class CostProfileCreate(Schema):
 
     @model_validator(mode="after")
     def decimal_parameters(self) -> Self:
-        values = [Decimal(self.min_margin_pct), *(Decimal(v) for v in self.fx_rates.values())]
+        try:
+            values = [Decimal(self.min_margin_pct), *(Decimal(v) for v in self.fx_rates.values())]
+        except InvalidOperation:
+            raise ValueError("invalid cost-profile decimal parameter") from None
         if not all(v.is_finite() and v >= 0 for v in values) or any(
             Decimal(v) == 0 for v in self.fx_rates.values()
         ):
