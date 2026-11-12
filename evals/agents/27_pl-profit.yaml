@@ -1,0 +1,23 @@
+version: 1
+id: pl-profit
+question: Pobierz kierowców i oferty, zoptymalizuj D1 według zysku i pokaż plan bez
+  prośby o zatwierdzenie.
+locale: pl
+fleet_fixture: fixtures/fleet/one.yaml
+offer_fixture: fixtures/offers/domestic.yaml
+expected_tools:
+- list_drivers
+- search_offers
+- optimize_driver
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: list_drivers
+- kind: tool_called
+  value: search_offers
+- kind: tool_called
+  value: optimize_driver
+- kind: no_assignment
+- kind: answer_grounded
+- kind: plans_valid
+smoke: false

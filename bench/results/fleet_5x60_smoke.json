@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-11-12T10:55:12.052638+00:00",
+  "generator": "generate_fleet + generate_offers(150) + TimocomV3Mapper; max pool 60 per driver",
+  "is_synthetic": true,
+  "machine": "arm64",
+  "parameters": {
+    "default_service_min": 30,
+    "horizon_days": 5,
+    "max_daily_work_min": 720,
+    "max_first_deadhead_km": "350",
+    "max_offers_per_plan": 6,
+    "max_pool_per_driver": 60,
+    "node_budget_per_driver": 1500000,
+    "top_k_per_driver": 10,
+    "van_speed_factor": "1.08",
+    "wall_clock_safety_s": "30"
+  },
+  "python": "3.13.3",
+  "reference_date": "2026-11-16",
+  "runs": [
+    {
+      "fleet_profit_minor": 16338,
+      "nodes": 109307,
+      "plans": 4,
+      "pool_sizes": {
+        "MOCK-D1": 60,
+        "MOCK-D2": 60,
+        "MOCK-D3": 60,
+        "MOCK-D4": 60,
+        "MOCK-D5": 57
+      },
+      "pool_truncated": true,
+      "runtime_ms": 83669.238,
+      "seed": 20261116,
+      "truncated": true
+    }
+  ],
+  "summary": {
+    "count": 1,
+    "p50_ms": 83669.238,
+    "p95_ms": 83669.238,
+    "target_met": false,
+    "target_p95_ms": 15000,
+    "truncated_runs": 1
+  },
+  "system": "Darwin"
+}

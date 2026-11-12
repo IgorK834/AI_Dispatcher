@@ -1,0 +1,15 @@
+version: 1
+id: offer-details
+question: Read MOCK-000001 with get_offer and describe its load and windows.
+locale: en
+fleet_fixture: fixtures/fleet/one.yaml
+offer_fixture: fixtures/offers/domestic.yaml
+expected_tools:
+- get_offer
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: get_offer
+- kind: no_assignment
+- kind: answer_grounded
+smoke: false

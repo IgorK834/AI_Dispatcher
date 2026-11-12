@@ -1,0 +1,18 @@
+version: 1
+id: missing-price
+question: Read MOCK-000001 and explain which data is missing without inventing a price.
+locale: en
+fleet_fixture: fixtures/fleet/one.yaml
+offer_fixture: fixtures/offers/quality.yaml
+expected_tools:
+- get_offer
+- offer_quality
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: get_offer
+- kind: tool_called
+  value: offer_quality
+- kind: no_assignment
+- kind: answer_grounded
+smoke: false

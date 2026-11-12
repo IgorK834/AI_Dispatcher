@@ -1,0 +1,19 @@
+offers:
+  - id: MOCK-000001
+    origin: Katowice
+    destination: Opole
+    pallet_count: 2
+    pallet_type: EUR_1200x800
+    weight_kg: 200
+    revenue_minor: 30000
+    pickup_minutes: [0, 240]
+    delivery_minutes: [120, 720]
+  - id: MOCK-000002
+    origin: Katowice
+    destination: Wrocław
+    pallet_count: 2
+    pallet_type: EUR_1200x800
+    weight_kg: 220
+    revenue_minor: 40000
+    pickup_minutes: [0, 240]
+    delivery_minutes: [180, 900]

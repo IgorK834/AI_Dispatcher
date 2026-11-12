@@ -1,0 +1,15 @@
+version: 1
+id: available-drivers
+question: List available drivers and their positions. Use fleet tools only.
+locale: en
+fleet_fixture: fixtures/fleet/one.yaml
+offer_fixture: fixtures/offers/domestic.yaml
+expected_tools:
+- list_drivers
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: list_drivers
+- kind: no_assignment
+- kind: answer_grounded
+smoke: false

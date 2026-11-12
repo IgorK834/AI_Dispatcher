@@ -1,0 +1,22 @@
+version: 1
+id: search-near-driver
+question: List drivers, then find offers near D1 using search_offers and inspect offer_quality.
+  Do not plan or assign.
+locale: en
+fleet_fixture: fixtures/fleet/one.yaml
+offer_fixture: fixtures/offers/domestic.yaml
+expected_tools:
+- list_drivers
+- search_offers
+- offer_quality
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: list_drivers
+- kind: tool_called
+  value: search_offers
+- kind: tool_called
+  value: offer_quality
+- kind: no_assignment
+- kind: answer_grounded
+smoke: false

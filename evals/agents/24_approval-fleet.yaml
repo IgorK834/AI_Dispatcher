@@ -1,0 +1,27 @@
+version: 1
+id: approval-fleet
+question: Get fleet and offer facts, optimize the fleet and request human approval.
+  Stop at approval_required.
+locale: en
+fleet_fixture: fixtures/fleet/two.yaml
+offer_fixture: fixtures/offers/domestic.yaml
+expected_tools:
+- list_drivers
+- search_offers
+- optimize_fleet
+- request_approval
+expected_approval: true
+key_facts:
+- kind: tool_called
+  value: list_drivers
+- kind: tool_called
+  value: search_offers
+- kind: tool_called
+  value: optimize_fleet
+- kind: tool_called
+  value: request_approval
+- kind: no_assignment
+- kind: answer_grounded
+- kind: approval_required
+- kind: plans_valid
+smoke: false

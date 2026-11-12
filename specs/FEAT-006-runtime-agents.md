@@ -97,7 +97,7 @@ flowchart TD
 
 - **FR-18.** `POST /agent/threads/{id}/messages` creates an `agent_runs` row (`queued`) and returns `202 {runId}`. Runs execute as `asyncio` tasks in the API process (at most 2 at a time, one per thread). Optimisation tools enqueue a job on the CPU worker of FEAT-004 and await it.
 - **FR-19 Trace.** Every LLM call, tool call, guard decision and interrupt is one `agent_steps` row: `seq`, `agent`, `type`, `tool_name`, `input_summary` and `output_summary` (≤ 500 characters each, no personal data, no `untrusted_text`), `tokens`, `duration_ms`, `status` (`ok`, `error`, `rejected`).
-- **FR-20 SSE.** `GET /agent/runs/{runId}/events` streams the events of §6.3 through sse-starlette. Each step produces events with `id = seq`. A client that reconnects with `Last-Event-ID: n` first receives the stored steps with `seq > n`, then live events. A `heartbeat` is sent every 15 s. The stream closes after `run_finished`.
+- **FR-20 SSE.** `GET /agent/runs/{runId}/events` streams the events of §6.3 through sse-starlette. Event IDs form a separate increasing sequence; step events retain the step's `seq` in their payload. A client that reconnects with `Last-Event-ID: n` first receives the stored events with event IDs greater than `n`, then live events. A `heartbeat` is sent every 15 s. The stream closes after `run_finished`.
 - **FR-21.** The first event (`run_started`) is sent within 2 s of the message request (NFR-007).
 - **FR-22 Durability.** The checkpointer is `SqliteSaver` on `AGENTS_DB_PATH` (separate file `agents.db`); `setup()` runs at start; `thread_id = agent_threads.id`. A run waiting for approval survives a process restart and can be resumed.
 
@@ -165,7 +165,7 @@ RouteExplanation { id, routePlanId, source ("llm"|"template"), model?, promptVer
 
 ### 6.3 SSE events
 
-Wire format: `id: <seq>`, `event: <type>`, `data: <JSON>`.
+Wire format: `id: <event-id>`, `event: <type>`, `data: <JSON>`. The event ID is independent of the step `seq`, so start and finish events can both be replayed exactly once (owner-approved clarification, 2026-11-11).
 
 | Event | Payload | When |
 |---|---|---|
@@ -466,3 +466,4 @@ One scripted "happy path" scenario doubles as the integration scenario of FEAT-0
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11); example profit in AC-09/10 aligned with GOLD-001 |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
 | 4 | 2026-11-11 | Five proposed initial v1 prompts added for O-6 owner review; runtime integration and live evaluations remain pending. |
+| 5 | 2026-11-12 | Owner-approved SSE clarification: increasing event IDs are independent of the trace step sequence. Runtime, guards, durable approvals and metering are being implemented against the approved v1 prompts. |

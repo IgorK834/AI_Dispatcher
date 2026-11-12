@@ -51,7 +51,7 @@ There is no access to TIMOCOM ([`context.md`](../context.md) → Project Constra
 - **FR-10 Geography.** Each lane has Poland at one end or both: about 45 % domestic PL→PL, about 55 % international (PL→X or X→PL), along the corridors of report §17.3. Origin ≠ destination.
 - **FR-11 Load.** Pallets 1–10 with weights favouring 1–4; pallet type 85 % EUR, 10 % industrial, 5 % half; mass 40–1 100 kg; `length_m` consistent with the pallets (`ceil(eq / 2.4 × 10) / 10`).
 - **FR-12 Time windows.** Loading on working days within 7 days from the reference date; delivery on the same or a later working day; window lengths 2–8 h; a share of whole-day windows (no `startTime`/`endTime`) and a share of tight 2-hour windows.
-- **FR-13 Price.** `price = max(min_fare, round(rate × distance_km × noise))` in whole euros, where `distance_km` is the haversine distance × 1.25, `noise` is log-normal with σ = 0.15 from the seeded generator, `min_fare = 120` and `rate` comes from §6.3. Prices are generated values, not market data.
+- **FR-13 Price.** `price = max(min_fare, round(rate × distance_km × noise))` in whole euros, where `distance_km` is the haversine distance × 1.25, `noise` is log-normal with σ = 0.15 from the seeded generator, `min_fare = 120` and `rate` comes from §6.3. Prices are generated values, not market data. The five `UNPROFITABLE_DETOUR` examples are an explicit difficulty override: their effective price multiplier is set to reach the minimum fare on a long lane; the enrichment records the sampled noise, effective multiplier and override provenance `assumption` (owner decision, 2026-11-12).
 - **FR-14 Difficulty categories.** The 150 offers contain at least the counts of §6.4. Each tagged offer lists its tags in the enrichment file so that tests and the demo can find it.
 - **FR-15 Tolerance cases.** Some offers use the alternative formats that the official OpenAPI itself shows (report T29): `startTime` as `HH:MM:SSZ`, the key `"creationDateTime "` with a trailing space, `distance_km` above 200.
 
@@ -317,3 +317,4 @@ No change.
 | 1 | 2026-11-09 | Initial draft |
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11); statutory per-diem values in the cost profile |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
+| 4 | 2026-11-12 | Owner clarified FR-13/14: the five minimum-fare detour examples override the normal price multiplier and record the effective multiplier, sampled noise and assumption provenance. |

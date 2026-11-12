@@ -1,0 +1,7 @@
+seed: 42
+driver_count: 2
+home_by_minutes: null
+params:
+  horizon_days: 1
+  max_offers_per_plan: 2
+  top_k_per_driver: 3

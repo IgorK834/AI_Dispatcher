@@ -1,0 +1,15 @@
+version: 1
+id: offer-quality
+question: Check quality of MOCK-000001 and MOCK-000002; identify missing price.
+locale: en
+fleet_fixture: fixtures/fleet/one.yaml
+offer_fixture: fixtures/offers/quality.yaml
+expected_tools:
+- offer_quality
+expected_approval: false
+key_facts:
+- kind: tool_called
+  value: offer_quality
+- kind: no_assignment
+- kind: answer_grounded
+smoke: false

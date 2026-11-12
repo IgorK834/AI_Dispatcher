@@ -80,7 +80,7 @@ Work = driving + service + waiting (Core Domain Rule 9). Breaks and rests are no
 
 **FR-6 `DAILY_REST`** lasts 660 min and resets `work_today`, `drive_today`, `work_since_break`, `drive_since_break`, `breaks_today` and `day_start_at`. Its location is the stop where it is taken or "en route" on a leg.
 
-**FR-7 `advance_wait(s, W)`.** If `W ≥ 660`: the wait is taken as a `DAILY_REST` of length `W`. Otherwise the wait counts as work for all work counters and is splittable; a break that falls due inside the wait is taken inside it and does not extend it; a daily limit reached inside the wait starts a 660-minute `DAILY_REST`.
+**FR-7 `advance_wait(s, W)`.** If `W ≥ 660`: the wait is taken as a `DAILY_REST` of length `W`. Otherwise the wait counts as work for all work counters and is splittable; a break that falls due inside the wait overlaps it. If the full break cannot fit before the nominal wait ends, it finishes afterwards and delays service; only the overlapping portion replaces waiting work. The normal time-window validator rejects a plan when this delay misses its window. A daily limit reached inside the wait starts a 660-minute `DAILY_REST`.
 
 **FR-8 Initial state.** Counters come from the driver's `DriverState` snapshot. If `work_today_min > 0`, `day_start_at = last_daily_rest_end`; otherwise it is unset until the first activity. `breaks_today` starts at 0. Weeks run Monday 00:00 – Sunday 24:00 in the time zone of the driver's home base; when the clock crosses that boundary, `drive_prev_week = drive_week` and the weekly counters reset.
 
@@ -133,7 +133,7 @@ Formulas: report §19.1; parameters: `CostProfile` and vehicle (report §17.4). 
 - **FR-22 Moves.** `PICKUP(o)` for a pool offer not yet picked (first pickup subject to `max_first_deadhead_km`; capacity must hold after it; at most `max_offers_per_plan` offers), `DELIVERY(o)` for an offer on board. A label is *complete* when nothing is on board and at least one offer is done.
 - **FR-23 Profile passes.** The search runs a domestic pass (offers and start entirely in the home country, profile PL) and an international pass (all pool offers, profile 561, keeping only international plans). Results are merged.
 - **FR-24 Bounds.** `profit`: upper bound = revenue so far + Σ revenue of pool offers that could still be added within `max_offers_per_plan` − cost so far; prune when the bound cannot enter the top-K. `fastest` / `fuel`: the clock / fuel so far is a lower bound; prune when it cannot enter the top-K. Bounds must be admissible (property P9 checks this against the oracle).
-- **FR-25 Budget and determinism.** Expansion order is deterministic (moves sorted by kind then offer id). The search stops after `node_budget_per_driver` nodes or `wall_clock_safety_s`; then `truncated = true`. The result never depends on wall-clock time except through this flag and `runtimeMs`.
+- **FR-25 Budget and determinism.** Expansion order is deterministic (moves sorted by kind then offer id). The search stops after `node_budget_per_driver` nodes or `wall_clock_safety_s`; then `truncated = true`. Jobs inject a monotonic elapsed-time callback for the safety cutoff and `runtimeMs`; tests inject deterministic values. The engine does not read the system clock (owner clarification, 2026-11-12). For runs within both budgets, the result is independent of elapsed time except for `runtimeMs`; after a safety cutoff, the result is the validated partial result and `truncated = true`.
 - **FR-26 Top-K.** For each objective the engine returns up to `top_k_per_driver` plans with **distinct offer sets** — for each set its best sequence — sorted by the objective and the tie-breakers of FR-28. Plans below `min_profit` or `min_margin_pct` are not returned.
 
 ### 4.5 Objectives
@@ -151,8 +151,9 @@ Formulas: report §19.1; parameters: `CostProfile` and vehicle (report §17.4). 
 ### 4.6 Fleet assignment
 
 - **FR-29.** For each objective choose at most one plan per driver (or none) so that no offer appears twice.
+  - Candidate pool: the per-driver top-K lists are supplemented with optimized-kind copies of the plans from both baselines. These additional plans are returned in `EngineResult.fleet_candidates` when absent from the top-K lists; the per-driver top-K cap stays unchanged. This preserves invariant 15 even when the top-K lists overlap on the same offers.
   - `profit`: maximise Σ `net_profit`; ties → smaller Σ `finish_at` offset → smaller Σ `fuel_l` → driver/plan ids.
-  - `fastest` / `fuel`: the candidate plans of a driver are the union of its top-K lists for that objective and for `profit`. Every driver that has a plan in the `profit` solution must have a plan. Minimise Σ (`finish_at` − reference time) for `fastest`, Σ `fuel_l` for `fuel`; ties → larger Σ `net_profit` → ids.
+  - `fastest` / `fuel`: the candidate plans of a driver are the union of its top-K list for that objective and the supplemented `profit` candidate pool. Every driver that has a plan in the `profit` solution must have a plan. Minimise Σ (`finish_at` − reference time) for `fastest`, Σ `fuel_l` for `fuel`; ties → larger Σ `net_profit` → ids.
 - **FR-30.** Exact depth-first search over drivers in the order of increasing candidate count (ties by driver id), with conflict pruning and a bound equal to the sum of each remaining driver's best candidate value.
 - **FR-31.** The result per objective is a `FleetSolution {objective, assignments: [{driver_id, plan_ref}], totals: {net_profit, fuel_l, co2_kg, distance_km, drivers_with_plan}}`.
 
@@ -220,7 +221,7 @@ Default parameters (configurable assumptions, not facts): `horizon_days=5`, `max
 - **AC-FEAT-003-09** [property] **P9** Given instances with N ≤ 5 offers and K ≤ 3 When the Branch-and-Bound result is compared with `oracle.py` Then for each objective the offer sets, sequences and objective values of the top-K are identical (invariant 11).
 - **AC-FEAT-003-10** [property] **P10** Given any fleet solution When it is inspected Then no offer occurs in two plans and no driver has two plans, and for ≤ 3 drivers × ≤ 4 plans the solution equals `fleet_oracle.py` (invariant 12).
 - **AC-FEAT-003-11** [property] **P11** Given a driver whose `home_by` is inside the horizon When the engine returns plans for that driver Then every returned plan ends with an `END` stop at the home base with arrival ≤ `home_by` and `home_reached = true`; when no such plan exists the list is empty (invariant 13).
-- **AC-FEAT-003-12** [property] **P12** Given a result with `truncated = false` When the fleet totals are compared Then the fleet profit of the `profit` solution is ≥ the fleet profit of `baseline_single` and of `baseline_greedy` (invariant 15).
+- **AC-FEAT-003-12** [property] **P12** Given a result with `truncated = false` When the fleet totals are compared Then the fleet profit of the `profit` solution is ≥ the fleet profit of `baseline_single` and of `baseline_greedy`, including when a small top-K list would exclude a baseline plan (invariant 15).
 - **AC-FEAT-003-13** [property] **P13** Given a result with `truncated = false` When the variants are compared Then for every driver the rank 1 `fastest` plan finishes no later than the rank 1 `profit` plan and the rank 1 `fuel` plan burns no more fuel; and over the drivers of the `profit` fleet solution Σ finish offsets (`fastest`) ≤ Σ finish offsets (`profit`) and Σ litres (`fuel`) ≤ Σ litres (`profit`) (invariant 16).
 
 **Working-time rules**
@@ -326,3 +327,5 @@ Each row is a detail that the existing documents do not fix. The proposed defaul
 | 1 | 2026-11-09 | Initial draft |
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11); FR-12 per-diem rule replaced; warning `PER_DIEM_DEFAULTED` removed |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
+
+- 2026-11-12 owner clarification (FR-29, P12): include optimized-kind copies of both baselines in fleet candidates, expose additional copies in `fleet_candidates`, and keep the per-driver top-K cap unchanged. This resolves the finite-top-K counterexample without changing golden values.
