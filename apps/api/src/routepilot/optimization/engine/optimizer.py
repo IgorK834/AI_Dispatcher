@@ -1,5 +1,6 @@
 """Pure public optimization entry point (FEAT-003)."""
 
+from collections.abc import Callable
 from typing import Literal
 
 from routepilot.optimization.engine.fleet import assign_fleet, build_baselines
@@ -19,7 +20,9 @@ from routepilot.optimization.engine.search import OBJECTIVES, search_driver
 from routepilot.optimization.engine.validators import FleetValidator, RouteValidator
 
 
-def optimize(snapshot: EngineSnapshot) -> EngineResult:
+def optimize(
+    snapshot: EngineSnapshot, *, elapsed_ms: Callable[[], int] | None = None
+) -> EngineResult:
     per_driver = {}
     pools = {}
     rejections = []
@@ -27,7 +30,7 @@ def optimize(snapshot: EngineSnapshot) -> EngineResult:
     for driver in sorted(snapshot.drivers, key=lambda d: d.id):
         pool, rejected, cut = offer_pool(snapshot, driver)
         pools[driver.id] = pool
-        top, expanded, stopped = search_driver(snapshot, driver, pool)
+        top, expanded, stopped = search_driver(snapshot, driver, pool, elapsed_ms=elapsed_ms)
         per_driver[driver.id] = top
         nodes += expanded
         truncated |= stopped
@@ -86,5 +89,10 @@ def optimize(snapshot: EngineSnapshot) -> EngineResult:
         baseline_plans=baseline_plans,
         rejections=rejections,
         warnings=["POOL_TRUNCATED"] if pool_truncated else [],
-        stats=EngineStats(nodes=nodes, truncated=truncated, pool_truncated=pool_truncated),
+        stats=EngineStats(
+            nodes=nodes,
+            truncated=truncated,
+            pool_truncated=pool_truncated,
+            runtime_ms=elapsed_ms() if elapsed_ms else 0,
+        ),
     )

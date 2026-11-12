@@ -87,3 +87,28 @@ def test_atomic_service_and_wait_semantics() -> None:
     wait = rules.advance_wait(DriverState(t=T), 120)
     assert isinstance(wait, Ok) and wait.state.work_today == 120
     assert wait.elapsed_min == 120
+
+
+@pytest.mark.ac("AC-FEAT-003-18")
+def test_atomic_service_rest_and_wait_extension() -> None:
+    from routepilot.compliance.ports import DriverRules
+
+    rules: DriverRules = PlDomesticRules()
+    for operation in (rules.advance_work, rules.advance_wait, rules.advance_drive):
+        assert operation(DriverState(t=T), -1) == Infeasible(code="INVALID_ACTIVITY")
+    assert rules.advance_work(DriverState(t=T), 361) == Infeasible(code="INVALID_ACTIVITY")
+    assert rules.advance_work(DriverState(t=T), 0).state.t == T
+    daily = rules.advance_work(DriverState(t=T, work_today=710), 30)
+    assert isinstance(daily, Ok)
+    assert daily.events[0].kind == "DAILY_REST"
+    assert daily.state.work_today == 30
+    # Only 10 minutes of the full 30-minute break overlap the remaining nominal wait.
+    waiting = rules.advance_wait(DriverState(t=T, work_since_break=350), 20)
+    assert isinstance(waiting, Ok)
+    assert waiting.elapsed_min == 40
+    assert waiting.state.work_today == 10
+    span = rules.advance_drive(
+        DriverState(t=T, work_since_break=360, day_start_at=T - timedelta(minutes=770)), 1
+    )
+    assert isinstance(span, Ok)
+    assert span.events[0].kind == "DAILY_REST"

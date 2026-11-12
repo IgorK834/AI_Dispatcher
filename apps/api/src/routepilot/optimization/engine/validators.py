@@ -147,12 +147,17 @@ class RouteValidator:
                 onboard.discard(target.offer_id)
         state = driver.rules_state.model_copy(
             update={
-                "t": plan.departure_at,
+                "t": driver.available_from,
                 "sleeper_cab": driver.vehicle.sleeper_cab,
                 "home_timezone": driver.home.timezone,
             }
         )
+        if state.work_today and state.day_start_at is None:
+            state = state.model_copy(
+                update={"day_start_at": driver.available_from - timedelta(minutes=state.work_today)}
+            )
         idle = int((plan.departure_at - driver.available_from).total_seconds() // 60)
+        state = advance_clock(state, idle, work=False, driving=False)
         if idle >= 660:
             state = state.model_copy(
                 update={
@@ -163,10 +168,6 @@ class RouteValidator:
                     "breaks_today": 0,
                     "day_start_at": None,
                 }
-            )
-        elif state.work_today and state.day_start_at is None:
-            state = state.model_copy(
-                update={"day_start_at": driver.available_from - timedelta(minutes=state.work_today)}
             )
         checkpoints: dict[object, DriverState] = {state.t: state}
         international = profile == "eu561_van_international_v1"

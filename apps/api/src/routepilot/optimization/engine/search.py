@@ -1,5 +1,7 @@
 """Deterministic two-profile Branch-and-Bound with distinct offer-set top K."""
 
+from collections.abc import Callable
+
 from routepilot.optimization.engine.costs import CostModel, revenue_in_profile_currency
 from routepilot.optimization.engine.models import (
     Action,
@@ -47,9 +49,12 @@ def search_driver(
     pool: list[OfferSnapshot],
     *,
     bounded: bool = True,
+    elapsed_ms: Callable[[], int] | None = None,
 ) -> tuple[dict[Objective, list[RoutePlan]], int, bool]:
     top: dict[Objective, list[RoutePlan]] = {objective: [] for objective in OBJECTIVES}
     nodes, truncated = 0, False
+    started_ms = elapsed_ms() if elapsed_ms else 0
+    time_limit_ms = int(snapshot.params.wall_clock_safety_s * 1000)
     k = snapshot.params.top_k_per_driver
     revenues = {
         o.id: revenue_in_profile_currency(
@@ -79,14 +84,17 @@ def search_driver(
             label.state.t,
         )
         return (
-            prospective - partial.calculation.total < top["profit"][-1].net_profit_minor
+            prospective - (partial.calculation.total - partial.calculation.per_diem)
+            < top["profit"][-1].net_profit_minor
             and label.state.t > top["fastest"][-1].finish_at
             and partial.fuel_l > top["fuel"][-1].fuel_l
         )
 
     def visit(builder: ScheduleBuilder, label: Label, eligible: list[OfferSnapshot]) -> None:
         nonlocal nodes, truncated
-        if nodes >= snapshot.params.node_budget_per_driver:
+        if nodes >= snapshot.params.node_budget_per_driver or (
+            elapsed_ms is not None and elapsed_ms() - started_ms >= time_limit_ms
+        ):
             truncated = True
             return
         nodes += 1
