@@ -25,8 +25,9 @@ class Schema(BaseModel):
 
 
 class Fuel(Schema):
-    l_per_100km_empty_at90: Decimal = Field(alias="lPer100kmEmptyAt90", gt=0)
-    l_per_100km_full_at90: Decimal = Field(alias="lPer100kmFullAt90", gt=0)
+    # Stored as tenths of a litre: finer input would be silently truncated, so it is rejected.
+    l_per_100km_empty_at90: Decimal = Field(alias="lPer100kmEmptyAt90", gt=0, decimal_places=1)
+    l_per_100km_full_at90: Decimal = Field(alias="lPer100kmFullAt90", gt=0, decimal_places=1)
     speed_curve: Literal["VAN_DEFAULT_V1"] = "VAN_DEFAULT_V1"
 
 
