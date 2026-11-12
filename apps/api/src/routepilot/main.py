@@ -1,6 +1,7 @@
 """Application composition, health endpoints and middleware."""
 
 import asyncio
+import re
 import secrets
 import sqlite3
 from collections.abc import AsyncIterator, Awaitable, Callable
@@ -23,6 +24,7 @@ from sqlalchemy import JSON, Column, MetaData, Table, Text, inspect, select
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException
 from starlette.responses import Response
+from starlette.routing import Match
 
 from routepilot.agent_persistence import SqlAgentStore
 from routepilot.agents.api import create_agents_router
@@ -198,19 +200,36 @@ def create_app(
     )
     user_dependency = require_user(identity)
     admin_dependency = require_role(identity, "admin")
-    application.include_router(create_identity_router(identity, settings))
-    application.include_router(create_fleet_router(fleet, user_dependency, admin_dependency))
-    application.include_router(create_freight_router(freight, user_dependency))
-    application.include_router(create_jobs_router(jobs, plans, assignments, user_dependency))
-    application.include_router(create_agents_router(agents, explanations, user_dependency))
+    # Session, role, CSRF and Origin failures are answered by shared code for every API route;
+    # `Problem` is served as application/problem+json (see `problem_media_type` below).
+    auth_problems: dict[int | str, dict[str, Any]] = {
+        401: {"model": Problem, "description": "No valid session"},
+        403: {"model": Problem, "description": "Role, CSRF token or Origin not accepted"},
+    }
+    application.include_router(
+        create_identity_router(identity, settings),
+        responses={**auth_problems, 429: {"model": Problem, "description": "Rate limited"}},
+    )
+    application.include_router(
+        create_fleet_router(fleet, user_dependency, admin_dependency), responses=auth_problems
+    )
+    application.include_router(
+        create_freight_router(freight, user_dependency), responses=auth_problems
+    )
+    application.include_router(
+        create_jobs_router(jobs, plans, assignments, user_dependency), responses=auth_problems
+    )
+    application.include_router(
+        create_agents_router(agents, explanations, user_dependency), responses=auth_problems
+    )
 
     admin = Depends(admin_dependency)
 
-    @application.post("/api/v1/admin/demo-data/generate", tags=["admin"])
+    @application.post("/api/v1/admin/demo-data/generate", tags=["admin"], responses=auth_problems)
     async def generate_demo_data(body: GenerateInput, actor: Principal = admin) -> dict[str, Any]:
         return demo_data.generate(body, str(actor.id))
 
-    @application.post("/api/v1/admin/demo-data/reset", tags=["admin"])
+    @application.post("/api/v1/admin/demo-data/reset", tags=["admin"], responses=auth_problems)
     async def reset_demo_data(actor: Principal = admin) -> dict[str, Any]:
         await agents.stop()
         await jobs.stop()
@@ -221,6 +240,12 @@ def create_app(
             return demo_data.reset(str(actor.id))
         finally:
             await jobs.start()
+
+    def method_not_allowed(request: Request) -> bool:
+        # A path that exists but not for this method is answered `405` by routing; no handler
+        # runs, so the Origin/CSRF check has nothing to protect and must not mask it as `403`.
+        matches = [route.matches(request.scope)[0] for route in application.router.routes]
+        return Match.FULL not in matches and Match.PARTIAL in matches
 
     @application.middleware("http")
     async def request_context(
@@ -234,6 +259,7 @@ def create_app(
                     request.url.path.startswith("/api/v1/")
                     and request.method in {"POST", "PATCH", "PUT", "DELETE"}
                     and request.url.path != "/api/v1/auth/login"
+                    and not method_not_allowed(request)
                 ):
                     if request.headers.get("Origin") not in settings.origins:
                         raise DomainError("ORIGIN_NOT_ALLOWED", 403)
@@ -299,6 +325,11 @@ def create_app(
             request, error.status_code, "NOT_FOUND" if error.status_code == 404 else "HTTP_ERROR"
         )
         response.headers.update(error.headers or {})
+        if error.status_code == 405:
+            # Routing reports one route's methods; the contract lists every method of the path.
+            for template, item in application.openapi()["paths"].items():
+                if re.fullmatch(re.sub(r"\{[^/]+\}", "[^/]+", template), request.url.path):
+                    response.headers["Allow"] = ", ".join(sorted(m.upper() for m in item))
         return response
 
     @application.get("/health", operation_id="health", response_model=HealthResponse)
@@ -327,6 +358,19 @@ def create_app(
         except SQLAlchemyError:
             return problem(request, 503, "NOT_READY")
         return JSONResponse({"status": "ready", "migration": heads[0] if heads else "base"})
+
+    def problem_media_type() -> dict[str, Any]:
+        if application.openapi_schema is None:
+            schema = FastAPI.openapi(application)
+            for path_item in schema["paths"].values():
+                for operation in path_item.values():
+                    for code in ("401", "403", "429"):
+                        content = operation.get("responses", {}).get(code, {}).get("content", {})
+                        if "application/json" in content:
+                            content["application/problem+json"] = content.pop("application/json")
+        return application.openapi_schema or {}
+
+    application.openapi = problem_media_type  # type: ignore[method-assign]  # reason: contract hook
 
     application.add_middleware(
         CORSMiddleware,

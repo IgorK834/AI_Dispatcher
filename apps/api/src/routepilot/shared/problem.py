@@ -1,8 +1,10 @@
 """RFC 9457 problem responses."""
 
+from typing import Any
+
 from fastapi import Request
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, ConfigDict, Field, JsonValue
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class Problem(BaseModel):
@@ -14,7 +16,7 @@ class Problem(BaseModel):
     code: str
     instance: str
     request_id: str = Field(alias="requestId")
-    errors: list[dict[str, JsonValue]] = Field(default_factory=list)
+    errors: list[dict[str, Any]] = Field(default_factory=list)
 
 
 def problem(
@@ -22,7 +24,7 @@ def problem(
     status: int,
     code: str,
     *,
-    errors: list[dict[str, JsonValue]] | None = None,
+    errors: list[dict[str, Any]] | None = None,
     headers: dict[str, str] | None = None,
 ) -> JSONResponse:
     return JSONResponse(
