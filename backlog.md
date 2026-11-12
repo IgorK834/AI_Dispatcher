@@ -84,23 +84,23 @@ If the lanes still slip, apply the cut order of `context.md` in sequence. Items 
 
 | Slice | Scope | ACs (AC-FEAT-001-…) | Depends | Lock | Status |
 |---|---|---|---|---|---|
-| 001/1 | `shared` kernel (Money, units, ids, `Clock`, `UtcDateTime`, `DomainError`), SQLite engine with PRAGMAs, Alembic setup (`render_as_batch`), `0001_initial` with all MVP tables + `app_meta` | 01, 02, 03 | 000/1, O-3 | 🔒 `apps/api/migrations/**` | todo |
-| 001/2 | `identity`: Argon2id, server-side sessions (hashed token, TTL), `CaptchaVerifier` (Turnstile, test keys), login / logout / me, rate limits, first-start `admin` and `demo` accounts, no registration route | 20, 21, 22, 25, 26, 28, 29, 31, 33 | 001/1 | `.env.example`, `contracts/openapi.json` | todo |
-| 001/3 | CSRF double-submit token, `Origin` check (including login), role dependencies `require_user` / `require_role`, security headers | 23, 24, 34 | 001/2 | — | todo |
-| 001/4 | Drivers CRUD (cursor pagination, filters, `version`, soft delete via `DriverUsageChecker`) and driver state (`POST`/`GET …/state`) | 04, 05, 06, 07, 08, 09, 15 | 001/3 | `contracts/openapi.json` | todo |
-| 001/5 | Vehicles CRUD and cost-profiles CRUD | 10, 11 | 001/4 | `contracts/openapi.json` | todo |
-| 001/6 | Freight offers: manual CRUD (`source=manual`, `MAN-` ids), provider offers read-only, list filters with completeness and provenance (cities fixture until 002/1) | 12, 13, 14 | 001/3 | `contracts/openapi.json` | todo |
-| 001/7 | Cross-cutting: problem+json for every error code with `requestId`, CORS preflight / disallowed origin / no `*`, permission-matrix test over every endpoint of §6.2 (§6.5: drivers/vehicles writable by all roles, cost profiles admin only — OQ-001-01), audit events, OpenAPI completeness + schemathesis over CRUD | 16, 17, 18, 19, 27, 30, 32 | 001/4, 001/5, 001/6 | `contracts/openapi.json` | todo |
+| 001/1 | `shared` kernel (Money, units, ids, `Clock`, `UtcDateTime`, `DomainError`), SQLite engine with PRAGMAs, Alembic setup (`render_as_batch`), `0001_initial` with all MVP tables + `app_meta` | 01, 02, 03 | 000/1, O-3 | 🔒 `apps/api/migrations/**` | done |
+| 001/2 | `identity`: Argon2id, server-side sessions (hashed token, TTL), `CaptchaVerifier` (Turnstile, test keys), login / logout / me, rate limits, first-start `admin` and `demo` accounts, no registration route | 20, 21, 22, 25, 26, 28, 29, 31, 33 | 001/1 | `.env.example`, `contracts/openapi.json` | done |
+| 001/3 | CSRF double-submit token, `Origin` check (including login), role dependencies `require_user` / `require_role`, security headers | 23, 24, 34 | 001/2 | — | in progress — AC-FEAT-001-34 has no test |
+| 001/4 | Drivers CRUD (cursor pagination, filters, `version`, soft delete via `DriverUsageChecker`) and driver state (`POST`/`GET …/state`) | 04, 05, 06, 07, 08, 09, 15 | 001/3 | `contracts/openapi.json` | done |
+| 001/5 | Vehicles CRUD and cost-profiles CRUD | 10, 11 | 001/4 | `contracts/openapi.json` | done |
+| 001/6 | Freight offers: manual CRUD (`source=manual`, `MAN-` ids), provider offers read-only, list filters with completeness and provenance (cities fixture until 002/1) | 12, 13, 14 | 001/3 | `contracts/openapi.json` | done |
+| 001/7 | Cross-cutting: problem+json for every error code with `requestId`, CORS preflight / disallowed origin / no `*`, permission-matrix test over every endpoint of §6.2 (§6.5: drivers/vehicles writable by all roles, cost profiles admin only — OQ-001-01), audit events, OpenAPI completeness + schemathesis over CRUD | 16, 17, 18, 19, 27, 30, 32 | 001/4, 001/5, 001/6 | `contracts/openapi.json` | in progress — AC-17, 18, 19, 32 have no test |
 
 ### FEAT-002 — Demo data generators and import · [spec](specs/FEAT-002-demo-data-generators.md) · planned 11-10
 
 | Slice | Scope | ACs (AC-FEAT-002-…) | Depends | Lock | Status |
 |---|---|---|---|---|---|
-| 002/1 | `data/mock/cities.json` (39 cities), `fleet-generator v1`, committed `fleet.json` (fuel values per OQ-002-01) | 01, 02, 03, 08 | 001/1 | `data/mock/*.json` | todo |
-| 002/2 | `offers-generator v2`: 150 offers, enrichment file with tags, lane rates (OQ-002-03), committed output (body/equipment enumeration values come from the official OpenAPI file, OQ-002-02) | 04, 05, 06, 07 | 002/1, O-4 | `data/mock/*.json` | todo |
-| 002/3 | TIMOCOM v3 subset schemas, tolerant `TimocomV3Mapper`, fixtures from the official OpenAPI examples, `SUSPICIOUS_TEXT` flag | 09, 10, 11, 12, 19 | 002/1, O-4 | 🔒 fixtures from an external file | todo |
-| 002/4 | `MockFreightProvider` (no network), idempotent import with batches, raw records, synthetic-data checks | 13, 14, 18, 20 | 002/2, 002/3, 001/6 | — | todo |
-| 002/5 | First-start seed (`DEMO-DEFAULT` cost profile, fleet, offers, `app_meta.seed_version`), admin `demo-data/generate` and `demo-data/reset`, `make seed-fleet` | 15, 16, 17 | 002/4, 001/5 | `Makefile`, `contracts/openapi.json` | todo |
+| 002/1 | `data/mock/cities.json` (39 cities), `fleet-generator v1`, committed `fleet.json` (fuel values per OQ-002-01) | 01, 02, 03, 08 | 001/1 | `data/mock/*.json` | done |
+| 002/2 | `offers-generator v2`: 150 offers, enrichment file with tags, lane rates (OQ-002-03), committed output (body/equipment enumeration values come from the official OpenAPI file, OQ-002-02) | 04, 05, 06, 07 | 002/1, O-4 | `data/mock/*.json` | done |
+| 002/3 | TIMOCOM v3 subset schemas, tolerant `TimocomV3Mapper`, fixtures from the official OpenAPI examples, `SUSPICIOUS_TEXT` flag | 09, 10, 11, 12, 19 | 002/1, O-4 | 🔒 fixtures from an external file | done |
+| 002/4 | `MockFreightProvider` (no network), idempotent import with batches, raw records, synthetic-data checks | 13, 14, 18, 20 | 002/2, 002/3, 001/6 | — | done |
+| 002/5 | First-start seed (`DEMO-DEFAULT` cost profile, fleet, offers, `app_meta.seed_version`), admin `demo-data/generate` and `demo-data/reset`, `make seed-fleet` | 15, 16, 17 | 002/4, 001/5 | `Makefile`, `contracts/openapi.json` | in progress — AC-FEAT-002-16 has no test |
 
 ### FEAT-003 — Optimizer and working time · [spec](specs/FEAT-003-optimizer-and-working-time.md) · planned 11-11
 
@@ -108,24 +108,24 @@ Pure code: no DB, HTTP, environment or system clock. Gates: `make check` + `make
 
 | Slice | Scope | ACs (AC-FEAT-003-…) | Depends | Lock | Status |
 |---|---|---|---|---|---|
-| 003/1 | `compliance`: `DriverRules` port, `pl_domestic_employee_v1` (break split 30 + 15 min, OQ-003-04), `eu561_van_international_v1`, profile choice per plan, weekly counters (Monday 00:00 base zone) | 14, 15, 16, 17, 18 | 001/1 | — | todo |
-| 003/2 | Cost model: fuel with `VAN_DEFAULT_V1` speed curve, CO₂, tolls, driver cost, per diems (domestic 45 zł/day, none international), accommodation, vehicle cost | 19, 20 | 001/1 | — | todo |
-| 003/3 | Snapshot models, prefilter with ordered rejection codes, rejection report, empty result without exception | 21, 22 | 003/1, 003/2, 002/1 | — | todo |
-| 003/4 | `RouteValidator` and `FleetValidator` (separate implementation from the search) | 25 | 003/3 | — | todo |
-| 003/5 | Per-driver Branch-and-Bound (horizon, chains, `home_by`, top-K), objectives `profit`/`fastest`/`fuel` with tie-breakers, node budget / `truncated`, brute-force `oracle.py`, property tests P1–P9, P11 | 01, 02, 03, 04, 05, 06, 07, 08, 09, 11, 23, 27 | 003/4 | — | todo |
-| 003/6 | Fleet assignment, `fastest`/`fuel` fleet solutions over the `profit` drivers, `baseline_single`, `baseline_greedy`, `fleet_oracle.py`, property tests P10, P12, P13 | 10, 12, 13, 24, 26 | 003/5 | — | todo |
-| 003/7 | Golden tests GOLD-001 … GOLD-010 (values are binding; a mismatch = stop and report, never edit the golden file) | 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 | 003/6 | 🔒 golden values | todo |
+| 003/1 | `compliance`: `DriverRules` port, `pl_domestic_employee_v1` (break split 30 + 15 min, OQ-003-04), `eu561_van_international_v1`, profile choice per plan, weekly counters (Monday 00:00 base zone) | 14, 15, 16, 17, 18 | 001/1 | — | done |
+| 003/2 | Cost model: fuel with `VAN_DEFAULT_V1` speed curve, CO₂, tolls, driver cost, per diems (domestic 45 zł/day, none international), accommodation, vehicle cost | 19, 20 | 001/1 | — | done |
+| 003/3 | Snapshot models, prefilter with ordered rejection codes, rejection report, empty result without exception | 21, 22 | 003/1, 003/2, 002/1 | — | done |
+| 003/4 | `RouteValidator` and `FleetValidator` (separate implementation from the search) | 25 | 003/3 | — | done |
+| 003/5 | Per-driver Branch-and-Bound (horizon, chains, `home_by`, top-K), objectives `profit`/`fastest`/`fuel` with tie-breakers, node budget / `truncated`, brute-force `oracle.py`, property tests P1–P9, P11 | 01, 02, 03, 04, 05, 06, 07, 08, 09, 11, 23, 27 | 003/4 | — | in progress — AC-FEAT-003-01 … 08 have no test |
+| 003/6 | Fleet assignment, `fastest`/`fuel` fleet solutions over the `profit` drivers, `baseline_single`, `baseline_greedy`, `fleet_oracle.py`, property tests P10, P12, P13 | 10, 12, 13, 24, 26 | 003/5 | — | in progress — AC-FEAT-003-10, 13 have no test |
+| 003/7 | Golden tests GOLD-001 … GOLD-010 (values are binding; a mismatch = stop and report, never edit the golden file) | 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 | 003/6 | 🔒 golden values | done |
 | 003/8 | Import-linter contract for engine/compliance purity and oracles test-only; `bench/fleet_5x60.py` with p50/p95 report | 28, 29 | 003/6 | — | todo |
 
 ### FEAT-004 — Routing and jobs · [spec](specs/FEAT-004-routing-and-jobs.md) · planned 11-11
 
 | Slice | Scope | ACs (AC-FEAT-004-…) | Depends | Lock | Status |
 |---|---|---|---|---|---|
-| 004/1 | `RoutingProvider` port, repo matrix provider (`matrix_repo_v1`), haversine provider, composite fallback with `ROUTING_FALLBACK`, committed `data/mock/routing-matrix.json` (haversine variant per OQ-004-02), no HTTP without a key | 01, 02, 03, 06, 07, 08 | 002/1 | `data/mock/*.json` | todo |
-| 004/2 | `OrsRoutingProvider` (`driving-car`), retry then fallback, `routing_cache` | 04, 05 | 004/1, O-5 | 🔒 recorded ORS fixtures (external calls, no key in files) | todo — waits for O-5 |
-| 004/3 | Jobs: `POST /optimization-jobs` (`202`, `Idempotency-Key`), in-process worker (`ProcessPoolExecutor(max_workers=1)`), result storage, heartbeat and restart recovery, sequential runs, per-user job limit | 09, 10, 11, 13, 14, 15 | 003/6, 004/1, 002/5 | `contracts/openapi.json` | todo |
-| 004/4 | Results and route plans: `GET …/result`, `GET /route-plans/{id}` with geometry, immutable snapshot and plans | 12, 16, 17 | 004/3 | `contracts/openapi.json` | todo |
-| 004/5 | Assignments: `POST`/`DELETE /assignments`, `PLAN_NOT_ASSIGNABLE`, `DriverUsageChecker` implementation for FEAT-001; auth/CSRF/rate-limit test over all endpoints of FEAT-004 §6.1 | 18, 19, 20 | 004/4 | `contracts/openapi.json` | todo |
+| 004/1 | `RoutingProvider` port, repo matrix provider (`matrix_repo_v1`), haversine provider, composite fallback with `ROUTING_FALLBACK`, committed `data/mock/routing-matrix.json` (haversine variant per OQ-004-02), no HTTP without a key | 01, 02, 03, 06, 07, 08 | 002/1 | `data/mock/*.json` | done |
+| 004/2 | `OrsRoutingProvider` (`driving-car`), retry then fallback, `routing_cache` | 04, 05 | 004/1, O-5 | 🔒 recorded ORS fixtures (external calls, no key in files) | review — O-5 still open |
+| 004/3 | Jobs: `POST /optimization-jobs` (`202`, `Idempotency-Key`), in-process worker (`ProcessPoolExecutor(max_workers=1)`), result storage, heartbeat and restart recovery, sequential runs, per-user job limit | 09, 10, 11, 13, 14, 15 | 003/6, 004/1, 002/5 | `contracts/openapi.json` | done |
+| 004/4 | Results and route plans: `GET …/result`, `GET /route-plans/{id}` with geometry, immutable snapshot and plans | 12, 16, 17 | 004/3 | `contracts/openapi.json` | done |
+| 004/5 | Assignments: `POST`/`DELETE /assignments`, `PLAN_NOT_ASSIGNABLE`, `DriverUsageChecker` implementation for FEAT-001; auth/CSRF/rate-limit test over all endpoints of FEAT-004 §6.1 | 18, 19, 20 | 004/4 | `contracts/openapi.json` | done |
 
 ### FEAT-006 — Runtime agents · [spec](specs/FEAT-006-runtime-agents.md) · planned 11-12
 
@@ -133,13 +133,13 @@ All `agent` tests run on scripted fake models without network (`make test-agents
 
 | Slice | Scope | ACs (AC-FEAT-006-…) | Depends | Lock | Status |
 |---|---|---|---|---|---|
-| 006/1 | `agents/models.py`: `AGENT_MODEL_POLICY`, `build_chat_model(role)` via `init_chat_model`, provider fallback mechanics, fake-model registration for tests; versioned prompt files and loader; AI-enabled rule and `GET /agent/status` | 21 | 004/5, O-6 | 🔒 `agents/prompts/**`, `.env.example` | todo |
-| 006/2 | Tools (13 read tools + `assign_plan` adapter) as thin adapters over services: registry with allowlist and `read`/`write` kind, Pydantic schemas `extra="forbid"`, size limits, facts export, `untrusted_text`, driver and plan aliases | 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 | 006/1 | — | todo |
-| 006/3 | `StateGraph`: Dispatcher + Freight Scout + Fleet & Compliance + Route Planner, allowlist enforcement, `PlanValidator`, `request_approval`, `ApprovalGate` with idempotent `interrupt()`/resume, `assign_plan`, SQLite checkpoints in `agents.db`, data minimisation, prompt-injection containment (run service, no HTTP yet) | 01, 02, 05, 06, 07, 08, 13, 20, 38, 39 | 006/2 | 🔒 `agents/prompts/**` | todo |
-| 006/4 | `GroundingGuard` with formatting tolerance, template answers (incl. excluded suspicious offers), provider fallback in nodes, `explain_plan` and `POST /route-plans/{id}/explanations` with template fallback | 09, 10, 14, 18, 25, 37 | 006/3 | `contracts/openapi.json` | todo |
-| 006/5 | `BudgetGuard`: recursion limit, tool-call limit, run token budget, run timeout (excluding `waiting_approval`), daily budget accounting per user (lower for `demo`) | 11, 12 | 006/3 | `.env.example` | todo |
-| 006/6 | Threads, runs, messages, resume and SSE endpoints (`sse-starlette`, `Last-Event-ID` replay), trace in `agent_steps`, resume authorisation, `503 AI_UNAVAILABLE`, `429 AI_BUDGET_EXCEEDED`, provider swap end to end | 03, 04, 15, 16, 17, 19, 22, 23, 24 | 006/3, 006/4, 006/5 | `contracts/openapi.json` | todo |
-| 006/7 | Live evaluation set: ≥ 30 scenarios + ≥ 10 prompt-injection scenarios in `evals/agents/*.yaml` (manual `ai-evals` only, never blocks CI) | 40, 41 | 006/6, 007/3, O-7 | 🔒 paid API budget | todo |
+| 006/1 | `agents/models.py`: `AGENT_MODEL_POLICY`, `build_chat_model(role)` via `init_chat_model`, provider fallback mechanics, fake-model registration for tests; versioned prompt files and loader; AI-enabled rule and `GET /agent/status` | 21 | 004/5, O-6 | 🔒 `agents/prompts/**`, `.env.example` | review — O-6 still open |
+| 006/2 | Tools (13 read tools + `assign_plan` adapter) as thin adapters over services: registry with allowlist and `read`/`write` kind, Pydantic schemas `extra="forbid"`, size limits, facts export, `untrusted_text`, driver and plan aliases | 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 | 006/1 | — | in progress — AC-FEAT-006-33 … 35 have no test |
+| 006/3 | `StateGraph`: Dispatcher + Freight Scout + Fleet & Compliance + Route Planner, allowlist enforcement, `PlanValidator`, `request_approval`, `ApprovalGate` with idempotent `interrupt()`/resume, `assign_plan`, SQLite checkpoints in `agents.db`, data minimisation, prompt-injection containment (run service, no HTTP yet) | 01, 02, 05, 06, 07, 08, 13, 20, 38, 39 | 006/2 | 🔒 `agents/prompts/**` | in progress — AC-FEAT-006-08, 13, 38, 39 have no test |
+| 006/4 | `GroundingGuard` with formatting tolerance, template answers (incl. excluded suspicious offers), provider fallback in nodes, `explain_plan` and `POST /route-plans/{id}/explanations` with template fallback | 09, 10, 14, 18, 25, 37 | 006/3 | `contracts/openapi.json` | in progress — AC-FEAT-006-14 has no test |
+| 006/5 | `BudgetGuard`: recursion limit, tool-call limit, run token budget, run timeout (excluding `waiting_approval`), daily budget accounting per user (lower for `demo`) | 11, 12 | 006/3 | `.env.example` | in progress — AC-FEAT-006-12 has no test |
+| 006/6 | Threads, runs, messages, resume and SSE endpoints (`sse-starlette`, `Last-Event-ID` replay), trace in `agent_steps`, resume authorisation, `503 AI_UNAVAILABLE`, `429 AI_BUDGET_EXCEEDED`, provider swap end to end | 03, 04, 15, 16, 17, 19, 22, 23, 24 | 006/3, 006/4, 006/5 | `contracts/openapi.json` | review — depends on 006/3 … 006/5 |
+| 006/7 | Live evaluation set: ≥ 30 scenarios + ≥ 10 prompt-injection scenarios in `evals/agents/*.yaml` (manual `ai-evals` only, never blocks CI) | 40, 41 | 006/6, 007/3, O-7 | 🔒 paid API budget | in progress — O-7 allowance used up, 22 scenarios not run |
 
 ### FEAT-005 — Frontend · [spec](specs/FEAT-005-frontend.md) · planned 11-13
 
@@ -214,3 +214,4 @@ Reported, not fixed (these files are outside this task):
 - 2026-11-11 — ACs moved to the slice where they can first be tested end to end: AC-FEAT-001-27 → 001/7; AC-FEAT-004-20 → 004/5; AC-FEAT-005-18 → 005/9; FEAT-006 ACs regrouped (02, 20 → 006/3; 14, 18 → 006/4; 03, 04, 17, 19, 24 → 006/6). 002/2 now depends on O-4 (enumeration values). Every AC still belongs to exactly one slice.
 - 2026-11-11 — UI design approved (`docs/design/`, ADR-0015, FEAT-000 rev. 4, FEAT-005 rev. 4): 000/2 sets up tokens and fonts instead of shadcn/ui; 005/1 builds the design system and `VanSide`; new AC-FEAT-005-26 → 005/5 (top-view load plan), AC-FEAT-005-27 → 005/9 (design conformance); 005/3, 005/6, 005/7 show the van.
 - 2026-11-12 — 000/1 … 000/5 marked `done` after an end-to-end check against their issues (all FEAT-000 ACs 01–13 have named tests; `make check`, `export_openapi.py --check`, `trace.py --check`, `check_spec_touch.py` and the `ci-fast` run on GitHub are green). Two points for the owner: `Makefile` stubs (`e2e`, `bench`, `seed-fleet`, `test-props`) print "not available until FEAT-xxx" and exit 0, while the 000/3 issue text asks for a non-zero exit (FR-9 only says "print"); `styles/tokens.css` carries colour, radius and shadow tokens only — `status.*`, `cargo.*`, `timeline`, `type`, `space` and `layout` tokens are left to 005/1.
+- 2026-11-12 — statuses of the other slices set from `scripts/trace.py` (every AC of the slice maps to a named test) and a green full run (`make check`, `make test-db`, security tests). `done` = every AC has a passing named test and no owner action is open; `review` = tests complete but an owner action or an unfinished dependency is open; `in progress` = some ACs of the slice still have no test. This is the AC-to-test mapping, not a line-by-line review of each test; 001/2 was additionally audited against its issue (AC-FEAT-001-33 got its test and `POST` to an unknown `/api/v1` path now answers `404` instead of `403`/`401`). Not changed: owner actions O-1 … O-4 (owner decision), and the status sentence at the top of this file.
