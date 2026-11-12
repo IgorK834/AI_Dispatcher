@@ -279,6 +279,7 @@ class EngineResult(EngineModel):
     fleet: dict[Objective, FleetSolution]
     baselines: dict[str, FleetSolution]
     baseline_plans: list[RoutePlan]
+    fleet_candidates: list[RoutePlan] = Field(default_factory=list)
     rejections: list[Rejection]
     warnings: list[str]
     stats: EngineStats
