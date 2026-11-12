@@ -16,7 +16,9 @@ import structlog
 from sqlalchemy import func, select, update
 from sqlalchemy.engine import CursorResult, Engine
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
 
+from routepilot.compliance.rules import Eu561Rules, PlDomesticRules
 from routepilot.optimization.engine.models import (
     EngineParams,
     EngineResult,
@@ -30,13 +32,17 @@ from routepilot.optimization.jobs.domain import (
     Assignment,
     Calculation,
     Counters,
+    DriverAvailability,
     Job,
     JobCreate,
     JobError,
     JobResult,
     Money,
+    PlanRules,
     PlanStop,
     Progress,
+    Remaining561,
+    RemainingWork,
     RoutePlan,
     Stats,
 )
@@ -458,12 +464,36 @@ class PlanService:
             return RouteValidator().validate(snapshot, plan)
 
     def compare(self, plan_ids: list[UUID]) -> dict[str, Any]:
-        if not 2 <= len(plan_ids) <= 3:
+        if not 2 <= len(plan_ids) <= 6:
             raise DomainError("VALIDATION_ERROR", 422)
         plans = [self.get(plan_id) for plan_id in plan_ids]
         base = plans[0]
         return {
             "plans": [plan.model_dump(mode="json", by_alias=True) for plan in plans],
+            "rows": [
+                {
+                    "plan_id": str(plan.id),
+                    "variant": plan.variant,
+                    "net_profit_eur": str(Decimal(plan.net_profit.amount_minor) / 100),
+                    "finish_at": plan.finish_at.isoformat(),
+                    "fuel_l": str(plan.fuel_l),
+                    "co2_kg": str(plan.co2_kg),
+                    "distance_km": str(plan.distance_km),
+                }
+                for plan in plans
+            ],
+            "deltas_vs_first": [
+                {
+                    "plan_id": str(plan.id),
+                    "d_profit_eur": str(
+                        Decimal(plan.net_profit.amount_minor - base.net_profit.amount_minor) / 100
+                    ),
+                    "d_finish_min": int((plan.finish_at - base.finish_at).total_seconds() // 60),
+                    "d_fuel_l": str(plan.fuel_l - base.fuel_l),
+                    "d_co2_kg": str(plan.co2_kg - base.co2_kg),
+                }
+                for plan in plans[1:]
+            ],
             "deltas": [
                 {
                     "routePlanId": str(plan.id),
@@ -476,6 +506,95 @@ class PlanService:
                 for plan in plans[1:]
             ],
         }
+
+    def driver_availability(self, driver_id: UUID, horizon_days: int = 5) -> DriverAvailability:
+        if not 1 <= horizon_days <= 7:
+            raise DomainError("VALIDATION_ERROR", 422)
+        with self.repository.session() as session:
+            snapshot = build_snapshot(
+                self.repository,
+                session,
+                JobCreate(scope="driver", driver_ids=[driver_id], offer_ids=[]),
+                self.clock.now(),
+                EngineParams(horizon_days=horizon_days),
+                Decimal("2.6"),
+            )
+            if not snapshot.drivers:
+                raise DomainError("NOT_FOUND", 404)
+            driver = snapshot.drivers[0]
+            domestic = PlDomesticRules(snapshot.params.max_daily_work_min).remaining(
+                driver.rules_state
+            )
+            international = Eu561Rules().remaining(driver.rules_state)
+            active = session.scalar(
+                select(AssignmentRow.id).where(
+                    AssignmentRow.driver_id == driver_id, AssignmentRow.status == "active"
+                )
+            )
+            return DriverAvailability(
+                driver_id=driver_id,
+                profile_domestic="pl_domestic_employee_v1",
+                remaining=RemainingWork(
+                    work_today_min=domestic.daily_work_min, work_week_min=domestic.weekly_work_min
+                ),
+                remaining_561=Remaining561(
+                    drive_before_break_min=international.drive_break_min,
+                    drive_today_min=international.daily_drive_min,
+                    drive_week_min=international.weekly_drive_min,
+                    drive_two_weeks_min=international.two_week_drive_min,
+                ),
+                must_be_home_by=driver.home_by,
+                has_active_assignment=active is not None,
+            )
+
+    def check_plan_rules(self, plan_id: UUID) -> PlanRules:
+        validation = self.validate(plan_id)
+        with self.repository.session() as session:
+            row = session.get(PlanRow, plan_id)
+            if row is None:
+                raise DomainError("NOT_FOUND", 404)
+            job = session.get(JobRow, row.job_id)
+            if job is None or job.result is None:
+                raise DomainError("NOT_FOUND", 404)
+            result = EngineResult.model_validate(job.result["engine"])
+            ref = next(
+                key for key, value in job.result["plan_ids"].items() if value == str(plan_id)
+            )
+            plans = [
+                plan
+                for variants in result.per_driver.values()
+                for items in variants.values()
+                for plan in items
+            ] + result.baseline_plans
+            plan = next(plan for plan in plans if plan.plan_ref == ref)
+            snapshot = EngineSnapshot.model_validate(job.request["snapshot"])
+            driver = next(driver for driver in snapshot.drivers if driver.id == plan.driver_id)
+            work, drive = driver.rules_state.work_today, driver.rules_state.drive_today
+            max_work, max_drive = work, drive
+            breaks = rests = 0
+            for item in plan.activities:
+                activity = item.activity
+                if activity.kind == "DAILY_REST":
+                    rests += 1
+                    work = drive = 0
+                elif activity.kind == "BREAK":
+                    breaks += 1
+                else:
+                    work += activity.minutes
+                    drive += activity.minutes if activity.kind == "DRIVE" else 0
+                    max_work, max_drive = max(max_work, work), max(max_drive, drive)
+            return PlanRules(
+                plan_id=plan_id,
+                rules_profile=plan.rules_profile,
+                valid=validation.valid,
+                violations=[{"invariant": error, "message": error} for error in validation.errors],
+                inserted_breaks=breaks,
+                inserted_daily_rests=rests,
+                max_work_day_min=max_work,
+                max_drive_day_min=max_drive,
+                finish_at=plan.finish_at,
+                home_reached=plan.home_reached,
+            )
 
     def plan_facts(self, plan_id: UUID) -> RoutePlan:
         return self.get(plan_id)
@@ -554,6 +673,73 @@ class AssignmentService:
     ) -> Assignment:
         return self.assign_many([plan_id], approved_by, agent_run_id)[0]
 
+    def _checked_plans(
+        self, session: Session, plan_ids: list[UUID]
+    ) -> list[tuple[PlanRow, dict[str, int]]]:
+        if not plan_ids or len(set(plan_ids)) != len(plan_ids):
+            raise DomainError("PLAN_NOT_ASSIGNABLE", errors=[{"code": "CONFLICTING_PLANS"}])
+        plans = []
+        used_drivers: set[UUID] = set()
+        used_offers: set[str] = set()
+        drivers, offers = (
+            self.repository.table("drivers"),
+            self.repository.table("freight_offers"),
+        )
+        for plan_id in plan_ids:
+            plan = session.get(PlanRow, plan_id)
+            if plan is None:
+                raise DomainError("NOT_FOUND", 404)
+            errors: list[dict[str, Any]] = []
+            if plan.kind != "optimized":
+                errors.append({"code": "BASELINE_PLAN"})
+            if plan.driver_id in used_drivers or used_offers.intersection(plan.offer_ids):
+                errors.append({"code": "CONFLICTING_PLANS"})
+            driver = session.execute(
+                select(drivers.c.deleted_at).where(drivers.c.id == str(plan.driver_id))
+            ).first()
+            if driver is None or driver[0] is not None:
+                errors.append({"code": "DRIVER_UNAVAILABLE"})
+            if session.scalar(
+                select(AssignmentRow.id).where(
+                    AssignmentRow.driver_id == plan.driver_id,
+                    AssignmentRow.status == "active",
+                )
+            ):
+                errors.append({"code": "DRIVER_ALREADY_ASSIGNED"})
+            job = session.get(JobRow, plan.job_id)
+            expected = (
+                {offer["id"]: offer["version"] for offer in job.request["snapshot"]["offers"]}
+                if job
+                else {}
+            )
+            for offer_id in plan.offer_ids:
+                actual = session.execute(
+                    select(offers.c.status, offers.c.version).where(offers.c.id == offer_id)
+                ).first()
+                if (
+                    actual is None
+                    or actual.status != "open"
+                    or actual.version != expected.get(offer_id)
+                ):
+                    errors.append({"code": "OFFER_CHANGED", "offerId": offer_id})
+            if errors:
+                raise DomainError("PLAN_NOT_ASSIGNABLE", errors=errors)
+            used_drivers.add(plan.driver_id)
+            used_offers.update(plan.offer_ids)
+            plans.append((plan, expected))
+        return plans
+
+    def check_assignable(self, plan_ids: list[UUID]) -> ValidationResult:
+        try:
+            with self.repository.session() as session:
+                self._checked_plans(session, plan_ids)
+            return ValidationResult(valid=True, errors=[])
+        except DomainError as error:
+            return ValidationResult(
+                valid=False,
+                errors=[str(item.get("code", error.code)) for item in error.errors] or [error.code],
+            )
+
     def assign_many(
         self, plan_ids: list[UUID], approved_by: UUID, agent_run_id: UUID | None = None
     ) -> list[Assignment]:
@@ -561,58 +747,8 @@ class AssignmentService:
             raise DomainError("PLAN_NOT_ASSIGNABLE", errors=[{"code": "CONFLICTING_PLANS"}])
         try:
             with self._lock, self.repository.session() as session:
-                plans = []
-                used_drivers: set[UUID] = set()
-                used_offers: set[str] = set()
-                drivers, offers = (
-                    self.repository.table("drivers"),
-                    self.repository.table("freight_offers"),
-                )
-                for plan_id in plan_ids:
-                    plan = session.get(PlanRow, plan_id)
-                    if plan is None:
-                        raise DomainError("NOT_FOUND", 404)
-                    errors: list[dict[str, Any]] = []
-                    if plan.kind != "optimized":
-                        errors.append({"code": "BASELINE_PLAN"})
-                    if plan.driver_id in used_drivers or used_offers.intersection(plan.offer_ids):
-                        errors.append({"code": "CONFLICTING_PLANS"})
-                    driver = session.execute(
-                        select(drivers.c.deleted_at).where(drivers.c.id == str(plan.driver_id))
-                    ).first()
-                    if driver is None or driver[0] is not None:
-                        errors.append({"code": "DRIVER_UNAVAILABLE"})
-                    if session.scalar(
-                        select(AssignmentRow.id).where(
-                            AssignmentRow.driver_id == plan.driver_id,
-                            AssignmentRow.status == "active",
-                        )
-                    ):
-                        errors.append({"code": "DRIVER_ALREADY_ASSIGNED"})
-                    job = session.get(JobRow, plan.job_id)
-                    expected = (
-                        {
-                            offer["id"]: offer["version"]
-                            for offer in job.request["snapshot"]["offers"]
-                        }
-                        if job
-                        else {}
-                    )
-                    for offer_id in plan.offer_ids:
-                        actual = session.execute(
-                            select(offers.c.status, offers.c.version).where(offers.c.id == offer_id)
-                        ).first()
-                        if (
-                            actual is None
-                            or actual.status != "open"
-                            or actual.version != expected.get(offer_id)
-                        ):
-                            errors.append({"code": "OFFER_CHANGED", "offerId": offer_id})
-                    if errors:
-                        raise DomainError("PLAN_NOT_ASSIGNABLE", errors=errors)
-                    used_drivers.add(plan.driver_id)
-                    used_offers.update(plan.offer_ids)
-                    plans.append((plan, expected))
+                plans = self._checked_plans(session, plan_ids)
+                offers = self.repository.table("freight_offers")
                 created = []
                 now = self.clock.now()
                 for plan, expected in plans:
