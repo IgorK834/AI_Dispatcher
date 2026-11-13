@@ -232,7 +232,7 @@ export function FleetScreen() {
       <KpiCards drivers={driverItems} assignedIds={assignedIds} />
 
       <section className="rounded-card bg-surface shadow-card">
-        <div className="flex flex-wrap items-center justify-between gap-3 px-6 pb-3 pt-5">
+        <div className="min-w-0 px-6 pb-3 pt-5">
           <Tabs
             label={t('tabs.label')}
             value={view}

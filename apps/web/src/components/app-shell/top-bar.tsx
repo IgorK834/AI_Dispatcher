@@ -30,7 +30,7 @@ export function TopBar({
   account,
 }: TopBarProps) {
   return (
-    <header className="flex min-h-20 items-center gap-6 border-b border-line bg-surface px-10">
+    <header className="flex min-h-20 flex-wrap items-center gap-x-6 gap-y-2 border-b border-line bg-surface px-4 py-3 md:px-10">
       <Link
         href="/"
         className="flex items-center gap-2 font-display text-lg font-semibold text-ink"
@@ -45,7 +45,10 @@ export function TopBar({
         {appName}
       </Link>
       {items.length > 0 && (
-        <nav aria-label={navLabel} className="flex flex-1 justify-center gap-1">
+        <nav
+          aria-label={navLabel}
+          className="order-last flex w-full flex-wrap justify-center gap-1 xl:order-none xl:w-auto xl:flex-1"
+        >
           {items.map((item) => {
             const active = item.href === activeHref;
             return (
@@ -55,7 +58,7 @@ export function TopBar({
                 aria-current={active ? 'page' : undefined}
                 className={cn(
                   'inline-flex min-h-11 items-center rounded-control px-4 text-sm font-semibold',
-                  active ? 'bg-red-tint text-red' : 'text-ink2 hover:bg-well',
+                  active ? 'bg-red-tint text-red-hover' : 'text-ink2 hover:bg-well',
                 )}
               >
                 {item.label}
@@ -64,7 +67,7 @@ export function TopBar({
           })}
         </nav>
       )}
-      <div className="ml-auto flex items-center gap-3">
+      <div className="ml-auto flex flex-wrap items-center gap-3">
         {syntheticLabel && <Pill level="synthetic">{syntheticLabel}</Pill>}
         <LanguageSwitch />
         {account}
