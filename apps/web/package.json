@@ -14,7 +14,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "format:check": "prettier --check .",
-    "gen:api": "openapi-typescript ../../contracts/openapi.json -o src/lib/api/schema.d.ts",
+    "generate:api": "openapi-typescript ../../contracts/openapi.json -o src/lib/api/schema.d.ts",
+    "gen:api": "pnpm run generate:api",
     "check:fetch": "node scripts/check-fetch-usage.mjs",
     "check:messages": "node scripts/check-messages.mjs"
   },
