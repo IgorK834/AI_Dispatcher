@@ -766,7 +766,119 @@
       "none": "No offer was rejected."
     }
   },
-  "chat": {},
+  "chat": {
+    "title": "AI Dispatcher",
+    "subtitle": "Ask in plain language. Agents read the data, the engine computes every number, you approve every assignment.",
+    "loading": "Loading the AI status",
+    "loadFailed": "Could not load the AI status",
+    "conversation": "Conversation",
+    "newConversation": "New conversation",
+    "draft": "Draft",
+    "roles": {
+      "user": "You",
+      "assistant": "Dispatcher"
+    },
+    "empty": {
+      "title": "Ask for a plan",
+      "body": "Describe what you need. The assistant reads the fleet and the offers, the engine computes every number and nothing is assigned without your approval.",
+      "example": "Find the best loads for all vans for tomorrow; everyone must get home for the weekend."
+    },
+    "answer": {
+      "verified": "Verified numbers",
+      "template": "Template answer",
+      "unverified": "Numbers not verified"
+    },
+    "runErrors": {
+      "BUDGET_EXCEEDED": "The AI budget ran out during this run. The manual optimizer is still available.",
+      "AI_PROVIDER_ERROR": "The AI provider did not answer. Try again, or use the manual optimizer.",
+      "TOOL_ERROR": "A data step failed, so the answer could not be completed. Try again.",
+      "APPROVAL_EXPIRED": "The approval request expired. Nothing was assigned.",
+      "INTERNAL_ERROR": "The run stopped because of an internal error. Nothing was assigned.",
+      "UNKNOWN": "The run ended with an error ({code})."
+    },
+    "status": {
+      "queued": "Waiting to start",
+      "running": "Working on it",
+      "waiting_approval": "Waiting for your approval",
+      "succeeded": "Done",
+      "failed": "The run failed",
+      "cancelled": "The run was cancelled"
+    },
+    "connection": {
+      "reconnecting": "Connection lost, reconnecting",
+      "polling": "Live updates unavailable, checking every 2 seconds"
+    },
+    "composer": {
+      "label": "Message",
+      "placeholder": "Ask about loads, drivers or plans",
+      "send": "Send",
+      "hint": "Unlocks when the run finishes. Answers may only use numbers returned by tools in this run."
+    },
+    "trace": {
+      "title": "Agent trace",
+      "close": "Close",
+      "summary": "{steps, plural, one {# step} other {# steps}} · {tokens} tokens",
+      "empty": "Steps appear here while the assistant works.",
+      "type": {
+        "llm": "Model",
+        "tool": "Tool",
+        "guard": "Check",
+        "interrupt": "Waiting for you"
+      },
+      "status": {
+        "running": "running",
+        "ok": "ok",
+        "error": "failed",
+        "rejected": "rejected"
+      },
+      "tokens": "{input} in / {output} out"
+    },
+    "proposal": {
+      "netProfit": "Net profit",
+      "finish": "Finish",
+      "co2": "CO₂ est.",
+      "openPlan": "Open plan",
+      "showOnMap": "Show on map"
+    },
+    "approval": {
+      "title": "Approve {count, plural, one {# assignment} other {# assignments}}?",
+      "expiresIn": "Expires in {time}",
+      "expired": "This request expired",
+      "note": "Nothing is assigned until you approve. Rejecting saves nothing.",
+      "driver": "Driver",
+      "net": "Net",
+      "finish": "Finish",
+      "home": "Home in time",
+      "yes": "Yes",
+      "no": "No",
+      "totalNet": "Total net",
+      "fuel": "Fuel est.",
+      "co2": "CO₂ est.",
+      "comment": "Comment",
+      "commentHint": "Optional, sent with a rejection.",
+      "approve": "Approve and assign",
+      "reject": "Reject",
+      "resolvedApprove": "Approved. The assignments are saved.",
+      "resolvedReject": "Rejected. Nothing was assigned.",
+      "resolvedOther": "This request was resolved.",
+      "openFleet": "See the assignments in the fleet"
+    },
+    "map": {
+      "title": "Proposed routes",
+      "empty": "Proposed routes appear here after an answer.",
+      "loading": "Loading the route"
+    },
+    "aiOff": {
+      "title": "AI is off — no model key is configured",
+      "body": "The chat needs a model key on the server. Everything else works without it: run the same optimisation by hand, open plans with template explanations and assign plans.",
+      "openOptimizer": "Open the manual optimizer",
+      "goFleet": "Go to fleet",
+      "howTo": {
+        "title": "How to turn AI on (administrator)",
+        "body": "Add a provider key and <code>AGENT_MODEL_POLICY</code> to <code>apps/api/.env</code>, then restart the API."
+      }
+    }
+  },
   "admin": {},
   "errors": {
     "VALIDATION_ERROR": "Some values are not valid. Check the fields and try again.",
