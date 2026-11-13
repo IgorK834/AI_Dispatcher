@@ -10,7 +10,7 @@ const levels: Record<PillLevel, string> = {
   error: 'bg-red text-surface',
   info: 'bg-info-bg text-info-fg',
   quiet: 'bg-quiet-bg text-quiet-fg',
-  brand: 'bg-red-tint text-red',
+  brand: 'bg-red-tint text-red-hover',
   synthetic: 'border border-line-strong bg-surface text-ink2',
 };
 

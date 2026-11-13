@@ -1,0 +1,10 @@
+// A component with a visible string written in the source instead of the message files.
+// The lint rule `routepilot/no-hardcoded-text` has to fail on it (AC-FEAT-005-18).
+export function Greeting() {
+  return (
+    <section aria-label="Greeting">
+      <h2>Welcome back</h2>
+      <button type="button">Save changes</button>
+    </section>
+  );
+}

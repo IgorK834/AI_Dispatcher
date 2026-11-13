@@ -1,0 +1,9 @@
+// A component with a raw colour and a font-family written in the source instead of the tokens.
+// The lint rule `routepilot/no-raw-colors` has to fail on it (AC-FEAT-005-27).
+export function Badge() {
+  return (
+    <span style={{ color: '#D42A22', fontFamily: 'Arial' }} className="bg-[#fff]">
+      {'rgb(0, 0, 0)'}
+    </span>
+  );
+}

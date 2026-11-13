@@ -55,7 +55,7 @@ export function TopBar({
                 aria-current={active ? 'page' : undefined}
                 className={cn(
                   'inline-flex min-h-11 items-center rounded-control px-4 text-sm font-semibold',
-                  active ? 'bg-red-tint text-red' : 'text-ink2 hover:bg-well',
+                  active ? 'bg-red-tint text-red-hover' : 'text-ink2 hover:bg-well',
                 )}
               >
                 {item.label}
