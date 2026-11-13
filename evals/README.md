@@ -53,8 +53,11 @@ runs under the hard campaign ledger in `ledger.py`:
 
 - every model call reserves its whole token cap before it is sent; an exhausted or unknown
   reservation stops the batch;
-- the campaign total is 500 000 tokens, split into the `smoke` phase (80 000) and the `evals`
-  phase (420 000); a finished phase is not run again without `--retry-phase`.
+- the campaign total is 1 000 000 tokens (owner decision 2026-11-13), split into the `smoke`
+  phase (80 000) and the `evals` phase (920 000); a finished phase is not run again without
+  `--retry-phase`. The budget of a ledger file is immutable, so a new campaign uses a new file
+  (`--ledger`). Tokens spent by earlier campaigns (the first one used 484 835 of its 500 000,
+  see issue #7) are not in a new ledger: check the owner's budget record before every run.
 
 The `ai-evals` workflow (`.github/workflows/ai-evals.yml`) starts it by hand with the confirmation
 text `run-paid-evals`. Do not start it, and do not change prompts to improve a score: a prompt

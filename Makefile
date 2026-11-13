@@ -30,7 +30,7 @@ test-agents:
 eval-offline:
 	cd apps/api && PYTHONPATH=../.. uv run python -m evals.runner --mode offline --phase evals
 
-# Paid provider calls under the hard campaign ledger (O-6 smoke 80 000, O-7 batch 420 000 tokens).
+# Paid provider calls under the hard campaign ledger (smoke 80 000, evals 920 000 tokens; campaign of 2026-11-13).
 # Needs the local apps/api/.env; each phase may be attempted once per ledger.
 eval-smoke:
 	cd apps/api && PYTHONPATH=../.. uv run python -m evals.runner --mode live --phase smoke --confirm-live $(EVAL_ARGS)

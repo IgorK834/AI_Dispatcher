@@ -12,16 +12,19 @@ from uuid import uuid4
 from routepilot.agents.guards import BudgetExceeded, Reservation, TokenBudget
 
 Phase = Literal["smoke", "evals"]
-# Owner decision 2026-11-12: 30 000 moved from evals to smoke after live runs showed the approval
-# path needs more than 50 000 tokens. The campaign total stays 500 000.
-PHASE_LIMITS: dict[Phase, int] = {"smoke": 80000, "evals": 420000}
-CAMPAIGN_LIMIT = 500000
+# Owner decision 2026-11-12: a first campaign of 500 000 tokens (80 000 smoke, 420 000 evals);
+# 484 835 of them were used by the first live batch (issue #7), which ran 18 of 40 scenarios.
+# Owner decision 2026-11-13: one new campaign of 1 000 000 tokens for a complete AC-40/41 batch,
+# 80 000 for the smoke check and 920 000 for the evals phase. It needs a new ledger file: the
+# budget of an existing ledger is immutable.
+PHASE_LIMITS: dict[Phase, int] = {"smoke": 80000, "evals": 920000}
+CAMPAIGN_LIMIT = 1000000
 
 
 class CampaignLedger:
     def __init__(self, path: Path, limit: int = CAMPAIGN_LIMIT) -> None:
         if not 0 < limit <= CAMPAIGN_LIMIT:
-            raise ValueError("campaign budget must be within approved 500000 tokens")
+            raise ValueError("campaign budget must be within approved 1000000 tokens")
         self.path, self.limit = path, limit
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.lock_path = path.with_suffix(path.suffix + ".lock")

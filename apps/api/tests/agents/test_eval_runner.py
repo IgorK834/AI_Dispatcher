@@ -49,7 +49,7 @@ def test_offline_run_uses_real_flow_and_never_assigns(tmp_path: Path, scenario_i
 def test_campaign_ledger_is_immutable_once_and_hard_capped(tmp_path: Path) -> None:
     path = tmp_path / "ledger.json"
     with pytest.raises(ValueError):
-        CampaignLedger(path, 500001)
+        CampaignLedger(path, 1000001)
     ledger = CampaignLedger(path)
     ledger.start_phase("smoke", ["a"], "fingerprint")
     with pytest.raises(ValueError):
@@ -117,7 +117,7 @@ def test_reconcile_only_lowers_an_orphaned_reservation(tmp_path: Path) -> None:
 def test_phase_caps_sum_to_the_approved_campaign_and_reopen_is_recorded(tmp_path: Path) -> None:
     from evals.ledger import CAMPAIGN_LIMIT, PHASE_LIMITS
 
-    assert sum(PHASE_LIMITS.values()) == CAMPAIGN_LIMIT == 500000
+    assert sum(PHASE_LIMITS.values()) == CAMPAIGN_LIMIT == 1000000
     ledger = CampaignLedger(tmp_path / "ledger.json")
     with pytest.raises(ValueError):
         ledger.reopen("not closed")

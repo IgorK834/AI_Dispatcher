@@ -1,7 +1,7 @@
 name: ai-evals
 
 # Manual only (FEAT-007 FR-10). Never runs on pull requests or pushes. Paid provider calls
-# run under the hard campaign ledger: smoke 80 000 and evals 420 000 tokens (O-6, O-7).
+# run under the hard campaign ledger: smoke 80 000 and evals 920 000 tokens (O-6, O-7).
 'on':
   workflow_dispatch:
     inputs:
