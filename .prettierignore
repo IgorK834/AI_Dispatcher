@@ -9,3 +9,4 @@ contracts/openapi.json
 node_modules
 .next
 apps/web/next-env.d.ts
+apps/web/src/lib/api/schema.d.ts

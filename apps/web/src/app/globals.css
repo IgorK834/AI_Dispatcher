@@ -7,18 +7,41 @@
   --color-surface: var(--surface);
   --color-well: var(--well);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-ink: var(--ink);
   --color-ink2: var(--ink2);
   --color-ink3: var(--ink3);
   --color-red: var(--red);
   --color-red-hover: var(--red-hover);
   --color-red-tint: var(--red-tint);
+  --color-red-soft: var(--red-soft);
+  --color-red-fade: var(--red-fade);
+  --color-neutral-data: var(--neutral-data);
+  --color-window: var(--window);
+  --color-scrim: var(--scrim);
+  --color-done-bg: var(--status-done-bg);
+  --color-done-fg: var(--status-done-fg);
+  --color-info-bg: var(--status-info-bg);
+  --color-info-fg: var(--status-info-fg);
+  --color-quiet-bg: var(--status-quiet-bg);
+  --color-quiet-fg: var(--status-quiet-fg);
+  --color-cargo-a: var(--cargo-a);
+  --color-cargo-b: var(--cargo-b);
+  --color-cargo-c: var(--cargo-c);
+  --color-cargo-d: var(--cargo-d);
+  --color-cargo-e: var(--cargo-e);
   --font-body: var(--font-body-source);
   --font-display: var(--font-display-source);
   --font-mono: var(--font-mono-source);
   --radius-card: var(--radius-card);
+  --radius-inner: var(--radius-inner);
   --radius-control: var(--radius-control);
+  --radius-segment: var(--radius-segment);
+  --radius-pill: var(--radius-pill);
+  --radius-round: var(--radius-round);
   --shadow-card: var(--shadow-card);
+  --shadow-sheet: var(--shadow-sheet);
+  --shadow-segment-on: var(--shadow-segment-on);
 }
 
 body {
@@ -26,44 +49,34 @@ body {
   background: var(--ground);
   color: var(--ink);
   font: 400 14px/1.5 var(--font-body-source);
+  font-feature-settings: 'tnum';
 }
-.home-card {
-  max-width: 720px;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: var(--radius-card);
-  background: var(--surface);
-  box-shadow: var(--shadow-card);
-}
+
 h1 {
   font: 500 32px/1.15 var(--font-display-source);
   letter-spacing: -0.025em;
 }
-p {
-  color: var(--ink2);
-}
-.language-switch {
-  display: inline-flex;
-  gap: 4px;
-  padding: 4px;
-  border-radius: var(--radius-control);
-  background: var(--well);
-}
-.language-switch button {
-  min-height: 44px;
-  padding: 8px 16px;
-  border: 0;
-  border-radius: var(--radius-segment);
-  color: var(--ink2);
-  cursor: pointer;
-}
-.language-switch button[aria-pressed='true'] {
-  color: var(--red);
-  background: var(--surface);
-  box-shadow: var(--shadow-segment-on);
-}
+
 :focus-visible {
   outline: 2px solid var(--red);
   outline-offset: 2px;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: var(--red);
   box-shadow: var(--shadow-focus-ring);
+}
+
+@keyframes rp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rp-pulse {
+  50% {
+    opacity: 0.5;
+  }
 }

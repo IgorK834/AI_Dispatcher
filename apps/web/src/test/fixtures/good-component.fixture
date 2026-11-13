@@ -1,0 +1,13 @@
+// The same component written the way the rules want it.
+import { useTranslations } from 'next-intl';
+
+export function Good() {
+  const t = useTranslations('fleet');
+  return (
+    <div className="bg-red-tint font-body text-red">
+      {t('save')}
+      <svg fill="var(--red)" />
+      <button aria-label={t('close')} />
+    </div>
+  );
+}

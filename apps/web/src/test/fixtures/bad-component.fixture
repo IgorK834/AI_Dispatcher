@@ -1,0 +1,10 @@
+// A component that breaks the design and i18n rules; linted as text, never imported.
+export function Bad() {
+  return (
+    <div style={{ color: '#d42a22', fontFamily: 'Arial' }}>
+      Save the driver
+      <svg fill="white" />
+      <button aria-label="Close dialog" className="bg-[#fff]" />
+    </div>
+  );
+}
