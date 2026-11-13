@@ -96,7 +96,203 @@
     },
     "checkingSession": "Sprawdzanie sesji…"
   },
-  "fleet": {},
+  "fleet": {
+    "title": "Flota",
+    "subtitle": "Kierowcy, busy i pozostały czas pracy",
+    "addDriver": "Dodaj kierowcę",
+    "addVehicle": "Dodaj pojazd",
+    "tabs": {
+      "label": "Widok floty",
+      "drivers": "Kierowcy · {count}",
+      "vehicles": "Pojazdy · {count}"
+    },
+    "kpi": {
+      "drivers": "Kierowcy",
+      "driversNote": "{vans} busów · {places} miejsc paletowych",
+      "free": "Wolni dziś",
+      "freeNote": "{assigned} przypisanych",
+      "lowestWeek": "Najmniej czasu w tygodniu",
+      "homeBy": "Powrót do",
+      "homeByNote": "najwcześniejszy ze wszystkich",
+      "none": "—"
+    },
+    "filters": {
+      "label": "Filtry",
+      "base": "Baza",
+      "availableBefore": "Dostępny przed",
+      "hasVehicle": "Ma busa"
+    },
+    "table": {
+      "driver": "Kierowca",
+      "van": "Bus",
+      "base": "Baza · pozycja",
+      "available": "Dostępny od",
+      "workDay": "Pozostała praca dziś",
+      "workWeek": "Pozostała praca w tygodniu",
+      "status": "Status",
+      "actions": "Akcje",
+      "noState": "Brak stanu"
+    },
+    "status": {
+      "assigned": "Przypisany",
+      "free": "Wolny",
+      "synthetic": "SYNTETYCZNY"
+    },
+    "capacity": "{places} EP · {kg} kg",
+    "sleeperCab": "kabina sypialna",
+    "atBase": "w bazie",
+    "nowIn": "teraz w: {city}",
+    "bar": {
+      "left": "zostało {time} z {limit}",
+      "low": "mało"
+    },
+    "details": {
+      "show": "Pokaż limity jazdy 561 dla {name}",
+      "hide": "Ukryj limity jazdy 561 dla {name}",
+      "title": "Limity jazdy (rozporządzenie 561/2006)",
+      "sinceBreak": "Jazda do następnej przerwy",
+      "day": "Jazda dziś",
+      "week": "Jazda w tym tygodniu",
+      "twoWeek": "Jazda w dwóch tygodniach"
+    },
+    "notice": "Zastrzeżenie o czasie pracy",
+    "loading": "Ładowanie kierowców",
+    "empty": {
+      "driversTitle": "Brak kierowców",
+      "driversBody": "Dodaj kierowcę lub wygeneruj dane demo w panelu Administracja.",
+      "vehiclesTitle": "Brak pojazdów",
+      "vehiclesBody": "Dodaj pojazd, zanim przypiszesz go kierowcy."
+    },
+    "error": {
+      "drivers": "Nie udało się załadować kierowców",
+      "vehicles": "Nie udało się załadować pojazdów"
+    },
+    "loadMore": "Pokaż więcej",
+    "allLoaded": "Załadowano wszystko",
+    "action": {
+      "edit": "Edytuj: {name}",
+      "delete": "Usuń: {name}",
+      "addState": "Dodaj stan: {name}"
+    },
+    "vehicleTable": {
+      "label": "Pojazd",
+      "body": "Zabudowa",
+      "places": "Miejsca paletowe",
+      "payload": "Ładowność",
+      "layout": "Układ",
+      "cost": "Profil kosztów",
+      "sleeper": "Kabina sypialna",
+      "yes": "tak",
+      "no": "nie"
+    },
+    "driverForm": {
+      "createTitle": "Dodaj kierowcę",
+      "editTitle": "Edytuj kierowcę",
+      "name": "Imię i nazwisko",
+      "phone": "Telefon",
+      "homeCity": "Miasto bazy",
+      "homeCountry": "Kod kraju",
+      "homeCountryHint": "Dwie litery, na przykład PL",
+      "homeLat": "Szerokość geograficzna bazy",
+      "homeLon": "Długość geograficzna bazy",
+      "profile": "Profil przepisów",
+      "profilePl": "Krajowy (polska ustawa)",
+      "profilePlNote": "Jazda po Polsce",
+      "profile561": "Międzynarodowy (WE 561/2006)",
+      "profile561Note": "Przekracza granice",
+      "vehicle": "Bus",
+      "noVehicle": "Bez busa"
+    },
+    "vehicleForm": {
+      "createTitle": "Dodaj pojazd",
+      "editTitle": "Edytuj pojazd",
+      "label": "Oznaczenie",
+      "bodyType": "Typ zabudowy",
+      "palletPlaces": "Miejsca paletowe",
+      "layout": "Szablon układu",
+      "sideAccess": "Dostęp boczny",
+      "payload": "Ładowność (kg)",
+      "gvw": "Dopuszczalna masa całkowita (kg)",
+      "sleeperCab": "Kabina sypialna",
+      "fuelEmpty": "Paliwo, pusty (l/100 km przy 90 km/h)",
+      "fuelFull": "Paliwo, załadowany (l/100 km przy 90 km/h)",
+      "costProfile": "Profil kosztów",
+      "innerLength": "Długość wnętrza (m)",
+      "innerWidth": "Szerokość wnętrza (m)",
+      "innerHeight": "Wysokość wnętrza (m)"
+    },
+    "stateForm": {
+      "title": "Dodaj stan kierowcy",
+      "description": "Stan kierowcy {name} na teraz.",
+      "availableFrom": "Dostępny od",
+      "currentCity": "Aktualne miasto",
+      "currentLat": "Aktualna szerokość geograficzna",
+      "currentLon": "Aktualna długość geograficzna",
+      "workToday": "Praca dziś (min)",
+      "driveToday": "Jazda dziś (min)",
+      "workSinceBreak": "Praca od przerwy (min)",
+      "driveSinceBreak": "Jazda od przerwy (min)",
+      "workWeek": "Praca w tym tygodniu (min)",
+      "driveWeek": "Jazda w tym tygodniu (min)",
+      "drivePrevWeek": "Jazda w zeszłym tygodniu (min)",
+      "homeBy": "Powrót do"
+    },
+    "options": {
+      "CURTAIN_SIDER": "Plandeka",
+      "TAUTLINER": "Tautliner",
+      "BOX": "Kontener",
+      "EUR_MIXED_6X4": "Euro mieszany 6 + 4 (10 miejsc)",
+      "EUR_MIXED_5X3": "Euro mieszany 5 + 3 (8 miejsc)",
+      "DECLARED_ONLY": "Tylko zadeklarowane miejsca",
+      "LEFT": "Lewa",
+      "RIGHT": "Prawa",
+      "BOTH": "Obie strony",
+      "NONE": "Brak"
+    },
+    "validation": {
+      "nameRequired": "Podaj imię i nazwisko kierowcy.",
+      "nameTooLong": "Nazwa może mieć najwyżej 120 znaków.",
+      "phoneTooLong": "Telefon może mieć najwyżej 80 znaków.",
+      "cityRequired": "Podaj miasto bazy.",
+      "countryInvalid": "Użyj dwóch wielkich liter, na przykład PL.",
+      "latitudeRange": "Szerokość geograficzna musi być między -90 a 90.",
+      "longitudeRange": "Długość geograficzna musi być między -180 a 180.",
+      "numberRequired": "Podaj liczbę.",
+      "labelRequired": "Podaj oznaczenie.",
+      "labelTooLong": "Oznaczenie może mieć najwyżej 120 znaków.",
+      "placesRange": "Miejsca paletowe muszą być między 1 a 12.",
+      "payloadRange": "Ładowność musi być między 100 a 2 000 kg.",
+      "gvwRange": "Masa całkowita musi być między 1 a 3 500 kg.",
+      "fuelPositive": "Podaj wartość większą od 0.",
+      "minutesRange": "Podaj 0 lub więcej minut.",
+      "dateRequired": "Wybierz datę i godzinę.",
+      "costProfileRequired": "Wybierz profil kosztów.",
+      "dimensionPositive": "Podaj wartość większą od 0 albo zostaw puste."
+    },
+    "conflict": {
+      "title": "Ten rekord został zmieniony w innym miejscu",
+      "body": "Twoje dane zostały zachowane. Odśwież, aby pobrać najnowszą wersję, a potem zapisz ponownie.",
+      "reload": "Odśwież"
+    },
+    "formError": "Nie udało się dopasować pól do formularza: {fields}",
+    "delete": {
+      "driverTitle": "Usunąć kierowcę {name}?",
+      "driverBody": "Kierowca i historia stanów zostaną usunięci. Przypisania nie są zmieniane.",
+      "driverConfirm": "Usuń kierowcę",
+      "vehicleTitle": "Usunąć pojazd {name}?",
+      "vehicleBody": "Pojazd zostanie usunięty z floty.",
+      "vehicleConfirm": "Usuń pojazd",
+      "blockedTitle": "Nie można tego usunąć"
+    },
+    "toast": {
+      "driverSaved": "Kierowca zapisany",
+      "driverDeleted": "Kierowca usunięty",
+      "vehicleSaved": "Pojazd zapisany",
+      "vehicleDeleted": "Pojazd usunięty",
+      "stateSaved": "Stan kierowcy zapisany",
+      "noPermission": "Nie masz uprawnień do tej czynności."
+    }
+  },
   "offers": {},
   "plans": {},
   "optimizer": {},

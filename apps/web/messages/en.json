@@ -96,7 +96,203 @@
     },
     "checkingSession": "Checking your session…"
   },
-  "fleet": {},
+  "fleet": {
+    "title": "Fleet",
+    "subtitle": "Drivers, vans and remaining working time",
+    "addDriver": "Add driver",
+    "addVehicle": "Add vehicle",
+    "tabs": {
+      "label": "Fleet view",
+      "drivers": "Drivers · {count}",
+      "vehicles": "Vehicles · {count}"
+    },
+    "kpi": {
+      "drivers": "Drivers",
+      "driversNote": "{vans} vans · {places} pallet places",
+      "free": "Free today",
+      "freeNote": "{assigned} assigned",
+      "lowestWeek": "Lowest weekly time left",
+      "homeBy": "Home by",
+      "homeByNote": "earliest of all drivers",
+      "none": "—"
+    },
+    "filters": {
+      "label": "Filters",
+      "base": "Base",
+      "availableBefore": "Available before",
+      "hasVehicle": "Has a van"
+    },
+    "table": {
+      "driver": "Driver",
+      "van": "Van",
+      "base": "Base · position",
+      "available": "Available from",
+      "workDay": "Work left today",
+      "workWeek": "Work left this week",
+      "status": "Status",
+      "actions": "Actions",
+      "noState": "No state yet"
+    },
+    "status": {
+      "assigned": "Assigned",
+      "free": "Free",
+      "synthetic": "SYNTHETIC"
+    },
+    "capacity": "{places} EP · {kg} kg",
+    "sleeperCab": "sleeper cab",
+    "atBase": "at base",
+    "nowIn": "now in {city}",
+    "bar": {
+      "left": "{time} left of {limit}",
+      "low": "low"
+    },
+    "details": {
+      "show": "Show 561 driving limits for {name}",
+      "hide": "Hide 561 driving limits for {name}",
+      "title": "Driving limits (Regulation 561/2006)",
+      "sinceBreak": "Driving before the next break",
+      "day": "Driving today",
+      "week": "Driving this week",
+      "twoWeek": "Driving in two weeks"
+    },
+    "notice": "Working-time notice",
+    "loading": "Loading drivers",
+    "empty": {
+      "driversTitle": "No drivers yet",
+      "driversBody": "Add a driver, or generate demo data in Admin.",
+      "vehiclesTitle": "No vehicles yet",
+      "vehiclesBody": "Add a vehicle before you assign it to a driver."
+    },
+    "error": {
+      "drivers": "Could not load drivers",
+      "vehicles": "Could not load vehicles"
+    },
+    "loadMore": "Load more",
+    "allLoaded": "All loaded",
+    "action": {
+      "edit": "Edit {name}",
+      "delete": "Delete {name}",
+      "addState": "Add state for {name}"
+    },
+    "vehicleTable": {
+      "label": "Vehicle",
+      "body": "Body",
+      "places": "Pallet places",
+      "payload": "Payload",
+      "layout": "Layout",
+      "cost": "Cost profile",
+      "sleeper": "Sleeper cab",
+      "yes": "yes",
+      "no": "no"
+    },
+    "driverForm": {
+      "createTitle": "Add driver",
+      "editTitle": "Edit driver",
+      "name": "Name",
+      "phone": "Phone",
+      "homeCity": "Home city",
+      "homeCountry": "Country code",
+      "homeCountryHint": "Two letters, for example PL",
+      "homeLat": "Home latitude",
+      "homeLon": "Home longitude",
+      "profile": "Rules profile",
+      "profilePl": "Domestic (Polish Act)",
+      "profilePlNote": "Drives within Poland",
+      "profile561": "International (EC 561/2006)",
+      "profile561Note": "Crosses borders",
+      "vehicle": "Van",
+      "noVehicle": "No van"
+    },
+    "vehicleForm": {
+      "createTitle": "Add vehicle",
+      "editTitle": "Edit vehicle",
+      "label": "Label",
+      "bodyType": "Body type",
+      "palletPlaces": "Pallet places",
+      "layout": "Layout template",
+      "sideAccess": "Side access",
+      "payload": "Payload (kg)",
+      "gvw": "Gross vehicle weight (kg)",
+      "sleeperCab": "Sleeper cab",
+      "fuelEmpty": "Fuel, empty (l/100 km at 90 km/h)",
+      "fuelFull": "Fuel, full (l/100 km at 90 km/h)",
+      "costProfile": "Cost profile",
+      "innerLength": "Interior length (m)",
+      "innerWidth": "Interior width (m)",
+      "innerHeight": "Interior height (m)"
+    },
+    "stateForm": {
+      "title": "Add driver state",
+      "description": "The state of {name} as of now.",
+      "availableFrom": "Available from",
+      "currentCity": "Current city",
+      "currentLat": "Current latitude",
+      "currentLon": "Current longitude",
+      "workToday": "Work today (min)",
+      "driveToday": "Driving today (min)",
+      "workSinceBreak": "Work since break (min)",
+      "driveSinceBreak": "Driving since break (min)",
+      "workWeek": "Work this week (min)",
+      "driveWeek": "Driving this week (min)",
+      "drivePrevWeek": "Driving last week (min)",
+      "homeBy": "Home by"
+    },
+    "options": {
+      "CURTAIN_SIDER": "Curtain-sider",
+      "TAUTLINER": "Tautliner",
+      "BOX": "Box",
+      "EUR_MIXED_6X4": "Euro mixed 6 + 4 (10 places)",
+      "EUR_MIXED_5X3": "Euro mixed 5 + 3 (8 places)",
+      "DECLARED_ONLY": "Declared places only",
+      "LEFT": "Left",
+      "RIGHT": "Right",
+      "BOTH": "Both sides",
+      "NONE": "None"
+    },
+    "validation": {
+      "nameRequired": "Enter the driver's name.",
+      "nameTooLong": "The name can have at most 120 characters.",
+      "phoneTooLong": "The phone can have at most 80 characters.",
+      "cityRequired": "Enter the home city.",
+      "countryInvalid": "Use two capital letters, for example PL.",
+      "latitudeRange": "Latitude must be between -90 and 90.",
+      "longitudeRange": "Longitude must be between -180 and 180.",
+      "numberRequired": "Enter a number.",
+      "labelRequired": "Enter a label.",
+      "labelTooLong": "The label can have at most 120 characters.",
+      "placesRange": "Pallet places must be between 1 and 12.",
+      "payloadRange": "Payload must be between 100 and 2 000 kg.",
+      "gvwRange": "Gross weight must be between 1 and 3 500 kg.",
+      "fuelPositive": "Enter a value above 0.",
+      "minutesRange": "Enter 0 or more minutes.",
+      "dateRequired": "Choose a date and time.",
+      "costProfileRequired": "Choose a cost profile.",
+      "dimensionPositive": "Enter a value above 0 or leave it empty."
+    },
+    "conflict": {
+      "title": "This record was changed elsewhere",
+      "body": "Your input is kept. Reload to get the latest version, then save again.",
+      "reload": "Reload"
+    },
+    "formError": "Some fields could not be matched to the form: {fields}",
+    "delete": {
+      "driverTitle": "Delete driver {name}?",
+      "driverBody": "The driver and the state history are removed. Assignments are not affected.",
+      "driverConfirm": "Delete driver",
+      "vehicleTitle": "Delete vehicle {name}?",
+      "vehicleBody": "The vehicle is removed from the fleet.",
+      "vehicleConfirm": "Delete vehicle",
+      "blockedTitle": "This cannot be deleted"
+    },
+    "toast": {
+      "driverSaved": "Driver saved",
+      "driverDeleted": "Driver deleted",
+      "vehicleSaved": "Vehicle saved",
+      "vehicleDeleted": "Vehicle deleted",
+      "stateSaved": "Driver state saved",
+      "noPermission": "You do not have permission to do this."
+    }
+  },
   "offers": {},
   "plans": {},
   "optimizer": {},
