@@ -1,9 +1,22 @@
 """FR-27 content checks for O-6 drafts; runtime loading/trace tests remain in 006/1."""
 
+import asyncio
 import re
+import sqlite3
+from datetime import UTC, datetime
 from pathlib import Path
+from uuid import uuid4
 
 import pytest
+from langgraph.checkpoint.sqlite import SqliteSaver
+
+from routepilot.agents.prompt_loader import ROLES, load_prompts
+from routepilot.agents.schemas import MessageCreate
+from routepilot.agents.service import AgentService
+from routepilot.shared.auth import Principal
+from routepilot.shared.clock import FixedClock
+from tests.agents.memory_store import MemoryStore
+from tests.agents.test_graph import Tools, scripted_registry
 
 PROMPTS = Path(__file__).resolve().parents[5] / "apps/api/src/routepilot/agents/prompts"
 ROLE_CONTRACTS = {
@@ -44,3 +57,60 @@ def test_prompt_contains_fr27_guards_exact_allowlist_and_output_contract(role: s
     assert "human approval" in text
     assert not re.search(r"(?:google_genai|anthropic|openai):", text)
     assert not re.search(r"gemini-\d|gpt-\d|claude-\d", text)
+
+
+def _prompt_dir(tmp_path: Path, files: dict[str, str]) -> Path:
+    for name, text in files.items():
+        (tmp_path / name).write_text(text)
+    return tmp_path
+
+
+@pytest.mark.ac("AC-FEAT-006-21")
+def test_loader_uses_the_numerically_highest_version_per_role(tmp_path: Path) -> None:
+    files = {f"{role}.v1.md": f"{role} one" for role in ROLES}
+    files |= {"dispatcher.v2.md": "dispatcher two", "dispatcher.v10.md": "dispatcher ten"}
+    # Names that are not exact versions never count, so they can neither win nor break loading.
+    files |= {
+        "dispatcher.v0.md": "zero",
+        "dispatcher.v11.md.bak": "backup",
+        "dispatcher.vX.md": "invalid",
+        "route_planner.v2.draft.md": "draft",
+    }
+    prompts = load_prompts(_prompt_dir(tmp_path, files))
+    assert set(prompts) == set(ROLES)
+    assert (prompts["dispatcher"].version, prompts["dispatcher"].text) == ("v10", "dispatcher ten")
+    assert Path(prompts["dispatcher"].path).name == "dispatcher.v10.md"
+    assert all(prompts[role].version == "v1" for role in ROLES if role != "dispatcher")
+
+
+@pytest.mark.ac("AC-FEAT-006-21")
+def test_loader_fails_when_a_role_has_no_prompt(tmp_path: Path) -> None:
+    files = {f"{role}.v1.md": "text" for role in ROLES if role != "explainer"}
+    with pytest.raises(ValueError, match="explainer"):
+        load_prompts(_prompt_dir(tmp_path, files))
+
+
+@pytest.mark.ac("AC-FEAT-006-21")
+def test_run_stores_the_prompt_versions_it_used(tmp_path: Path) -> None:
+    files = {f"{role}.v1.md": f"{role} one" for role in ROLES} | {"explainer.v2.md": "two"}
+
+    async def scenario() -> dict[str, object]:
+        store, registry = MemoryStore(), scripted_registry()
+        user = Principal(id=uuid4(), role="dispatcher", locale="en", session_id=uuid4())
+        clock = FixedClock(datetime(2026, 11, 12, tzinfo=UTC))
+        with sqlite3.connect(tmp_path / "agents.db", check_same_thread=False) as connection:
+            service = AgentService(
+                store, registry, Tools(), clock, registry.settings, SqliteSaver(connection)
+            )
+            service.prompts = load_prompts(_prompt_dir(tmp_path, files))
+            thread = service.create_thread(user, None)
+            run = service.message(user, thread["id"], MessageCreate(content="Find loads"), None)
+            stored = store.get("agent_runs", run["runId"])
+            assert stored is not None
+            await service.stop()
+            return dict(stored["model_policy"])
+
+    policy = asyncio.run(scenario())
+    assert policy["promptVersions"] == {role: "v1" for role in ROLES} | {"explainer": "v2"}
+    # The models recorded next to the versions come from the policy, never from code.
+    assert "dispatcher" in policy
