@@ -96,6 +96,14 @@ def _model_data(value: Any) -> Any:
     return value
 
 
+class ToolFailure(Exception):
+    """A tool answered TOOL_ERROR twice; the agent's turn ends with a note for the Dispatcher."""
+
+    def __init__(self, role: Role, tool: str) -> None:
+        super().__init__(tool)
+        self.note = f"{role} stopped: {tool} failed twice (TOOL_ERROR); no new report from {role}"
+
+
 @dataclass
 class GraphContext:
     registry: ModelRegistry
@@ -263,13 +271,21 @@ class GraphContext:
                     raise BudgetExceeded("TOOL_CALL_LIMIT")
                 counts[role] = counts.get(role, 0) + 1
                 trace = self.trace(role, "tool", f"Call {call['name']}", tool=call["name"])
-                facts = self.tools.execute(
-                    role,
-                    call["name"],
-                    call["args"],
-                    cast(dict[str, Any], state),
-                    lambda messages, schema: self.call(state, "explainer", messages, schema=schema),
-                )
+                for attempt in (1, 2):
+                    facts = self.tools.execute(
+                        role,
+                        call["name"],
+                        call["args"],
+                        cast(dict[str, Any], state),
+                        lambda messages, schema: self.call(
+                            state, "explainer", messages, schema=schema
+                        ),
+                    )
+                    if facts.get("error", {}).get("code") != "TOOL_ERROR":
+                        break
+                    if attempt == 2:
+                        self.end_trace(trace, "Tool failed twice", "error")
+                        raise ToolFailure(role, call["name"])
                 rejected = facts.get("error", {}).get("code") == "TOOL_NOT_ALLOWED"
                 self.end_trace(
                     trace,
@@ -310,6 +326,10 @@ def dispatcher(state: AgentState, runtime: Runtime[GraphContext]) -> AgentState:
             state["notes"].append("Approval requires an accepted request_approval result.")
             state["next"] = "finish"
         return state
+    except ToolFailure as error:
+        state["notes"].append(error.note)
+        state["next"] = "finish"
+        return state
     except (BudgetExceeded, ProviderFailure, ValidationError) as error:
         return _failure(state, error)
 
@@ -320,6 +340,9 @@ def _specialist(
     try:
         cast(dict[str, Any], state)[key] = runtime.context.turn(state, role)
         state["next"] = "plan_validator" if role == "route_planner" else "budget_guard"
+    except ToolFailure as error:
+        state["notes"].append(error.note)
+        state["next"] = "budget_guard"
     except (BudgetExceeded, ProviderFailure, ValidationError) as error:
         return _failure(state, error)
     return state

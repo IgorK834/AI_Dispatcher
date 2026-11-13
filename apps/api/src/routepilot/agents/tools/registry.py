@@ -82,8 +82,17 @@ def tool(
     return decorate
 
 
-def _error(code: str, **details: str) -> dict[str, Any]:
-    return {"error": {"code": code, **details}}
+ERROR_MESSAGES = {
+    "TOOL_NOT_ALLOWED": "This tool is not available to you.",
+    "VALIDATION_ERROR": "The tool input is invalid.",
+    "NOT_FOUND": "The referenced item was not found.",
+    "TOOL_ERROR": "The tool failed.",
+    "JOB_TIMEOUT": "Optimisation is still running.",
+}
+
+
+def _error(code: str) -> dict[str, Any]:
+    return {"error": {"code": code, "message": ERROR_MESSAGES.get(code, "The tool call failed.")}}
 
 
 def _time(value: str | None) -> datetime | None:

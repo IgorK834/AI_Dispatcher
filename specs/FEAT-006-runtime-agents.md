@@ -479,3 +479,4 @@ One scripted "happy path" scenario doubles as the integration scenario of FEAT-0
 | 6 | 2026-11-12 | Model id check and eval token budget recorded (§11). |
 | 7 | 2026-11-12 | Owner approval of the five v1 prompts recorded (§11). |
 | 8 | 2026-11-12 | Eval allowance split revised to 80 000 / 420 000; live findings and the partial eval batch recorded (§11). |
+| 9 | 2026-11-13 | §6.6 common rules implemented as written: every tool error carries a fixed `message`, and a `TOOL_ERROR` is retried once before the agent's turn ends with a note for the Dispatcher. No wording of the rules changed. |
