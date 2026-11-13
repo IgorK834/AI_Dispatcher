@@ -766,7 +766,119 @@
       "none": "Żadna oferta nie została odrzucona."
     }
   },
-  "chat": {},
+  "chat": {
+    "title": "Dyspozytor AI",
+    "subtitle": "Pytaj zwykłym językiem. Agenci czytają dane, silnik liczy każdą liczbę, a Ty zatwierdzasz każde przypisanie.",
+    "loading": "Wczytywanie stanu AI",
+    "loadFailed": "Nie udało się wczytać stanu AI",
+    "conversation": "Rozmowa",
+    "newConversation": "Nowa rozmowa",
+    "draft": "Szkic",
+    "roles": {
+      "user": "Ty",
+      "assistant": "Dyspozytor"
+    },
+    "empty": {
+      "title": "Poproś o plan",
+      "body": "Opisz, czego potrzebujesz. Asystent czyta flotę i oferty, silnik liczy każdą liczbę, a nic nie zostanie przypisane bez Twojej zgody.",
+      "example": "Znajdź najlepsze ładunki dla wszystkich busów na jutro; każdy musi wrócić do domu na weekend."
+    },
+    "answer": {
+      "verified": "Zweryfikowane liczby",
+      "template": "Odpowiedź z szablonu",
+      "unverified": "Liczby niezweryfikowane"
+    },
+    "runErrors": {
+      "BUDGET_EXCEEDED": "Budżet AI skończył się w trakcie tego uruchomienia. Ręczny optymalizator nadal działa.",
+      "AI_PROVIDER_ERROR": "Dostawca AI nie odpowiedział. Spróbuj ponownie albo użyj ręcznego optymalizatora.",
+      "TOOL_ERROR": "Jeden z kroków na danych się nie udał, więc odpowiedzi nie dało się dokończyć. Spróbuj ponownie.",
+      "APPROVAL_EXPIRED": "Prośba o zatwierdzenie wygasła. Nic nie zostało przypisane.",
+      "INTERNAL_ERROR": "Uruchomienie zatrzymał błąd wewnętrzny. Nic nie zostało przypisane.",
+      "UNKNOWN": "Uruchomienie zakończyło się błędem ({code})."
+    },
+    "status": {
+      "queued": "Czeka na start",
+      "running": "Pracuję nad tym",
+      "waiting_approval": "Czeka na Twoją zgodę",
+      "succeeded": "Gotowe",
+      "failed": "Uruchomienie nie powiodło się",
+      "cancelled": "Uruchomienie anulowano"
+    },
+    "connection": {
+      "reconnecting": "Utracono połączenie, łączę ponownie",
+      "polling": "Aktualizacje na żywo niedostępne, sprawdzam co 2 sekundy"
+    },
+    "composer": {
+      "label": "Wiadomość",
+      "placeholder": "Zapytaj o ładunki, kierowców lub plany",
+      "send": "Wyślij",
+      "hint": "Odblokuje się, gdy uruchomienie się skończy. Odpowiedzi mogą używać tylko liczb zwróconych przez narzędzia w tym uruchomieniu."
+    },
+    "trace": {
+      "title": "Ślad agentów",
+      "close": "Zamknij",
+      "summary": "{steps, plural, one {# krok} few {# kroki} many {# kroków} other {# kroku}} · {tokens} tokenów",
+      "empty": "Kroki pojawią się tutaj, gdy asystent pracuje.",
+      "type": {
+        "llm": "Model",
+        "tool": "Narzędzie",
+        "guard": "Kontrola",
+        "interrupt": "Czeka na Ciebie"
+      },
+      "status": {
+        "running": "w toku",
+        "ok": "ok",
+        "error": "błąd",
+        "rejected": "odrzucony"
+      },
+      "tokens": "{input} wej. / {output} wyj."
+    },
+    "proposal": {
+      "netProfit": "Zysk netto",
+      "finish": "Koniec",
+      "co2": "CO₂ szac.",
+      "openPlan": "Otwórz plan",
+      "showOnMap": "Pokaż na mapie"
+    },
+    "approval": {
+      "title": "Zatwierdzić {count, plural, one {# przypisanie} few {# przypisania} many {# przypisań} other {# przypisania}}?",
+      "expiresIn": "Wygasa za {time}",
+      "expired": "Ta prośba wygasła",
+      "note": "Nic nie zostanie przypisane, dopóki nie zatwierdzisz. Odrzucenie niczego nie zapisuje.",
+      "driver": "Kierowca",
+      "net": "Netto",
+      "finish": "Koniec",
+      "home": "W domu na czas",
+      "yes": "Tak",
+      "no": "Nie",
+      "totalNet": "Razem netto",
+      "fuel": "Paliwo szac.",
+      "co2": "CO₂ szac.",
+      "comment": "Komentarz",
+      "commentHint": "Opcjonalny, wysyłany razem z odrzuceniem.",
+      "approve": "Zatwierdź i przypisz",
+      "reject": "Odrzuć",
+      "resolvedApprove": "Zatwierdzono. Przypisania zostały zapisane.",
+      "resolvedReject": "Odrzucono. Nic nie zostało przypisane.",
+      "resolvedOther": "Ta prośba została rozstrzygnięta.",
+      "openFleet": "Zobacz przypisania we flocie"
+    },
+    "map": {
+      "title": "Proponowane trasy",
+      "empty": "Proponowane trasy pojawią się tutaj po odpowiedzi.",
+      "loading": "Wczytywanie trasy"
+    },
+    "aiOff": {
+      "title": "AI jest wyłączone — nie skonfigurowano klucza modelu",
+      "body": "Czat wymaga klucza modelu na serwerze. Wszystko inne działa bez niego: uruchom tę samą optymalizację ręcznie, otwieraj plany z wyjaśnieniami z szablonu i przypisuj plany.",
+      "openOptimizer": "Otwórz ręczny optymalizator",
+      "goFleet": "Przejdź do floty",
+      "howTo": {
+        "title": "Jak włączyć AI (administrator)",
+        "body": "Dodaj klucz dostawcy i <code>AGENT_MODEL_POLICY</code> do <code>apps/api/.env</code>, a potem uruchom API ponownie."
+      }
+    }
+  },
   "admin": {},
   "errors": {
     "VALIDATION_ERROR": "Niektóre wartości są nieprawidłowe. Sprawdź pola i spróbuj ponownie.",
