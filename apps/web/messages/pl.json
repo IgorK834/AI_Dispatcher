@@ -491,7 +491,213 @@
       "noPermission": "Nie masz uprawnień do tej czynności."
     }
   },
-  "plans": {},
+  "plans": {
+    "loading": "Ładowanie planu",
+    "error": {
+      "title": "Nie udało się załadować planu"
+    },
+    "breadcrumb": {
+      "label": "Ścieżka",
+      "optimizer": "Optymalizator"
+    },
+    "kind": {
+      "baseline_single": "Punkt odniesienia: najlepsza pojedyncza oferta",
+      "baseline_greedy": "Punkt odniesienia: zachłanny",
+      "START": "Start",
+      "PICKUP": "Załadunek",
+      "DELIVERY": "Rozładunek",
+      "BREAK": "Przerwa",
+      "DAILY_REST": "Odpoczynek dobowy",
+      "WEEKLY_REST": "Odpoczynek tygodniowy",
+      "END": "Koniec"
+    },
+    "variant": {
+      "profit": "Najbardziej opłacalny",
+      "fastest": "Najszybszy",
+      "fuel": "Najmniej paliwa"
+    },
+    "profile": {
+      "pl_domestic_employee_v1": "Przepisy krajowe (PL)",
+      "eu561_van_international_v1": "Przepisy UE 561/2006"
+    },
+    "homeReached": "Powrót w terminie",
+    "homeNotReached": "Powrót nie osiągnięty",
+    "driver": "Kierowca {name}",
+    "actions": {
+      "explain": "Wyjaśnij ten plan",
+      "assign": "Przypisz ten plan"
+    },
+    "warningsTitle": "Uwagi do planu",
+    "reason": {
+      "BREAK_LIMIT_REACHED": "Wymagana przerwa (limit jazdy)",
+      "DAILY_LIMIT_REACHED": "Wymagany odpoczynek dobowy (limit dobowy)",
+      "WEEKLY_LIMIT_REACHED": "Osiągnięto limit tygodniowy"
+    },
+    "variants": {
+      "title": "Warianty",
+      "shown": "Pokazany",
+      "coincide": "Ten sam plan co {name}: warianty się pokrywają.",
+      "finish": "Koniec",
+      "distance": "Dystans",
+      "fuel": "Paliwo",
+      "co2": "CO₂",
+      "estimate": "szacunek",
+      "deltaProfit": "Δ zysk",
+      "deltaTime": "Δ czas",
+      "deltaFuel": "Δ paliwo",
+      "deltaCo2": "Δ CO₂",
+      "open": "Otwórz ten wariant",
+      "noJob": "Otwórz ten plan z wyniku optymalizatora, aby porównać warianty."
+    },
+    "stops": {
+      "title": "Przystanki",
+      "number": "#",
+      "stop": "Przystanek",
+      "arrival": "Przyjazd",
+      "serviceStart": "Początek obsługi",
+      "departure": "Wyjazd",
+      "leg": "Odcinek",
+      "load": "Ładunek po"
+    },
+    "timeline": {
+      "title": "Oś czasu",
+      "segment": "{kind}, {minutes}, od {from} do {to}",
+      "kind": {
+        "drive": "Jazda",
+        "service": "Załadunek i rozładunek",
+        "wait": "Oczekiwanie",
+        "break": "Przerwa",
+        "rest": "Odpoczynek dobowy"
+      },
+      "estimate": "Godziny i czasy jazdy są szacunkowe."
+    },
+    "occupancy": {
+      "title": "Zapełnienie po każdym przystanku",
+      "alt": "Miejsca paletowe i kilogramy po każdym przystanku:",
+      "altStop": "przystanek {number}: {eq}, {kg}",
+      "peak": "Szczyt: {eq} i {kg} z {max}",
+      "legendEq": "Miejsca paletowe (EP)",
+      "legendKg": "Masa (kg)"
+    },
+    "costs": {
+      "title": "Koszty",
+      "revenue": "Przychód",
+      "line": {
+        "fuel": "Paliwo",
+        "toll": "Opłaty drogowe",
+        "driver": "Kierowca",
+        "perDiem": "Dieta",
+        "accommodation": "Nocleg",
+        "vehicle": "Pojazd"
+      },
+      "estimate": "szacunek",
+      "total": "Koszty razem",
+      "net": "Zysk netto",
+      "margin": "marża {percent} %",
+      "parameters": "Parametry obliczeń",
+      "parameter": "Parametr",
+      "value": "Wartość",
+      "basis": {
+        "source": "źródło",
+        "assumption": "założenie",
+        "user": "użytkownik"
+      },
+      "perHour": "/ h",
+      "perKm": "/ km",
+      "perL": "/ l",
+      "param": {
+        "fuel_price_minor_per_l": "Cena paliwa",
+        "driver_cost_minor_per_hour": "Koszt kierowcy",
+        "vehicle_cost_minor_per_km": "Koszt pojazdu",
+        "accommodation_minor": "Nocleg za dobę",
+        "co2_factor_kg_per_l": "Współczynnik CO₂",
+        "fuel_consumption": "Zużycie paliwa, pusty / pełny przy 90 km/h"
+      },
+      "basisColumn": "Podstawa"
+    },
+    "vehicle": {
+      "title": "Pojazd",
+      "type": "Typ",
+      "body": "Zabudowa",
+      "places": "Miejsca paletowe",
+      "placesValue": "{places} ({layout})",
+      "payload": "Ładowność",
+      "interior": "Wnętrze",
+      "interiorUnknown": "nieznane",
+      "sleeper": "Kabina sypialna",
+      "yes": "tak",
+      "no": "nie",
+      "fuel": "Założenie zużycia",
+      "fuelValue": "{empty} / {full} l/100 km ({basis})",
+      "bodyType": {
+        "CURTAIN_SIDER": "Plandeka",
+        "TAUTLINER": "Tautliner",
+        "BOX": "Kontener"
+      }
+    },
+    "progress": {
+      "title": "Postęp trasy",
+      "notStarted": "Nie rozpoczęto",
+      "finished": "Zakończono",
+      "underway": "W trasie, {percent} %"
+    },
+    "map": {
+      "title": "Mapa trasy",
+      "view": "Mapa lub lista",
+      "map": "Mapa",
+      "list": "Lista",
+      "unavailable": "Mapa jest niedostępna. Przystanki wypisano po kolei.",
+      "approximate": "Linia trasy jest przybliżona (proste między przystankami).",
+      "attribution": "© współtwórcy OpenStreetMap"
+    },
+    "explanation": {
+      "title": "Wyjaśnienie",
+      "ai": "AI",
+      "template": "Szablon",
+      "reasons": "Powody",
+      "tradeoffs": "Kompromisy",
+      "ungrounded": "Nie wszystkie liczby w tym tekście udało się zweryfikować z planem."
+    },
+    "assign": {
+      "title": "Przypisać ten plan?",
+      "summary": "Kierowca {driver}, oferty {offers}, zysk netto {profit}.",
+      "confirm": "Przypisz plan",
+      "done": "Plan przypisany",
+      "assigned": "Przypisany",
+      "noPermission": "Nie masz uprawnień do tej czynności.",
+      "staleTitle": "Ten plan jest nieaktualny",
+      "rerun": "Uruchom optymalizację ponownie",
+      "reason": {
+        "BASELINE_PLAN": "Planów odniesienia nie można przypisać.",
+        "CONFLICTING_PLANS": "Inny plan używa jednej z tych ofert.",
+        "DRIVER_UNAVAILABLE": "Kierowca nie jest już dostępny.",
+        "DRIVER_ALREADY_ASSIGNED": "Kierowca ma już przypisanie.",
+        "OFFER_CHANGED": "Oferta zmieniła się lub nie jest już otwarta.",
+        "UNKNOWN": "Część planu jest nieaktualna."
+      }
+    },
+    "topView": {
+      "title": "Plan załadunku z góry",
+      "selector": "Przystanek",
+      "start": "Start",
+      "atStart": "Na starcie, pusty",
+      "afterPickup": "Po załadunku {tag} · {place}, {time}",
+      "afterDelivery": "Po rozładunku {tag} · {place}, {time}",
+      "offerTag": "Oferta {tag}",
+      "free": "Wolne",
+      "notOnBoard": "poza pojazdem",
+      "legend": "Legenda",
+      "rear": "Tylne drzwi",
+      "cab": "Kabina",
+      "weightMeter": "Załadowana masa",
+      "placesMeter": "Zajęte miejsca paletowe",
+      "weight": "{kg} z {max}",
+      "spaceUsed": "Zajęte miejsce: {percent} %",
+      "declaredOnly": "Wymiary wnętrza nieznane, więc plan podłogi nie jest rysowany.",
+      "illustrative": "Pozycje są poglądowe. Silnik sprawdza miejsca paletowe i masę; nie modeluje kolejności załadunku w plandekach, które otwierają się z obu stron.",
+      "alt": "Podłoga pojazdu z góry. {where}: zajęte miejsca {used} z {places}, {kg} z {max}."
+    }
+  },
   "optimizer": {},
   "chat": {},
   "admin": {},
@@ -524,7 +730,14 @@
     "UNKNOWN": "Coś poszło nie tak. Spróbuj ponownie."
   },
   "rejections": {},
-  "warnings": {},
+  "warnings": {
+    "LOADING_ORDER_NOT_MODELLED": "Kolejność załadunku nie jest modelowana; pozycje palet są poglądowe.",
+    "SERVICE_TIME_DEFAULTED": "Część przystanków ma domyślny czas obsługi 30 minut.",
+    "ROUTING_FALLBACK": "Odległości pochodzą z zapasowego wyliczenia w linii prostej, nie z routingu drogowego.",
+    "GEOMETRY_APPROXIMATE": "Linia trasy na mapie jest przybliżona.",
+    "POOL_TRUNCATED": "Pulę ofert ograniczono, więc część ofert nie została rozważona.",
+    "UNKNOWN": "Ten plan zawiera uwagę bez opisu."
+  },
   "legal": {
     "notice": "Harmonogram pracy, jazdy i odpoczynków jest estymacją planistyczną opartą na uproszczonym modelu wybranych przepisów (ustawa o czasie pracy kierowców; rozporządzenie (WE) nr 561/2006). Nie stanowi potwierdzenia zgodności z przepisami."
   },
