@@ -698,7 +698,74 @@
       "alt": "Podłoga pojazdu z góry. {where}: zajęte miejsca {used} z {places}, {kg} z {max}."
     }
   },
-  "optimizer": {},
+  "optimizer": {
+    "title": "Optymalizator",
+    "subtitle": "Zaplanuj całą flotę lub jednego kierowcę bez asystenta AI. Silnik sprawdza limity czasu pracy i miejsca paletowe.",
+    "error": {
+      "job": "Nie udało się odczytać przebiegu",
+      "result": "Nie udało się załadować wyniku"
+    },
+    "form": {
+      "label": "Przebieg optymalizacji",
+      "scope": "Zakres",
+      "scopeFleet": "Cała flota",
+      "scopeDriver": "Wybrani kierowcy",
+      "drivers": "Kierowcy",
+      "driversRequired": "Wybierz co najmniej jednego kierowcę.",
+      "objectives": "Cele",
+      "objectivesRequired": "Wybierz co najmniej jeden cel.",
+      "objective": {
+        "profit": "Najbardziej opłacalny",
+        "fastest": "Najszybszy",
+        "fuel": "Najmniej paliwa"
+      },
+      "horizon": "Horyzont planowania",
+      "days": "{count, plural, one {# dzień} few {# dni} many {# dni} other {# dnia}}",
+      "maxOffers": "Maks. ofert w planie",
+      "start": "Uruchom optymalizację"
+    },
+    "progress": {
+      "title": "Optymalizacja w toku",
+      "phase": {
+        "queued": "Oczekiwanie w kolejce",
+        "routing": "Liczenie odległości",
+        "search": "Szukanie planów",
+        "assignment": "Przydzielanie planów kierowcom",
+        "saving": "Zapisywanie wyniku"
+      },
+      "drivers": "{done} z {total} kierowców",
+      "failed": "Optymalizacja nie powiodła się",
+      "cancelled": "Przebieg anulowano.",
+      "code": "Kod błędu",
+      "runAgain": "Uruchom ponownie"
+    },
+    "result": {
+      "title": "Wynik",
+      "driver": "Kierowca",
+      "plan": "Plan",
+      "open": "Otwórz plan",
+      "profit": "Zysk netto",
+      "finish": "Koniec",
+      "fuel": "Paliwo (szacunek)",
+      "co2": "CO₂ (szacunek)",
+      "home": "Powrót",
+      "homeYes": "w terminie",
+      "homeNo": "nieosiągnięty",
+      "total": "Razem flota"
+    },
+    "baselines": {
+      "title": "Porównanie z prostymi punktami odniesienia",
+      "engine": "Silnik",
+      "greedy": "Zachłanny",
+      "single": "Najlepsza pojedyncza oferta",
+      "upliftGreedy": "Zysk ponad zachłanny:",
+      "upliftSingle": "Zysk ponad najlepszą pojedynczą ofertę:"
+    },
+    "rejections": {
+      "title": "Odrzucone oferty ({count})",
+      "none": "Żadna oferta nie została odrzucona."
+    }
+  },
   "chat": {},
   "admin": {},
   "errors": {
@@ -729,7 +796,30 @@
     "INTERNAL_ERROR": "Coś poszło nie tak po naszej stronie. Spróbuj ponownie.",
     "UNKNOWN": "Coś poszło nie tak. Spróbuj ponownie."
   },
-  "rejections": {},
+  "rejections": {
+    "OVERWEIGHT": "Ładunek jest cięższy niż ładowność pojazdu.",
+    "MISSING_REVENUE": "Oferta nie ma ceny.",
+    "FIRST_DEADHEAD_TOO_LONG": "Pusty dojazd do pierwszego załadunku jest za długi.",
+    "PICKUP_WINDOW_UNREACHABLE": "Nie da się zdążyć w okno załadunku.",
+    "BODY_TYPE_MISMATCH": "Typ zabudowy pojazdu nie pasuje do oferty.",
+    "PALLET_CAPACITY_EXCEEDED": "Brakuje miejsc paletowych.",
+    "MISSING_CAPACITY_DATA": "Brakuje danych o wadze lub paletach.",
+    "MISSING_COORDINATES": "Oferta nie ma współrzędnych.",
+    "DELIVERY_WINDOW_MISSED": "Okno rozładunku zostałoby przekroczone.",
+    "PICKUP_WINDOW_MISSED": "Okno załadunku zostałoby przekroczone.",
+    "BELOW_MIN_PROFIT": "Zysk jest poniżej minimum.",
+    "BELOW_MIN_MARGIN": "Marża jest poniżej minimum.",
+    "NOT_IN_TOP_K": "Dla tego kierowcy wybrano lepsze oferty.",
+    "HOME_BY_UNREACHABLE": "Kierowca nie zdążyłby wrócić w wyznaczonym terminie.",
+    "CAPACITY_EXCEEDED": "Przekroczona zostałaby pojemność pojazdu.",
+    "OUTSIDE_HORIZON": "Oferta leży poza horyzontem planowania.",
+    "OFFER_NOT_OPEN": "Oferta nie jest już otwarta.",
+    "VEHICLE_TYPE_MISMATCH": "Typ pojazdu nie pasuje do oferty.",
+    "EQUIPMENT_MISSING": "Brakuje wymaganego wyposażenia.",
+    "DIMENSIONS_EXCEEDED": "Ładunek nie mieści się we wnętrzu pojazdu.",
+    "INVALID_ACTION_ORDER": "Kolejność załadunku i rozładunku jest nieprawidłowa.",
+    "UNKNOWN": "Oferta została odrzucona z powodu bez opisu."
+  },
   "warnings": {
     "LOADING_ORDER_NOT_MODELLED": "Kolejność załadunku nie jest modelowana; pozycje palet są poglądowe.",
     "SERVICE_TIME_DEFAULTED": "Część przystanków ma domyślny czas obsługi 30 minut.",
