@@ -1,0 +1,3 @@
+# Synthetic fixture for AC-FEAT-007-08: a runtime dependency under a GPL licence
+# (pylint is GPL-2.0-or-later), so the licence check must fail on it. Never installed.
+pylint==3.3.1

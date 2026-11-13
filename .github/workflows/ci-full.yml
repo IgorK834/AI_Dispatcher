@@ -1,0 +1,157 @@
+name: ci-full
+
+# Everything in ci-fast plus the long gates (FEAT-007 FR-1): Hypothesis nightly profile, the
+# integration tests, the Playwright scenarios, the dependency audit and the licence check.
+# It runs on every push to main and every night, never on pull requests, and needs no secret
+# and no paid service. A red run is the notification: GitHub mails whoever last changed the
+# schedule and the run shows on the Actions page; the status badge goes into the README (007/4).
+'on':
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '23 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-full-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  checks:
+    name: Full quality gates
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      APP_ENV: test
+      HYPOTHESIS_PROFILE: nightly
+      NEXT_TELEMETRY_DISABLED: '1'
+      BEFORE_SHA: ${{ github.event.before }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.13'
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: '0.13.6'
+          enable-cache: true
+          cache-dependency-glob: apps/api/uv.lock
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          version: '11.3.0'
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - name: Install locked dependencies and verified CI tools
+        run: |
+          uv sync --project apps/api --locked
+          pnpm install --frozen-lockfile
+          bash scripts/ci/install_tools.sh
+      - name: Pick the comparison base of this run
+        run: |
+          # A push compares with the commit before it; a nightly or manual run has no change to
+          # compare, so its base is HEAD itself.
+          if [ "$GITHUB_EVENT_NAME" = push ] && [ "$BEFORE_SHA" != 0000000000000000000000000000000000000000 ] && git cat-file -e "$BEFORE_SHA^{commit}" 2>/dev/null; then
+            echo "CI_BASE_SHA=$BEFORE_SHA" >> "$GITHUB_ENV"
+          else
+            echo "CI_BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          fi
+      - name: 'Gate 1: formatting and lint'
+        if: ${{ !cancelled() }}
+        run: |
+          cd apps/api
+          uv run ruff format --config pyproject.toml --check src tests migrations ../../scripts/*.py ../../scripts/tests
+          uv run ruff check --config pyproject.toml src tests migrations ../../scripts/*.py ../../scripts/tests
+          cd ../..
+          pnpm format:check
+          pnpm --filter web lint
+      - name: 'Gate 2: strict types'
+        if: ${{ !cancelled() }}
+        run: make types
+      - name: 'Gate 3: unit, API and contract tests with coverage (Hypothesis nightly profile)'
+        if: ${{ !cancelled() }}
+        run: |
+          cd apps/api
+          uv run pytest tests ../../scripts/tests --ignore=tests/db --ignore=tests/agents --ignore=tests/security -m 'not integration' --cov=routepilot --cov-branch --cov-report=term-missing
+          cd ../..
+          pnpm --filter web test
+      - name: 'Gate 3a: runtime agents with fake models'
+        if: ${{ !cancelled() }}
+        run: make test-agents
+      - name: 'Gate 4: contract drift, compatibility and schemathesis'
+        if: ${{ !cancelled() }}
+        # The property-based schemathesis suite (tests/contract) runs in Gate 3 under the
+        # nightly Hypothesis profile; this step is the drift, compatibility and smoke check.
+        run: bash scripts/ci/contracts.sh
+      - name: 'Gate 5: migration up/down/up and database tests'
+        if: ${{ !cancelled() }}
+        run: make test-db
+      - name: 'Gate 6: integration tests'
+        if: ${{ !cancelled() }}
+        run: |
+          cd apps/api
+          uv run pytest tests ../../scripts/tests -m integration -q
+      - name: 'Gate 7: end-to-end scenarios in Chromium'
+        if: ${{ !cancelled() }}
+        # The sign-in scenario uses Cloudflare's free always-pass Turnstile test widget (a test
+        # key, no secret). This is the one outbound call of the run to a Cloudflare host.
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          pnpm exec playwright test -c tests/e2e/playwright.config.ts
+      - name: Keep the Playwright results of a failed run
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: playwright-results
+          path: /tmp/routepilot-e2e/results
+          if-no-files-found: ignore
+      - name: 'Gate 8a: secrets scan'
+        if: ${{ !cancelled() }}
+        run: |
+          if [ "$CI_BASE_SHA" = "$(git rev-parse HEAD)" ]; then
+            gitleaks git --redact --config .gitleaks.toml
+          else
+            gitleaks git --redact --log-opts="$CI_BASE_SHA..HEAD" --config .gitleaks.toml
+          fi
+      - name: 'Gate 8b: dependency audit and licence check'
+        if: ${{ !cancelled() }}
+        # pip-audit and pnpm audit for advisories, then no GPL or AGPL licence at runtime.
+        # Static analysis is CodeQL's default setup in the repository settings (OQ-007-03).
+        run: bash scripts/ci/gate_8b.sh
+      - name: 'Gate 8c: auth, CSRF and CORS security tests'
+        if: ${{ !cancelled() }}
+        run: bash scripts/ci/pytest_optional.sh tests/security
+      - name: 'Gate 9: production web build and API smoke'
+        if: ${{ !cancelled() }}
+        run: |
+          pnpm --filter web build
+          bash scripts/ci/api_smoke.sh
+      - name: 'Gate 10: architecture, traceability and spec coupling'
+        if: ${{ !cancelled() }}
+        run: |
+          cd apps/api
+          uv run lint-imports
+          uv run python ../../scripts/check_spec_touch.py --agent-docs
+          uv run python ../../scripts/check_spec_touch.py --base "$CI_BASE_SHA"
+          uv run python ../../scripts/trace.py --check
+      # The clean-clone check (007/4, issue #61) joins here once scripts/clean_clone_check.sh exists.
+  required:
+    name: ci-full
+    needs: checks
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    permissions: {}
+    timeout-minutes: 1
+    steps:
+      - name: Require every quality gate to pass
+        env:
+          GATES_RESULT: ${{ needs.checks.result }}
+        run: test "$GATES_RESULT" = success
