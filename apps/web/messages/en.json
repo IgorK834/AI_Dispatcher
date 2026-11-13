@@ -491,8 +491,281 @@
       "noPermission": "You do not have permission to do this."
     }
   },
-  "plans": {},
-  "optimizer": {},
+  "plans": {
+    "loading": "Loading plan",
+    "error": {
+      "title": "Could not load the plan"
+    },
+    "breadcrumb": {
+      "label": "Breadcrumb",
+      "optimizer": "Optimizer"
+    },
+    "kind": {
+      "baseline_single": "Baseline: best single offer",
+      "baseline_greedy": "Baseline: greedy",
+      "START": "Start",
+      "PICKUP": "Pick-up",
+      "DELIVERY": "Delivery",
+      "BREAK": "Break",
+      "DAILY_REST": "Daily rest",
+      "WEEKLY_REST": "Weekly rest",
+      "END": "End"
+    },
+    "variant": {
+      "profit": "Most profitable",
+      "fastest": "Fastest",
+      "fuel": "Lowest fuel"
+    },
+    "profile": {
+      "pl_domestic_employee_v1": "Polish domestic rules",
+      "eu561_van_international_v1": "EU 561/2006 rules"
+    },
+    "homeReached": "Home in time",
+    "homeNotReached": "Home not reached",
+    "driver": "Driver {name}",
+    "actions": {
+      "explain": "Explain this plan",
+      "assign": "Assign this plan"
+    },
+    "warningsTitle": "Notes on this plan",
+    "reason": {
+      "BREAK_LIMIT_REACHED": "Break required (driving limit)",
+      "DAILY_LIMIT_REACHED": "Daily rest required (daily limit)",
+      "WEEKLY_LIMIT_REACHED": "Weekly limit reached"
+    },
+    "variants": {
+      "title": "Variants",
+      "shown": "Shown",
+      "coincide": "Same plan as {name}: the variants coincide.",
+      "finish": "Finish",
+      "distance": "Distance",
+      "fuel": "Fuel",
+      "co2": "CO₂",
+      "estimate": "estimate",
+      "deltaProfit": "Δ profit",
+      "deltaTime": "Δ time",
+      "deltaFuel": "Δ fuel",
+      "deltaCo2": "Δ CO₂",
+      "open": "Open this variant",
+      "noJob": "Open this plan from an optimizer result to compare the variants."
+    },
+    "stops": {
+      "title": "Stops",
+      "number": "#",
+      "stop": "Stop",
+      "arrival": "Arrival",
+      "serviceStart": "Service start",
+      "departure": "Departure",
+      "leg": "Leg",
+      "load": "Load after"
+    },
+    "timeline": {
+      "title": "Timeline",
+      "segment": "{kind}, {minutes}, {from} to {to}",
+      "kind": {
+        "drive": "Driving",
+        "service": "Loading and unloading",
+        "wait": "Waiting",
+        "break": "Break",
+        "rest": "Daily rest"
+      },
+      "estimate": "Times and driving durations are estimates."
+    },
+    "occupancy": {
+      "title": "Occupancy after each stop",
+      "alt": "Pallet places and kilograms after each stop:",
+      "altStop": "stop {number}: {eq}, {kg}",
+      "peak": "Peak: {eq} and {kg} of {max}",
+      "legendEq": "Pallet places (EP)",
+      "legendKg": "Mass (kg)"
+    },
+    "costs": {
+      "title": "Costs",
+      "revenue": "Revenue",
+      "line": {
+        "fuel": "Fuel",
+        "toll": "Tolls",
+        "driver": "Driver",
+        "perDiem": "Per diem",
+        "accommodation": "Accommodation",
+        "vehicle": "Vehicle"
+      },
+      "estimate": "estimate",
+      "total": "Total costs",
+      "net": "Net profit",
+      "margin": "margin {percent} %",
+      "parameters": "Parameters of the calculation",
+      "parameter": "Parameter",
+      "value": "Value",
+      "basis": {
+        "source": "source",
+        "assumption": "assumption",
+        "user": "user"
+      },
+      "perHour": "/ h",
+      "perKm": "/ km",
+      "perL": "/ l",
+      "param": {
+        "fuel_price_minor_per_l": "Fuel price",
+        "driver_cost_minor_per_hour": "Driver cost",
+        "vehicle_cost_minor_per_km": "Vehicle cost",
+        "accommodation_minor": "Accommodation per night",
+        "co2_factor_kg_per_l": "CO₂ factor",
+        "fuel_consumption": "Fuel use, empty / full at 90 km/h"
+      },
+      "basisColumn": "Basis"
+    },
+    "vehicle": {
+      "title": "Vehicle",
+      "type": "Type",
+      "body": "Body",
+      "places": "Pallet places",
+      "placesValue": "{places} ({layout})",
+      "payload": "Payload",
+      "interior": "Interior",
+      "interiorUnknown": "unknown",
+      "sleeper": "Sleeper cab",
+      "yes": "yes",
+      "no": "no",
+      "fuel": "Fuel assumption",
+      "fuelValue": "{empty} / {full} l/100 km ({basis})",
+      "bodyType": {
+        "CURTAIN_SIDER": "Curtain-sider",
+        "TAUTLINER": "Tautliner",
+        "BOX": "Box"
+      }
+    },
+    "progress": {
+      "title": "Route progress",
+      "notStarted": "Not started",
+      "finished": "Finished",
+      "underway": "Under way, {percent} %"
+    },
+    "map": {
+      "title": "Route map",
+      "view": "Map or list",
+      "map": "Map",
+      "list": "List",
+      "unavailable": "The map is not available. The stops are listed in order.",
+      "approximate": "The route line is approximate (straight lines between stops).",
+      "attribution": "© OpenStreetMap contributors"
+    },
+    "explanation": {
+      "title": "Explanation",
+      "ai": "AI",
+      "template": "Template",
+      "reasons": "Reasons",
+      "tradeoffs": "Trade-offs",
+      "ungrounded": "Some figures in this text could not be verified against the plan."
+    },
+    "assign": {
+      "title": "Assign this plan?",
+      "summary": "Driver {driver}, offers {offers}, net profit {profit}.",
+      "confirm": "Assign plan",
+      "done": "Plan assigned",
+      "assigned": "Assigned",
+      "noPermission": "You do not have permission to do this.",
+      "staleTitle": "This plan is out of date",
+      "rerun": "Run the optimisation again",
+      "reason": {
+        "BASELINE_PLAN": "Baseline plans cannot be assigned.",
+        "CONFLICTING_PLANS": "Another plan uses one of these offers.",
+        "DRIVER_UNAVAILABLE": "The driver is no longer available.",
+        "DRIVER_ALREADY_ASSIGNED": "The driver already has an assignment.",
+        "OFFER_CHANGED": "An offer changed or is no longer open.",
+        "UNKNOWN": "Part of the plan is out of date."
+      }
+    },
+    "topView": {
+      "title": "Load plan, top view",
+      "selector": "Stop",
+      "start": "Start",
+      "atStart": "At the start, empty",
+      "afterPickup": "After pick-up {tag} · {place}, {time}",
+      "afterDelivery": "After delivery {tag} · {place}, {time}",
+      "offerTag": "Offer {tag}",
+      "free": "Free",
+      "notOnBoard": "not on board",
+      "legend": "Legend",
+      "rear": "Rear doors",
+      "cab": "Cab",
+      "weightMeter": "Mass loaded",
+      "placesMeter": "Pallet places used",
+      "weight": "{kg} of {max}",
+      "spaceUsed": "Space used: {percent} %",
+      "declaredOnly": "Interior dimensions unknown, so no floor plan is drawn.",
+      "illustrative": "Positions are illustrative. The engine checks pallet places and mass; it does not model loading order for curtain-siders, which open on both sides.",
+      "alt": "Van floor from above. {where}: {used} of {places} pallet places used, {kg} of {max}."
+    }
+  },
+  "optimizer": {
+    "title": "Optimizer",
+    "subtitle": "Plan the whole fleet or one driver without the AI assistant. The engine checks working-time limits and pallet places.",
+    "error": {
+      "job": "Could not read the run",
+      "result": "Could not load the result"
+    },
+    "form": {
+      "label": "Optimisation run",
+      "scope": "Scope",
+      "scopeFleet": "Whole fleet",
+      "scopeDriver": "Selected drivers",
+      "drivers": "Drivers",
+      "driversRequired": "Choose at least one driver.",
+      "objectives": "Objectives",
+      "objectivesRequired": "Choose at least one objective.",
+      "objective": {
+        "profit": "Most profitable",
+        "fastest": "Fastest",
+        "fuel": "Lowest fuel"
+      },
+      "horizon": "Planning horizon",
+      "days": "{count, plural, one {# day} other {# days}}",
+      "maxOffers": "Max offers per plan",
+      "start": "Start optimisation"
+    },
+    "progress": {
+      "title": "Optimisation in progress",
+      "phase": {
+        "queued": "Waiting in the queue",
+        "routing": "Computing distances",
+        "search": "Searching for plans",
+        "assignment": "Assigning plans to drivers",
+        "saving": "Saving the result"
+      },
+      "drivers": "{done} of {total} drivers",
+      "failed": "The optimisation failed",
+      "cancelled": "The run was cancelled.",
+      "code": "Error code",
+      "runAgain": "Run again"
+    },
+    "result": {
+      "title": "Result",
+      "driver": "Driver",
+      "plan": "Plan",
+      "open": "Open plan",
+      "profit": "Net profit",
+      "finish": "Finish",
+      "fuel": "Fuel (estimate)",
+      "co2": "CO₂ (estimate)",
+      "home": "Home",
+      "homeYes": "in time",
+      "homeNo": "not reached",
+      "total": "Fleet total"
+    },
+    "baselines": {
+      "title": "Compared with simple baselines",
+      "engine": "Engine",
+      "greedy": "Greedy",
+      "single": "Best single offer",
+      "upliftGreedy": "Uplift over greedy:",
+      "upliftSingle": "Uplift over best single offer:"
+    },
+    "rejections": {
+      "title": "Rejected offers ({count})",
+      "none": "No offer was rejected."
+    }
+  },
   "chat": {},
   "admin": {},
   "errors": {
@@ -523,8 +796,38 @@
     "INTERNAL_ERROR": "Something went wrong on our side. Try again.",
     "UNKNOWN": "Something went wrong. Try again."
   },
-  "rejections": {},
-  "warnings": {},
+  "rejections": {
+    "OVERWEIGHT": "The load is heavier than the van's payload.",
+    "MISSING_REVENUE": "The offer has no price.",
+    "FIRST_DEADHEAD_TOO_LONG": "The empty drive to the first pick-up is too long.",
+    "PICKUP_WINDOW_UNREACHABLE": "The pick-up window cannot be reached in time.",
+    "BODY_TYPE_MISMATCH": "The van's body type does not fit the offer.",
+    "PALLET_CAPACITY_EXCEEDED": "There are not enough pallet places.",
+    "MISSING_CAPACITY_DATA": "Weight or pallet data is missing.",
+    "MISSING_COORDINATES": "The offer has no coordinates.",
+    "DELIVERY_WINDOW_MISSED": "The delivery window would be missed.",
+    "PICKUP_WINDOW_MISSED": "The pick-up window would be missed.",
+    "BELOW_MIN_PROFIT": "The profit is below the minimum.",
+    "BELOW_MIN_MARGIN": "The margin is below the minimum.",
+    "NOT_IN_TOP_K": "Better offers were chosen for this driver.",
+    "HOME_BY_UNREACHABLE": "The driver could not be home by the set time.",
+    "CAPACITY_EXCEEDED": "The van's capacity would be exceeded.",
+    "OUTSIDE_HORIZON": "The offer lies outside the planning horizon.",
+    "OFFER_NOT_OPEN": "The offer is no longer open.",
+    "VEHICLE_TYPE_MISMATCH": "The vehicle type does not fit the offer.",
+    "EQUIPMENT_MISSING": "Required equipment is missing.",
+    "DIMENSIONS_EXCEEDED": "The load does not fit the van's interior.",
+    "INVALID_ACTION_ORDER": "The pick-up and delivery order is invalid.",
+    "UNKNOWN": "The offer was rejected for a reason without a description."
+  },
+  "warnings": {
+    "LOADING_ORDER_NOT_MODELLED": "The loading order is not modelled; pallet positions are illustrative.",
+    "SERVICE_TIME_DEFAULTED": "Some stops use the default service time of 30 minutes.",
+    "ROUTING_FALLBACK": "Distances come from a straight-line fallback, not from road routing.",
+    "GEOMETRY_APPROXIMATE": "The route line on the map is approximate.",
+    "POOL_TRUNCATED": "The offer pool was capped, so some offers were not considered.",
+    "UNKNOWN": "This plan carries a note without a description."
+  },
   "legal": {
     "notice": "The work/driving/rest schedule is a planning estimate based on a simplified model of selected rules (Polish Act on Drivers' Working Time; Regulation (EC) No 561/2006). It does not certify legal compliance."
   },
