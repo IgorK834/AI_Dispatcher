@@ -143,6 +143,19 @@ forbidden_modules = ["routepilot.optimization.engine", "routepilot.identity", "s
 allow_indirect_imports = true
 
 [[tool.importlinter.contracts]]
+name = "provider SDKs only in agents.models"
+type = "forbidden"
+# FR-23: agents/models.py is the only module that may import a chat-model provider package.
+# import-linter tracks external packages by their root name, so google.genai appears as "google".
+source_modules = ["routepilot"]
+forbidden_modules = ["langchain_google_genai", "langchain_anthropic", "langchain_openai", "google"]
+ignore_imports = [
+  "routepilot.agents.models -> langchain_google_genai",
+  "routepilot.agents.models -> google",
+]
+allow_indirect_imports = true
+
+[[tool.importlinter.contracts]]
 name = "integrations boundaries"
 type = "forbidden"
 source_modules = ["routepilot.integrations"]
