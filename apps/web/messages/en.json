@@ -698,7 +698,74 @@
       "alt": "Van floor from above. {where}: {used} of {places} pallet places used, {kg} of {max}."
     }
   },
-  "optimizer": {},
+  "optimizer": {
+    "title": "Optimizer",
+    "subtitle": "Plan the whole fleet or one driver without the AI assistant. The engine checks working-time limits and pallet places.",
+    "error": {
+      "job": "Could not read the run",
+      "result": "Could not load the result"
+    },
+    "form": {
+      "label": "Optimisation run",
+      "scope": "Scope",
+      "scopeFleet": "Whole fleet",
+      "scopeDriver": "Selected drivers",
+      "drivers": "Drivers",
+      "driversRequired": "Choose at least one driver.",
+      "objectives": "Objectives",
+      "objectivesRequired": "Choose at least one objective.",
+      "objective": {
+        "profit": "Most profitable",
+        "fastest": "Fastest",
+        "fuel": "Lowest fuel"
+      },
+      "horizon": "Planning horizon",
+      "days": "{count, plural, one {# day} other {# days}}",
+      "maxOffers": "Max offers per plan",
+      "start": "Start optimisation"
+    },
+    "progress": {
+      "title": "Optimisation in progress",
+      "phase": {
+        "queued": "Waiting in the queue",
+        "routing": "Computing distances",
+        "search": "Searching for plans",
+        "assignment": "Assigning plans to drivers",
+        "saving": "Saving the result"
+      },
+      "drivers": "{done} of {total} drivers",
+      "failed": "The optimisation failed",
+      "cancelled": "The run was cancelled.",
+      "code": "Error code",
+      "runAgain": "Run again"
+    },
+    "result": {
+      "title": "Result",
+      "driver": "Driver",
+      "plan": "Plan",
+      "open": "Open plan",
+      "profit": "Net profit",
+      "finish": "Finish",
+      "fuel": "Fuel (estimate)",
+      "co2": "CO₂ (estimate)",
+      "home": "Home",
+      "homeYes": "in time",
+      "homeNo": "not reached",
+      "total": "Fleet total"
+    },
+    "baselines": {
+      "title": "Compared with simple baselines",
+      "engine": "Engine",
+      "greedy": "Greedy",
+      "single": "Best single offer",
+      "upliftGreedy": "Uplift over greedy:",
+      "upliftSingle": "Uplift over best single offer:"
+    },
+    "rejections": {
+      "title": "Rejected offers ({count})",
+      "none": "No offer was rejected."
+    }
+  },
   "chat": {},
   "admin": {},
   "errors": {
@@ -729,7 +796,30 @@
     "INTERNAL_ERROR": "Something went wrong on our side. Try again.",
     "UNKNOWN": "Something went wrong. Try again."
   },
-  "rejections": {},
+  "rejections": {
+    "OVERWEIGHT": "The load is heavier than the van's payload.",
+    "MISSING_REVENUE": "The offer has no price.",
+    "FIRST_DEADHEAD_TOO_LONG": "The empty drive to the first pick-up is too long.",
+    "PICKUP_WINDOW_UNREACHABLE": "The pick-up window cannot be reached in time.",
+    "BODY_TYPE_MISMATCH": "The van's body type does not fit the offer.",
+    "PALLET_CAPACITY_EXCEEDED": "There are not enough pallet places.",
+    "MISSING_CAPACITY_DATA": "Weight or pallet data is missing.",
+    "MISSING_COORDINATES": "The offer has no coordinates.",
+    "DELIVERY_WINDOW_MISSED": "The delivery window would be missed.",
+    "PICKUP_WINDOW_MISSED": "The pick-up window would be missed.",
+    "BELOW_MIN_PROFIT": "The profit is below the minimum.",
+    "BELOW_MIN_MARGIN": "The margin is below the minimum.",
+    "NOT_IN_TOP_K": "Better offers were chosen for this driver.",
+    "HOME_BY_UNREACHABLE": "The driver could not be home by the set time.",
+    "CAPACITY_EXCEEDED": "The van's capacity would be exceeded.",
+    "OUTSIDE_HORIZON": "The offer lies outside the planning horizon.",
+    "OFFER_NOT_OPEN": "The offer is no longer open.",
+    "VEHICLE_TYPE_MISMATCH": "The vehicle type does not fit the offer.",
+    "EQUIPMENT_MISSING": "Required equipment is missing.",
+    "DIMENSIONS_EXCEEDED": "The load does not fit the van's interior.",
+    "INVALID_ACTION_ORDER": "The pick-up and delivery order is invalid.",
+    "UNKNOWN": "The offer was rejected for a reason without a description."
+  },
   "warnings": {
     "LOADING_ORDER_NOT_MODELLED": "The loading order is not modelled; pallet positions are illustrative.",
     "SERVICE_TIME_DEFAULTED": "Some stops use the default service time of 30 minutes.",
