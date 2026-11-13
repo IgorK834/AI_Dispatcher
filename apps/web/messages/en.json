@@ -31,7 +31,71 @@
       "retry": "Try again"
     }
   },
-  "auth": {},
+  "auth": {
+    "title": "Sign in",
+    "subtitle": "Use the account your administrator gave you.",
+    "headline": "Profitable van routes, planned with an AI dispatcher.",
+    "lead": "Agents search offers and check drivers' time. A deterministic engine builds and verifies every plan. You approve each assignment.",
+    "syntheticDemo": "SYNTHETIC DEMO DATA",
+    "facts": {
+      "vans": {
+        "label": "Vans",
+        "value": "8 · 9 · 10 EP",
+        "note": "up to 3.5 t"
+      },
+      "variants": {
+        "label": "Variants",
+        "value": "3 per plan",
+        "note": "profit · fastest · fuel"
+      },
+      "withoutAi": {
+        "label": "Without AI",
+        "value": "Still works",
+        "note": "manual optimizer"
+      }
+    },
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "submitting": "Signing in",
+      "captchaHint": "Complete the check below to sign in.",
+      "captchaLoading": "Loading the check…",
+      "captchaUnavailable": "The check could not be loaded. Reload the page and try again."
+    },
+    "validation": {
+      "emailRequired": "Enter your email address.",
+      "emailInvalid": "Enter a valid email address, for example name@example.com.",
+      "passwordRequired": "Enter your password."
+    },
+    "rateLimited": "Too many attempts. Wait {seconds} seconds and try again.",
+    "localHint": {
+      "title": "Local demo",
+      "body": "Accounts: {demo} or {admin}. The passwords are in apps/api/.env.example."
+    },
+    "footer": {
+      "synthetic": "All drivers, vans and offers in this app are synthetic demo data.",
+      "mvp": "MVP · 2026"
+    },
+    "account": {
+      "label": "Account",
+      "signOut": "Sign out",
+      "signingOut": "Signing out",
+      "email": "Signed in as {email}",
+      "role": "Role: {role}"
+    },
+    "roles": {
+      "admin": "Admin",
+      "dispatcher": "Dispatcher",
+      "demo": "Demo"
+    },
+    "noAccess": {
+      "title": "No access",
+      "body": "Your role does not include this page.",
+      "back": "Back to the start page"
+    },
+    "checkingSession": "Checking your session…"
+  },
   "fleet": {},
   "offers": {},
   "plans": {},

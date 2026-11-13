@@ -1,13 +1,11 @@
 import { useTranslations } from 'next-intl';
-import { LanguageSwitch } from '../components/language-switch';
 
 export default function Home() {
   const t = useTranslations('common');
   return (
-    <main className="home-card">
-      <LanguageSwitch />
+    <section className="flex max-w-3xl flex-col gap-2 rounded-card bg-surface p-6 shadow-card">
       <h1>{t('appTitle')}</h1>
-      <p>{t('description')}</p>
-    </main>
+      <p className="text-ink2">{t('description')}</p>
+    </section>
   );
 }

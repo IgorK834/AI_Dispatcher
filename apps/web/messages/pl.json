@@ -31,7 +31,71 @@
       "retry": "Spróbuj ponownie"
     }
   },
-  "auth": {},
+  "auth": {
+    "title": "Zaloguj się",
+    "subtitle": "Użyj konta, które dał Ci administrator.",
+    "headline": "Opłacalne trasy busów, planowane z dyspozytorem AI.",
+    "lead": "Agenci szukają ofert i sprawdzają czas pracy kierowców. Deterministyczny silnik buduje i weryfikuje każdy plan. Ty zatwierdzasz każde przypisanie.",
+    "syntheticDemo": "SYNTETYCZNE DANE DEMO",
+    "facts": {
+      "vans": {
+        "label": "Busy",
+        "value": "8 · 9 · 10 EP",
+        "note": "do 3,5 t"
+      },
+      "variants": {
+        "label": "Warianty",
+        "value": "3 na plan",
+        "note": "zysk · czas · paliwo"
+      },
+      "withoutAi": {
+        "label": "Bez AI",
+        "value": "Nadal działa",
+        "note": "ręczny optymalizator"
+      }
+    },
+    "form": {
+      "email": "E-mail",
+      "password": "Hasło",
+      "submit": "Zaloguj się",
+      "submitting": "Logowanie",
+      "captchaHint": "Wykonaj poniższą weryfikację, aby się zalogować.",
+      "captchaLoading": "Ładowanie weryfikacji…",
+      "captchaUnavailable": "Nie udało się załadować weryfikacji. Odśwież stronę i spróbuj ponownie."
+    },
+    "validation": {
+      "emailRequired": "Podaj adres e-mail.",
+      "emailInvalid": "Podaj poprawny adres e-mail, na przykład imie@example.com.",
+      "passwordRequired": "Podaj hasło."
+    },
+    "rateLimited": "Zbyt wiele prób. Odczekaj {seconds} s i spróbuj ponownie.",
+    "localHint": {
+      "title": "Lokalne demo",
+      "body": "Konta: {demo} lub {admin}. Hasła są w apps/api/.env.example."
+    },
+    "footer": {
+      "synthetic": "Wszyscy kierowcy, busy i oferty w tej aplikacji to syntetyczne dane demo.",
+      "mvp": "MVP · 2026"
+    },
+    "account": {
+      "label": "Konto",
+      "signOut": "Wyloguj się",
+      "signingOut": "Wylogowywanie",
+      "email": "Zalogowano jako {email}",
+      "role": "Rola: {role}"
+    },
+    "roles": {
+      "admin": "Administrator",
+      "dispatcher": "Dyspozytor",
+      "demo": "Demo"
+    },
+    "noAccess": {
+      "title": "Brak dostępu",
+      "body": "Twoja rola nie obejmuje tej strony.",
+      "back": "Wróć na stronę główną"
+    },
+    "checkingSession": "Sprawdzanie sesji…"
+  },
   "fleet": {},
   "offers": {},
   "plans": {},
