@@ -40,11 +40,21 @@ MATRIX: dict[tuple[str, str], str] = {
     ("GET", "/api/v1/freight-offers/{offer_id}"): "demo",
     ("PATCH", "/api/v1/freight-offers/{offer_id}"): "demo",
     ("DELETE", "/api/v1/freight-offers/{offer_id}"): "demo",
+    # Agent threads and runs: every role may use them, but only its own (404 for others' runs,
+    # see tests/contract/test_agent_api.py).
+    ("GET", "/api/v1/agent/status"): "demo",
+    ("GET", "/api/v1/agent/threads"): "demo",
+    ("POST", "/api/v1/agent/threads"): "demo",
+    ("GET", "/api/v1/agent/threads/{thread_id}"): "demo",
+    ("POST", "/api/v1/agent/threads/{thread_id}/messages"): "demo",
+    ("GET", "/api/v1/agent/runs/{run_id}"): "demo",
+    ("GET", "/api/v1/agent/runs/{run_id}/events"): "demo",
+    ("POST", "/api/v1/agent/runs/{run_id}/resume"): "demo",
 }
 PUBLIC = {("GET", "/api/v1/auth/captcha-config"), ("POST", "/api/v1/auth/login")}
 # Endpoints of later features join the full matrix in their own slices. Until then they must at
 # least refuse anonymous callers, and `/admin/*` must refuse every non-admin role (§6.5).
-LATER = ("/api/v1/admin/", "/api/v1/agent/", "/api/v1/assignments", "/api/v1/optimization-jobs")
+LATER = ("/api/v1/admin/", "/api/v1/assignments", "/api/v1/optimization-jobs")
 LATER_EXACT = ("/api/v1/route-plans/",)
 
 
