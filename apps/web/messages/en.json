@@ -879,7 +879,97 @@
       }
     }
   },
-  "admin": {},
+  "admin": {
+    "title": "Admin",
+    "subtitle": "Demo data, cost profile and AI status. Visible to administrators only.",
+    "validation": {
+      "seedInvalid": "Enter a whole number, or leave the seed empty.",
+      "dateInvalid": "Enter a date, or leave it empty.",
+      "offersRange": "Enter a whole number from 1 to 500."
+    },
+    "generate": {
+      "title": "Generate demo data",
+      "body": "Re-runs the fleet and offer generators. The same seed always gives the same data.",
+      "seed": "Seed",
+      "seedHint": "Empty uses the configured seed.",
+      "referenceDate": "Reference date",
+      "referenceDateHint": "Empty uses today.",
+      "offers": "Offers",
+      "offersHint": "1 to 500",
+      "submit": "Generate",
+      "done": "Demo data generated.",
+      "noPermission": "You do not have permission to generate demo data.",
+      "unknownFields": "The server refused these fields: {fields}."
+    },
+    "counts": {
+      "title": "Last run",
+      "imported": "Imported",
+      "updated": "Updated",
+      "unchanged": "Unchanged",
+      "failed": "Failed",
+      "fleet": "{drivers, plural, one {# driver} other {# drivers}} · {vehicles, plural, one {# van} other {# vans}}",
+      "unknown": "The server answered, but not with the expected counts."
+    },
+    "reset": {
+      "title": "Reset demo data",
+      "body": "Restores the exact first-start state.",
+      "deletedTitle": "Deleted",
+      "deleted": {
+        "generated": "Generated drivers, vans, offers",
+        "manual": "Manual offers and added fleet rows",
+        "jobs": "Jobs, plans, assignments",
+        "agent": "Agent conversations and approvals"
+      },
+      "keptTitle": "Kept",
+      "kept": {
+        "accounts": "User accounts and sessions",
+        "audit": "Audit log"
+      },
+      "confirmLabel": "Type RESET to confirm",
+      "confirmHint": "The confirmation word is RESET, in capital letters, in both languages.",
+      "submit": "Reset demo data",
+      "done": "Demo data reset to the first-start state."
+    },
+    "ai": {
+      "title": "AI status",
+      "loading": "Loading the AI status",
+      "unavailable": "The AI status could not be loaded.",
+      "on": "On",
+      "off": "Off",
+      "models": "Models are set per role in <code>AGENT_MODEL_POLICY</code> on the server.",
+      "budget": "Today’s token budget",
+      "budgetValue": "{used} of {limit}"
+    },
+    "cost": {
+      "title": "Cost profile {name}",
+      "titleEmpty": "Cost profile",
+      "readOnly": "Read-only",
+      "loading": "Loading the cost profile",
+      "unavailable": "The cost profile could not be loaded.",
+      "none": "There is no cost profile yet. Generate demo data to create one.",
+      "parameter": "Parameter",
+      "value": "Value",
+      "basis": "Basis",
+      "rows": {
+        "fuelPrice": "Fuel price per litre",
+        "driverCost": "Driver cost per hour",
+        "vehicleCost": "Vehicle cost per km",
+        "accommodation": "Accommodation per night",
+        "perDiem": "Per diem per day",
+        "tolls": "Tolls per km",
+        "vignettes": "Annual vignettes",
+        "fx": "Exchange rates",
+        "minProfit": "Minimum profit",
+        "minMargin": "Minimum margin"
+      },
+      "basisValue": {
+        "source": "source",
+        "assumption": "assumption",
+        "unknown": "not stated"
+      },
+      "note": "Values marked “assumption” are demo estimates, not market data. Edit through the API docs page."
+    }
+  },
   "errors": {
     "VALIDATION_ERROR": "Some values are not valid. Check the fields and try again.",
     "MALFORMED_REQUEST": "The request could not be read. Reload the page and try again.",

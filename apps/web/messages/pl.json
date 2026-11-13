@@ -879,7 +879,97 @@
       }
     }
   },
-  "admin": {},
+  "admin": {
+    "title": "Administracja",
+    "subtitle": "Dane demo, profil kosztów i stan AI. Widoczne tylko dla administratorów.",
+    "validation": {
+      "seedInvalid": "Wpisz liczbę całkowitą albo zostaw ziarno puste.",
+      "dateInvalid": "Wpisz datę albo zostaw pole puste.",
+      "offersRange": "Wpisz liczbę całkowitą od 1 do 500."
+    },
+    "generate": {
+      "title": "Generuj dane demo",
+      "body": "Uruchamia ponownie generatory floty i ofert. To samo ziarno zawsze daje te same dane.",
+      "seed": "Ziarno",
+      "seedHint": "Puste używa skonfigurowanego ziarna.",
+      "referenceDate": "Data odniesienia",
+      "referenceDateHint": "Puste używa dzisiejszej daty.",
+      "offers": "Oferty",
+      "offersHint": "od 1 do 500",
+      "submit": "Generuj",
+      "done": "Wygenerowano dane demo.",
+      "noPermission": "Nie masz uprawnień do generowania danych demo.",
+      "unknownFields": "Serwer odrzucił te pola: {fields}."
+    },
+    "counts": {
+      "title": "Ostatnie uruchomienie",
+      "imported": "Zaimportowano",
+      "updated": "Zaktualizowano",
+      "unchanged": "Bez zmian",
+      "failed": "Błędy",
+      "fleet": "{drivers, plural, one {# kierowca} few {# kierowców} many {# kierowców} other {# kierowcy}} · {vehicles, plural, one {# bus} few {# busy} many {# busów} other {# busa}}",
+      "unknown": "Serwer odpowiedział, ale nie podał oczekiwanych liczb."
+    },
+    "reset": {
+      "title": "Zresetuj dane demo",
+      "body": "Przywraca dokładnie stan z pierwszego uruchomienia.",
+      "deletedTitle": "Usuwane",
+      "deleted": {
+        "generated": "Wygenerowani kierowcy, busy, oferty",
+        "manual": "Oferty ręczne i dodane wiersze floty",
+        "jobs": "Zadania, plany, przypisania",
+        "agent": "Rozmowy z agentami i zatwierdzenia"
+      },
+      "keptTitle": "Zachowane",
+      "kept": {
+        "accounts": "Konta użytkowników i sesje",
+        "audit": "Dziennik audytu"
+      },
+      "confirmLabel": "Wpisz RESET, aby potwierdzić",
+      "confirmHint": "Słowo potwierdzenia to RESET, wielkimi literami, w obu językach.",
+      "submit": "Zresetuj dane demo",
+      "done": "Dane demo przywrócono do stanu z pierwszego uruchomienia."
+    },
+    "ai": {
+      "title": "Stan AI",
+      "loading": "Wczytywanie stanu AI",
+      "unavailable": "Nie udało się wczytać stanu AI.",
+      "on": "Włączone",
+      "off": "Wyłączone",
+      "models": "Modele ustawia się dla każdej roli w <code>AGENT_MODEL_POLICY</code> na serwerze.",
+      "budget": "Dzisiejszy budżet tokenów",
+      "budgetValue": "{used} z {limit}"
+    },
+    "cost": {
+      "title": "Profil kosztów {name}",
+      "titleEmpty": "Profil kosztów",
+      "readOnly": "Tylko do odczytu",
+      "loading": "Wczytywanie profilu kosztów",
+      "unavailable": "Nie udało się wczytać profilu kosztów.",
+      "none": "Nie ma jeszcze profilu kosztów. Wygeneruj dane demo, aby go utworzyć.",
+      "parameter": "Parametr",
+      "value": "Wartość",
+      "basis": "Podstawa",
+      "rows": {
+        "fuelPrice": "Cena paliwa za litr",
+        "driverCost": "Koszt kierowcy za godzinę",
+        "vehicleCost": "Koszt pojazdu za km",
+        "accommodation": "Nocleg za noc",
+        "perDiem": "Dieta za dobę",
+        "tolls": "Opłaty drogowe za km",
+        "vignettes": "Winiety roczne",
+        "fx": "Kursy walut",
+        "minProfit": "Minimalny zysk",
+        "minMargin": "Minimalna marża"
+      },
+      "basisValue": {
+        "source": "źródło",
+        "assumption": "założenie",
+        "unknown": "nie podano"
+      },
+      "note": "Wartości oznaczone jako „założenie” to szacunki demo, a nie dane rynkowe. Edycja przez stronę dokumentacji API."
+    }
+  },
   "errors": {
     "VALIDATION_ERROR": "Niektóre wartości są nieprawidłowe. Sprawdź pola i spróbuj ponownie.",
     "MALFORMED_REQUEST": "Nie udało się odczytać żądania. Odśwież stronę i spróbuj ponownie.",
