@@ -355,6 +355,26 @@ def plan_validator(state: AgentState, runtime: Runtime[GraphContext]) -> AgentSt
     return state
 
 
+def _assignment_failure(state: AgentState, pending: dict[str, Any], error: DomainError) -> str:
+    """Tell the Dispatcher which approved plans failed, so it can drop them and ask again.
+
+    The service reports a changed offer by its internal id; only the plans holding that offer are
+    named. For other failures the service does not name a plan, so none is guessed.
+    """
+    offers = state["aliases"]["offers"]
+    changed = {str(item["offerId"]) for item in error.errors if "offerId" in item}
+    stale = [
+        ref
+        for ref in pending["plan_refs"]
+        if changed
+        & {offers.get(offer) for offer in state["plan_facts"].get(ref, {}).get("offer_ids", [])}
+    ]
+    codes = ", ".join(sorted({str(item.get("code", error.code)) for item in error.errors}))
+    if stale:
+        return f"{error.code}: nothing was assigned; stale plans {', '.join(stale)} ({codes})"
+    return f"{error.code}: nothing was assigned; the failing plan is not identified ({codes})"
+
+
 def approval_gate(state: AgentState, runtime: Runtime[GraphContext]) -> AgentState:
     context = runtime.context
     pending = state["pending_approval"]
@@ -418,7 +438,7 @@ def approval_gate(state: AgentState, runtime: Runtime[GraphContext]) -> AgentSta
             state["notes"].append("Approved assignments committed.")
         except DomainError as error:
             context.end_trace(trace, error.code, "error")
-            state["notes"].append(error.code)
+            state["notes"].append(_assignment_failure(state, pending, error))
     else:
         state["notes"].append(
             f"Human decision: {decision.get('decision')}; {decision.get('comment') or ''}"
