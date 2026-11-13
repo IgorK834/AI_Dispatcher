@@ -2,7 +2,34 @@
   "common": {
     "appTitle": "RoutePilot AI",
     "description": "AI dispatcher for a small van fleet. MVP deadline: 15 November 2026; later a portfolio project.",
-    "language": { "label": "Language", "en": "English", "pl": "Polski" }
+    "language": {
+      "label": "Language",
+      "en": "English",
+      "pl": "Polski"
+    },
+    "nav": {
+      "label": "Main navigation",
+      "assistant": "AI Dispatcher",
+      "fleet": "Fleet",
+      "offers": "Offers",
+      "optimizer": "Optimizer",
+      "admin": "Admin"
+    },
+    "syntheticData": "SYNTHETIC DATA",
+    "close": "Close",
+    "dismiss": "Dismiss",
+    "cancel": "Cancel",
+    "tryAgain": "Try again",
+    "loadMore": "Load more",
+    "reload": "Reload",
+    "save": "Save",
+    "saving": "Saving",
+    "requestId": "Request ID: {id}",
+    "apiUnreachable": {
+      "title": "Cannot reach the API at {url}",
+      "hint": "Check that the API is running on port 8000. If it is, the browser may be blocking the request: check CORS_ALLOWED_ORIGINS.",
+      "retry": "Try again"
+    }
   },
   "auth": {},
   "fleet": {},
@@ -11,8 +38,40 @@
   "optimizer": {},
   "chat": {},
   "admin": {},
-  "errors": {},
+  "errors": {
+    "VALIDATION_ERROR": "Some values are not valid. Check the fields and try again.",
+    "MALFORMED_REQUEST": "The request could not be read. Reload the page and try again.",
+    "CAPTCHA_FAILED": "The captcha check failed. Please try again.",
+    "UNAUTHENTICATED": "Your session has expired. Sign in again.",
+    "INVALID_CREDENTIALS": "Wrong email or password.",
+    "FORBIDDEN": "You do not have permission to do this.",
+    "CSRF_FAILED": "Your session token is out of date. Reload the page and try again.",
+    "ORIGIN_NOT_ALLOWED": "This address is not allowed to call the API.",
+    "NOT_FOUND": "This record does not exist any more.",
+    "VERSION_CONFLICT": "This record was changed elsewhere.",
+    "DUPLICATE_RESOURCE": "This value is already used. Choose another one.",
+    "PROVIDER_OFFER_READ_ONLY": "Imported offers are read-only.",
+    "DRIVER_HAS_ACTIVE_ASSIGNMENT": "This driver has an active assignment. Cancel the assignment first.",
+    "VEHICLE_ASSIGNED_TO_DRIVER": "This vehicle is assigned to a driver. Remove it from the driver first.",
+    "COST_PROFILE_IN_USE": "This cost profile is used by a vehicle.",
+    "IDEMPOTENCY_KEY_REUSED": "This request was already sent with different content.",
+    "JOB_NOT_FINISHED": "The optimization has not finished yet.",
+    "PLAN_NOT_ASSIGNABLE": "This plan is out of date: an offer is no longer open or the driver is already assigned.",
+    "APPROVAL_NOT_PENDING": "This request is no longer waiting for approval.",
+    "RUN_IN_PROGRESS": "The assistant is still working on the previous message.",
+    "RATE_LIMITED": "Too many requests. Try again in a moment.",
+    "AI_BUDGET_EXCEEDED": "Your daily AI budget is used up. Use the manual optimizer.",
+    "AI_UNAVAILABLE": "AI is not available right now. Use the manual optimizer.",
+    "NOT_READY": "The service is starting up. Try again in a moment.",
+    "INTERNAL_ERROR": "Something went wrong on our side. Try again.",
+    "UNKNOWN": "Something went wrong. Try again."
+  },
   "rejections": {},
   "warnings": {},
-  "legal": {}
+  "legal": {
+    "notice": "The work/driving/rest schedule is a planning estimate based on a simplified model of selected rules (Polish Act on Drivers' Working Time; Regulation (EC) No 561/2006). It does not certify legal compliance."
+  },
+  "vehicle": {
+    "vanAriaLabel": "Curtain-sider van up to 3.5 t, {label}"
+  }
 }

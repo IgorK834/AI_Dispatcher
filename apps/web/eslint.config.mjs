@@ -2,9 +2,13 @@ import path from 'node:path';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTypescript from 'eslint-config-next/typescript';
+import { noHardcodedText } from './eslint-rules/no-hardcoded-text.mjs';
+import { noRawColors } from './eslint-rules/no-raw-colors.mjs';
 
 const boundaries = {
   rules: {
+    'no-raw-colors': noRawColors,
+    'no-hardcoded-text': noHardcodedText,
     imports: {
       meta: {
         type: 'problem',
@@ -62,5 +66,17 @@ export default defineConfig([
     plugins: { routepilot: boundaries },
     rules: { 'routepilot/imports': 'error' },
   },
-  globalIgnores(['.next/**', 'next-env.d.ts']),
+  {
+    files: ['src/**/*.{ts,tsx}'],
+    ignores: ['src/**/*.test.{ts,tsx}', 'src/test/**'],
+    plugins: { routepilot: boundaries },
+    rules: { 'routepilot/no-raw-colors': 'error' },
+  },
+  {
+    files: ['src/components/**/*.tsx', 'src/features/**/*.tsx', 'src/app/**/*.tsx'],
+    ignores: ['src/**/*.test.tsx'],
+    plugins: { routepilot: boundaries },
+    rules: { 'routepilot/no-hardcoded-text': 'error' },
+  },
+  globalIgnores(['.next/**', 'next-env.d.ts', 'src/lib/api/schema.d.ts']),
 ]);

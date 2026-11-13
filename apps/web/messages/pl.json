@@ -2,7 +2,34 @@
   "common": {
     "appTitle": "RoutePilot AI — dyspozytor",
     "description": "Dyspozytor AI dla małej floty busów. Termin MVP: 15 listopada 2026; później projekt portfolio.",
-    "language": { "label": "Język", "en": "English", "pl": "Polski" }
+    "language": {
+      "label": "Język",
+      "en": "English",
+      "pl": "Polski"
+    },
+    "nav": {
+      "label": "Nawigacja główna",
+      "assistant": "Dyspozytor AI",
+      "fleet": "Flota",
+      "offers": "Oferty",
+      "optimizer": "Optymalizator",
+      "admin": "Administracja"
+    },
+    "syntheticData": "DANE SYNTETYCZNE",
+    "close": "Zamknij",
+    "dismiss": "Odrzuć",
+    "cancel": "Anuluj",
+    "tryAgain": "Spróbuj ponownie",
+    "loadMore": "Pokaż więcej",
+    "reload": "Odśwież",
+    "save": "Zapisz",
+    "saving": "Zapisywanie",
+    "requestId": "Identyfikator żądania: {id}",
+    "apiUnreachable": {
+      "title": "Nie można połączyć się z API pod adresem {url}",
+      "hint": "Sprawdź, czy API działa na porcie 8000. Jeśli tak, przeglądarka może blokować żądanie: sprawdź CORS_ALLOWED_ORIGINS.",
+      "retry": "Spróbuj ponownie"
+    }
   },
   "auth": {},
   "fleet": {},
@@ -11,8 +38,40 @@
   "optimizer": {},
   "chat": {},
   "admin": {},
-  "errors": {},
+  "errors": {
+    "VALIDATION_ERROR": "Niektóre wartości są nieprawidłowe. Sprawdź pola i spróbuj ponownie.",
+    "MALFORMED_REQUEST": "Nie udało się odczytać żądania. Odśwież stronę i spróbuj ponownie.",
+    "CAPTCHA_FAILED": "Weryfikacja captcha nie powiodła się. Spróbuj ponownie.",
+    "UNAUTHENTICATED": "Twoja sesja wygasła. Zaloguj się ponownie.",
+    "INVALID_CREDENTIALS": "Nieprawidłowy adres e-mail lub hasło.",
+    "FORBIDDEN": "Nie masz uprawnień do tej czynności.",
+    "CSRF_FAILED": "Token sesji jest nieaktualny. Odśwież stronę i spróbuj ponownie.",
+    "ORIGIN_NOT_ALLOWED": "Ten adres nie ma dostępu do API.",
+    "NOT_FOUND": "Ten rekord już nie istnieje.",
+    "VERSION_CONFLICT": "Ten rekord został zmieniony w innym miejscu.",
+    "DUPLICATE_RESOURCE": "Ta wartość jest już używana. Wybierz inną.",
+    "PROVIDER_OFFER_READ_ONLY": "Oferty z importu są tylko do odczytu.",
+    "DRIVER_HAS_ACTIVE_ASSIGNMENT": "Kierowca ma aktywne przypisanie. Najpierw anuluj przypisanie.",
+    "VEHICLE_ASSIGNED_TO_DRIVER": "Pojazd jest przypisany do kierowcy. Najpierw odepnij go od kierowcy.",
+    "COST_PROFILE_IN_USE": "Ten profil kosztów jest używany przez pojazd.",
+    "IDEMPOTENCY_KEY_REUSED": "To żądanie zostało już wysłane z inną treścią.",
+    "JOB_NOT_FINISHED": "Optymalizacja jeszcze się nie zakończyła.",
+    "PLAN_NOT_ASSIGNABLE": "Ten plan jest nieaktualny: oferta nie jest już otwarta lub kierowca ma już przypisanie.",
+    "APPROVAL_NOT_PENDING": "Ta prośba nie czeka już na zatwierdzenie.",
+    "RUN_IN_PROGRESS": "Asystent nadal pracuje nad poprzednią wiadomością.",
+    "RATE_LIMITED": "Zbyt wiele żądań. Spróbuj za chwilę.",
+    "AI_BUDGET_EXCEEDED": "Dzienny budżet AI został wykorzystany. Użyj ręcznego optymalizatora.",
+    "AI_UNAVAILABLE": "AI jest teraz niedostępne. Użyj ręcznego optymalizatora.",
+    "NOT_READY": "Usługa się uruchamia. Spróbuj za chwilę.",
+    "INTERNAL_ERROR": "Coś poszło nie tak po naszej stronie. Spróbuj ponownie.",
+    "UNKNOWN": "Coś poszło nie tak. Spróbuj ponownie."
+  },
   "rejections": {},
   "warnings": {},
-  "legal": {}
+  "legal": {
+    "notice": "Harmonogram pracy, jazdy i odpoczynków jest estymacją planistyczną opartą na uproszczonym modelu wybranych przepisów (ustawa o czasie pracy kierowców; rozporządzenie (WE) nr 561/2006). Nie stanowi potwierdzenia zgodności z przepisami."
+  },
+  "vehicle": {
+    "vanAriaLabel": "Furgon z plandeką do 3,5 t, {label}"
+  }
 }

@@ -27,4 +27,25 @@
   --shadow-sheet: 0 24px 48px rgba(21, 21, 21, 0.1);
   --shadow-segment-on: 0 1px 2px rgba(26, 29, 35, 0.1);
   --shadow-focus-ring: 0 0 0 3px #fdedec;
+  --status-done-bg: #e6e8ec;
+  --status-done-fg: #1a1d23;
+  --status-info-bg: #eff1f4;
+  --status-info-fg: #474c55;
+  --status-quiet-bg: #f4f5f7;
+  --status-quiet-fg: #5b626c;
+  --cargo-a: #ec7a74;
+  --cargo-b: #f5aaa6;
+  --cargo-c: #fad4d1;
+  --cargo-d: #f8bfbb;
+  --cargo-e: #fce6e4;
+  --cargo-free-border: #c3c9d2;
+  --cargo-stripe: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0 9px,
+    rgba(255, 255, 255, 0.45) 9px 11px
+  );
+  --timeline-rest: repeating-linear-gradient(135deg, #e3e6ea 0 5px, #f1f2f4 5px 10px);
+  --page-max-width: 1440px;
+  --page-gutter: 40px;
+  --top-bar-height: 80px;
 }
