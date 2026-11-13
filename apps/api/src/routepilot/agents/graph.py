@@ -5,7 +5,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import timedelta
 from decimal import Decimal
-from threading import Event
+from threading import Event, Lock
 from time import monotonic
 from typing import Any, TypedDict, cast
 from uuid import UUID
@@ -104,6 +104,10 @@ class ToolFailure(Exception):
         self.note = f"{role} stopped: {tool} failed twice (TOOL_ERROR); no new report from {role}"
 
 
+class GuardStop(BudgetExceeded):
+    """A limit was reached and a `guard` step with the reason is already stored."""
+
+
 @dataclass
 class GraphContext:
     registry: ModelRegistry
@@ -120,6 +124,11 @@ class GraphContext:
     started: float = field(default_factory=monotonic)
     run_budget: TokenBudget | None = None
     daily_budget: TokenBudget | None = None
+    # Steps that were started and not finished, and whether the run was abandoned (timeout): an
+    # abandoned worker thread cannot be stopped, so it must not write after `run_finished`.
+    _open: dict[UUID, TraceStep] = field(default_factory=dict, repr=False)
+    _closed: bool = field(default=False, repr=False)
+    _lock: Lock = field(default_factory=Lock, repr=False)
 
     def _budgets(self, state: AgentState) -> list[TokenBudget]:
         if self.run_budget is None:
@@ -141,7 +150,12 @@ class GraphContext:
         self, agent: str, kind: StepKind, summary: str, *, tool: str | None = None
     ) -> tuple[UUID, TraceStep, float]:
         step = TraceStep(seq=0, agent=agent, type=kind, toolName=tool, inputSummary=summary[:500])
-        return self.store.start_step(self.run_id, step), step, monotonic()
+        with self._lock:
+            if self._closed:
+                raise GuardStop("RUN_TIMEOUT")
+            id = self.store.start_step(self.run_id, step)
+            self._open[id] = step
+        return id, step, monotonic()
 
     def end_trace(
         self,
@@ -152,11 +166,32 @@ class GraphContext:
         tokens_out: int = 0,
     ) -> None:
         id, step, start = trace
-        step.outputSummary = summary[:500]
-        step.status = status
-        step.durationMs = max(0, int((monotonic() - start) * 1000))
-        step.tokens = {"in": tokens_in, "out": tokens_out}
-        self.store.finish_step(id, step)
+        with self._lock:
+            if id not in self._open:
+                return  # the run was abandoned and this step closed with it
+            del self._open[id]
+            step.outputSummary = summary[:500]
+            step.status = status
+            step.durationMs = max(0, int((monotonic() - start) * 1000))
+            step.tokens = {"in": tokens_in, "out": tokens_out}
+            self.store.finish_step(id, step)
+
+    def abandon(self) -> None:
+        """The run timed out or failed: close open steps and refuse every later write."""
+        self.cancelled.set()
+        with self._lock:
+            self._closed = True
+            for id, step in self._open.items():
+                step.outputSummary = "RUN_TIMEOUT"
+                step.status = "error"
+                self.store.finish_step(id, step)
+            self._open.clear()
+
+    def reject(self, reason: str) -> GuardStop:
+        """Store a `guard` step with the reason of a stop and return the error to raise."""
+        trace = self.trace("BudgetGuard", "guard", "Check run, daily and tool budgets")
+        self.end_trace(trace, reason, "rejected")
+        return GuardStop(reason)
 
     def persist_usage(self, state: AgentState) -> None:
         if self.run_budget:
@@ -172,7 +207,11 @@ class GraphContext:
             },
         )
 
-    def guard(self, state: AgentState, *, count_step: bool = False) -> None:
+    def guard(
+        self, state: AgentState, *, count_step: bool = False, tool_role: Role | None = None
+    ) -> None:
+        if self.cancelled.is_set() and self._closed:
+            raise GuardStop("RUN_TIMEOUT")
         trace = self.trace("BudgetGuard", "guard", "Check run, daily and tool budgets")
         reason = None
         if (
@@ -183,11 +222,17 @@ class GraphContext:
             reason = "RUN_TIMEOUT"
         elif state["budget"]["steps"] >= self.settings.agent_recursion_limit:
             reason = "STEP_LIMIT"
+        elif (
+            tool_role is not None
+            and state["budget"]["tool_calls"].get(tool_role, 0)
+            >= self.settings.agent_max_tool_calls
+        ):
+            reason = "TOOL_CALL_LIMIT"
         elif any(budget.closed or budget.used >= budget.limit for budget in self._budgets(state)):
             reason = "TOKEN_BUDGET"
         self.end_trace(trace, reason or "Within limits", "rejected" if reason else "ok")
         if reason:
-            raise BudgetExceeded(reason)
+            raise GuardStop(reason)
         if count_step:
             state["budget"]["steps"] += 1
 
@@ -213,15 +258,22 @@ class GraphContext:
                     current, f"{model}: {status}", cast(TraceStatus, status), tokens_in, tokens_out
                 )
 
-        return self.registry.call(
-            role,
-            messages,
-            schema=schema,
-            tools=self.tools.schemas(role) if tools else [],
-            budgets=self._budgets(state),
-            live_campaign=self.live_campaign,
-            observe=observe,
-        )
+        try:
+            return self.registry.call(
+                role,
+                messages,
+                schema=schema,
+                tools=self.tools.schemas(role) if tools else [],
+                budgets=self._budgets(state),
+                live_campaign=self.live_campaign,
+                observe=observe,
+            )
+        except GuardStop:
+            raise
+        except BudgetExceeded as error:
+            # The token reservation was refused inside the registry: store the reason as a guard
+            # step like every other stop.
+            raise self.reject(str(error) or "TOKEN_BUDGET") from error
 
     def turn(self, state: AgentState, role: Role) -> dict[str, Any]:
         self.tools.prepare(cast(dict[str, Any], state))
@@ -265,10 +317,8 @@ class GraphContext:
                     return result.parsed.model_dump()
             messages.append(message)
             for call in message.tool_calls:
-                self.guard(state)
+                self.guard(state, tool_role=role)
                 counts = state["budget"]["tool_calls"]
-                if counts.get(role, 0) >= self.settings.agent_max_tool_calls:
-                    raise BudgetExceeded("TOOL_CALL_LIMIT")
                 counts[role] = counts.get(role, 0) + 1
                 trace = self.trace(role, "tool", f"Call {call['name']}", tool=call["name"])
                 for attempt in (1, 2):

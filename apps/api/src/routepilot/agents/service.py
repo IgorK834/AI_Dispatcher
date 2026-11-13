@@ -342,14 +342,14 @@ class AgentService:
                 if result.get("__interrupt__"):
                     return
             except (TimeoutError, GraphRecursionError):
-                context.cancelled.set()
+                context.abandon()
                 state = self.graph.get_state(config).values
                 state["error"] = {"code": "BUDGET_EXCEEDED", "message": "Run limit reached"}
                 from langgraph.runtime import Runtime
 
                 result = template_answer(cast(AgentState, state), Runtime(context=context))
             except Exception:
-                context.cancelled.set()
+                context.abandon()
                 self.store.update(
                     "agent_runs",
                     run_id,
