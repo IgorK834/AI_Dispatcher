@@ -1,0 +1,3 @@
+# Synthetic fixture for AC-FEAT-007-08: this pin has published advisories (for example
+# CVE-2018-18074, a high-severity one), so Gate 8b must fail on it. Never installed.
+requests==2.19.1
