@@ -12,6 +12,7 @@ from routepilot.optimization.engine import FleetValidator, RouteValidator, optim
 from routepilot.optimization.engine.fleet_oracle import brute_force_fleet
 from routepilot.optimization.engine.models import EngineSnapshot
 from routepilot.optimization.engine.oracle import brute_force
+from routepilot.optimization.engine.schedule import build_plan
 from routepilot.optimization.engine.search import plan_key
 
 
@@ -111,6 +112,15 @@ def test_p1_to_p13_engine_invariants(source: EngineSnapshot) -> None:
         if groups["profit"]:
             assert groups["fastest"][0].finish_at <= groups["profit"][0].finish_at
             assert groups["fuel"][0].fuel_l <= groups["profit"][0].fuel_l
+    # The engine also offers the two baselines' plans as candidates (copies built as optimised
+    # plans), whether or not another group already lists them; `fleet_candidates` holds only the
+    # unlisted ones, so the oracle's candidates are completed with the same copies.
+    drivers_by_id = {d.id: d for d in source.drivers}
+    baseline_plans: dict[str, list] = {driver_id: [] for driver_id in result.per_driver}
+    for baseline in result.baseline_plans:
+        copy, _ = build_plan(source, drivers_by_id[baseline.driver_id], baseline.actions)
+        assert copy is not None
+        baseline_plans[baseline.driver_id].append(copy)
     for objective, solution in result.fleet.items():
         assert FleetValidator().validate(source, solution, all_plans).valid
         # Four candidate slots suffice for the <=3-offer instances after deduplication by ref.
@@ -121,6 +131,7 @@ def test_p1_to_p13_engine_invariants(source: EngineSnapshot) -> None:
                     for p in groups[objective]
                     + groups["profit"]
                     + [p for p in result.fleet_candidates if p.driver_id == d]
+                    + baseline_plans[d]
                 }.values()
             )
             for d, groups in result.per_driver.items()

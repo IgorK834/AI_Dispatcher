@@ -1,7 +1,10 @@
 import os from 'node:os';
 import path from 'node:path';
 import { defineConfig } from '@playwright/test';
+import { prepareDiagnostics, diagnosticsDir } from './diagnostics';
 import { accounts } from './fixtures';
+
+if (process.env.CI) prepareDiagnostics();
 
 const root = path.resolve(__dirname, '../..');
 // A throw-away stack on its own ports and database: the e2e run never touches local data.
@@ -13,11 +16,15 @@ const webUrl = `http://localhost:${webPort}`;
 
 export default defineConfig({
   testDir: __dirname,
+  globalSetup: require.resolve('./diagnostics'),
   outputDir: path.join(work, 'results'),
   fullyParallel: false,
   workers: 1,
   retries: 0,
   reporter: [['list']],
+  // A CI runner shares a few CPUs between Chromium, `next dev` and the API: requests that take
+  // milliseconds locally have taken seconds there, so assertions wait longer in CI.
+  expect: { timeout: process.env.CI ? 30_000 : 5_000 },
   use: { baseURL: webUrl, locale: 'en-US', trace: 'retain-on-failure' },
   projects: [{ name: 'chromium', use: { browserName: 'chromium' } }],
   webServer: [
@@ -29,11 +36,15 @@ export default defineConfig({
         'uv run alembic upgrade head',
         `uv run uvicorn routepilot.main:app --port ${apiPort}`,
       ].join(' && '),
+      // The API's request log (method, path, status, duration) goes into the test output, so a slow or
+      // stuck request of a CI run can be read from it.
+      stdout: 'pipe',
       url: `${apiUrl}/health`,
       reuseExistingServer: false,
       timeout: 120_000,
       env: {
         APP_ENV: 'local',
+        ...(process.env.CI ? { PYTHONPATH: diagnosticsDir } : {}),
         DATABASE_URL: `sqlite:///${work}/data/routepilot.db`,
         AGENTS_DB_PATH: `${work}/data/agents.db`,
         CORS_ALLOWED_ORIGINS: webUrl,
