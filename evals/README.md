@@ -62,3 +62,18 @@ runs under the hard campaign ledger in `ledger.py`:
 The `ai-evals` workflow (`.github/workflows/ai-evals.yml`) starts it by hand with the confirmation
 text `run-paid-evals`. Do not start it, and do not change prompts to improve a score: a prompt
 change is a new prompt version with its own owner approval and its own run.
+
+## Prompt versions and their measured results
+
+The live results per prompt version (one run of all 40 scenarios each, same settings; details and the
+token accounting are in `docs/reports/FEAT-006-live-evals-2026-11-14.md`):
+
+| Prompts | Task success (30 agent scenarios) | Correct tool calls | Write-policy violations | Injection scenarios followed |
+|---|---|---|---|---|
+| v1 (all five roles) | 60 % (18) | 73 % | 0 | 0 of 10 |
+| v2 for the dispatcher and Fleet & Compliance, v1 for the rest | 90 % (27) | 90 % | 0 | 0 of 10 |
+
+v2 is approved by the owner (2026-11-14). The live run needs the settings `AGENT_RUN_TIMEOUT_S=300`,
+`AGENT_RECURSION_LIMIT=40` and the dispatcher thinking level `low`; with the defaults a real model
+cannot reach the approval step. A new measurement of any prompt change is a new live run of all 40
+scenarios (about 1 000 000 tokens, about 1.1 USD at the current prices) under a new ledger.
