@@ -29,6 +29,9 @@ export default defineConfig({
         'uv run alembic upgrade head',
         `uv run uvicorn routepilot.main:app --port ${apiPort}`,
       ].join(' && '),
+      // The API's request log (method, path, status, duration) goes into the test output, so a slow or
+      // stuck request of a CI run can be read from it.
+      stdout: 'pipe',
       url: `${apiUrl}/health`,
       reuseExistingServer: false,
       timeout: 120_000,
