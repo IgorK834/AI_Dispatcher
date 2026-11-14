@@ -1,6 +1,7 @@
 """Real process-worker lifecycle, recovery, failure and event-loop responsiveness."""
 
 import asyncio
+import socket
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
@@ -222,3 +223,29 @@ def test_stopping_an_idle_worker_does_not_wait_for_the_poll_interval(worker):
         return time.perf_counter() - began
 
     assert asyncio.run(scenario()) < 1.0, "shutdown interrupts the idle wait"
+
+
+@pytest.mark.integration
+@pytest.mark.ac("AC-FEAT-004-15")
+def test_the_worker_process_does_not_keep_client_connections_of_the_server_open(worker):
+    """A forked worker would inherit every open client socket, so a connection that the server
+    closes (keep-alive timeout) stayed open towards the browser, which then sent its next request
+    into a dead connection and waited for ever (the stalled e2e run of FEAT-007)."""
+    service, _user = worker
+
+    async def scenario() -> bytes:
+        await service.start()
+        with socket.create_server(("127.0.0.1", 0)) as listener:
+            client = socket.create_connection(listener.getsockname())
+            server_side, _ = listener.accept()
+            # The first submit starts the worker process, while the connection is open.
+            await asyncio.get_running_loop().run_in_executor(service._pool, abs, -1)
+            server_side.close()
+            client.settimeout(5)
+            try:
+                return client.recv(1)
+            finally:
+                client.close()
+                await service.stop()
+
+    assert asyncio.run(scenario()) == b"", "closing the server side ends the client's connection"

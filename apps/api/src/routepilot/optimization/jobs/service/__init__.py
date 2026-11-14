@@ -6,6 +6,7 @@ import asyncio
 import contextlib
 import hashlib
 import json
+import multiprocessing
 import threading
 from concurrent.futures import ProcessPoolExecutor
 from datetime import timedelta
@@ -73,6 +74,13 @@ def _optimize(snapshot: EngineSnapshot) -> EngineResult:
 
     began = perf_counter()
     return optimize(snapshot, elapsed_ms=lambda: int((perf_counter() - began) * 1000))
+
+
+def _new_pool() -> ProcessPoolExecutor:
+    """One worker process that starts clean. A forked worker would inherit every open client
+    socket of the server: a connection that the server closes (keep-alive timeout) then stays
+    open towards the browser, which sends its next request into it and waits for ever."""
+    return ProcessPoolExecutor(max_workers=1, mp_context=multiprocessing.get_context("spawn"))
 
 
 def _job(row: JobRow) -> Job:
@@ -257,7 +265,7 @@ class JobService:
         self.recover()
         self._stopping = False
         self._wake = asyncio.Event()
-        self._pool = ProcessPoolExecutor(max_workers=1)
+        self._pool = _new_pool()
         self._task = asyncio.create_task(self._loop())
 
     async def stop(self) -> None:
@@ -354,7 +362,7 @@ class JobService:
             self._progress(job_id, "search")
             # run_one also supports a direct test invocation without a lifespan.
             own_pool = self._pool is None
-            pool = self._pool or ProcessPoolExecutor(max_workers=1)
+            pool = self._pool or _new_pool()
             try:
                 future = asyncio.get_running_loop().run_in_executor(pool, _optimize, snapshot)
                 while not future.done():
