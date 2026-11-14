@@ -460,7 +460,12 @@ def approval_gate(state: AgentState, runtime: Runtime[GraphContext]) -> AgentSta
     if existing:
         approval = existing[0]
     else:
-        context.guard(state)
+        try:
+            context.guard(state)
+        except BudgetExceeded as error:
+            # No approval request exists yet: end the run with the template answer instead of
+            # letting the exception fail the whole run.
+            return _failure(state, error)
         payload = pending["payload"]
         approval = context.store.create(
             "approval_requests",
@@ -498,7 +503,11 @@ def approval_gate(state: AgentState, runtime: Runtime[GraphContext]) -> AgentSta
     )
     context.started = monotonic()
     if decision.get("decision") == "approve":
-        context.guard(state)
+        try:
+            context.guard(state)
+        except BudgetExceeded as error:
+            state["notes"].append("Approved assignments were not committed: a limit was reached.")
+            return _failure(state, error)
         trace = context.trace(
             "ApprovalGate", "tool", "Commit the approved set atomically", tool="assign_plan"
         )

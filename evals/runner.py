@@ -24,6 +24,7 @@ from typing import Any
 from uuid import UUID, uuid4
 
 from alembic import command
+from pydantic import ValidationError
 from sqlalchemy import text
 
 from evals.fakes import offline_registry
@@ -58,6 +59,7 @@ class ScenarioResult:
     run_error: str | None = None
     trace: list[str] = field(default_factory=list)
     provider_errors: list[str] = field(default_factory=list)
+    tool_error_details: list[str] = field(default_factory=list)
     expected_tools_ok: bool = False
     approval_ok: bool = False
     write_violation: bool = False
@@ -109,6 +111,36 @@ def check_fact(
     return False
 
 
+def _tool_diagnostics(tools: Any, sink: list[str]) -> None:
+    """Record why a tool call failed its input check: field names, types, lengths and the
+    validation error kinds. Argument values are never stored."""
+    original = tools.execute
+
+    def traced(role: str, name: str, args: dict[str, Any], *rest: Any, **kwargs: Any) -> Any:
+        result = original(role, name, args, *rest, **kwargs)
+        if (
+            isinstance(result, dict)
+            and (result.get("error") or {}).get("code") == "VALIDATION_ERROR"
+        ):
+            shape = ", ".join(
+                f"{key}:{type(value).__name__}"
+                + (f"[{len(value)}]" if isinstance(value, (str, list)) else "")
+                for key, value in sorted(args.items())
+            )
+            try:
+                tools.definitions[name].input_schema.model_validate(args, strict=True)
+                kinds = "no input error on a second check"
+            except ValidationError as failure:
+                kinds = ", ".join(
+                    f"{'.'.join(str(part) for part in item['loc'])}:{item['type']}"
+                    for item in failure.errors()
+                )
+            sink.append(f"{role}/{name} args {{{shape}}} errors {{{kinds}}}")
+        return result
+
+    tools.execute = traced
+
+
 def _provider_diagnostics(sink: list[str]) -> Any:
     """Record exception class names and status codes of provider failures; never messages."""
     original = ModelRegistry._call_once
@@ -157,6 +189,7 @@ async def run_scenario(
     app = create_app(settings, model_registry=registry)
     services = app.state.services
     engine = app.state.engine
+    _tool_diagnostics(services.tools, result.tool_error_details)
     try:
         services.identity.seed_accounts()
         services.agents.graph.checkpointer.setup()
@@ -358,7 +391,7 @@ async def run_batch(args: argparse.Namespace) -> int:
         if not base.google_api_key and not (base.anthropic_api_key or base.openai_api_key):
             print("No provider key configured in the environment file", file=sys.stderr)
             return 2
-        ledger = CampaignLedger(args.ledger, CAMPAIGN_LIMIT)
+        ledger = CampaignLedger(args.ledger, args.campaign_limit)
         phase: Phase = "smoke" if args.phase == "smoke" else "evals"
         ledger.start_phase(
             phase,
@@ -366,7 +399,7 @@ async def run_batch(args: argparse.Namespace) -> int:
             fingerprint(scenarios, base.agent_model_policy),
             retry=args.retry_phase,
         )
-        budget = DurableBudget(ledger, phase)
+        budget = DurableBudget(ledger, phase, args.phase_limit)
     started = datetime.now(UTC).isoformat(timespec="seconds")
     results: list[ScenarioResult] = []
     stopped_early = False
@@ -424,6 +457,19 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--env-file", type=Path, default=DEFAULT_ENV)
     parser.add_argument("--ledger", type=Path, default=ROOT / "reports/ledger.json")
     parser.add_argument("--output", type=Path, default=ROOT / "reports")
+    parser.add_argument(
+        "--campaign-limit",
+        type=int,
+        default=CAMPAIGN_LIMIT,
+        help="hard token cap of this ledger file (never above the approved campaign limit)",
+    )
+    parser.add_argument(
+        "--phase-limit",
+        type=int,
+        default=None,
+        help="token cap of this phase (default: the phase cap of evals/ledger.py); the campaign "
+        "limit of the ledger still applies",
+    )
     parser.add_argument(
         "--retry-phase",
         action="store_true",
