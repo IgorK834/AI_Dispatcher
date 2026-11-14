@@ -129,3 +129,25 @@ def test_phase_caps_sum_to_the_approved_campaign_and_reopen_is_recorded(tmp_path
     ledger.reopen("test reason")
     assert ledger.snapshot()["closed"] is False
     assert ledger.snapshot()["reopened"] == ["test reason"]
+
+
+@pytest.mark.ac("AC-FEAT-006-40")
+def test_a_smaller_campaign_limit_is_a_hard_cap_for_every_phase(tmp_path: Path) -> None:
+    ledger = CampaignLedger(tmp_path / "ledger.json", 60000)
+    ledger.start_phase("evals", ["a"], "fingerprint")
+    budget = DurableBudget(ledger, "evals")  # the phase cap (920 000) is far above the campaign
+    budget.settle(budget.reserve(40000, 8192), 38000, 2000)
+    with pytest.raises(BudgetExceeded):
+        budget.reserve(15000, 8192)  # 40 000 used + 23 192 would pass the phase, not the campaign
+    assert ledger.usage(ledger.snapshot()) == (38000, 2000)
+    with pytest.raises(ValueError):
+        CampaignLedger(tmp_path / "other.json", 1000001)
+
+
+@pytest.mark.ac("AC-FEAT-006-40")
+def test_a_phase_limit_can_exceed_the_default_but_never_the_campaign_limit(tmp_path: Path) -> None:
+    ledger = CampaignLedger(tmp_path / "ledger.json", 1000000)
+    ledger.start_phase("evals", ["a"], "fingerprint")
+    assert DurableBudget(ledger, "evals").limit == 920000  # the default phase cap
+    assert DurableBudget(ledger, "evals", 1000000).limit == 1000000
+    assert DurableBudget(ledger, "evals", 5000000).limit == 1000000  # capped by the campaign

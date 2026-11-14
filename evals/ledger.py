@@ -122,11 +122,17 @@ class CampaignLedger:
 class DurableBudget(TokenBudget):
     """One reservation entry accounts global and phase caps together, exactly once."""
 
-    def __init__(self, ledger: CampaignLedger, phase: Phase) -> None:
+    def __init__(
+        self, ledger: CampaignLedger, phase: Phase, phase_limit: int | None = None
+    ) -> None:
         self.ledger, self.phase = ledger, phase
         state = ledger.snapshot()
         tokens_in, tokens_out = ledger.usage(state, phase)
-        super().__init__(PHASE_LIMITS[phase], tokens_in + tokens_out)
+        # An owner-approved campaign may need a phase cap above the default; never above the
+        # campaign limit of the ledger, which is checked at every reservation anyway.
+        super().__init__(
+            min(phase_limit or PHASE_LIMITS[phase], ledger.limit), tokens_in + tokens_out
+        )
         self.tokens_in, self.tokens_out = tokens_in, tokens_out
         self.closed = state["closed"]
         self.entries: dict[int, str] = {}

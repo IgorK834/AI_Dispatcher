@@ -328,3 +328,29 @@ def test_status_reports_usage_against_the_limit_of_the_role(tmp_path: Path) -> N
         status = harness.service.status(harness.user)
         assert status["dailyBudget"] == {"usedTokens": 75, "limitTokens": limit}
         harness.connection.close()
+
+
+@pytest.mark.ac("AC-FEAT-006-11")
+@pytest.mark.parametrize("limit", [10, 11])
+def test_a_limit_reached_at_the_approval_gate_ends_the_run_gracefully(
+    tmp_path: Path, limit: int
+) -> None:
+    """A real model needs many steps before it asks for approval; if the step limit is reached
+    exactly there, the run ends with a template answer and BUDGET_EXCEEDED, not INTERNAL_ERROR."""
+
+    async def scenario() -> None:
+        registry = scripted_registry()
+        registry.settings.agent_recursion_limit = limit
+        harness = Harness(registry, tmp_path)
+        run_id = harness.post()
+        run = await harness.finish(run_id)
+        assert run["status"] == "succeeded", run  # a validated plan exists, so the answer stands
+        assert run["error"]["code"] == "BUDGET_EXCEEDED"
+        assert run["finalAnswer"]["source"] == "template"
+        assert [item["planRef"] for item in run["finalAnswer"]["proposals"]] == ["PLAN-1a2b3c4d"]
+        assert harness.guard_reasons(run_id) == ["STEP_LIMIT"]
+        assert harness.store.find("approval_requests", run_id=run_id) == []
+        assert harness.tools.writes == []
+        await harness.close()
+
+    asyncio.run(scenario())
