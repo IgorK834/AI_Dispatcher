@@ -48,7 +48,7 @@ def test_the_same_scenario_succeeds_under_two_providers_and_records_the_policy(t
         policy = run["modelPolicy"]
         assert policy["dispatcher"]["model"] == f"{provider}:eval-dispatcher"
         assert policy["promptVersions"] == {
-            role: "v1"
+            role: ("v2" if role in {"dispatcher", "fleet_compliance"} else "v1")
             for role in (
                 "dispatcher",
                 "explainer",

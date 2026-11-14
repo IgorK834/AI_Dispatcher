@@ -34,17 +34,21 @@ ROLE_CONTRACTS = {
 }
 
 
+PROPOSED_V2 = ("dispatcher", "fleet_compliance")
+
+
 @pytest.mark.ac("AC-FEAT-006-21")
-def test_all_five_initial_prompt_versions_exist() -> None:
+def test_all_five_initial_prompt_versions_and_the_proposed_v2_files_exist() -> None:
     assert {path.name for path in PROMPTS.glob("*.md")} == {
         f"{role}.v1.md" for role in ROLE_CONTRACTS
-    }
+    } | {f"{role}.v2.md" for role in PROPOSED_V2}
 
 
 @pytest.mark.ac("AC-FEAT-006-21")
-@pytest.mark.parametrize("role", ROLE_CONTRACTS)
-def test_prompt_contains_fr27_guards_exact_allowlist_and_output_contract(role: str) -> None:
-    text = (PROMPTS / f"{role}.v1.md").read_text()
+@pytest.mark.parametrize("file", sorted(PROMPTS.glob("*.md")), ids=lambda path: path.name)
+def test_prompt_contains_fr27_guards_exact_allowlist_and_output_contract(file: Path) -> None:
+    role = file.name.split(".")[0]
+    text = file.read_text()
     tools, schema = ROLE_CONTRACTS[role]
     tool_line = next(line for line in text.splitlines() if line.startswith("Allowed tools:"))
     assert re.findall(r"`([^`]+)`", tool_line) == tools
@@ -57,6 +61,38 @@ def test_prompt_contains_fr27_guards_exact_allowlist_and_output_contract(role: s
     assert "human approval" in text
     assert not re.search(r"(?:google_genai|anthropic|openai):", text)
     assert not re.search(r"gemini-\d|gpt-\d|claude-\d", text)
+
+
+@pytest.mark.ac("AC-FEAT-006-21")
+@pytest.mark.parametrize("role", PROPOSED_V2)
+def test_v2_only_adds_to_v1_and_never_drops_a_v1_sentence(role: str) -> None:
+    v1 = (PROMPTS / f"{role}.v1.md").read_text().splitlines()
+    v2 = (PROMPTS / f"{role}.v2.md").read_text()
+    assert v2.splitlines()[0].endswith("— v2")
+    for line in v1[1:]:  # everything but the title line
+        assert line in v2.splitlines(), f"v2 of {role} lost: {line!r}"
+
+
+@pytest.mark.ac("AC-FEAT-006-21")
+def test_dispatcher_v2_states_when_to_ask_for_approval_and_the_exact_input() -> None:
+    text = " ".join((PROMPTS / "dispatcher.v2.md").read_text().split())
+    assert "Call `request_approval` only when the user asks" in text
+    assert "never call it" in text
+    assert "`action` is the literal string `assign_plan`" in text
+    assert "at most 300 characters" in text
+    assert "1 to 10 `PLAN-…` references" in text
+    assert "call `explain_plan` with its plan reference before you answer" in text
+    assert "delegate to `fleet_compliance` again after `route_planner`" in text
+
+
+@pytest.mark.ac("AC-FEAT-006-21")
+def test_fleet_compliance_v2_states_the_lookup_order_and_the_rule_check() -> None:
+    text = " ".join((PROMPTS / "fleet_compliance.v2.md").read_text().split())
+    assert (
+        "Always call `list_drivers` first in a run, even when the task names a driver alias" in text
+    )
+    assert "call `check_plan_rules` for each of them (at most 5)" in text
+    assert "return the `FleetReport` as soon as the facts are in" in text
 
 
 def _prompt_dir(tmp_path: Path, files: dict[str, str]) -> Path:
