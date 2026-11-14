@@ -29,12 +29,13 @@ def test_policy_resolves_defaults_and_disables_without_credentials() -> None:
 def test_highest_prompt_versions_are_loaded_and_unambiguous() -> None:
     prompts = load_prompts()
     assert len(prompts) == 5
-    for prompt in prompts.values():
-        assert prompt.version == "v1"
+    for role, prompt in prompts.items():
+        # dispatcher and fleet_compliance have a proposed v2 (owner approval pending)
+        assert prompt.version == ("v2" if role in {"dispatcher", "fleet_compliance"} else "v1")
         assert "numbers come only from tool results" in prompt.text.lower()
         assert "never claim legal compliance" in prompt.text.lower()
         assert "locale" in prompt.text
-    assert Path(prompts["dispatcher"].path).name == "dispatcher.v1.md"
+    assert Path(prompts["dispatcher"].path).name == "dispatcher.v2.md"
 
 
 @pytest.mark.ac("AC-FEAT-006-09")
