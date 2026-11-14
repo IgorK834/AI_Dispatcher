@@ -18,6 +18,9 @@ export default defineConfig({
   workers: 1,
   retries: 0,
   reporter: [['list']],
+  // A CI runner shares a few CPUs between Chromium, `next dev` and the API: requests that take
+  // milliseconds locally have taken seconds there, so assertions wait longer in CI.
+  expect: { timeout: process.env.CI ? 30_000 : 5_000 },
   use: { baseURL: webUrl, locale: 'en-US', trace: 'retain-on-failure' },
   projects: [{ name: 'chromium', use: { browserName: 'chromium' } }],
   webServer: [
