@@ -1,7 +1,10 @@
 import os from 'node:os';
 import path from 'node:path';
 import { defineConfig } from '@playwright/test';
+import { prepareDiagnostics, diagnosticsDir } from './diagnostics';
 import { accounts } from './fixtures';
+
+if (process.env.CI) prepareDiagnostics();
 
 const root = path.resolve(__dirname, '../..');
 // A throw-away stack on its own ports and database: the e2e run never touches local data.
@@ -13,6 +16,7 @@ const webUrl = `http://localhost:${webPort}`;
 
 export default defineConfig({
   testDir: __dirname,
+  globalSetup: require.resolve('./diagnostics'),
   outputDir: path.join(work, 'results'),
   fullyParallel: false,
   workers: 1,
@@ -40,6 +44,7 @@ export default defineConfig({
       timeout: 120_000,
       env: {
         APP_ENV: 'local',
+        ...(process.env.CI ? { PYTHONPATH: diagnosticsDir } : {}),
         DATABASE_URL: `sqlite:///${work}/data/routepilot.db`,
         AGENTS_DB_PATH: `${work}/data/agents.db`,
         CORS_ALLOWED_ORIGINS: webUrl,
