@@ -146,6 +146,7 @@ feat_name() {
     006) echo "Runtime agents" ;;
     007) echo "Quality, README, ci-full" ;;
     009) echo "Demo media and release" ;;
+    010) echo "LTL consolidation and load metrics" ;;
     *) die "unknown FEAT-$1" ;;
   esac
 }
@@ -224,7 +225,8 @@ sec_header() {
   printf '| Field | Value |\n|---|---|\n'
   printf '| Task | %s — %s |\n' "$I_ID" "$I_TITLE"
   printf '| Epic | FEAT-%s — %s ([spec](%s/%s), status `%s`, revision %s) |\n' "$I_FEAT" "$(feat_name "$I_FEAT")" "$BLOB" "$spec" "$status" "$rev"
-  printf '| Priority | %s (MVP, must have) |\n' "$I_PRIORITY"
+  if [ "$I_PRIORITY" = "P0" ]; then printf '| Priority | %s (MVP, must have) |\n' "$I_PRIORITY"
+  else printf '| Priority | %s (after the MVP; only with an approved specification) |\n' "$I_PRIORITY"; fi
   printf '| Delivery checkpoint | %s — %s (`context.md` → Delivery Deadline) |\n' "$I_DAY" "$(day_title "$I_DAY")"
   if [ -n "$I_CATCHUP" ]; then
     printf '| Catch-up proposal | %s (`backlog.md` §3 — needs the owner'"'"'s decision) |\n' "$I_CATCHUP"
@@ -508,6 +510,7 @@ LABELS_SPEC='slice|0e8a16|One backlog slice = one task brief = one PR
 owner-action|d93f0b|Needs the owner (human); a coding agent cannot do it alone
 needs-approval|b60205|Touches a file or action that needs the owner'"'"'s approval before merge
 P0|5319e7|MVP, must have
+P1|7057ff|After the MVP; needs an approved specification
 FEAT-000|c5def5|Monorepo and ci-fast
 FEAT-001|c5def5|Domain, SQLite, CRUD, auth
 FEAT-002|c5def5|Demo data generators and import
@@ -517,6 +520,7 @@ FEAT-005|c5def5|Frontend
 FEAT-006|c5def5|Runtime agents
 FEAT-007|c5def5|Quality, README, ci-full
 FEAT-009|c5def5|Demo media and release
+FEAT-010|c5def5|LTL consolidation and load metrics
 area:infra|fbca04|Tooling, CI, scripts
 area:backend|1d76db|FastAPI, SQLite, services
 area:data|0052cc|Demo data, generators, TIMOCOM format

@@ -2,7 +2,7 @@
 
 This folder holds **what to build**: requirements, feature specifications with acceptance criteria, and golden cases. Rules live in [`context.md`](../context.md); rationale in [`docs/report.md`](../docs/report.md); decisions in [`docs/adr/`](../docs/adr/README.md); how-to in [`DEVELOPMENT.md`](../DEVELOPMENT.md).
 
-> **Status (2026-11-11):** FEAT-000 … FEAT-007 and FEAT-009 are `approved` by the owner; FEAT-008 (P1) is `draft`. Nothing is implemented.
+> **Status (2026-11-11):** FEAT-000 … FEAT-007 and FEAT-009 are `approved` by the owner; FEAT-008 (P1) is `draft`. Nothing is implemented. *(2026-11-15: FEAT-010 (P1, after the MVP) added as `draft`.)*
 
 ## How specifications work
 
@@ -71,6 +71,7 @@ The tag names the test type: `unit`, `property`, `golden`, `contract`, `db`, `in
 | [`FEAT-007-quality-readme-ci-full.md`](FEAT-007-quality-readme-ci-full.md) | `ci-full`, E2E, clean-clone test, documentation checklists, metrics | P0 |
 | [`FEAT-008-p1-offer-text-and-road-alternatives.md`](FEAT-008-p1-offer-text-and-road-alternatives.md) | offer text interpretation, road alternatives, risk rating | P1 |
 | [`FEAT-009-demo-media.md`](FEAT-009-demo-media.md) | demo video script, recording settings, screenshots | P0 |
+| [`FEAT-010-ltl-consolidation.md`](FEAT-010-ltl-consolidation.md) | LTL consolidation: offers-generator v3 (size-based tariff, grouped lanes), partner-aware pool, plan load metrics, GOLD-011 (`draft`) | P1 |
 | [`golden/`](golden/README.md) | GOLD-001 … GOLD-010 with shown arithmetic | P0 |
 
 Suggested implementation order: FEAT-000 → FEAT-001 → FEAT-002 → FEAT-003 → FEAT-004 → FEAT-006 → FEAT-005 → FEAT-007 → FEAT-009; FEAT-008 only if time allows ([`context.md` → Next Implementation Tasks](../context.md#next-implementation-tasks)).
