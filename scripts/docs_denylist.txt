@@ -1,0 +1,11 @@
+# Terms that must not appear in any Markdown file of the repository (FEAT-007 FR-7, OQ-007-02).
+# `scripts/check_docs.py` enforces the fixed purpose statement of context.md → Project Constraints 10:
+# the project is described only as an MVP with a deadline, later a portfolio project.
+# One term per line; a term matches as a whole word, in any letter case. Lines that start with # are
+# comments. The owner may add further terms locally (for example the name of an organisation).
+recruitment
+recruiter
+recruiting
+hiring
+job application
+take-home
