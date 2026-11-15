@@ -1,6 +1,6 @@
 """AC-FEAT-007-05 and AC-FEAT-007-06: README and DEVELOPMENT.md completeness, wording checks.
 
-AC-FEAT-009-01 and 03: the demo media check.
+AC-FEAT-009-01, 03 and 04: the demo media check and the README demo section.
 """
 
 import importlib.util
@@ -349,3 +349,56 @@ def test_a_missing_screenshot_a_wrong_format_a_wrong_size_and_a_heavy_file_fail(
     assert any("02-fleet.png is 1280 x 800" in item for item in found)
     assert any("03-driver-form.png is larger than 1 MB" in item for item in found)
     assert len(found) == 4
+
+
+DEMO_ROW = "| Demo video (`docs/media/demo.mp4` / `.gif`) and screenshots | {status} |\n"
+
+
+def readme_with_demo(root: Path, section: str, status: str) -> None:
+    readme = root / "README.md"
+    change(readme, "## 8. Demo\n\n- text\n", f"## 8. Demo\n\n{section}\n")
+    readme.write_text(readme.read_text() + DEMO_ROW.format(status=status))
+
+
+@pytest.mark.ac("AC-FEAT-009-04")
+def test_readme_demo_section_with_media_needs_an_inline_image_a_video_link_and_a_done_row(
+    tmp_path: Path,
+) -> None:
+    root = make_root(tmp_path)
+    make_media(root)
+    good = "![The optimizer and a plan](docs/media/demo.gif)\n\n[Full video](docs/media/demo.mp4)\n"
+    readme_with_demo(root, good, "\u2705 done")
+    assert problems(root, "--readme") == []
+
+
+@pytest.mark.ac("AC-FEAT-009-04")
+def test_readme_demo_section_problems_are_each_reported(tmp_path: Path) -> None:
+    root = make_root(tmp_path)
+    make_media(root)
+    # No inline image, no video link and a row that still says planned.
+    readme_with_demo(root, "Some words only.", "planned")
+    found = problems(root, "--readme")
+    assert any("no inline image from docs/media" in item for item in found)
+    assert any("does not link docs/media/demo.mp4" in item for item in found)
+    assert any("not marked done" in item for item in found)
+
+    root = make_root(tmp_path / "second")
+    make_media(root)
+    readme_with_demo(
+        root, "![](docs/media/demo.gif)\n![x](docs/media/missing.gif)\n", "\u2705 done"
+    )
+    found = problems(root, "--readme")
+    assert any("has no alt text" in item for item in found)
+    assert any("'docs/media/missing.gif' does not exist" in item for item in found)
+
+
+@pytest.mark.ac("AC-FEAT-009-04")
+def test_a_done_row_without_media_fails_and_a_planned_row_without_media_passes(
+    tmp_path: Path,
+) -> None:
+    root = make_root(tmp_path)
+    readme_with_demo(root, "Planned.", "\u2705 done")
+    assert any("marked done, but no media exists" in item for item in problems(root, "--readme"))
+    root = make_root(tmp_path / "second")
+    readme_with_demo(root, "Planned.", "planned")
+    assert problems(root, "--readme") == []

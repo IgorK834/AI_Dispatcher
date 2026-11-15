@@ -4,7 +4,10 @@ Usage: check_docs.py [--readme] [--development] [--wording] [--media] [--root DI
 
 --readme       the twelve README sections in order, a Mermaid diagram in the architecture section,
                a Polish summary of at most 25 lines at the end, resolvable relative links, and the
-               commands of README steps 1 and 2 (API and web) repeated in `clean_clone_check.sh`
+               commands of README steps 1 and 2 (API and web) repeated in `clean_clone_check.sh`;
+               section 8 (Demo): images with alt text that point to existing files, an inline image
+               and a video link when `docs/media/` has media, and a demo status row that matches
+               the files (FEAT-009 FR-7, FR-8)
 --development  the 14 sections of DEVELOPMENT.md and a standards-matrix row with existing proof
                references for every delivery standard (1-6, 7a-7e, 8a-8e)
 --media        `docs/media/` (FEAT-009 §4.3): at least one of `demo.mp4` / `demo.gif`, each within
@@ -75,6 +78,7 @@ SCREENSHOTS = [
     "10-pl-locale",
 ]
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+IMAGE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 
 LINK = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 COMMENT = re.compile(r"\s+#.*$")
@@ -189,6 +193,7 @@ def check_readme(root: Path) -> list[str]:
         for item in expected:
             if script_lines and not any(item in line for line in script_lines):
                 problems.append(f"README command '{command}' is not in clean_clone_check.sh")
+    problems += check_demo_section(root, text, found.get(8, ("", ""))[1])
     problems += denied_terms(text, "README.md", denylist(root))
     return problems
 
@@ -279,6 +284,34 @@ def check_media(root: Path) -> list[str]:
             problems.append(f"{path.name} is {size[0]} x {size[1]}, not {expected}")
         if path.stat().st_size > PNG_MAX_BYTES:
             problems.append(f"{path.name} is larger than 1 MB")
+    return problems
+
+
+def check_demo_section(root: Path, text: str, demo: str) -> list[str]:
+    """FEAT-009 AC-04: section 8 shows the media that exists and the status row says so."""
+    problems: list[str] = []
+    images = IMAGE.findall(demo)
+    for alt, target in images:
+        if re.match(r"^[a-z][a-z0-9+.-]*:", target):
+            continue
+        if not alt.strip():
+            problems.append(f"README section 8: the image '{target}' has no alt text")
+        if target.startswith(f"{MEDIA_FOLDER}/") and not (root / target).exists():
+            problems.append(f"README section 8: the image '{target}' does not exist")
+    present = media_present(root)
+    if present:
+        if not any(target.startswith(f"{MEDIA_FOLDER}/") for _, target in images):
+            problems.append("README section 8 has no inline image from docs/media/")
+        has_video = (root / MEDIA_FOLDER / "demo.mp4").exists()
+        if has_video and f"{MEDIA_FOLDER}/demo.mp4" not in demo:
+            problems.append("README section 8 does not link docs/media/demo.mp4")
+    for line in text.splitlines():
+        if line.startswith("|") and "demo video" in line.lower():
+            done = "✅" in line
+            if present and not done:
+                problems.append("The README demo status row is not marked done, but media exists")
+            if not present and done:
+                problems.append("The README demo status row is marked done, but no media exists")
     return problems
 
 
