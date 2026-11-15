@@ -25,22 +25,22 @@ def generator() -> ModuleType:
 
 
 @pytest.mark.ac("AC-FEAT-004-08")
-def test_matrix_lists_the_same_39_cities_in_the_same_order() -> None:
+def test_matrix_lists_the_same_605_cities_in_the_same_order() -> None:
     cities = json.loads(CITIES_FILE.read_text())["cities"]
     matrix = json.loads(MATRIX_FILE.read_text())
-    assert len(cities) == 39
+    assert len(cities) == 605
     assert matrix["cities"] == [city["name"] for city in cities]
 
 
 @pytest.mark.ac("AC-FEAT-004-08")
 @pytest.mark.parametrize("table", ["distanceM", "durationS"])
-def test_both_tables_are_39_by_39_with_a_zero_diagonal_and_non_negative_integers(
+def test_both_tables_are_605_by_605_with_a_zero_diagonal_and_non_negative_integers(
     table: str,
 ) -> None:
     rows = json.loads(MATRIX_FILE.read_text())[table]
-    assert len(rows) == 39
+    assert len(rows) == 605
     for index, row in enumerate(rows):
-        assert len(row) == 39, f"{table} row {index} has {len(row)} columns"
+        assert len(row) == 605, f"{table} row {index} has {len(row)} columns"
         assert row[index] == 0, f"{table} diagonal at {index}"
         assert all(type(value) is int and value >= 0 for value in row), f"{table} row {index}"
 
@@ -54,7 +54,7 @@ def test_source_is_one_of_the_two_allowed_values() -> None:
 def test_the_provider_accepts_the_committed_file_for_the_committed_cities() -> None:
     cities = json.loads(CITIES_FILE.read_text())["cities"]
     provider = MatrixFileRoutingProvider(MATRIX_FILE, cities=cities)
-    assert len(provider.points) == 39
+    assert len(provider.points) == 605
 
 
 @pytest.mark.ac("AC-FEAT-004-08")
