@@ -1,7 +1,11 @@
-"""AC-FEAT-007-05 and AC-FEAT-007-06: README and DEVELOPMENT.md completeness, wording checks."""
+"""AC-FEAT-007-05 and AC-FEAT-007-06: README and DEVELOPMENT.md completeness, wording checks.
+
+AC-FEAT-009-01 and 03: the demo media check.
+"""
 
 import importlib.util
 import shutil
+import struct
 from pathlib import Path
 from types import ModuleType
 
@@ -51,6 +55,8 @@ def problems(root: Path, *flags: str) -> list[str]:
         found += module.check_development(root)
     if "--wording" in flags:
         found += module.check_wording(root)
+    if "--media" in flags:
+        found += module.check_media(root)
     return found
 
 
@@ -242,3 +248,104 @@ def test_the_clean_clone_script_checks_every_step_of_the_readme_and_runs_in_ci_f
     workflow = (ROOT / ".github/workflows/ci-full.yml").read_text()
     assert "bash scripts/clean_clone_check.sh --here" in workflow
     assert "python3 scripts/check_docs.py --readme --development --wording" in workflow
+
+
+# --- FEAT-009: demo media ---------------------------------------------------------------------
+
+
+def make_mp4(path: Path, seconds: float, padding: int = 0) -> None:
+    """A minimal MP4: `ftyp`, then `moov` with an `mvhd` of the given duration, then padding."""
+    mvhd = b"\x00\x00\x00\x00" + b"\x00" * 8 + struct.pack(">II", 1000, int(seconds * 1000))
+    mvhd = struct.pack(">I4s", 8 + len(mvhd), b"mvhd") + mvhd + b"\x00" * 80
+    moov = struct.pack(">I4s", 8 + len(mvhd), b"moov") + mvhd
+    ftyp = struct.pack(">I4s4sI", 16, b"ftyp", b"isom", 0)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(ftyp + moov + b"\x00" * padding)
+
+
+def make_png(path: Path, width: int = 1440, height: int = 900, padding: int = 0) -> None:
+    head = (
+        b"\x89PNG\r\n\x1a\n"
+        + struct.pack(">I4sII", 13, b"IHDR", width, height)
+        + b"\x08\x02\x00\x00\x00"
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(head + b"\x00" * padding)
+
+
+def make_gif(path: Path, padding: int = 0) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(b"GIF89a" + struct.pack("<HH", 960, 600) + b"\x00" * padding)
+
+
+def make_media(root: Path) -> None:
+    media = root / "docs/media"
+    make_mp4(media / "demo.mp4", 130)
+    make_gif(media / "demo.gif")
+    module = load()
+    for name in module.SCREENSHOTS:
+        make_png(media / "screenshots" / f"{name}.png")
+
+
+@pytest.mark.ac("AC-FEAT-009-01")
+@pytest.mark.ac("AC-FEAT-009-03")
+def test_complete_media_within_the_limits_passes(tmp_path: Path) -> None:
+    make_media(tmp_path)
+    assert problems(tmp_path, "--media") == []
+
+
+@pytest.mark.ac("AC-FEAT-009-01")
+def test_no_video_and_no_gif_fails_but_one_of_them_is_enough(tmp_path: Path) -> None:
+    make_media(tmp_path)
+    (tmp_path / "docs/media/demo.mp4").unlink()
+    assert problems(tmp_path, "--media") == []  # the GIF alone satisfies AC-01
+    (tmp_path / "docs/media/demo.gif").unlink()
+    assert any("neither demo.mp4 nor demo.gif" in item for item in problems(tmp_path, "--media"))
+
+
+@pytest.mark.ac("AC-FEAT-009-01")
+@pytest.mark.parametrize(
+    ("seconds", "fails"), [(119, True), (120, False), (240, False), (241, True)]
+)
+def test_the_mp4_duration_must_be_120_to_240_seconds(
+    tmp_path: Path, seconds: int, fails: bool
+) -> None:
+    make_media(tmp_path)
+    make_mp4(tmp_path / "docs/media/demo.mp4", seconds)
+    found = [item for item in problems(tmp_path, "--media") if "lasts" in item]
+    assert bool(found) is fails
+
+
+@pytest.mark.ac("AC-FEAT-009-01")
+def test_a_file_that_is_not_an_mp4_has_no_readable_duration(tmp_path: Path) -> None:
+    make_media(tmp_path)
+    (tmp_path / "docs/media/demo.mp4").write_bytes(b"not a video")
+    assert any("duration cannot be read" in item for item in problems(tmp_path, "--media"))
+
+
+@pytest.mark.ac("AC-FEAT-009-01")
+def test_the_size_limits_of_the_mp4_and_the_gif(tmp_path: Path) -> None:
+    make_media(tmp_path)
+    make_mp4(tmp_path / "docs/media/demo.mp4", 130, padding=25 * 1024 * 1024)
+    make_gif(tmp_path / "docs/media/demo.gif", padding=10 * 1024 * 1024)
+    found = problems(tmp_path, "--media")
+    assert any("demo.mp4 is larger than 25 MB" in item for item in found)
+    assert any("demo.gif is larger than 10 MB" in item for item in found)
+
+
+@pytest.mark.ac("AC-FEAT-009-03")
+def test_a_missing_screenshot_a_wrong_format_a_wrong_size_and_a_heavy_file_fail(
+    tmp_path: Path,
+) -> None:
+    make_media(tmp_path)
+    shots = tmp_path / "docs/media/screenshots"
+    (shots / "05-ai-dispatcher-trace.png").unlink()
+    (shots / "01-login.png").write_bytes(b"\xff\xd8 a jpeg, not a png")
+    make_png(shots / "02-fleet.png", 1280, 800)
+    make_png(shots / "03-driver-form.png", padding=1024 * 1024)
+    found = problems(tmp_path, "--media")
+    assert any("05-ai-dispatcher-trace.png is missing" in item for item in found)
+    assert any("01-login.png is not a PNG" in item for item in found)
+    assert any("02-fleet.png is 1280 x 800" in item for item in found)
+    assert any("03-driver-form.png is larger than 1 MB" in item for item in found)
+    assert len(found) == 4
