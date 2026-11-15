@@ -123,7 +123,7 @@ AC IDs refer to section 7 of each FEAT file. Ranges are inclusive. This table is
 | REQ-033 | FEAT-007 | AC-FEAT-007-05, 06 |
 | | FEAT-009 | AC-FEAT-009-01 … 04 |
 | | FEAT-000 | AC-FEAT-000-13 |
-| REQ-034 | FEAT-010 | AC-FEAT-010-01 … 14 |
+| REQ-034 | FEAT-010 | AC-FEAT-010-01 … 15 |
 | NFR-001 | FEAT-003 | AC-FEAT-003-07 |
 | NFR-002 | FEAT-003 | AC-FEAT-003-27, 29 |
 | NFR-003 | FEAT-003 | AC-FEAT-003-01 … 13, 25 |
