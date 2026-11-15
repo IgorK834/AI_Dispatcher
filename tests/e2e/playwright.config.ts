@@ -26,11 +26,13 @@ export default defineConfig({
   webServer: [
     {
       // Fresh database, migrations, then the API with the local demo accounts and no provider keys.
+      // The launcher is the real application with no chat model; agent-fake.spec.ts switches the
+      // scripted models on for its own tests (scripts/e2e/e2e_api.py).
       command: [
         `rm -rf "${work}/data" && mkdir -p "${work}/data"`,
         `cd "${root}/apps/api"`,
         'uv run alembic upgrade head',
-        `uv run uvicorn routepilot.main:app --port ${apiPort}`,
+        `uv run python ../../scripts/e2e/e2e_api.py ${apiPort}`,
       ].join(' && '),
       // The API's request log (method, path, status, duration) goes into the test output, so a slow or
       // stuck request of a CI run can be read from it.
@@ -39,7 +41,8 @@ export default defineConfig({
       reuseExistingServer: false,
       timeout: 120_000,
       env: {
-        APP_ENV: 'local',
+        // The scripted models of agent-fake.spec.ts are accepted only with APP_ENV=test.
+        APP_ENV: 'test',
         DATABASE_URL: `sqlite:///${work}/data/routepilot.db`,
         AGENTS_DB_PATH: `${work}/data/agents.db`,
         CORS_ALLOWED_ORIGINS: webUrl,

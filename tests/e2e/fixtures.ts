@@ -34,5 +34,27 @@ export async function signIn(page: Page, account: { email: string; password: str
   await page.getByRole('button', { name: 'Sign in' }).click();
 }
 
+/**
+ * One driver can hold one active assignment, and all specs share one database, so a spec that
+ * assigns a plan cancels its assignments again (the product's own `DELETE /assignments/{id}`,
+ * as the signed-in user) and leaves the next spec a fleet without assignments.
+ */
+export async function cancelActiveAssignments(page: Page) {
+  const api = `http://localhost:${process.env.E2E_API_PORT ?? '8010'}`;
+  const origin = `http://localhost:${process.env.E2E_WEB_PORT ?? '3010'}`;
+  const session = await page.request.get(`${api}/api/v1/auth/me`);
+  expect(session.ok()).toBe(true);
+  const { csrfToken } = (await session.json()) as { csrfToken: string };
+  const listed = await page.request.get(`${api}/api/v1/assignments`);
+  expect(listed.ok()).toBe(true);
+  const { items } = (await listed.json()) as { items: { id: string; status: string }[] };
+  for (const item of items.filter((assignment) => assignment.status === 'active')) {
+    const cancelled = await page.request.delete(`${api}/api/v1/assignments/${item.id}`, {
+      headers: { 'X-CSRF-Token': csrfToken, Origin: origin },
+    });
+    expect(cancelled.status()).toBe(204);
+  }
+}
+
 export const test = base;
 export { expect };

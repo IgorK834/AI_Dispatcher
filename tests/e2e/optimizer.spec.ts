@@ -53,7 +53,7 @@ test('[AC-FEAT-005-13] a fleet optimisation shows progress and a result, and its
   await expect(page).toHaveURL(/\/plans\/[0-9a-f-]{36}\?job=/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('→');
   const driverText = await page
-    .getByText(/^Driver /)
+    .getByText(/^Driver (?!cost)/)
     .first()
     .innerText();
   const driverName = driverText.replace(/^Driver /, '');

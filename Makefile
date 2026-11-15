@@ -44,8 +44,9 @@ openapi:
 trace:
 	cd apps/api && uv run python ../../scripts/trace.py --check
 
+# Playwright (Chromium) against a throw-away API and web app started by the config; needs `pnpm exec playwright install chromium` once.
 e2e:
-	@echo "not available until FEAT-007"
+	pnpm exec playwright test -c tests/e2e/playwright.config.ts
 
 bench:
 	cd apps/api && uv run pytest -c pyproject.toml -m bench ../../bench/fleet_5x60.py -q -s
