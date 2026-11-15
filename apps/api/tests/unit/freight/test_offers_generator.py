@@ -163,8 +163,8 @@ def half_up(value: float) -> int:
 
 
 def recomputed_price(formula: dict[str, Any]) -> int:
-    product = formula["rate"] * formula["distance_km"] * formula["share"]
-    return max(60, half_up(product * formula["premium"] * formula["noise"]))
+    line_haul = formula["rate"] * formula["distance_km"] * formula["share"] * formula["premium"]
+    return max(60, half_up((formula["handling"] + line_haul) * formula["noise"]))
 
 
 def committed() -> tuple[list[dict[str, Any]], dict[str, Any]]:
@@ -178,6 +178,7 @@ def minutes(value: str) -> int:
 
 
 @pytest.mark.ac("AC-FEAT-002-04")
+@pytest.mark.ac("AC-FEAT-010-01")
 def test_files_are_byte_identical_on_every_run_and_ids_follow_the_pattern(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -332,6 +333,7 @@ def test_prices_recompute_from_the_recorded_tariff_values() -> None:
         share = min(1, max(eq / 10, weight / 1000))
         assert formula["share"] == pytest.approx(share) and 0 < formula["share"] <= 1
         assert formula["premium"] == pytest.approx(1 + 0.6 * (1 - share))
+        assert formula["handling"] == pytest.approx(35 * eq)  # 35 EUR per pallet equivalent
         assert info["billableShare"] == formula["share"]
         assert info["ltlPremium"] == formula["premium"]
         # The recorded inputs themselves follow §6.3 and the haversine x 1.25 distance.
@@ -357,17 +359,18 @@ def test_prices_recompute_from_the_recorded_tariff_values() -> None:
 @pytest.mark.parametrize(
     ("pallets", "weight_kg", "price"),
     [
-        (1, 100, 60),  # 52.36 -> minimum fare
-        (4, 400, 185),  # 340 x 0.4 x 1.36 = 184.96
-        (10, 900, 340),  # full van
-        (2, 1000, 340),  # weight-bound: share 1
+        (1, 100, 87),  # 35 + 340 x 0.1 x 1.54 = 87.36
+        (4, 400, 325),  # 140 + 340 x 0.4 x 1.36 = 324.96
+        (10, 900, 690),  # 350 + a full van
+        (2, 1000, 410),  # 70 + weight-bound line haul: share 1
     ],
 )
 def test_ltl_tariff_examples(pallets: int, weight_kg: int, price: int) -> None:
     assert ltl_price(0.85, 400.0, Decimal(pallets), weight_kg, 1.0) == price
+    assert ltl_price(0.85, 40.0, Decimal("0.5"), 40, 1.0) == 60  # 17.5 + 2.69 -> minimum fare
 
 
-@pytest.mark.ac("AC-FEAT-010-04")
+@pytest.mark.ac("AC-FEAT-010-01")
 def test_enrichment_records_the_generator_version() -> None:
     _, enrichment = committed()
     assert {info["generatorVersion"] for info in enrichment.values()} == {"offers-generator v3"}

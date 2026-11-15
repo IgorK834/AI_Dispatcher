@@ -21,7 +21,7 @@ KATOWICE = GeoPoint(lat=50.2649, lon=19.0238)
 WROCLAW = GeoPoint(lat=51.1079, lon=17.0385)
 DRESDEN = GeoPoint(lat=51.0504, lon=13.7373)
 CITY_POINTS = [KATOWICE, WROCLAW, DRESDEN]
-# Two villages: more than 1 km from every one of the 39 cities.
+# Two villages: more than 1 km from every one of the 605 cities.
 OFF_GRID = [GeoPoint(lat=51.20, lon=18.00), GeoPoint(lat=51.45, lon=18.45)]
 ORS_MATRIX = json.loads(
     (Path(__file__).resolve().parents[2] / "fixtures/ors/matrix.json").read_text()

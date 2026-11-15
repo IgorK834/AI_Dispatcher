@@ -135,8 +135,31 @@ Coordinates are approximate city-centre values (confidence **A**), chosen by thi
 | IT | Verona | 45.4384 | 10.9916 | Europe/Rome |
 | IT | Milano | 45.4642 | 9.1900 | Europe/Rome |
 | DK | Kolding | 55.4904 | 9.4722 | Europe/Copenhagen |
+| PL | Gliwice | 50.2945 | 18.6714 | Europe/Warsaw |
+| PL | Tychy | 50.1218 | 18.9872 | Europe/Warsaw |
+| PL | Sosnowiec | 50.2863 | 19.1041 | Europe/Warsaw |
+| PL | Rybnik | 50.1022 | 18.5463 | Europe/Warsaw |
+| PL | Legnica | 51.2070 | 16.1619 | Europe/Warsaw |
+| PL | Wałbrzych | 50.7714 | 16.2843 | Europe/Warsaw |
+| PL | Gniezno | 52.5348 | 17.5826 | Europe/Warsaw |
+| PL | Leszno | 51.8420 | 16.5749 | Europe/Warsaw |
+| PL | Konin | 52.2230 | 18.2511 | Europe/Warsaw |
+| PL | Piotrków Trybunalski | 51.4052 | 19.7030 | Europe/Warsaw |
+| PL | Radom | 51.4027 | 21.1471 | Europe/Warsaw |
+| PL | Gdynia | 54.5189 | 18.5305 | Europe/Warsaw |
+| DE | Chemnitz | 50.8278 | 12.9214 | Europe/Berlin |
+| DE | Halle | 51.4970 | 11.9688 | Europe/Berlin |
+| DE | Potsdam | 52.3906 | 13.0645 | Europe/Berlin |
+| CZ | Olomouc | 49.5938 | 17.2509 | Europe/Prague |
 
-39 cities (the report says "~40"). The five driver bases are among them, so the routing matrix of FEAT-004 is 39 × 39.
+The table lists the 55 named places: the 39 of revision 1 (the report says "~40") and 16 named towns added by FEAT-010 revision 3 at the end.
+
+**Generated towns (revision 6).** After the named places, `cities.json` holds 550 synthetic towns, ten around each named place in table order. They are generated points, not real places, and exist so that pickups and deliveries can be close together without sharing one point:
+- name `<City> area NN` (NN = 01 … 10), country and time zone of the city;
+- position: a bearing drawn uniformly from 0–360° and a distance drawn uniformly from 5–30 km (*assumption*) from the city, from `random.Random(20261109)` in table order (bearing, then distance), converted with 111.2 km per degree of latitude and rounded to 4 decimals;
+- the function `routepilot.freight.places.generate_towns` is the definition; `python -m routepilot.freight.places --out data/mock/cities.json` rewrites the file byte for byte.
+
+`cities.json` therefore has 605 places. The five driver bases are among them, so the routing matrix of FEAT-004 is 605 × 605.
 
 ### 6.2 Fleet (report §17.2)
 
@@ -251,7 +274,7 @@ No change.
 - **AC-FEAT-002-05** [property] Given any seed When `generate_offers` runs Then every offer has exactly two loading places (`LOADING`, `UNLOADING`) in different cities of `cities.json` with Poland at one end at least, type `["VEHICLE_UP_TO_3_5_T"]`, 1–10 pallets, mass 40–1 100 kg, loading dates within 7 days of the reference date on working days, and `windowStart ≤ windowEnd`; over the 150 offers the domestic share is 35–55 %.
 - **AC-FEAT-002-06** [unit] Given the committed offers When the tags in the enrichment file are counted Then every tag of §6.4 occurs at least the stated number of times according to the enrichment file, and each tagged offer really has the property (for example every `NO_PRICE` offer has no `price`).
 - **AC-FEAT-002-07** [unit] Given an offer without the `NO_PRICE` tag When its price is recomputed Then `price.amount` is a whole number ≥ 120 and equals `max(120, round(rate × distance × noise))` recomputed from the recorded lane, distance and noise value in the enrichment file.
-- **AC-FEAT-002-08** [unit] Given `data/mock/cities.json` When the file is loaded Then it validates against its schema, contains the 39 cities of §6.1 with those coordinates and time zones, and has no duplicate `(name, countryCode)`.
+- **AC-FEAT-002-08** [unit] Given `data/mock/cities.json` When the file is loaded Then it validates against its schema, contains the 55 named places of §6.1 followed by the 550 generated towns with those coordinates and time zones, and has no duplicate `(name, countryCode)`.
 - **AC-FEAT-002-09** [contract] Given the freight-offer example from the official OpenAPI 3.0.6 file stored as a fixture with a source note When `TimocomV3Mapper.to_domain` runs Then it returns a `NormalizedOffer` whose fields follow §6.5 and whose `field_provenance` has an entry for every mapped field.
 - **AC-FEAT-002-10** [contract] Given fixtures with `startTime = "08:15:22Z"`, with the key `"creationDateTime "` and with `distance_km = 4711` When the mapper runs Then all three map successfully, the first two carry the flags `TIME_FORMAT_TOLERATED` and `KEY_WHITESPACE_TOLERATED`, and the window of the first starts at 08:15 local time of the stop.
 - **AC-FEAT-002-11** [unit] Given a raw offer without `price` When the mapper runs Then `revenue` is null and `missing_fields` contains `revenue`; Given one without `geoCoordinate` in Katowice Then the coordinates come from `cities.json` with provenance `derived`; Given one in an unknown place Then `lat/lon` are null with the flag `MISSING_COORDINATES`; Given one without times Then the window is 00:00–23:59 local with `TIME_WINDOW_DAY_ONLY`; Given one without pallets but with `length_m = 1.7` Then `pallet_count = 5` (`ceil(1.7 × 2.4)`) with provenance `derived`.
@@ -319,3 +342,4 @@ No change.
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
 | 4 | 2026-11-12 | Owner clarified FR-13/14: the five minimum-fare detour examples override the normal price multiplier and record the effective multiplier, sampled noise and assumption provenance. |
 | 5 | 2026-11-15 | Owner decision (FEAT-010 OQ-010-04): FR-10, the mass part of FR-11, FR-13 and AC-FEAT-002-07 are superseded by FEAT-010 (FR-3, FR-4, FR-6; AC-FEAT-010-03 … 06) for `offers-generator v3`. AC-FEAT-002-07 is withdrawn; AC-FEAT-002-04 … 06 stay. |
+| 6 | 2026-11-15 | Owner decision (FEAT-010 revision 3): §6.1 gains 16 named towns and 550 generated towns (605 places; AC-FEAT-002-08 updated). The delivery-date part of FR-12 is superseded by FEAT-010 FR-4a for `offers-generator v3`. |

@@ -1,4 +1,4 @@
-"""The committed city table: schema, the 39 cities of FEAT-002 §6.1 and lookup rules."""
+"""The committed city table: schema, the cities and towns of FEAT-002 §6.1 and lookup rules."""
 
 import json
 import re
@@ -11,6 +11,7 @@ import jsonschema_rs
 import pytest
 
 from routepilot.freight.geocoding import CityTable, geocode, timezone_for_country
+from routepilot.freight.places import generate_towns
 
 ROOT = Path(__file__).resolve().parents[4]
 CITIES = ROOT / "data/mock/cities.json"
@@ -53,13 +54,25 @@ def test_file_validates_against_its_schema_and_rejects_broken_documents() -> Non
 
 
 @pytest.mark.ac("AC-FEAT-002-08")
-def test_the_39_cities_of_section_6_1_with_their_coordinates_and_zones() -> None:
+def test_the_cities_and_towns_of_section_6_1_with_their_coordinates_and_zones() -> None:
     expected = spec_rows()
-    assert len(expected) == 39
+    assert len(expected) == 55
     cities = document()["cities"]
     found = {(c["name"], c["countryCode"]): (c["lat"], c["lon"], c["timezone"]) for c in cities}
-    assert len(cities) == len(found) == 39, "no duplicate (name, countryCode)"
-    assert found == expected
+    assert len(cities) == len(found) == 605, "no duplicate (name, countryCode)"
+    named = {key: value for key, value in list(found.items())[:55]}
+    assert named == expected
+    # FEAT-010 revision 3: the rest are the generated towns, ten around every named city.
+    towns = generate_towns()
+    assert len(towns) == 550 >= 500
+    assert [
+        (c["name"], c["countryCode"], c["lat"], c["lon"], c["timezone"]) for c in cities[55:]
+    ] == [town for town in towns]
+    by_name = {name: (lat, lon) for (name, _), (lat, lon, _) in found.items()}
+    for name, country, lat, lon, zone in towns:
+        parent = name.split(" area ")[0]
+        assert (parent, country) in expected and expected[(parent, country)][2] == zone
+        assert abs(lat - by_name[parent][0]) < 0.3 and abs(lon - by_name[parent][1]) < 0.5
     for city in cities:
         assert round(city["lat"], 4) == city["lat"] and round(city["lon"], 4) == city["lon"]
         assert unicodedata.is_normalized("NFC", city["name"])

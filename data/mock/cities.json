@@ -273,6 +273,3968 @@
       "lat": 55.4904,
       "lon": 9.4722,
       "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Gliwice",
+      "countryCode": "PL",
+      "lat": 50.2945,
+      "lon": 18.6714,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy",
+      "countryCode": "PL",
+      "lat": 50.1218,
+      "lon": 18.9872,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec",
+      "countryCode": "PL",
+      "lat": 50.2863,
+      "lon": 19.1041,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik",
+      "countryCode": "PL",
+      "lat": 50.1022,
+      "lon": 18.5463,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica",
+      "countryCode": "PL",
+      "lat": 51.207,
+      "lon": 16.1619,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych",
+      "countryCode": "PL",
+      "lat": 50.7714,
+      "lon": 16.2843,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno",
+      "countryCode": "PL",
+      "lat": 52.5348,
+      "lon": 17.5826,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno",
+      "countryCode": "PL",
+      "lat": 51.842,
+      "lon": 16.5749,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin",
+      "countryCode": "PL",
+      "lat": 52.223,
+      "lon": 18.2511,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski",
+      "countryCode": "PL",
+      "lat": 51.4052,
+      "lon": 19.703,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom",
+      "countryCode": "PL",
+      "lat": 51.4027,
+      "lon": 21.1471,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia",
+      "countryCode": "PL",
+      "lat": 54.5189,
+      "lon": 18.5305,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Chemnitz",
+      "countryCode": "DE",
+      "lat": 50.8278,
+      "lon": 12.9214,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle",
+      "countryCode": "DE",
+      "lat": 51.497,
+      "lon": 11.9688,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam",
+      "countryCode": "DE",
+      "lat": 52.3906,
+      "lon": 13.0645,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Olomouc",
+      "countryCode": "CZ",
+      "lat": 49.5938,
+      "lon": 17.2509,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Katowice area 01",
+      "countryCode": "PL",
+      "lat": 50.3277,
+      "lon": 19.2456,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Katowice area 02",
+      "countryCode": "PL",
+      "lat": 50.1621,
+      "lon": 18.8744,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Katowice area 03",
+      "countryCode": "PL",
+      "lat": 50.3641,
+      "lon": 19.3667,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Katowice area 04",
+      "countryCode": "PL",
+      "lat": 50.4569,
+      "lon": 18.7305,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Katowice area 05",
+      "countryCode": "PL",
+      "lat": 50.2908,
+      "lon": 19.1636,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Katowice area 06",
+      "countryCode": "PL",
+      "lat": 50.3452,
+      "lon": 19.0043,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Katowice area 07",
+      "countryCode": "PL",
+      "lat": 50.1291,
+      "lon": 18.7252,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Katowice area 08",
+      "countryCode": "PL",
+      "lat": 50.1834,
+      "lon": 19.3963,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Katowice area 09",
+      "countryCode": "PL",
+      "lat": 50.1722,
+      "lon": 19.1771,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Katowice area 10",
+      "countryCode": "PL",
+      "lat": 50.1425,
+      "lon": 18.9202,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 01",
+      "countryCode": "PL",
+      "lat": 51.0274,
+      "lon": 16.6392,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 02",
+      "countryCode": "PL",
+      "lat": 51.1849,
+      "lon": 17.3354,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 03",
+      "countryCode": "PL",
+      "lat": 51.2352,
+      "lon": 17.3533,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 04",
+      "countryCode": "PL",
+      "lat": 51.1858,
+      "lon": 17.1757,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 05",
+      "countryCode": "PL",
+      "lat": 50.9625,
+      "lon": 16.7814,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 06",
+      "countryCode": "PL",
+      "lat": 50.9438,
+      "lon": 17.1038,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 07",
+      "countryCode": "PL",
+      "lat": 51.2066,
+      "lon": 17.4216,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 08",
+      "countryCode": "PL",
+      "lat": 51.1759,
+      "lon": 17.0979,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 09",
+      "countryCode": "PL",
+      "lat": 50.9563,
+      "lon": 16.8323,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wrocław area 10",
+      "countryCode": "PL",
+      "lat": 51.2037,
+      "lon": 17.0981,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 01",
+      "countryCode": "PL",
+      "lat": 50.7791,
+      "lon": 17.578,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 02",
+      "countryCode": "PL",
+      "lat": 50.8509,
+      "lon": 17.8391,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 03",
+      "countryCode": "PL",
+      "lat": 50.5642,
+      "lon": 17.6612,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 04",
+      "countryCode": "PL",
+      "lat": 50.6002,
+      "lon": 17.6123,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 05",
+      "countryCode": "PL",
+      "lat": 50.6827,
+      "lon": 17.6762,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 06",
+      "countryCode": "PL",
+      "lat": 50.7977,
+      "lon": 17.7961,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 07",
+      "countryCode": "PL",
+      "lat": 50.7156,
+      "lon": 18.0669,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 08",
+      "countryCode": "PL",
+      "lat": 50.7043,
+      "lon": 17.8474,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 09",
+      "countryCode": "PL",
+      "lat": 50.7441,
+      "lon": 17.8935,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Opole area 10",
+      "countryCode": "PL",
+      "lat": 50.6257,
+      "lon": 17.9757,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 01",
+      "countryCode": "PL",
+      "lat": 50.1329,
+      "lon": 20.0333,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 02",
+      "countryCode": "PL",
+      "lat": 49.9993,
+      "lon": 20.2748,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 03",
+      "countryCode": "PL",
+      "lat": 49.9397,
+      "lon": 19.9673,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 04",
+      "countryCode": "PL",
+      "lat": 49.9102,
+      "lon": 19.7661,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 05",
+      "countryCode": "PL",
+      "lat": 50.0842,
+      "lon": 19.5721,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 06",
+      "countryCode": "PL",
+      "lat": 50.0635,
+      "lon": 20.1086,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 07",
+      "countryCode": "PL",
+      "lat": 49.8835,
+      "lon": 19.9423,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 08",
+      "countryCode": "PL",
+      "lat": 50.143,
+      "lon": 19.91,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 09",
+      "countryCode": "PL",
+      "lat": 50.135,
+      "lon": 19.7938,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Kraków area 10",
+      "countryCode": "PL",
+      "lat": 50.2591,
+      "lon": 20.0104,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 01",
+      "countryCode": "PL",
+      "lat": 51.752,
+      "lon": 19.0912,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 02",
+      "countryCode": "PL",
+      "lat": 51.7284,
+      "lon": 19.6567,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 03",
+      "countryCode": "PL",
+      "lat": 51.6824,
+      "lon": 19.2889,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 04",
+      "countryCode": "PL",
+      "lat": 51.7252,
+      "lon": 19.08,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 05",
+      "countryCode": "PL",
+      "lat": 51.8674,
+      "lon": 19.5569,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 06",
+      "countryCode": "PL",
+      "lat": 51.9403,
+      "lon": 19.1855,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 07",
+      "countryCode": "PL",
+      "lat": 51.7754,
+      "lon": 19.5444,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 08",
+      "countryCode": "PL",
+      "lat": 51.5007,
+      "lon": 19.5245,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 09",
+      "countryCode": "PL",
+      "lat": 51.9949,
+      "lon": 19.5005,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Łódź area 10",
+      "countryCode": "PL",
+      "lat": 51.9128,
+      "lon": 19.5715,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 01",
+      "countryCode": "PL",
+      "lat": 52.6123,
+      "lon": 16.7888,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 02",
+      "countryCode": "PL",
+      "lat": 52.569,
+      "lon": 16.8259,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 03",
+      "countryCode": "PL",
+      "lat": 52.5375,
+      "lon": 17.2859,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 04",
+      "countryCode": "PL",
+      "lat": 52.2086,
+      "lon": 17.2037,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 05",
+      "countryCode": "PL",
+      "lat": 52.3308,
+      "lon": 17.0953,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 06",
+      "countryCode": "PL",
+      "lat": 52.2972,
+      "lon": 16.524,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 07",
+      "countryCode": "PL",
+      "lat": 52.414,
+      "lon": 17.0809,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 08",
+      "countryCode": "PL",
+      "lat": 52.3119,
+      "lon": 16.8745,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 09",
+      "countryCode": "PL",
+      "lat": 52.3371,
+      "lon": 16.8043,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Poznań area 10",
+      "countryCode": "PL",
+      "lat": 52.1923,
+      "lon": 16.9413,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 01",
+      "countryCode": "PL",
+      "lat": 52.3884,
+      "lon": 20.99,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 02",
+      "countryCode": "PL",
+      "lat": 52.092,
+      "lon": 20.9361,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 03",
+      "countryCode": "PL",
+      "lat": 52.1409,
+      "lon": 20.8881,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 04",
+      "countryCode": "PL",
+      "lat": 52.0539,
+      "lon": 20.9231,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 05",
+      "countryCode": "PL",
+      "lat": 52.2943,
+      "lon": 20.6401,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 06",
+      "countryCode": "PL",
+      "lat": 52.0914,
+      "lon": 20.7693,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 07",
+      "countryCode": "PL",
+      "lat": 52.2753,
+      "lon": 20.9342,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 08",
+      "countryCode": "PL",
+      "lat": 52.1015,
+      "lon": 20.7722,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 09",
+      "countryCode": "PL",
+      "lat": 52.1913,
+      "lon": 21.1489,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Warszawa area 10",
+      "countryCode": "PL",
+      "lat": 52.2951,
+      "lon": 20.9573,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 01",
+      "countryCode": "PL",
+      "lat": 54.4673,
+      "lon": 18.4216,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 02",
+      "countryCode": "PL",
+      "lat": 54.1923,
+      "lon": 18.8483,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 03",
+      "countryCode": "PL",
+      "lat": 54.2524,
+      "lon": 18.5211,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 04",
+      "countryCode": "PL",
+      "lat": 54.2874,
+      "lon": 19.0374,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 05",
+      "countryCode": "PL",
+      "lat": 54.4207,
+      "lon": 18.4311,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 06",
+      "countryCode": "PL",
+      "lat": 54.2422,
+      "lon": 18.7379,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 07",
+      "countryCode": "PL",
+      "lat": 54.1229,
+      "lon": 18.6867,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 08",
+      "countryCode": "PL",
+      "lat": 54.5344,
+      "lon": 18.4146,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 09",
+      "countryCode": "PL",
+      "lat": 54.4731,
+      "lon": 18.944,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdańsk area 10",
+      "countryCode": "PL",
+      "lat": 54.1879,
+      "lon": 18.6667,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 01",
+      "countryCode": "PL",
+      "lat": 53.5514,
+      "lon": 14.5517,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 02",
+      "countryCode": "PL",
+      "lat": 53.2992,
+      "lon": 14.943,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 03",
+      "countryCode": "PL",
+      "lat": 53.4085,
+      "lon": 14.312,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 04",
+      "countryCode": "PL",
+      "lat": 53.3497,
+      "lon": 14.5334,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 05",
+      "countryCode": "PL",
+      "lat": 53.5,
+      "lon": 14.5637,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 06",
+      "countryCode": "PL",
+      "lat": 53.6124,
+      "lon": 14.3393,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 07",
+      "countryCode": "PL",
+      "lat": 53.5004,
+      "lon": 14.654,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 08",
+      "countryCode": "PL",
+      "lat": 53.647,
+      "lon": 14.7642,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 09",
+      "countryCode": "PL",
+      "lat": 53.5343,
+      "lon": 14.7601,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Szczecin area 10",
+      "countryCode": "PL",
+      "lat": 53.205,
+      "lon": 14.574,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 01",
+      "countryCode": "PL",
+      "lat": 50.2021,
+      "lon": 22.3327,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 02",
+      "countryCode": "PL",
+      "lat": 49.9962,
+      "lon": 21.8043,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 03",
+      "countryCode": "PL",
+      "lat": 49.8043,
+      "lon": 22.1423,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 04",
+      "countryCode": "PL",
+      "lat": 50.2892,
+      "lon": 21.9494,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 05",
+      "countryCode": "PL",
+      "lat": 50.0397,
+      "lon": 22.0808,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 06",
+      "countryCode": "PL",
+      "lat": 50.1088,
+      "lon": 22.2213,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 07",
+      "countryCode": "PL",
+      "lat": 50.0554,
+      "lon": 22.1037,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 08",
+      "countryCode": "PL",
+      "lat": 50.1156,
+      "lon": 22.2104,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 09",
+      "countryCode": "PL",
+      "lat": 50.1753,
+      "lon": 22.0271,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rzeszów area 10",
+      "countryCode": "PL",
+      "lat": 50.1584,
+      "lon": 21.8037,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 01",
+      "countryCode": "PL",
+      "lat": 49.862,
+      "lon": 19.4085,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 02",
+      "countryCode": "PL",
+      "lat": 50.066,
+      "lon": 18.9931,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 03",
+      "countryCode": "PL",
+      "lat": 49.9986,
+      "lon": 18.9689,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 04",
+      "countryCode": "PL",
+      "lat": 49.7196,
+      "lon": 19.2044,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 05",
+      "countryCode": "PL",
+      "lat": 49.7006,
+      "lon": 18.886,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 06",
+      "countryCode": "PL",
+      "lat": 49.7824,
+      "lon": 19.0943,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 07",
+      "countryCode": "PL",
+      "lat": 49.7394,
+      "lon": 18.9318,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 08",
+      "countryCode": "PL",
+      "lat": 49.8101,
+      "lon": 18.7638,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 09",
+      "countryCode": "PL",
+      "lat": 49.9283,
+      "lon": 18.9041,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Bielsko-Biała area 10",
+      "countryCode": "PL",
+      "lat": 49.9125,
+      "lon": 19.3795,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 01",
+      "countryCode": "PL",
+      "lat": 50.65,
+      "lon": 19.2979,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 02",
+      "countryCode": "PL",
+      "lat": 50.8511,
+      "lon": 19.4995,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 03",
+      "countryCode": "PL",
+      "lat": 50.838,
+      "lon": 19.2341,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 04",
+      "countryCode": "PL",
+      "lat": 50.6299,
+      "lon": 18.8188,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 05",
+      "countryCode": "PL",
+      "lat": 50.9561,
+      "lon": 19.3508,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 06",
+      "countryCode": "PL",
+      "lat": 51.0124,
+      "lon": 19.126,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 07",
+      "countryCode": "PL",
+      "lat": 50.7814,
+      "lon": 18.718,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 08",
+      "countryCode": "PL",
+      "lat": 50.5735,
+      "lon": 19.0926,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 09",
+      "countryCode": "PL",
+      "lat": 50.6147,
+      "lon": 18.9197,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Częstochowa area 10",
+      "countryCode": "PL",
+      "lat": 50.6272,
+      "lon": 19.4129,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Dresden area 01",
+      "countryCode": "DE",
+      "lat": 51.1335,
+      "lon": 13.5082,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Dresden area 02",
+      "countryCode": "DE",
+      "lat": 51.1682,
+      "lon": 13.7626,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Dresden area 03",
+      "countryCode": "DE",
+      "lat": 50.9691,
+      "lon": 13.8936,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Dresden area 04",
+      "countryCode": "DE",
+      "lat": 51.1338,
+      "lon": 13.8804,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Dresden area 05",
+      "countryCode": "DE",
+      "lat": 51.167,
+      "lon": 13.756,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Dresden area 06",
+      "countryCode": "DE",
+      "lat": 51.0685,
+      "lon": 13.8774,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Dresden area 07",
+      "countryCode": "DE",
+      "lat": 51.1147,
+      "lon": 13.6214,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Dresden area 08",
+      "countryCode": "DE",
+      "lat": 51.1672,
+      "lon": 13.8085,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Dresden area 09",
+      "countryCode": "DE",
+      "lat": 50.9413,
+      "lon": 13.6309,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Dresden area 10",
+      "countryCode": "DE",
+      "lat": 50.9808,
+      "lon": 13.779,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 01",
+      "countryCode": "DE",
+      "lat": 51.3467,
+      "lon": 12.457,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 02",
+      "countryCode": "DE",
+      "lat": 51.3022,
+      "lon": 12.4259,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 03",
+      "countryCode": "DE",
+      "lat": 51.3842,
+      "lon": 12.7114,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 04",
+      "countryCode": "DE",
+      "lat": 51.2336,
+      "lon": 12.4437,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 05",
+      "countryCode": "DE",
+      "lat": 51.4141,
+      "lon": 12.2187,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 06",
+      "countryCode": "DE",
+      "lat": 51.1622,
+      "lon": 12.4729,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 07",
+      "countryCode": "DE",
+      "lat": 51.359,
+      "lon": 12.259,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 08",
+      "countryCode": "DE",
+      "lat": 51.2242,
+      "lon": 12.3276,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 09",
+      "countryCode": "DE",
+      "lat": 51.3972,
+      "lon": 11.9827,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Leipzig area 10",
+      "countryCode": "DE",
+      "lat": 51.4218,
+      "lon": 12.4185,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 01",
+      "countryCode": "DE",
+      "lat": 52.3867,
+      "lon": 13.5741,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 02",
+      "countryCode": "DE",
+      "lat": 52.3486,
+      "lon": 13.2352,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 03",
+      "countryCode": "DE",
+      "lat": 52.5855,
+      "lon": 13.7394,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 04",
+      "countryCode": "DE",
+      "lat": 52.5537,
+      "lon": 13.0641,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 05",
+      "countryCode": "DE",
+      "lat": 52.2998,
+      "lon": 13.5481,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 06",
+      "countryCode": "DE",
+      "lat": 52.6189,
+      "lon": 13.355,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 07",
+      "countryCode": "DE",
+      "lat": 52.6586,
+      "lon": 13.1362,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 08",
+      "countryCode": "DE",
+      "lat": 52.5717,
+      "lon": 13.7938,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 09",
+      "countryCode": "DE",
+      "lat": 52.3142,
+      "lon": 13.6317,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Berlin area 10",
+      "countryCode": "DE",
+      "lat": 52.5521,
+      "lon": 13.6611,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 01",
+      "countryCode": "DE",
+      "lat": 53.499,
+      "lon": 10.0666,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 02",
+      "countryCode": "DE",
+      "lat": 53.6614,
+      "lon": 9.8183,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 03",
+      "countryCode": "DE",
+      "lat": 53.5754,
+      "lon": 9.8332,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 04",
+      "countryCode": "DE",
+      "lat": 53.4005,
+      "lon": 9.7675,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 05",
+      "countryCode": "DE",
+      "lat": 53.5508,
+      "lon": 10.1442,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 06",
+      "countryCode": "DE",
+      "lat": 53.5239,
+      "lon": 9.7334,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 07",
+      "countryCode": "DE",
+      "lat": 53.4875,
+      "lon": 9.9171,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 08",
+      "countryCode": "DE",
+      "lat": 53.6777,
+      "lon": 9.8873,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 09",
+      "countryCode": "DE",
+      "lat": 53.7675,
+      "lon": 10.2217,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hamburg area 10",
+      "countryCode": "DE",
+      "lat": 53.3486,
+      "lon": 9.7388,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 01",
+      "countryCode": "DE",
+      "lat": 48.1971,
+      "lon": 11.6461,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 02",
+      "countryCode": "DE",
+      "lat": 48.2544,
+      "lon": 11.6031,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 03",
+      "countryCode": "DE",
+      "lat": 48.1409,
+      "lon": 11.2917,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 04",
+      "countryCode": "DE",
+      "lat": 48.0994,
+      "lon": 11.4319,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 05",
+      "countryCode": "DE",
+      "lat": 47.9046,
+      "lon": 11.6105,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 06",
+      "countryCode": "DE",
+      "lat": 48.3403,
+      "lon": 11.6359,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 07",
+      "countryCode": "DE",
+      "lat": 47.9967,
+      "lon": 11.6461,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 08",
+      "countryCode": "DE",
+      "lat": 48.172,
+      "lon": 11.2006,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 09",
+      "countryCode": "DE",
+      "lat": 47.9171,
+      "lon": 11.3705,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "München area 10",
+      "countryCode": "DE",
+      "lat": 48.152,
+      "lon": 11.781,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 01",
+      "countryCode": "DE",
+      "lat": 49.2526,
+      "lon": 11.3052,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 02",
+      "countryCode": "DE",
+      "lat": 49.3786,
+      "lon": 11.0001,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 03",
+      "countryCode": "DE",
+      "lat": 49.415,
+      "lon": 11.4331,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 04",
+      "countryCode": "DE",
+      "lat": 49.4443,
+      "lon": 10.808,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 05",
+      "countryCode": "DE",
+      "lat": 49.3368,
+      "lon": 10.7982,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 06",
+      "countryCode": "DE",
+      "lat": 49.3855,
+      "lon": 11.0695,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 07",
+      "countryCode": "DE",
+      "lat": 49.3993,
+      "lon": 10.7162,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 08",
+      "countryCode": "DE",
+      "lat": 49.6002,
+      "lon": 11.0268,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 09",
+      "countryCode": "DE",
+      "lat": 49.6608,
+      "lon": 10.9785,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Nürnberg area 10",
+      "countryCode": "DE",
+      "lat": 49.471,
+      "lon": 11.2173,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 01",
+      "countryCode": "DE",
+      "lat": 50.8726,
+      "lon": 6.992,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 02",
+      "countryCode": "DE",
+      "lat": 50.8748,
+      "lon": 6.9069,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 03",
+      "countryCode": "DE",
+      "lat": 50.9821,
+      "lon": 6.6784,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 04",
+      "countryCode": "DE",
+      "lat": 51.0168,
+      "lon": 6.9378,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 05",
+      "countryCode": "DE",
+      "lat": 51.1673,
+      "lon": 6.7771,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 06",
+      "countryCode": "DE",
+      "lat": 50.7274,
+      "lon": 6.9576,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 07",
+      "countryCode": "DE",
+      "lat": 50.7795,
+      "lon": 7.2594,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 08",
+      "countryCode": "DE",
+      "lat": 50.9185,
+      "lon": 7.2891,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 09",
+      "countryCode": "DE",
+      "lat": 50.7905,
+      "lon": 7.2136,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Köln area 10",
+      "countryCode": "DE",
+      "lat": 51.1948,
+      "lon": 6.842,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 01",
+      "countryCode": "DE",
+      "lat": 50.1901,
+      "lon": 8.697,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 02",
+      "countryCode": "DE",
+      "lat": 50.1038,
+      "lon": 8.8938,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 03",
+      "countryCode": "DE",
+      "lat": 50.1926,
+      "lon": 8.9774,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 04",
+      "countryCode": "DE",
+      "lat": 50.0779,
+      "lon": 8.4276,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 05",
+      "countryCode": "DE",
+      "lat": 50.1474,
+      "lon": 8.5758,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 06",
+      "countryCode": "DE",
+      "lat": 50.0399,
+      "lon": 8.7692,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 07",
+      "countryCode": "DE",
+      "lat": 50.0616,
+      "lon": 8.9063,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 08",
+      "countryCode": "DE",
+      "lat": 50.3473,
+      "lon": 8.6234,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 09",
+      "countryCode": "DE",
+      "lat": 50.021,
+      "lon": 8.9938,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Frankfurt area 10",
+      "countryCode": "DE",
+      "lat": 50.0809,
+      "lon": 8.8097,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 01",
+      "countryCode": "DE",
+      "lat": 48.909,
+      "lon": 8.9961,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 02",
+      "countryCode": "DE",
+      "lat": 49.0256,
+      "lon": 9.1136,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 03",
+      "countryCode": "DE",
+      "lat": 48.8596,
+      "lon": 9.2903,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 04",
+      "countryCode": "DE",
+      "lat": 48.7258,
+      "lon": 9.1552,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 05",
+      "countryCode": "DE",
+      "lat": 48.8109,
+      "lon": 8.785,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 06",
+      "countryCode": "DE",
+      "lat": 48.7535,
+      "lon": 9.0938,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 07",
+      "countryCode": "DE",
+      "lat": 48.6475,
+      "lon": 8.9682,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 08",
+      "countryCode": "DE",
+      "lat": 48.8393,
+      "lon": 9.0538,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 09",
+      "countryCode": "DE",
+      "lat": 48.956,
+      "lon": 9.3877,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Stuttgart area 10",
+      "countryCode": "DE",
+      "lat": 48.8348,
+      "lon": 9.1578,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 01",
+      "countryCode": "DE",
+      "lat": 52.262,
+      "lon": 9.8847,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 02",
+      "countryCode": "DE",
+      "lat": 52.4573,
+      "lon": 10.1113,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 03",
+      "countryCode": "DE",
+      "lat": 52.5313,
+      "lon": 9.7407,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 04",
+      "countryCode": "DE",
+      "lat": 52.3491,
+      "lon": 10.0894,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 05",
+      "countryCode": "DE",
+      "lat": 52.2144,
+      "lon": 9.7342,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 06",
+      "countryCode": "DE",
+      "lat": 52.3891,
+      "lon": 9.6332,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 07",
+      "countryCode": "DE",
+      "lat": 52.3673,
+      "lon": 9.9447,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 08",
+      "countryCode": "DE",
+      "lat": 52.4493,
+      "lon": 9.6025,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 09",
+      "countryCode": "DE",
+      "lat": 52.2426,
+      "lon": 9.4912,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Hannover area 10",
+      "countryCode": "DE",
+      "lat": 52.2294,
+      "lon": 9.9745,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Praha area 01",
+      "countryCode": "CZ",
+      "lat": 49.9131,
+      "lon": 14.5319,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Praha area 02",
+      "countryCode": "CZ",
+      "lat": 49.9727,
+      "lon": 14.3026,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Praha area 03",
+      "countryCode": "CZ",
+      "lat": 50.0986,
+      "lon": 14.597,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Praha area 04",
+      "countryCode": "CZ",
+      "lat": 50.2375,
+      "lon": 14.4472,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Praha area 05",
+      "countryCode": "CZ",
+      "lat": 50.1157,
+      "lon": 14.6055,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Praha area 06",
+      "countryCode": "CZ",
+      "lat": 49.8836,
+      "lon": 14.3603,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Praha area 07",
+      "countryCode": "CZ",
+      "lat": 50.227,
+      "lon": 14.3765,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Praha area 08",
+      "countryCode": "CZ",
+      "lat": 50.1379,
+      "lon": 14.2715,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Praha area 09",
+      "countryCode": "CZ",
+      "lat": 50.217,
+      "lon": 14.5288,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Praha area 10",
+      "countryCode": "CZ",
+      "lat": 49.8382,
+      "lon": 14.4539,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 01",
+      "countryCode": "CZ",
+      "lat": 48.9927,
+      "lon": 16.4793,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 02",
+      "countryCode": "CZ",
+      "lat": 49.2215,
+      "lon": 16.4435,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 03",
+      "countryCode": "CZ",
+      "lat": 49.3277,
+      "lon": 16.4289,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 04",
+      "countryCode": "CZ",
+      "lat": 49.0652,
+      "lon": 16.7231,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 05",
+      "countryCode": "CZ",
+      "lat": 49.0917,
+      "lon": 16.6838,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 06",
+      "countryCode": "CZ",
+      "lat": 48.9508,
+      "lon": 16.7035,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 07",
+      "countryCode": "CZ",
+      "lat": 49.2271,
+      "lon": 16.2203,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 08",
+      "countryCode": "CZ",
+      "lat": 49.1175,
+      "lon": 16.4397,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 09",
+      "countryCode": "CZ",
+      "lat": 49.1068,
+      "lon": 16.3653,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Brno area 10",
+      "countryCode": "CZ",
+      "lat": 49.2322,
+      "lon": 16.545,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 01",
+      "countryCode": "CZ",
+      "lat": 49.8698,
+      "lon": 18.274,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 02",
+      "countryCode": "CZ",
+      "lat": 49.6031,
+      "lon": 18.3976,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 03",
+      "countryCode": "CZ",
+      "lat": 49.9373,
+      "lon": 18.6093,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 04",
+      "countryCode": "CZ",
+      "lat": 50.0125,
+      "lon": 18.1536,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 05",
+      "countryCode": "CZ",
+      "lat": 49.6058,
+      "lon": 18.4144,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 06",
+      "countryCode": "CZ",
+      "lat": 49.7426,
+      "lon": 18.1823,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 07",
+      "countryCode": "CZ",
+      "lat": 49.9916,
+      "lon": 18.1346,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 08",
+      "countryCode": "CZ",
+      "lat": 49.9143,
+      "lon": 18.2864,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 09",
+      "countryCode": "CZ",
+      "lat": 49.7339,
+      "lon": 18.3517,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Ostrava area 10",
+      "countryCode": "CZ",
+      "lat": 49.5831,
+      "lon": 18.2921,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Žilina area 01",
+      "countryCode": "SK",
+      "lat": 49.2459,
+      "lon": 18.6115,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Žilina area 02",
+      "countryCode": "SK",
+      "lat": 49.2102,
+      "lon": 18.6257,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Žilina area 03",
+      "countryCode": "SK",
+      "lat": 49.1886,
+      "lon": 18.6364,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Žilina area 04",
+      "countryCode": "SK",
+      "lat": 49.1283,
+      "lon": 18.5191,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Žilina area 05",
+      "countryCode": "SK",
+      "lat": 49.3765,
+      "lon": 18.7408,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Žilina area 06",
+      "countryCode": "SK",
+      "lat": 49.0102,
+      "lon": 18.8031,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Žilina area 07",
+      "countryCode": "SK",
+      "lat": 49.4426,
+      "lon": 18.7985,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Žilina area 08",
+      "countryCode": "SK",
+      "lat": 49.1774,
+      "lon": 18.7119,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Žilina area 09",
+      "countryCode": "SK",
+      "lat": 49.2122,
+      "lon": 18.4899,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Žilina area 10",
+      "countryCode": "SK",
+      "lat": 49.3625,
+      "lon": 19.0611,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 01",
+      "countryCode": "SK",
+      "lat": 48.1233,
+      "lon": 16.7879,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 02",
+      "countryCode": "SK",
+      "lat": 48.0061,
+      "lon": 17.0339,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 03",
+      "countryCode": "SK",
+      "lat": 48.1473,
+      "lon": 17.0325,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 04",
+      "countryCode": "SK",
+      "lat": 48.1245,
+      "lon": 16.969,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 05",
+      "countryCode": "SK",
+      "lat": 48.1042,
+      "lon": 17.1696,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 06",
+      "countryCode": "SK",
+      "lat": 48.1114,
+      "lon": 17.1842,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 07",
+      "countryCode": "SK",
+      "lat": 48.3222,
+      "lon": 16.99,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 08",
+      "countryCode": "SK",
+      "lat": 48.1612,
+      "lon": 16.7781,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 09",
+      "countryCode": "SK",
+      "lat": 48.1841,
+      "lon": 16.9634,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Bratislava area 10",
+      "countryCode": "SK",
+      "lat": 48.2717,
+      "lon": 17.0242,
+      "timezone": "Europe/Bratislava"
+    },
+    {
+      "name": "Wien area 01",
+      "countryCode": "AT",
+      "lat": 48.087,
+      "lon": 16.4332,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Wien area 02",
+      "countryCode": "AT",
+      "lat": 48.0658,
+      "lon": 16.2029,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Wien area 03",
+      "countryCode": "AT",
+      "lat": 48.2762,
+      "lon": 16.2347,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Wien area 04",
+      "countryCode": "AT",
+      "lat": 48.1618,
+      "lon": 16.4211,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Wien area 05",
+      "countryCode": "AT",
+      "lat": 48.2818,
+      "lon": 16.1986,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Wien area 06",
+      "countryCode": "AT",
+      "lat": 48.309,
+      "lon": 16.25,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Wien area 07",
+      "countryCode": "AT",
+      "lat": 48.0842,
+      "lon": 16.5018,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Wien area 08",
+      "countryCode": "AT",
+      "lat": 48.2691,
+      "lon": 16.6944,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Wien area 09",
+      "countryCode": "AT",
+      "lat": 48.0317,
+      "lon": 16.3626,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Wien area 10",
+      "countryCode": "AT",
+      "lat": 48.2844,
+      "lon": 16.3001,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 01",
+      "countryCode": "AT",
+      "lat": 48.1973,
+      "lon": 14.5042,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 02",
+      "countryCode": "AT",
+      "lat": 48.2435,
+      "lon": 14.1175,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 03",
+      "countryCode": "AT",
+      "lat": 48.2641,
+      "lon": 14.6831,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 04",
+      "countryCode": "AT",
+      "lat": 48.3763,
+      "lon": 14.2419,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 05",
+      "countryCode": "AT",
+      "lat": 48.4332,
+      "lon": 14.2625,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 06",
+      "countryCode": "AT",
+      "lat": 48.3415,
+      "lon": 14.0318,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 07",
+      "countryCode": "AT",
+      "lat": 48.244,
+      "lon": 14.5581,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 08",
+      "countryCode": "AT",
+      "lat": 48.2615,
+      "lon": 14.2642,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 09",
+      "countryCode": "AT",
+      "lat": 48.3525,
+      "lon": 14.2718,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Linz area 10",
+      "countryCode": "AT",
+      "lat": 48.4202,
+      "lon": 14.2782,
+      "timezone": "Europe/Vienna"
+    },
+    {
+      "name": "Budapest area 01",
+      "countryCode": "HU",
+      "lat": 47.5917,
+      "lon": 18.7291,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Budapest area 02",
+      "countryCode": "HU",
+      "lat": 47.5048,
+      "lon": 19.3638,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Budapest area 03",
+      "countryCode": "HU",
+      "lat": 47.6113,
+      "lon": 19.0189,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Budapest area 04",
+      "countryCode": "HU",
+      "lat": 47.4312,
+      "lon": 18.7343,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Budapest area 05",
+      "countryCode": "HU",
+      "lat": 47.4632,
+      "lon": 18.9724,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Budapest area 06",
+      "countryCode": "HU",
+      "lat": 47.4728,
+      "lon": 18.9096,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Budapest area 07",
+      "countryCode": "HU",
+      "lat": 47.3422,
+      "lon": 19.1818,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Budapest area 08",
+      "countryCode": "HU",
+      "lat": 47.6868,
+      "lon": 19.3038,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Budapest area 09",
+      "countryCode": "HU",
+      "lat": 47.389,
+      "lon": 19.1098,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Budapest area 10",
+      "countryCode": "HU",
+      "lat": 47.5764,
+      "lon": 19.1315,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 01",
+      "countryCode": "HU",
+      "lat": 47.8054,
+      "lon": 17.8582,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 02",
+      "countryCode": "HU",
+      "lat": 47.7533,
+      "lon": 17.603,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 03",
+      "countryCode": "HU",
+      "lat": 47.9254,
+      "lon": 17.5706,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 04",
+      "countryCode": "HU",
+      "lat": 47.6249,
+      "lon": 17.6826,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 05",
+      "countryCode": "HU",
+      "lat": 47.7234,
+      "lon": 17.8725,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 06",
+      "countryCode": "HU",
+      "lat": 47.5798,
+      "lon": 17.6887,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 07",
+      "countryCode": "HU",
+      "lat": 47.7736,
+      "lon": 17.3176,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 08",
+      "countryCode": "HU",
+      "lat": 47.858,
+      "lon": 17.4057,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 09",
+      "countryCode": "HU",
+      "lat": 47.8101,
+      "lon": 17.805,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Győr area 10",
+      "countryCode": "HU",
+      "lat": 47.7479,
+      "lon": 17.717,
+      "timezone": "Europe/Budapest"
+    },
+    {
+      "name": "Venlo area 01",
+      "countryCode": "NL",
+      "lat": 51.2659,
+      "lon": 6.377,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Venlo area 02",
+      "countryCode": "NL",
+      "lat": 51.4305,
+      "lon": 6.5755,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Venlo area 03",
+      "countryCode": "NL",
+      "lat": 51.271,
+      "lon": 5.791,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Venlo area 04",
+      "countryCode": "NL",
+      "lat": 51.1525,
+      "lon": 6.3981,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Venlo area 05",
+      "countryCode": "NL",
+      "lat": 51.3914,
+      "lon": 6.3851,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Venlo area 06",
+      "countryCode": "NL",
+      "lat": 51.5814,
+      "lon": 5.9306,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Venlo area 07",
+      "countryCode": "NL",
+      "lat": 51.4568,
+      "lon": 6.0536,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Venlo area 08",
+      "countryCode": "NL",
+      "lat": 51.4398,
+      "lon": 6.0897,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Venlo area 09",
+      "countryCode": "NL",
+      "lat": 51.5171,
+      "lon": 6.249,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Venlo area 10",
+      "countryCode": "NL",
+      "lat": 51.4261,
+      "lon": 6.2527,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 01",
+      "countryCode": "NL",
+      "lat": 51.7271,
+      "lon": 4.7733,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 02",
+      "countryCode": "NL",
+      "lat": 52.0559,
+      "lon": 4.3231,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 03",
+      "countryCode": "NL",
+      "lat": 51.8208,
+      "lon": 4.5943,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 04",
+      "countryCode": "NL",
+      "lat": 51.9393,
+      "lon": 4.3696,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 05",
+      "countryCode": "NL",
+      "lat": 51.9329,
+      "lon": 4.5684,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 06",
+      "countryCode": "NL",
+      "lat": 52.123,
+      "lon": 4.4339,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 07",
+      "countryCode": "NL",
+      "lat": 51.9465,
+      "lon": 4.356,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 08",
+      "countryCode": "NL",
+      "lat": 52.0804,
+      "lon": 4.459,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 09",
+      "countryCode": "NL",
+      "lat": 51.9733,
+      "lon": 4.672,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Rotterdam area 10",
+      "countryCode": "NL",
+      "lat": 51.8504,
+      "lon": 4.2294,
+      "timezone": "Europe/Amsterdam"
+    },
+    {
+      "name": "Antwerpen area 01",
+      "countryCode": "BE",
+      "lat": 51.1235,
+      "lon": 4.3695,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Antwerpen area 02",
+      "countryCode": "BE",
+      "lat": 51.2855,
+      "lon": 4.4179,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Antwerpen area 03",
+      "countryCode": "BE",
+      "lat": 50.9944,
+      "lon": 4.3344,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Antwerpen area 04",
+      "countryCode": "BE",
+      "lat": 51.3718,
+      "lon": 4.3211,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Antwerpen area 05",
+      "countryCode": "BE",
+      "lat": 51.3726,
+      "lon": 4.5221,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Antwerpen area 06",
+      "countryCode": "BE",
+      "lat": 51.2357,
+      "lon": 4.2944,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Antwerpen area 07",
+      "countryCode": "BE",
+      "lat": 51.3845,
+      "lon": 4.2445,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Antwerpen area 08",
+      "countryCode": "BE",
+      "lat": 51.2654,
+      "lon": 4.2852,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Antwerpen area 09",
+      "countryCode": "BE",
+      "lat": 51.2019,
+      "lon": 4.5237,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Antwerpen area 10",
+      "countryCode": "BE",
+      "lat": 51.2794,
+      "lon": 4.5411,
+      "timezone": "Europe/Brussels"
+    },
+    {
+      "name": "Strasbourg area 01",
+      "countryCode": "FR",
+      "lat": 48.6144,
+      "lon": 8.1229,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Strasbourg area 02",
+      "countryCode": "FR",
+      "lat": 48.6287,
+      "lon": 7.7685,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Strasbourg area 03",
+      "countryCode": "FR",
+      "lat": 48.5284,
+      "lon": 8.0025,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Strasbourg area 04",
+      "countryCode": "FR",
+      "lat": 48.4943,
+      "lon": 7.7648,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Strasbourg area 05",
+      "countryCode": "FR",
+      "lat": 48.6724,
+      "lon": 8.0446,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Strasbourg area 06",
+      "countryCode": "FR",
+      "lat": 48.3523,
+      "lon": 7.6898,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Strasbourg area 07",
+      "countryCode": "FR",
+      "lat": 48.7371,
+      "lon": 7.7932,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Strasbourg area 08",
+      "countryCode": "FR",
+      "lat": 48.611,
+      "lon": 7.7017,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Strasbourg area 09",
+      "countryCode": "FR",
+      "lat": 48.471,
+      "lon": 7.5999,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Strasbourg area 10",
+      "countryCode": "FR",
+      "lat": 48.663,
+      "lon": 7.3844,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 01",
+      "countryCode": "FR",
+      "lat": 45.8219,
+      "lon": 4.496,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 02",
+      "countryCode": "FR",
+      "lat": 45.8256,
+      "lon": 4.8755,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 03",
+      "countryCode": "FR",
+      "lat": 45.7278,
+      "lon": 4.9012,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 04",
+      "countryCode": "FR",
+      "lat": 45.5913,
+      "lon": 4.6212,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 05",
+      "countryCode": "FR",
+      "lat": 45.8195,
+      "lon": 4.7629,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 06",
+      "countryCode": "FR",
+      "lat": 45.7981,
+      "lon": 4.9898,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 07",
+      "countryCode": "FR",
+      "lat": 45.7863,
+      "lon": 4.7229,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 08",
+      "countryCode": "FR",
+      "lat": 45.7547,
+      "lon": 5.0718,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 09",
+      "countryCode": "FR",
+      "lat": 45.7101,
+      "lon": 4.6983,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Lyon area 10",
+      "countryCode": "FR",
+      "lat": 45.8344,
+      "lon": 4.6592,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Verona area 01",
+      "countryCode": "IT",
+      "lat": 45.3838,
+      "lon": 10.8944,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Verona area 02",
+      "countryCode": "IT",
+      "lat": 45.2843,
+      "lon": 10.9604,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Verona area 03",
+      "countryCode": "IT",
+      "lat": 45.557,
+      "lon": 11.1455,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Verona area 04",
+      "countryCode": "IT",
+      "lat": 45.5091,
+      "lon": 10.9897,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Verona area 05",
+      "countryCode": "IT",
+      "lat": 45.3686,
+      "lon": 10.8451,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Verona area 06",
+      "countryCode": "IT",
+      "lat": 45.4839,
+      "lon": 11.1698,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Verona area 07",
+      "countryCode": "IT",
+      "lat": 45.2767,
+      "lon": 10.8072,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Verona area 08",
+      "countryCode": "IT",
+      "lat": 45.3281,
+      "lon": 10.9621,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Verona area 09",
+      "countryCode": "IT",
+      "lat": 45.5098,
+      "lon": 10.8488,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Verona area 10",
+      "countryCode": "IT",
+      "lat": 45.3146,
+      "lon": 11.0241,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 01",
+      "countryCode": "IT",
+      "lat": 45.5811,
+      "lon": 9.2052,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 02",
+      "countryCode": "IT",
+      "lat": 45.5801,
+      "lon": 8.8907,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 03",
+      "countryCode": "IT",
+      "lat": 45.3748,
+      "lon": 9.2404,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 04",
+      "countryCode": "IT",
+      "lat": 45.3864,
+      "lon": 9.3363,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 05",
+      "countryCode": "IT",
+      "lat": 45.198,
+      "lon": 9.1318,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 06",
+      "countryCode": "IT",
+      "lat": 45.5986,
+      "lon": 9.3156,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 07",
+      "countryCode": "IT",
+      "lat": 45.4014,
+      "lon": 9.2586,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 08",
+      "countryCode": "IT",
+      "lat": 45.3814,
+      "lon": 8.8664,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 09",
+      "countryCode": "IT",
+      "lat": 45.4329,
+      "lon": 9.0595,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Milano area 10",
+      "countryCode": "IT",
+      "lat": 45.445,
+      "lon": 9.1106,
+      "timezone": "Europe/Rome"
+    },
+    {
+      "name": "Kolding area 01",
+      "countryCode": "DK",
+      "lat": 55.6227,
+      "lon": 9.1397,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Kolding area 02",
+      "countryCode": "DK",
+      "lat": 55.6418,
+      "lon": 9.4045,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Kolding area 03",
+      "countryCode": "DK",
+      "lat": 55.6458,
+      "lon": 9.163,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Kolding area 04",
+      "countryCode": "DK",
+      "lat": 55.6203,
+      "lon": 9.4267,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Kolding area 05",
+      "countryCode": "DK",
+      "lat": 55.2251,
+      "lon": 9.493,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Kolding area 06",
+      "countryCode": "DK",
+      "lat": 55.4307,
+      "lon": 9.2943,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Kolding area 07",
+      "countryCode": "DK",
+      "lat": 55.2939,
+      "lon": 9.2514,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Kolding area 08",
+      "countryCode": "DK",
+      "lat": 55.3151,
+      "lon": 9.4125,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Kolding area 09",
+      "countryCode": "DK",
+      "lat": 55.6091,
+      "lon": 9.2167,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Kolding area 10",
+      "countryCode": "DK",
+      "lat": 55.3517,
+      "lon": 9.1008,
+      "timezone": "Europe/Copenhagen"
+    },
+    {
+      "name": "Gliwice area 01",
+      "countryCode": "PL",
+      "lat": 50.1845,
+      "lon": 18.765,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gliwice area 02",
+      "countryCode": "PL",
+      "lat": 50.3509,
+      "lon": 18.6991,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gliwice area 03",
+      "countryCode": "PL",
+      "lat": 50.0602,
+      "lon": 18.8691,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gliwice area 04",
+      "countryCode": "PL",
+      "lat": 50.413,
+      "lon": 18.3501,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gliwice area 05",
+      "countryCode": "PL",
+      "lat": 50.3079,
+      "lon": 18.9223,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gliwice area 06",
+      "countryCode": "PL",
+      "lat": 50.1639,
+      "lon": 18.7312,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gliwice area 07",
+      "countryCode": "PL",
+      "lat": 50.3799,
+      "lon": 18.9854,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gliwice area 08",
+      "countryCode": "PL",
+      "lat": 50.3306,
+      "lon": 18.5523,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gliwice area 09",
+      "countryCode": "PL",
+      "lat": 50.3532,
+      "lon": 18.285,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gliwice area 10",
+      "countryCode": "PL",
+      "lat": 50.3068,
+      "lon": 18.8733,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 01",
+      "countryCode": "PL",
+      "lat": 50.2249,
+      "lon": 18.6957,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 02",
+      "countryCode": "PL",
+      "lat": 50.078,
+      "lon": 18.8684,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 03",
+      "countryCode": "PL",
+      "lat": 50.0706,
+      "lon": 19.0178,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 04",
+      "countryCode": "PL",
+      "lat": 50.2306,
+      "lon": 19.0412,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 05",
+      "countryCode": "PL",
+      "lat": 50.2525,
+      "lon": 18.6734,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 06",
+      "countryCode": "PL",
+      "lat": 50.1138,
+      "lon": 18.9074,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 07",
+      "countryCode": "PL",
+      "lat": 49.936,
+      "lon": 19.0837,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 08",
+      "countryCode": "PL",
+      "lat": 50.1865,
+      "lon": 18.6887,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 09",
+      "countryCode": "PL",
+      "lat": 50.3373,
+      "lon": 19.1591,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Tychy area 10",
+      "countryCode": "PL",
+      "lat": 50.0179,
+      "lon": 19.044,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 01",
+      "countryCode": "PL",
+      "lat": 50.3365,
+      "lon": 18.9992,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 02",
+      "countryCode": "PL",
+      "lat": 50.3176,
+      "lon": 18.9804,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 03",
+      "countryCode": "PL",
+      "lat": 50.1242,
+      "lon": 19.4298,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 04",
+      "countryCode": "PL",
+      "lat": 50.4694,
+      "lon": 18.8813,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 05",
+      "countryCode": "PL",
+      "lat": 50.1736,
+      "lon": 19.207,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 06",
+      "countryCode": "PL",
+      "lat": 50.3995,
+      "lon": 19.2091,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 07",
+      "countryCode": "PL",
+      "lat": 50.1503,
+      "lon": 19.1233,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 08",
+      "countryCode": "PL",
+      "lat": 50.2892,
+      "lon": 18.7716,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 09",
+      "countryCode": "PL",
+      "lat": 50.3297,
+      "lon": 18.9958,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Sosnowiec area 10",
+      "countryCode": "PL",
+      "lat": 50.2531,
+      "lon": 19.4188,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 01",
+      "countryCode": "PL",
+      "lat": 50.1444,
+      "lon": 18.309,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 02",
+      "countryCode": "PL",
+      "lat": 50.0324,
+      "lon": 18.4607,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 03",
+      "countryCode": "PL",
+      "lat": 50.1174,
+      "lon": 18.382,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 04",
+      "countryCode": "PL",
+      "lat": 50.1834,
+      "lon": 18.589,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 05",
+      "countryCode": "PL",
+      "lat": 50.1102,
+      "lon": 18.6477,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 06",
+      "countryCode": "PL",
+      "lat": 49.9275,
+      "lon": 18.5841,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 07",
+      "countryCode": "PL",
+      "lat": 49.9761,
+      "lon": 18.5243,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 08",
+      "countryCode": "PL",
+      "lat": 50.2002,
+      "lon": 18.857,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 09",
+      "countryCode": "PL",
+      "lat": 50.2348,
+      "lon": 18.487,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Rybnik area 10",
+      "countryCode": "PL",
+      "lat": 50.2897,
+      "lon": 18.7636,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 01",
+      "countryCode": "PL",
+      "lat": 51.2503,
+      "lon": 16.3044,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 02",
+      "countryCode": "PL",
+      "lat": 51.2769,
+      "lon": 15.8459,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 03",
+      "countryCode": "PL",
+      "lat": 51.2346,
+      "lon": 16.0506,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 04",
+      "countryCode": "PL",
+      "lat": 51.0637,
+      "lon": 15.8868,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 05",
+      "countryCode": "PL",
+      "lat": 51.186,
+      "lon": 16.0924,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 06",
+      "countryCode": "PL",
+      "lat": 50.9593,
+      "lon": 16.2665,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 07",
+      "countryCode": "PL",
+      "lat": 51.1487,
+      "lon": 15.9559,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 08",
+      "countryCode": "PL",
+      "lat": 51.2366,
+      "lon": 16.1017,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 09",
+      "countryCode": "PL",
+      "lat": 51.3268,
+      "lon": 16.0133,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Legnica area 10",
+      "countryCode": "PL",
+      "lat": 51.4563,
+      "lon": 16.2881,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 01",
+      "countryCode": "PL",
+      "lat": 50.8326,
+      "lon": 16.404,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 02",
+      "countryCode": "PL",
+      "lat": 50.7956,
+      "lon": 15.8647,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 03",
+      "countryCode": "PL",
+      "lat": 50.9112,
+      "lon": 16.257,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 04",
+      "countryCode": "PL",
+      "lat": 50.8211,
+      "lon": 16.1008,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 05",
+      "countryCode": "PL",
+      "lat": 50.7199,
+      "lon": 16.337,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 06",
+      "countryCode": "PL",
+      "lat": 50.9791,
+      "lon": 16.1299,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 07",
+      "countryCode": "PL",
+      "lat": 50.8732,
+      "lon": 16.519,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 08",
+      "countryCode": "PL",
+      "lat": 50.608,
+      "lon": 16.4399,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 09",
+      "countryCode": "PL",
+      "lat": 50.8699,
+      "lon": 16.2043,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Wałbrzych area 10",
+      "countryCode": "PL",
+      "lat": 50.8386,
+      "lon": 16.3545,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 01",
+      "countryCode": "PL",
+      "lat": 52.5262,
+      "lon": 17.2946,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 02",
+      "countryCode": "PL",
+      "lat": 52.5482,
+      "lon": 17.9284,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 03",
+      "countryCode": "PL",
+      "lat": 52.774,
+      "lon": 17.6948,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 04",
+      "countryCode": "PL",
+      "lat": 52.5061,
+      "lon": 17.4745,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 05",
+      "countryCode": "PL",
+      "lat": 52.5373,
+      "lon": 17.4713,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 06",
+      "countryCode": "PL",
+      "lat": 52.4416,
+      "lon": 17.4889,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 07",
+      "countryCode": "PL",
+      "lat": 52.4662,
+      "lon": 17.5153,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 08",
+      "countryCode": "PL",
+      "lat": 52.3505,
+      "lon": 17.6662,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 09",
+      "countryCode": "PL",
+      "lat": 52.7078,
+      "lon": 17.5352,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gniezno area 10",
+      "countryCode": "PL",
+      "lat": 52.5479,
+      "lon": 17.4511,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 01",
+      "countryCode": "PL",
+      "lat": 51.8809,
+      "lon": 16.7343,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 02",
+      "countryCode": "PL",
+      "lat": 51.8898,
+      "lon": 16.5189,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 03",
+      "countryCode": "PL",
+      "lat": 51.6144,
+      "lon": 16.4916,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 04",
+      "countryCode": "PL",
+      "lat": 51.5976,
+      "lon": 16.574,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 05",
+      "countryCode": "PL",
+      "lat": 51.9312,
+      "lon": 16.3989,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 06",
+      "countryCode": "PL",
+      "lat": 52.0345,
+      "lon": 16.6144,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 07",
+      "countryCode": "PL",
+      "lat": 52.0158,
+      "lon": 16.5425,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 08",
+      "countryCode": "PL",
+      "lat": 51.8638,
+      "lon": 16.7822,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 09",
+      "countryCode": "PL",
+      "lat": 51.9772,
+      "lon": 16.8773,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Leszno area 10",
+      "countryCode": "PL",
+      "lat": 51.9138,
+      "lon": 16.6669,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 01",
+      "countryCode": "PL",
+      "lat": 52.0354,
+      "lon": 18.3881,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 02",
+      "countryCode": "PL",
+      "lat": 52.1255,
+      "lon": 17.8597,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 03",
+      "countryCode": "PL",
+      "lat": 52.1809,
+      "lon": 18.2119,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 04",
+      "countryCode": "PL",
+      "lat": 52.1517,
+      "lon": 17.9561,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 05",
+      "countryCode": "PL",
+      "lat": 52.2912,
+      "lon": 18.3376,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 06",
+      "countryCode": "PL",
+      "lat": 52.3714,
+      "lon": 18.263,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 07",
+      "countryCode": "PL",
+      "lat": 51.9868,
+      "lon": 18.1376,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 08",
+      "countryCode": "PL",
+      "lat": 52.0367,
+      "lon": 18.2435,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 09",
+      "countryCode": "PL",
+      "lat": 52.2601,
+      "lon": 18.4935,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Konin area 10",
+      "countryCode": "PL",
+      "lat": 52.4562,
+      "lon": 18.3876,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 01",
+      "countryCode": "PL",
+      "lat": 51.2845,
+      "lon": 19.8533,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 02",
+      "countryCode": "PL",
+      "lat": 51.3341,
+      "lon": 19.4552,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 03",
+      "countryCode": "PL",
+      "lat": 51.4931,
+      "lon": 19.6673,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 04",
+      "countryCode": "PL",
+      "lat": 51.3785,
+      "lon": 19.9191,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 05",
+      "countryCode": "PL",
+      "lat": 51.5182,
+      "lon": 19.5122,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 06",
+      "countryCode": "PL",
+      "lat": 51.6598,
+      "lon": 19.6739,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 07",
+      "countryCode": "PL",
+      "lat": 51.4436,
+      "lon": 19.9442,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 08",
+      "countryCode": "PL",
+      "lat": 51.2786,
+      "lon": 19.3399,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 09",
+      "countryCode": "PL",
+      "lat": 51.2775,
+      "lon": 19.8642,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Piotrków Trybunalski area 10",
+      "countryCode": "PL",
+      "lat": 51.201,
+      "lon": 19.7787,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 01",
+      "countryCode": "PL",
+      "lat": 51.3382,
+      "lon": 21.5385,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 02",
+      "countryCode": "PL",
+      "lat": 51.3229,
+      "lon": 21.1812,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 03",
+      "countryCode": "PL",
+      "lat": 51.4033,
+      "lon": 21.2385,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 04",
+      "countryCode": "PL",
+      "lat": 51.3791,
+      "lon": 21.0829,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 05",
+      "countryCode": "PL",
+      "lat": 51.3604,
+      "lon": 21.2608,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 06",
+      "countryCode": "PL",
+      "lat": 51.2836,
+      "lon": 21.256,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 07",
+      "countryCode": "PL",
+      "lat": 51.4092,
+      "lon": 21.0542,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 08",
+      "countryCode": "PL",
+      "lat": 51.2467,
+      "lon": 21.0599,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 09",
+      "countryCode": "PL",
+      "lat": 51.3888,
+      "lon": 20.9864,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Radom area 10",
+      "countryCode": "PL",
+      "lat": 51.2579,
+      "lon": 21.0633,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 01",
+      "countryCode": "PL",
+      "lat": 54.4427,
+      "lon": 18.3123,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 02",
+      "countryCode": "PL",
+      "lat": 54.3233,
+      "lon": 18.2275,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 03",
+      "countryCode": "PL",
+      "lat": 54.5922,
+      "lon": 18.4625,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 04",
+      "countryCode": "PL",
+      "lat": 54.7501,
+      "lon": 18.6991,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 05",
+      "countryCode": "PL",
+      "lat": 54.608,
+      "lon": 18.1236,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 06",
+      "countryCode": "PL",
+      "lat": 54.3651,
+      "lon": 18.1728,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 07",
+      "countryCode": "PL",
+      "lat": 54.6154,
+      "lon": 18.1527,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 08",
+      "countryCode": "PL",
+      "lat": 54.6138,
+      "lon": 18.5498,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 09",
+      "countryCode": "PL",
+      "lat": 54.7069,
+      "lon": 18.5922,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Gdynia area 10",
+      "countryCode": "PL",
+      "lat": 54.5157,
+      "lon": 18.1799,
+      "timezone": "Europe/Warsaw"
+    },
+    {
+      "name": "Chemnitz area 01",
+      "countryCode": "DE",
+      "lat": 50.7714,
+      "lon": 12.8814,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Chemnitz area 02",
+      "countryCode": "DE",
+      "lat": 50.9537,
+      "lon": 12.6448,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Chemnitz area 03",
+      "countryCode": "DE",
+      "lat": 50.9202,
+      "lon": 12.9958,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Chemnitz area 04",
+      "countryCode": "DE",
+      "lat": 50.7801,
+      "lon": 12.9945,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Chemnitz area 05",
+      "countryCode": "DE",
+      "lat": 50.8959,
+      "lon": 12.6381,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Chemnitz area 06",
+      "countryCode": "DE",
+      "lat": 50.8709,
+      "lon": 12.9514,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Chemnitz area 07",
+      "countryCode": "DE",
+      "lat": 50.7775,
+      "lon": 12.7121,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Chemnitz area 08",
+      "countryCode": "DE",
+      "lat": 50.8774,
+      "lon": 12.8062,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Chemnitz area 09",
+      "countryCode": "DE",
+      "lat": 51.0405,
+      "lon": 12.7438,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Chemnitz area 10",
+      "countryCode": "DE",
+      "lat": 50.7411,
+      "lon": 12.9108,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 01",
+      "countryCode": "DE",
+      "lat": 51.6845,
+      "lon": 12.1898,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 02",
+      "countryCode": "DE",
+      "lat": 51.5951,
+      "lon": 11.893,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 03",
+      "countryCode": "DE",
+      "lat": 51.6838,
+      "lon": 12.2017,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 04",
+      "countryCode": "DE",
+      "lat": 51.696,
+      "lon": 12.1063,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 05",
+      "countryCode": "DE",
+      "lat": 51.6181,
+      "lon": 12.2736,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 06",
+      "countryCode": "DE",
+      "lat": 51.272,
+      "lon": 12.1698,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 07",
+      "countryCode": "DE",
+      "lat": 51.3869,
+      "lon": 11.9275,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 08",
+      "countryCode": "DE",
+      "lat": 51.3437,
+      "lon": 12.1239,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 09",
+      "countryCode": "DE",
+      "lat": 51.4653,
+      "lon": 11.8802,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Halle area 10",
+      "countryCode": "DE",
+      "lat": 51.5632,
+      "lon": 12.0419,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 01",
+      "countryCode": "DE",
+      "lat": 52.2299,
+      "lon": 12.8176,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 02",
+      "countryCode": "DE",
+      "lat": 52.332,
+      "lon": 12.6961,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 03",
+      "countryCode": "DE",
+      "lat": 52.2743,
+      "lon": 13.3228,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 04",
+      "countryCode": "DE",
+      "lat": 52.3213,
+      "lon": 13.0243,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 05",
+      "countryCode": "DE",
+      "lat": 52.4534,
+      "lon": 13.4417,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 06",
+      "countryCode": "DE",
+      "lat": 52.1625,
+      "lon": 13.0776,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 07",
+      "countryCode": "DE",
+      "lat": 52.3162,
+      "lon": 13.4758,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 08",
+      "countryCode": "DE",
+      "lat": 52.2511,
+      "lon": 13.0879,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 09",
+      "countryCode": "DE",
+      "lat": 52.2369,
+      "lon": 13.1851,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Potsdam area 10",
+      "countryCode": "DE",
+      "lat": 52.2221,
+      "lon": 13.1318,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "name": "Olomouc area 01",
+      "countryCode": "CZ",
+      "lat": 49.624,
+      "lon": 17.3832,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Olomouc area 02",
+      "countryCode": "CZ",
+      "lat": 49.6802,
+      "lon": 17.0945,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Olomouc area 03",
+      "countryCode": "CZ",
+      "lat": 49.4874,
+      "lon": 17.3555,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Olomouc area 04",
+      "countryCode": "CZ",
+      "lat": 49.4657,
+      "lon": 17.5511,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Olomouc area 05",
+      "countryCode": "CZ",
+      "lat": 49.5939,
+      "lon": 17.5557,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Olomouc area 06",
+      "countryCode": "CZ",
+      "lat": 49.5094,
+      "lon": 16.986,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Olomouc area 07",
+      "countryCode": "CZ",
+      "lat": 49.7894,
+      "lon": 17.2384,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Olomouc area 08",
+      "countryCode": "CZ",
+      "lat": 49.3694,
+      "lon": 17.389,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Olomouc area 09",
+      "countryCode": "CZ",
+      "lat": 49.5438,
+      "lon": 17.1857,
+      "timezone": "Europe/Prague"
+    },
+    {
+      "name": "Olomouc area 10",
+      "countryCode": "CZ",
+      "lat": 49.737,
+      "lon": 17.1268,
+      "timezone": "Europe/Prague"
     }
   ],
   "countryTimezones": {

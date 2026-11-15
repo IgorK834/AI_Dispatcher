@@ -38,11 +38,12 @@ from routepilot.shared.clock import FixedClock
 from routepilot.shared.db.engine import make_engine, migration_config
 
 REFERENCE_DAY = date(2026, 11, 16)
-# Offers of generate_offers(20261109, REFERENCE_DAY) from which the offline engine builds plans for
-# the demo fleet at the fixed test clock: the first four for D1, MOCK-000073 for D2. The full set
-# of 150 offers exceeds the engine's wall-clock safety cutoff, so planning tests pass a pool.
-D1_POOL = ("MOCK-000055", "MOCK-000066", "MOCK-000078", "MOCK-000125")
-FLEET_POOL = (*D1_POOL, "MOCK-000073")
+# Offers of generate_offers(20261109, REFERENCE_DAY) (offers-generator v3, FEAT-010) from which the
+# offline engine builds plans for the demo fleet at the fixed test clock: the first four for D1,
+# the last three (one consignment group and its return group) for D2. The full set of 150 offers
+# exceeds the engine's wall-clock safety cutoff, so planning tests pass a pool.
+D1_POOL = ("MOCK-000030", "MOCK-000066", "MOCK-000089", "MOCK-000105")
+FLEET_POOL = (*D1_POOL, "MOCK-000106", "MOCK-000108", "MOCK-000109")
 
 
 @dataclass

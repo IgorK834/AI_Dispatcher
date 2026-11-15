@@ -47,7 +47,7 @@ The dispatcher starts an optimisation, waits a few seconds and gets plans (REQ-0
 - **FR-3 `OrsRoutingProvider`** (`provider_id = "ors_driving_car_v1"`). Used only when `ORS_API_KEY` is set. Profile `driving-car`; durations × `van_speed_factor`. One matrix request for at most 3 500 elements; retries with backoff on transient errors; a per-minute request limit below the free-plan limit. Every response is stored in `routing_cache` under `sha256(provider_id | profile | options | points rounded to 5 decimals)` and served from there afterwards. The key never leaves the server and is never logged.
 - **FR-4 `HaversineRoutingProvider`** (`provider_id = "haversine_v1"`). `distance_km = round_half_up(haversine_km × 1.25, 2)`; `duration_min = ceil(distance_km × 60 × van_speed_factor / 65)`; same point → 0 / 0. `route()` returns a straight line per leg with `approximate = true`. (Formula: FEAT-003 OQ-003-01.)
 - **FR-5 Fallback chain.** `CompositeRoutingProvider.matrix(points)`: (1) repo matrix if all points match; else (2) ORS if a key is set and the call succeeds; else (3) haversine with `fallback = true`. A matrix built with step 3 makes every plan carry the warning `ROUTING_FALLBACK`. `route()`: cache → ORS (if key) → straight lines (`approximate = true`, plan flag `GEOMETRY_APPROXIMATE`).
-- **FR-6 Matrix file.** `data/mock/routing-matrix.json` covers all 39 cities of `cities.json` (FEAT-002 §6.1) in the same order. It is produced once by a script run by the owner (one ORS matrix request, 39 × 39 = 1 521 elements) or, when no key is available, by the haversine formula; the file records which (§6.2).
+- **FR-6 Matrix file.** `data/mock/routing-matrix.json` covers all 605 places of `cities.json` (FEAT-002 §6.1) in the same order. It is produced once by a script run by the owner (one ORS matrix request, 605 × 605 = 366 025 elements) or, when no key is available, by the haversine formula; the file records which (§6.2).
 - **FR-7 Fuel model location.** The fuel and CO₂ formulas live in the engine's cost model (FEAT-003 FR-10, FR-11). `routing` supplies only distances, durations and geometry.
 
 ### 4.2 Jobs and worker
@@ -155,7 +155,7 @@ No change here. FEAT-006 wraps `JobService`, `PlanService` and `AssignmentServic
 - **AC-FEAT-004-05** [db] Given an ORS response stored in `routing_cache` When the same points are requested again (also in a different coordinate precision beyond 5 decimals) Then no HTTP call is made and the cached value is returned.
 - **AC-FEAT-004-06** [unit] Given no `ORS_API_KEY` and a transport that fails on any request When matrices and routes are requested Then no HTTP request is attempted and results come from the repo matrix or haversine.
 - **AC-FEAT-004-07** [unit] Given an ORS duration of 6 000 s and `van_speed_factor = 1.08` When the travel matrix is built Then the matrix duration is 108 min; with factor 1.0 it is 100 min.
-- **AC-FEAT-004-08** [unit] Given `data/mock/routing-matrix.json` and `data/mock/cities.json` When both files are loaded Then the matrix lists the same 39 cities in the same order, both tables are 39 × 39 with a zero diagonal and non-negative integers, and `source` is one of the two allowed values.
+- **AC-FEAT-004-08** [unit] Given `data/mock/routing-matrix.json` and `data/mock/cities.json` When both files are loaded Then the matrix lists the same 605 places in the same order, both tables are 605 × 605 with a zero diagonal and non-negative integers, and `source` is one of the two allowed values.
 
 **Jobs**
 
@@ -223,3 +223,4 @@ No change here. FEAT-006 wraps `JobService`, `PlanService` and `AssignmentServic
 | 1 | 2026-11-09 | Initial draft |
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11) |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
+| 4 | 2026-11-15 | Owner decision (FEAT-010 revision 3): the city table has 605 places (FEAT-002 revision 6), so the committed haversine matrix is regenerated as 605 × 605 (FR-6, AC-FEAT-004-08). |

@@ -109,6 +109,22 @@ So in LTL, the **load factor decides profit**. Under per-pallet pricing, a chain
 | Stops per trip, km per stop | — | Cost of consolidation (service time, detours) |
 | Consignments on board (max/avg) | — | Shows whether the plan consolidates at all |
 
+### 3.6 Price check for the demo tariff (2026-11-15)
+
+Public list and example prices found on 2026-11-15 (net, without surcharges; indicative, not a tariff):
+
+| Example | Price | Source |
+|---|---|---|
+| 1 pallet 120×80×100 cm, 240 kg, Poland → Poland | €110.52 | Eurosender route example |
+| 1 pallet, 240 kg, Poland → Netherlands | €169.12 | Eurosender route example |
+| 1 euro pallet, 300 kg, Germany → Warsaw | from €149 | NexCargo guide price |
+| 2 euro pallets, 400 kg, Zwolle → Bremen (about 200 km) | €247.16 | Quicargo example |
+| 5 euro pallets, 1 000 kg, Utrecht → Düsseldorf (about 110 km) | €360.20 | Quicargo example |
+
+What they show: a pallet costs roughly €70–150 **whatever the distance**, and the distance adds little. The first v3 tariff (FEAT-010 revision 2) was only proportional to the distance (`rate × km × share × premium`), so it gave €75 for the 5-pallet example and €74 for the 2-pallet example: three to five times too low on the short lanes that fill the demo. With that tariff and the demo cost profile no driver had a profitable plan.
+
+Change made in FEAT-010 revision 3: a handling charge of **€35 per pallet equivalent** (*assumption*, chosen well below the quotes because they are prices of hub networks, not of a direct van) is added before the noise. The same examples then give about €124 (1 pallet, 300 km in Poland), €144 (2 pallets, 200 km) and €250 (5 pallets, 110 km). Long lanes come out above the quotes (Poland → Netherlands about €300), because the line-haul part stays linear in the distance.
+
 ## 4. How a good plan should look (target behaviour)
 
 For one driver over the horizon, the **target** plan has these properties:
@@ -255,3 +271,4 @@ Not proposed for the MVP: hub/cross-dock modelling (no hubs in a 5-van fleet), l
 - Eurostat — empty road freight kilometres: https://ec.europa.eu/eurostat/web/products-eurostat-news/-/ddn-20211210-1 ; https://ec.europa.eu/eurostat/statistics-explained/index.php/Road_freight_transport_by_journey_characteristics
 - Pickup-and-delivery heuristics (insertion, cluster-first route-second): https://portal.mardi4nfdi.de/wiki/Publication:2433432 ; https://arxiv.org/pdf/2511.07681
 - Van partial-load price lists (example): https://zipmend.com/en/freight-forwarder-luxembourg
+- Pallet price examples (§3.6): https://www.eurosender.com/pl/transport-palet/polska ; https://www.nexcargo.de/en/laender/polen ; https://quicargo.com/pallet-shipments/
