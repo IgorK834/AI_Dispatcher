@@ -696,6 +696,13 @@
       "declaredOnly": "Wymiary wnętrza nieznane, więc plan podłogi nie jest rysowany.",
       "illustrative": "Pozycje są poglądowe. Silnik sprawdza miejsca paletowe i masę; nie modeluje kolejności załadunku w plandekach, które otwierają się z obu stron.",
       "alt": "Podłoga pojazdu z góry. {where}: zajęte miejsca {used} z {places}, {kg} z {max}."
+    },
+    "fill": {
+      "label": "Wypełnienie busa",
+      "value": "{ep} miejsc paletowych · {kg} ładowności",
+      "onBoard": "Zlecenia na pokładzie",
+      "upTo": "do {count}",
+      "partEmpty": "Pojedyncze zlecenia w łańcuchu — bus jedzie głównie częściowo pusty"
     }
   },
   "optimizer": {

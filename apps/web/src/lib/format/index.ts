@@ -6,5 +6,6 @@ export {
   formatFuel,
   formatMass,
   formatPalletEquivalents,
+  formatPercent,
 } from './units';
 export { formatDateTime, formatDuration } from './time';

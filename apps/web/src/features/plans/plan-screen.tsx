@@ -23,7 +23,7 @@ import { StopList } from './stop-list';
 import { Timeline } from './timeline';
 import { isAction, type VanLimits } from './types';
 import { VehicleCard } from './vehicle-card';
-import { Variants } from './variants';
+import { PlanFill, Variants } from './variants';
 
 export function PlanScreen({ planId }: { planId: string }) {
   const t = useTranslations('plans');
@@ -92,6 +92,7 @@ export function PlanScreen({ planId }: { planId: string }) {
               <span className="text-sm text-ink2">{t('driver', { name: driver.data.name })}</span>
             )}
           </div>
+          <PlanFill plan={data} />
           <div className="flex flex-wrap gap-2">
             <Button loading={explain.isPending} onClick={() => explain.mutate(locale)}>
               {t('actions.explain')}

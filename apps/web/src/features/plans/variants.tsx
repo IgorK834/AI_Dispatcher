@@ -10,6 +10,7 @@ import {
   formatDuration,
   formatFuel,
   formatMoney,
+  formatPercent,
 } from '@/lib/format';
 import { minutesBetween, signed } from './format';
 import { OBJECTIVES, PLAN_TIME_ZONE, type Objective, type PlanSummary } from './types';
@@ -29,6 +30,37 @@ function samePlan(left: PlanSummary, right: PlanSummary): boolean {
       left.netProfit.amountMinor === right.netProfit.amountMinor &&
       left.finishAt === right.finishAt &&
       left.fuelL === right.fuelL)
+  );
+}
+
+type FillProps = Pick<PlanSummary, 'loadFactorEp' | 'loadFactorKg' | 'maxOrdersOnBoard'>;
+
+/** How full the van is per kilometre and how many orders it carries at once (FEAT-010 FR-12). */
+export function PlanFill({ plan }: { plan: FillProps }) {
+  const t = useTranslations('plans.fill');
+  const locale = useLocale() === 'pl' ? 'pl' : 'en';
+  const pallets = Number(plan.loadFactorEp);
+  const payload = Number(plan.loadFactorKg);
+  const partEmpty = plan.maxOrdersOnBoard === 1 && pallets < 0.5 && payload < 0.5;
+  return (
+    <div className="flex flex-col gap-2 text-sm">
+      <dl className="flex flex-col gap-2">
+        <div>
+          <dt className="text-xs text-ink3">{t('label')}</dt>
+          <dd>
+            {t('value', {
+              ep: formatPercent(pallets, locale),
+              kg: formatPercent(payload, locale),
+            })}
+          </dd>
+        </div>
+        <div>
+          <dt className="text-xs text-ink3">{t('onBoard')}</dt>
+          <dd>{t('upTo', { count: plan.maxOrdersOnBoard })}</dd>
+        </div>
+      </dl>
+      {partEmpty && <p className="text-xs text-ink3">{t('partEmpty')}</p>}
+    </div>
   );
 }
 
@@ -89,6 +121,7 @@ export function Variants({ variants, currentId, jobId }: VariantsProps) {
                   <dd>{formatCo2(Number(plan.co2Kg), locale)}</dd>
                 </div>
               </dl>
+              <PlanFill plan={plan} />
               {delta && (
                 <ul className="flex flex-col gap-0.5 rounded-inner bg-well p-3 text-xs text-ink2">
                   <li>
