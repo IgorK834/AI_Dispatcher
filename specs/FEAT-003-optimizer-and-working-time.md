@@ -327,5 +327,6 @@ Each row is a detail that the existing documents do not fix. The proposed defaul
 | 1 | 2026-11-09 | Initial draft |
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11); FR-12 per-diem rule replaced; warning `PER_DIEM_DEFAULTED` removed |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
+| 4 | 2026-11-15 | Owner decision (FEAT-010 OQ-010-04): the FR-17 ranking and OQ-003-10 are superseded by FEAT-010 FR-8 (partner-aware pool cut). When the pool does not exceed `max_pool_per_driver` it is unchanged. |
 
 - 2026-11-12 owner clarification (FR-29, P12): include optimized-kind copies of both baselines in fleet candidates, expose additional copies in `fleet_candidates`, and keep the per-driver top-K cap unchanged. This resolves the finite-top-K counterexample without changing golden values.
