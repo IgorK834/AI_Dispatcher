@@ -1,74 +1,22 @@
 {
   "MOCK-000001": {
-    "billableShare": 0.142,
+    "billableShare": 0.3,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-001",
     "is_synthetic": true,
-    "ltlPremium": 1.5148,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
+    "ltlPremium": 1.42,
+    "pallet_count": 6,
+    "pallet_type": "HALF_800x600",
     "price_formula": {
-      "distance_km": 426.84,
-      "lane": "CZ->PL",
-      "min_fare": 60,
-      "noise": 0.7057567299329066,
-      "premium": 1.5148,
-      "rate": 0.651,
-      "rate_provenance": "assumption",
-      "share": 0.142,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "NO_PRICE"
-    ]
-  },
-  "MOCK-000002": {
-    "billableShare": 0.144,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.5135999999999998,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 634.06,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.242965646589424,
-      "premium": 1.5135999999999998,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.144,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "NO_PRICE"
-    ]
-  },
-  "MOCK-000003": {
-    "billableShare": 0.18,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.492,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 629.24,
+      "distance_km": 474.27,
+      "handling": 105.0,
       "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 0.9433074165142284,
-      "premium": 1.492,
+      "noise": 0.8170175182582504,
+      "premium": 1.42,
       "rate": 0.68,
       "rate_provenance": "source",
-      "share": 0.18,
+      "share": 0.3,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -78,78 +26,28 @@
     ],
     "tags": [
       "NO_PRICE"
-    ]
-  },
-  "MOCK-000004": {
-    "billableShare": 0.228,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4632,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 331.97,
-      "lane": "PL->AT",
-      "min_fare": 60,
-      "noise": 0.9112994190759275,
-      "premium": 1.4632,
-      "rate": 0.68,
-      "rate_provenance": "assumption",
-      "share": 0.228,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
     ],
-    "tags": [
-      "NO_PRICE"
-    ]
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
   },
-  "MOCK-000005": {
-    "billableShare": 0.162,
+  "MOCK-000002": {
+    "billableShare": 0.5,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-002",
     "is_synthetic": true,
-    "ltlPremium": 1.5028,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 409.06,
-      "lane": "CZ->PL",
-      "min_fare": 60,
-      "noise": 0.9087125872990316,
-      "premium": 1.5028,
-      "rate": 0.651,
-      "rate_provenance": "assumption",
-      "share": 0.162,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "NO_PRICE"
-    ]
-  },
-  "MOCK-000006": {
-    "billableShare": 0.517,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.2898,
+    "ltlPremium": 1.3,
     "pallet_count": 5,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1492.36,
-      "lane": "PL->FR",
+      "distance_km": 710.63,
+      "handling": 175.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 0.8039145897109797,
-      "premium": 1.2898,
-      "rate": 0.6,
-      "rate_provenance": "source",
-      "share": 0.517,
+      "noise": 1.0622125630004604,
+      "premium": 1.3,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.5,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -159,73 +57,149 @@
     ],
     "tags": [
       "NO_PRICE"
-    ]
+    ],
+    "zoneFrom": "DE-NOR",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000003": {
+    "billableShare": 0.8,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-003",
+    "is_synthetic": true,
+    "ltlPremium": 1.1199999999999999,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 589.32,
+      "handling": 280.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 1.154682212727839,
+      "premium": 1.1199999999999999,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.8,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "DE-NOR"
+  },
+  "MOCK-000004": {
+    "billableShare": 0.427,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-003",
+    "is_synthetic": true,
+    "ltlPremium": 1.3437999999999999,
+    "pallet_count": 6,
+    "pallet_type": "HALF_800x600",
+    "price_formula": {
+      "distance_km": 621.43,
+      "handling": 105.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 1.008831859868668,
+      "premium": 1.3437999999999999,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.427,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "DE-NOR"
+  },
+  "MOCK-000005": {
+    "billableShare": 0.502,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-003",
+    "is_synthetic": true,
+    "ltlPremium": 1.2988,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 594.11,
+      "handling": 140.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.6690485940889976,
+      "premium": 1.2988,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.502,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "DE-NOR"
+  },
+  "MOCK-000006": {
+    "billableShare": 0.245,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-004",
+    "is_synthetic": true,
+    "ltlPremium": 1.4529999999999998,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 277.81,
+      "handling": 70.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.0793843205509996,
+      "premium": 1.4529999999999998,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.245,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PRICE"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
   },
   "MOCK-000007": {
-    "billableShare": 0.665,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.201,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 648.27,
-      "lane": "DE->PL",
-      "min_fare": 60,
-      "noise": 1.02235694068504,
-      "premium": 1.201,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 0.665,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "NO_PALLETS"
-    ]
-  },
-  "MOCK-000008": {
-    "billableShare": 0.9,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.06,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 412.1,
-      "lane": "CZ->PL",
-      "min_fare": 60,
-      "noise": 0.853800637322089,
-      "premium": 1.06,
-      "rate": 0.651,
-      "rate_provenance": "assumption",
-      "share": 0.9,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "NO_PALLETS"
-    ]
-  },
-  "MOCK-000009": {
     "billableShare": 0.2,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-005",
     "is_synthetic": true,
     "ltlPremium": 1.48,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1439.99,
-      "lane": "PL->FR",
+      "distance_km": 242.52,
+      "handling": 70.0,
+      "lane": "PL->CZ",
       "min_fare": 60,
-      "noise": 0.9711184498664026,
+      "noise": 1.1165981833558527,
       "premium": 1.48,
-      "rate": 0.6,
+      "rate": 0.93,
       "rate_provenance": "source",
       "share": 0.2,
       "tariff_provenance": "assumption"
@@ -237,47 +211,25 @@
     ],
     "tags": [
       "NO_PALLETS"
-    ]
-  },
-  "MOCK-000010": {
-    "billableShare": 0.6,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.24,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 331.97,
-      "lane": "AT->PL",
-      "min_fare": 60,
-      "noise": 0.8761275304339413,
-      "premium": 1.24,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 0.6,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
     ],
-    "tags": [
-      "NO_PALLETS"
-    ]
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DANUBE"
   },
-  "MOCK-000011": {
+  "MOCK-000008": {
     "billableShare": 0.3,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-006",
     "is_synthetic": true,
     "ltlPremium": 1.42,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1290.7,
-      "lane": "PL->BE",
+      "distance_km": 426.32,
+      "handling": 105.0,
+      "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 0.9722793084637675,
+      "noise": 0.7801974967170522,
       "premium": 1.42,
-      "rate": 0.68,
+      "rate": 0.85,
       "rate_provenance": "assumption",
       "share": 0.3,
       "tariff_provenance": "assumption"
@@ -289,24 +241,118 @@
     ],
     "tags": [
       "NO_PALLETS"
-    ]
+    ],
+    "zoneFrom": "PL-POM",
+    "zoneTo": "PL-CEN"
   },
-  "MOCK-000012": {
-    "billableShare": 1.0,
+  "MOCK-000009": {
+    "billableShare": 0.4,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-006",
     "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 5,
-    "pallet_type": "IND_1200x1000",
+    "ltlPremium": 1.3599999999999999,
+    "pallet_type": "HALF_800x600",
     "price_formula": {
-      "distance_km": 514.73,
+      "distance_km": 485.27,
+      "handling": 140.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.0803915471555767,
-      "premium": 1.0,
+      "noise": 0.9405606563637123,
+      "premium": 1.3599999999999999,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 1.0,
+      "share": 0.4,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PALLETS"
+    ],
+    "zoneFrom": "PL-POM",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000010": {
+    "billableShare": 0.797,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-007",
+    "is_synthetic": true,
+    "ltlPremium": 1.1218,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 195.6,
+      "handling": 175.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.024442601154043,
+      "premium": 1.1218,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.797,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PALLETS"
+    ],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000011": {
+    "billableShare": 0.534,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-007",
+    "is_synthetic": true,
+    "ltlPremium": 1.2795999999999998,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 146.03,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.2219410124430945,
+      "premium": 1.2795999999999998,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.534,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_PALLETS"
+    ],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000012": {
+    "billableShare": 0.3,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-007",
+    "is_synthetic": true,
+    "ltlPremium": 1.42,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 276.66,
+      "handling": 105.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8761275304339413,
+      "premium": 1.42,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.3,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -316,24 +362,28 @@
     ],
     "tags": [
       "NO_COORDINATES"
-    ]
+    ],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-SIL"
   },
   "MOCK-000013": {
-    "billableShare": 0.395,
+    "billableShare": 0.245,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-008",
     "is_synthetic": true,
-    "ltlPremium": 1.363,
+    "ltlPremium": 1.4529999999999998,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 348.98,
+      "distance_km": 251.13,
+      "handling": 70.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.321712159640157,
-      "premium": 1.363,
+      "noise": 1.1242614371078603,
+      "premium": 1.4529999999999998,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.395,
+      "share": 0.245,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -343,24 +393,28 @@
     ],
     "tags": [
       "NO_COORDINATES"
-    ]
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-OPW"
   },
   "MOCK-000014": {
-    "billableShare": 0.6,
+    "billableShare": 0.153,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-008",
     "is_synthetic": true,
-    "ltlPremium": 1.24,
-    "pallet_count": 6,
-    "pallet_type": "EUR_1200x800",
+    "ltlPremium": 1.5082,
+    "pallet_count": 3,
+    "pallet_type": "HALF_800x600",
     "price_formula": {
-      "distance_km": 1086.0,
-      "lane": "PL->IT",
+      "distance_km": 276.26,
+      "handling": 52.5,
+      "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 0.8020660709588939,
-      "premium": 1.24,
-      "rate": 0.6,
+      "noise": 1.0266673492185323,
+      "premium": 1.5082,
+      "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.6,
+      "share": 0.153,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -370,23 +424,58 @@
     ],
     "tags": [
       "NO_COORDINATES"
-    ]
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-OPW"
   },
   "MOCK-000015": {
+    "billableShare": 0.245,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-009",
+    "is_synthetic": true,
+    "ltlPremium": 1.4529999999999998,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 292.28,
+      "handling": 70.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 0.8221928177858487,
+      "premium": 1.4529999999999998,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.245,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "NO_COORDINATES"
+    ],
+    "zoneFrom": "DE-BER",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000016": {
     "billableShare": 0.2,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-009",
     "is_synthetic": true,
     "ltlPremium": 1.48,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 780.52,
-      "lane": "PL->DE",
+      "distance_km": 325.64,
+      "handling": 70.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 0.8473657700353513,
+      "noise": 0.9939601049492847,
       "premium": 1.48,
-      "rate": 0.68,
-      "rate_provenance": "source",
+      "rate": 0.476,
+      "rate_provenance": "assumption",
       "share": 0.2,
       "tariff_provenance": "assumption"
     },
@@ -396,25 +485,29 @@
       30
     ],
     "tags": [
-      "NO_COORDINATES"
-    ]
+      "INCOMPATIBLE_BODY"
+    ],
+    "zoneFrom": "DE-BER",
+    "zoneTo": "PL-WLK"
   },
-  "MOCK-000016": {
-    "billableShare": 0.1,
+  "MOCK-000017": {
+    "billableShare": 0.414,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-009",
     "is_synthetic": true,
-    "ltlPremium": 1.54,
-    "pallet_count": 1,
+    "ltlPremium": 1.3516,
+    "pallet_count": 4,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 945.4,
-      "lane": "PL->NL",
+      "distance_km": 363.43,
+      "handling": 140.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 0.7567375093051034,
-      "premium": 1.54,
-      "rate": 0.68,
+      "noise": 0.8848306465101945,
+      "premium": 1.3516,
+      "rate": 0.476,
       "rate_provenance": "assumption",
-      "share": 0.1,
+      "share": 0.414,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -424,22 +517,26 @@
     ],
     "tags": [
       "INCOMPATIBLE_BODY"
-    ]
+    ],
+    "zoneFrom": "DE-BER",
+    "zoneTo": "PL-WLK"
   },
-  "MOCK-000017": {
+  "MOCK-000018": {
     "billableShare": 0.339,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-010",
     "is_synthetic": true,
     "ltlPremium": 1.3966,
     "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 412.1,
-      "lane": "PL->CZ",
+      "distance_km": 437.88,
+      "handling": 105.0,
+      "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 0.9786473544765484,
+      "noise": 0.9105551038720898,
       "premium": 1.3966,
-      "rate": 0.93,
+      "rate": 0.68,
       "rate_provenance": "source",
       "share": 0.339,
       "tariff_provenance": "assumption"
@@ -451,51 +548,28 @@
     ],
     "tags": [
       "INCOMPATIBLE_BODY"
-    ]
-  },
-  "MOCK-000018": {
-    "billableShare": 0.294,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4236,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 183.34,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9262103184738144,
-      "premium": 1.4236,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.294,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
     ],
-    "tags": [
-      "INCOMPATIBLE_BODY"
-    ]
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "DE-BER"
   },
   "MOCK-000019": {
-    "billableShare": 0.371,
+    "billableShare": 0.341,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-010",
     "is_synthetic": true,
-    "ltlPremium": 1.3774,
+    "ltlPremium": 1.3954,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1152.84,
+      "distance_km": 300.52,
+      "handling": 70.0,
       "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 1.0303800378244277,
-      "premium": 1.3774,
+      "noise": 1.017642236159322,
+      "premium": 1.3954,
       "rate": 0.68,
       "rate_provenance": "source",
-      "share": 0.371,
+      "share": 0.341,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -505,24 +579,28 @@
     ],
     "tags": [
       "INCOMPATIBLE_BODY"
-    ]
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "DE-BER"
   },
   "MOCK-000020": {
-    "billableShare": 0.624,
+    "billableShare": 0.159,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-011",
     "is_synthetic": true,
-    "ltlPremium": 1.2256,
-    "pallet_count": 3,
-    "pallet_type": "IND_1200x1000",
+    "ltlPremium": 1.5046,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 927.94,
-      "lane": "PL->DE",
+      "distance_km": 438.28,
+      "handling": 35.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 1.010457330488119,
-      "premium": 1.2256,
-      "rate": 0.68,
-      "rate_provenance": "source",
-      "share": 0.624,
+      "noise": 1.0221427752307113,
+      "premium": 1.5046,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.159,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -532,23 +610,89 @@
     ],
     "tags": [
       "INCOMPATIBLE_BODY"
-    ]
+    ],
+    "zoneFrom": "DE-BER",
+    "zoneTo": "PL-WLK"
   },
   "MOCK-000021": {
+    "billableShare": 0.115,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-011",
+    "is_synthetic": true,
+    "ltlPremium": 1.5310000000000001,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 294.94,
+      "handling": 35.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 0.8323254604916065,
+      "premium": 1.5310000000000001,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.115,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_EQUIPMENT"
+    ],
+    "zoneFrom": "DE-BER",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000022": {
+    "billableShare": 0.306,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-012",
+    "is_synthetic": true,
+    "ltlPremium": 1.4163999999999999,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 277.87,
+      "handling": 70.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.9143191290098641,
+      "premium": 1.4163999999999999,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.306,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "INCOMPATIBLE_EQUIPMENT"
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "DE-BER"
+  },
+  "MOCK-000023": {
     "billableShare": 0.1,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-012",
     "is_synthetic": true,
     "ltlPremium": 1.54,
     "pallet_count": 1,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 348.07,
-      "lane": "PL->PL",
+      "distance_km": 297.35,
+      "handling": 35.0,
+      "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 0.9428546135786486,
+      "noise": 0.9627189912682788,
       "premium": 1.54,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
+      "rate": 0.68,
+      "rate_provenance": "source",
       "share": 0.1,
       "tariff_provenance": "assumption"
     },
@@ -559,24 +703,28 @@
     ],
     "tags": [
       "INCOMPATIBLE_EQUIPMENT"
-    ]
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "DE-BER"
   },
-  "MOCK-000022": {
-    "billableShare": 0.487,
+  "MOCK-000024": {
+    "billableShare": 0.538,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-013",
     "is_synthetic": true,
-    "ltlPremium": 1.3078,
-    "pallet_count": 4,
+    "ltlPremium": 1.2772,
+    "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1186.37,
-      "lane": "PL->DE",
+      "distance_km": 450.22,
+      "handling": 105.0,
+      "lane": "PL->CZ",
       "min_fare": 60,
-      "noise": 0.8840951541083633,
-      "premium": 1.3078,
-      "rate": 0.68,
+      "noise": 0.875113789536461,
+      "premium": 1.2772,
+      "rate": 0.93,
       "rate_provenance": "source",
-      "share": 0.487,
+      "share": 0.538,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -586,22 +734,460 @@
     ],
     "tags": [
       "INCOMPATIBLE_EQUIPMENT"
-    ]
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "CZ-BOH"
   },
-  "MOCK-000023": {
+  "MOCK-000025": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-013",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 420.18,
+      "handling": 140.0,
+      "lane": "PL->CZ",
+      "min_fare": 60,
+      "noise": 1.1139095456400046,
+      "premium": 1.0,
+      "rate": 0.93,
+      "rate_provenance": "source",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TOO_HEAVY_ALL"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "CZ-BOH"
+  },
+  "MOCK-000026": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-013",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 1,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 418.56,
+      "handling": 52.5,
+      "lane": "PL->CZ",
+      "min_fare": 60,
+      "noise": 0.8627839697662693,
+      "premium": 1.0,
+      "rate": 0.93,
+      "rate_provenance": "source",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TOO_HEAVY_ALL"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "CZ-BOH"
+  },
+  "MOCK-000027": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-013",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 434.17,
+      "handling": 70.0,
+      "lane": "PL->CZ",
+      "min_fare": 60,
+      "noise": 1.0702976655353478,
+      "premium": 1.0,
+      "rate": 0.93,
+      "rate_provenance": "source",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TOO_HEAVY_ALL"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "CZ-BOH"
+  },
+  "MOCK-000028": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-014",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 1,
+    "pallet_type": "HALF_800x600",
+    "price_formula": {
+      "distance_km": 532.83,
+      "handling": 17.5,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.8343676791437014,
+      "premium": 1.0,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TOO_HEAVY_ALL"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000029": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-015",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 352.4,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.6922952945902254,
+      "premium": 1.0,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000030": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-016",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 266.97,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.0032078249300656,
+      "premium": 1.0,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000031": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-017",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1293.47,
+      "handling": 35.0,
+      "lane": "NL->PL",
+      "min_fare": 60,
+      "noise": 1.080695710151899,
+      "premium": 1.0,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "BENELUX",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000032": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-017",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1405.31,
+      "handling": 105.0,
+      "lane": "NL->PL",
+      "min_fare": 60,
+      "noise": 1.1787980228315418,
+      "premium": 1.0,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "BENELUX",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000033": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-017",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1391.14,
+      "handling": 280.0,
+      "lane": "NL->PL",
+      "min_fare": 60,
+      "noise": 0.8512712561311322,
+      "premium": 1.0,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "BENELUX",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000034": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-018",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1471.21,
+      "handling": 105.0,
+      "lane": "PL->NL",
+      "min_fare": 60,
+      "noise": 0.8843631415769914,
+      "premium": 1.0,
+      "rate": 0.68,
+      "rate_provenance": "assumption",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "BENELUX"
+  },
+  "MOCK-000035": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-019",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 905.91,
+      "handling": 35.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 0.9971196533837166,
+      "premium": 1.0,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "DE-RHM",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000036": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-020",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 318.31,
+      "handling": 105.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.9666026645896437,
+      "premium": 1.0,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000037": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-020",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 201.34,
+      "handling": 70.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.8996438980788503,
+      "premium": 1.0,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000038": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-020",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 290.41,
+      "handling": 175.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.9876993160120667,
+      "premium": 1.0,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "HEAVY_FOR_8EP"
+    ],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000039": {
     "billableShare": 0.2,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-021",
     "is_synthetic": true,
     "ltlPremium": 1.48,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 323.25,
-      "lane": "PL->PL",
+      "distance_km": 479.52,
+      "handling": 70.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 1.1487307979065975,
+      "noise": 0.8747134491687882,
       "premium": 1.48,
-      "rate": 0.85,
+      "rate": 0.476,
       "rate_provenance": "assumption",
       "share": 0.2,
       "tariff_provenance": "assumption"
@@ -612,644 +1198,27 @@
       30
     ],
     "tags": [
-      "INCOMPATIBLE_EQUIPMENT"
-    ]
-  },
-  "MOCK-000024": {
-    "billableShare": 0.3,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.42,
-    "pallet_count": 3,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 663.58,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9420279417736576,
-      "premium": 1.42,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.3,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "INCOMPATIBLE_EQUIPMENT"
-    ]
-  },
-  "MOCK-000025": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 372.13,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.0867024663499014,
-      "premium": 1.0,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TOO_HEAVY_ALL"
-    ]
-  },
-  "MOCK-000026": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 6,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 377.82,
-      "lane": "CZ->PL",
-      "min_fare": 60,
-      "noise": 1.204443401075269,
-      "premium": 1.0,
-      "rate": 0.651,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TOO_HEAVY_ALL"
-    ]
-  },
-  "MOCK-000027": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 6,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 211.11,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.030295663655489,
-      "premium": 1.0,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TOO_HEAVY_ALL"
-    ]
-  },
-  "MOCK-000028": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 514.73,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.8404098661018363,
-      "premium": 1.0,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TOO_HEAVY_ALL"
-    ]
-  },
-  "MOCK-000029": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 903.08,
-      "lane": "FR->PL",
-      "min_fare": 60,
-      "noise": 0.9388878248071186,
-      "premium": 1.0,
-      "rate": 0.42,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000030": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 8,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 843.33,
-      "lane": "HU->PL",
-      "min_fare": 60,
-      "noise": 1.012150769077831,
-      "premium": 1.0,
-      "rate": 0.5529999999999999,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000031": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 2,
-    "pallet_type": "HALF_800x600",
-    "price_formula": {
-      "distance_km": 1525.75,
-      "lane": "PL->FR",
-      "min_fare": 60,
-      "noise": 1.52286703623291,
-      "premium": 1.0,
-      "rate": 0.6,
-      "rate_provenance": "source",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000032": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 742.93,
-      "lane": "AT->PL",
-      "min_fare": 60,
-      "noise": 1.0230872389905163,
-      "premium": 1.0,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000033": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 155.76,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.098987385794877,
-      "premium": 1.0,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000034": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 906.16,
-      "lane": "DE->PL",
-      "min_fare": 60,
-      "noise": 0.9007988538113183,
-      "premium": 1.0,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000035": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1060.23,
-      "lane": "PL->IT",
-      "min_fare": 60,
-      "noise": 0.8958835756158607,
-      "premium": 1.0,
-      "rate": 0.6,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000036": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 9,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 359.0,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9132827515396647,
-      "premium": 1.0,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000037": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 873.61,
-      "lane": "PL->NL",
-      "min_fare": 60,
-      "noise": 1.2891055233803264,
-      "premium": 1.0,
-      "rate": 0.68,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000038": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 3,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1139.6,
-      "lane": "PL->DE",
-      "min_fare": 60,
-      "noise": 1.0609773103064783,
-      "premium": 1.0,
-      "rate": 0.68,
-      "rate_provenance": "source",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "HEAVY_FOR_8EP"
-    ]
-  },
-  "MOCK-000039": {
-    "billableShare": 0.397,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.3618,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 474.43,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.1128758755929034,
-      "premium": 1.3618,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.397,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
       "TIGHT_WINDOW"
-    ]
+    ],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-SIL"
   },
   "MOCK-000040": {
-    "billableShare": 0.5,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.3,
-    "pallet_count": 5,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 71.37,
-      "lane": "CZ->PL",
-      "min_fare": 60,
-      "noise": 1.0085284549015203,
-      "premium": 1.3,
-      "rate": 0.651,
-      "rate_provenance": "assumption",
-      "share": 0.5,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TIGHT_WINDOW"
-    ]
-  },
-  "MOCK-000041": {
-    "billableShare": 0.116,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.5304,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 234.12,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.0284022240868784,
-      "premium": 1.5304,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.116,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TIGHT_WINDOW"
-    ]
-  },
-  "MOCK-000042": {
-    "billableShare": 0.53,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.282,
-    "pallet_count": 2,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 971.39,
-      "lane": "PL->DK",
-      "min_fare": 60,
-      "noise": 0.7921609894994955,
-      "premium": 1.282,
-      "rate": 0.68,
-      "rate_provenance": "assumption",
-      "share": 0.53,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TIGHT_WINDOW"
-    ]
-  },
-  "MOCK-000043": {
-    "billableShare": 0.361,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.3834,
-    "pallet_count": 3,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 298.5,
-      "lane": "DE->PL",
-      "min_fare": 60,
-      "noise": 0.9141600869391528,
-      "premium": 1.3834,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 0.361,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TIGHT_WINDOW"
-    ]
-  },
-  "MOCK-000044": {
-    "billableShare": 0.766,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.1404,
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1172.01,
-      "lane": "IT->PL",
-      "min_fare": 60,
-      "noise": 0.9051102605827632,
-      "premium": 1.1404,
-      "rate": 0.42,
-      "rate_provenance": "assumption",
-      "share": 0.766,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TIGHT_WINDOW"
-    ]
-  },
-  "MOCK-000045": {
-    "billableShare": 0.143,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.5142,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1067.2,
-      "lane": "PL->FR",
-      "min_fare": 60,
-      "noise": 1.276686458866806,
-      "premium": 1.5142,
-      "rate": 0.6,
-      "rate_provenance": "source",
-      "share": 0.143,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TIGHT_WINDOW"
-    ]
-  },
-  "MOCK-000046": {
-    "billableShare": 0.818,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.1092,
-    "pallet_count": 5,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 234.12,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.7493653463802258,
-      "premium": 1.1092,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.818,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "TIGHT_WINDOW"
-    ]
-  },
-  "MOCK-000047": {
     "billableShare": 0.3,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-021",
     "is_synthetic": true,
     "ltlPremium": 1.42,
     "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 155.76,
-      "lane": "PL->PL",
+      "distance_km": 632.01,
+      "handling": 105.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 0.8754279621265773,
+      "noise": 0.7139524742385319,
       "premium": 1.42,
-      "rate": 0.85,
+      "rate": 0.476,
       "rate_provenance": "assumption",
       "share": 0.3,
       "tariff_provenance": "assumption"
@@ -1261,23 +1230,89 @@
     ],
     "tags": [
       "TIGHT_WINDOW"
-    ]
+    ],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-SIL"
   },
-  "MOCK-000048": {
+  "MOCK-000041": {
+    "billableShare": 0.539,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-022",
+    "is_synthetic": true,
+    "ltlPremium": 1.2766,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 581.46,
+      "handling": 105.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 1.0766000154814277,
+      "premium": 1.2766,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.539,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000042": {
+    "billableShare": 0.446,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-022",
+    "is_synthetic": true,
+    "ltlPremium": 1.3324,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 564.55,
+      "handling": 105.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.9915519054426393,
+      "premium": 1.3324,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.446,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000043": {
     "billableShare": 0.483,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-022",
     "is_synthetic": true,
     "ltlPremium": 1.3102,
     "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 86.61,
-      "lane": "PL->PL",
+      "distance_km": 468.74,
+      "handling": 105.0,
+      "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 1.275875629188019,
+      "noise": 1.0080954151799801,
       "premium": 1.3102,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
+      "rate": 0.68,
+      "rate_provenance": "source",
       "share": 0.483,
       "tariff_provenance": "assumption"
     },
@@ -1288,47 +1323,24 @@
     ],
     "tags": [
       "TIGHT_WINDOW"
-    ]
-  },
-  "MOCK-000049": {
-    "billableShare": 0.626,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.2244,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 749.14,
-      "lane": "PL->DK",
-      "min_fare": 60,
-      "noise": 0.9675358010532373,
-      "premium": 1.2244,
-      "rate": 0.68,
-      "rate_provenance": "assumption",
-      "share": 0.626,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
     ],
-    "tags": [
-      "TIGHT_WINDOW"
-    ]
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
   },
-  "MOCK-000050": {
+  "MOCK-000044": {
     "billableShare": 1.0,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-022",
     "is_synthetic": true,
     "ltlPremium": 1.0,
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
+    "pallet_count": 5,
+    "pallet_type": "IND_1200x1000",
     "price_formula": {
-      "distance_km": 641.68,
+      "distance_km": 661.74,
+      "handling": 262.5,
       "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 0.9548132235438511,
+      "noise": 0.9990494978510103,
       "premium": 1.0,
       "rate": 0.68,
       "rate_provenance": "source",
@@ -1342,24 +1354,28 @@
     ],
     "tags": [
       "TIGHT_WINDOW"
-    ]
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
   },
-  "MOCK-000051": {
-    "billableShare": 0.45,
+  "MOCK-000045": {
+    "billableShare": 0.158,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-023",
     "is_synthetic": true,
-    "ltlPremium": 1.33,
-    "pallet_count": 3,
-    "pallet_type": "IND_1200x1000",
+    "ltlPremium": 1.5051999999999999,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 499.5,
-      "lane": "PL->CZ",
+      "distance_km": 635.57,
+      "handling": 35.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 0.8162854205171086,
-      "premium": 1.33,
-      "rate": 0.93,
-      "rate_provenance": "source",
-      "share": 0.45,
+      "noise": 0.8894146181086287,
+      "premium": 1.5051999999999999,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.158,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -1369,20 +1385,210 @@
     ],
     "tags": [
       "TIGHT_WINDOW"
-    ]
+    ],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000046": {
+    "billableShare": 0.3,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-024",
+    "is_synthetic": true,
+    "ltlPremium": 1.42,
+    "pallet_count": 2,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 284.04,
+      "handling": 105.0,
+      "lane": "CZ->PL",
+      "min_fare": 60,
+      "noise": 1.131549027169862,
+      "premium": 1.42,
+      "rate": 0.651,
+      "rate_provenance": "assumption",
+      "share": 0.3,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ],
+    "zoneFrom": "DANUBE",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000047": {
+    "billableShare": 0.317,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-024",
+    "is_synthetic": true,
+    "ltlPremium": 1.4098,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 393.1,
+      "handling": 105.0,
+      "lane": "HU->PL",
+      "min_fare": 60,
+      "noise": 1.2153683840880098,
+      "premium": 1.4098,
+      "rate": 0.5529999999999999,
+      "rate_provenance": "assumption",
+      "share": 0.317,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ],
+    "zoneFrom": "DANUBE",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000048": {
+    "billableShare": 0.487,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-025",
+    "is_synthetic": true,
+    "ltlPremium": 1.3078,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 404.26,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.968046614955131,
+      "premium": 1.3078,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.487,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000049": {
+    "billableShare": 0.588,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-025",
+    "is_synthetic": true,
+    "ltlPremium": 1.2472,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 352.84,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8799439493870587,
+      "premium": 1.2472,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.588,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000050": {
+    "billableShare": 0.2,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-025",
+    "is_synthetic": true,
+    "ltlPremium": 1.48,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 148.88,
+      "handling": 70.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.9263769621034282,
+      "premium": 1.48,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.2,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000051": {
+    "billableShare": 0.2,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-026",
+    "is_synthetic": true,
+    "ltlPremium": 1.48,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 180.38,
+      "handling": 70.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.813865257516401,
+      "premium": 1.48,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.2,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "TIGHT_WINDOW"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
   },
   "MOCK-000052": {
     "billableShare": 0.2,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-026",
     "is_synthetic": true,
     "ltlPremium": 1.48,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 354.42,
+      "distance_km": 198.15,
+      "handling": 70.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.141196976158997,
+      "noise": 0.9424212164519209,
       "premium": 1.48,
       "rate": 0.85,
       "rate_provenance": "assumption",
@@ -1396,24 +1602,28 @@
     ],
     "tags": [
       "TIGHT_WINDOW"
-    ]
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
   },
   "MOCK-000053": {
-    "billableShare": 0.3,
+    "billableShare": 0.18,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-027",
     "is_synthetic": true,
-    "ltlPremium": 1.42,
-    "pallet_count": 3,
-    "pallet_type": "EUR_1200x800",
+    "ltlPremium": 1.492,
+    "pallet_count": 1,
+    "pallet_type": "IND_1200x1000",
     "price_formula": {
-      "distance_km": 314.68,
-      "lane": "PL->SK",
+      "distance_km": 1293.09,
+      "handling": 52.5,
+      "lane": "NL->PL",
       "min_fare": 60,
-      "noise": 0.8536095383289605,
-      "premium": 1.42,
-      "rate": 0.93,
-      "rate_provenance": "source",
-      "share": 0.3,
+      "noise": 1.0938445316605188,
+      "premium": 1.492,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.18,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -1423,24 +1633,28 @@
     ],
     "tags": [
       "TIGHT_WINDOW"
-    ]
+    ],
+    "zoneFrom": "BENELUX",
+    "zoneTo": "PL-CEN"
   },
   "MOCK-000054": {
-    "billableShare": 0.265,
+    "billableShare": 0.4,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-027",
     "is_synthetic": true,
-    "ltlPremium": 1.441,
-    "pallet_count": 2,
+    "ltlPremium": 1.3599999999999999,
+    "pallet_count": 4,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 794.64,
-      "lane": "PL->PL",
+      "distance_km": 1274.15,
+      "handling": 140.0,
+      "lane": "NL->PL",
       "min_fare": 60,
-      "noise": 1.2092683265449404,
-      "premium": 1.441,
-      "rate": 0.85,
+      "noise": 0.831811867053679,
+      "premium": 1.3599999999999999,
+      "rate": 0.476,
       "rate_provenance": "assumption",
-      "share": 0.265,
+      "share": 0.4,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -1450,239 +1664,27 @@
     ],
     "tags": [
       "DAY_ONLY_WINDOW"
-    ]
+    ],
+    "zoneFrom": "BENELUX",
+    "zoneTo": "PL-CEN"
   },
   "MOCK-000055": {
-    "billableShare": 0.83,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.102,
-    "pallet_count": 5,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 354.42,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.062587044247786,
-      "premium": 1.102,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.83,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "DAY_ONLY_WINDOW"
-    ]
-  },
-  "MOCK-000056": {
-    "billableShare": 0.8,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.1199999999999999,
-    "pallet_count": 8,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1305.07,
-      "lane": "PL->FR",
-      "min_fare": 60,
-      "noise": 0.9754685688665227,
-      "premium": 1.1199999999999999,
-      "rate": 0.6,
-      "rate_provenance": "source",
-      "share": 0.8,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "DAY_ONLY_WINDOW"
-    ]
-  },
-  "MOCK-000057": {
-    "billableShare": 0.1,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.54,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 806.42,
-      "lane": "PL->DE",
-      "min_fare": 60,
-      "noise": 0.9850527153996399,
-      "premium": 1.54,
-      "rate": 0.68,
-      "rate_provenance": "source",
-      "share": 0.1,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "DAY_ONLY_WINDOW"
-    ]
-  },
-  "MOCK-000058": {
-    "billableShare": 0.343,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.3942,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1271.4,
-      "lane": "PL->BE",
-      "min_fare": 60,
-      "noise": 1.219624516177706,
-      "premium": 1.3942,
-      "rate": 0.68,
-      "rate_provenance": "assumption",
-      "share": 0.343,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "DAY_ONLY_WINDOW"
-    ]
-  },
-  "MOCK-000059": {
-    "billableShare": 0.731,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.1614,
-    "pallet_count": 5,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 198.45,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9001338254828359,
-      "premium": 1.1614,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.731,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "DAY_ONLY_WINDOW"
-    ]
-  },
-  "MOCK-000060": {
-    "billableShare": 0.288,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4272,
-    "pallet_count": 5,
-    "pallet_type": "HALF_800x600",
-    "price_formula": {
-      "distance_km": 201.38,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.1339295396553406,
-      "premium": 1.4272,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.288,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "DAY_ONLY_WINDOW"
-    ]
-  },
-  "MOCK-000061": {
-    "billableShare": 0.509,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.2946,
-    "pallet_count": 2,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 715.98,
-      "lane": "PL->DE",
-      "min_fare": 60,
-      "noise": 0.9618505065941233,
-      "premium": 1.2946,
-      "rate": 0.68,
-      "rate_provenance": "source",
-      "share": 0.509,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "DAY_ONLY_WINDOW"
-    ]
-  },
-  "MOCK-000062": {
-    "billableShare": 0.579,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.2526,
-    "pallet_count": 5,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 228.19,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9986941000076479,
-      "premium": 1.2526,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.579,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "DAY_ONLY_WINDOW"
-    ]
-  },
-  "MOCK-000063": {
     "billableShare": 0.3,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-027",
     "is_synthetic": true,
     "ltlPremium": 1.42,
     "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 323.56,
-      "lane": "PL->HU",
+      "distance_km": 1281.99,
+      "handling": 105.0,
+      "lane": "NL->PL",
       "min_fare": 60,
-      "noise": 0.8510038347685348,
+      "noise": 1.0316022100715376,
       "premium": 1.42,
-      "rate": 0.79,
-      "rate_provenance": "source",
+      "rate": 0.476,
+      "rate_provenance": "assumption",
       "share": 0.3,
       "tariff_provenance": "assumption"
     },
@@ -1693,24 +1695,28 @@
     ],
     "tags": [
       "DAY_ONLY_WINDOW"
-    ]
+    ],
+    "zoneFrom": "BENELUX",
+    "zoneTo": "PL-CEN"
   },
-  "MOCK-000064": {
-    "billableShare": 0.2,
+  "MOCK-000056": {
+    "billableShare": 0.3,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-028",
     "is_synthetic": true,
-    "ltlPremium": 1.48,
-    "pallet_count": 2,
+    "ltlPremium": 1.42,
+    "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 228.19,
-      "lane": "PL->PL",
+      "distance_km": 1097.84,
+      "handling": 105.0,
+      "lane": "PL->NL",
       "min_fare": 60,
       "noise": 0.7422693748964067,
-      "premium": 1.48,
-      "rate": 0.85,
+      "premium": 1.42,
+      "rate": 0.68,
       "rate_provenance": "assumption",
-      "share": 0.2,
+      "share": 0.3,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -1719,25 +1725,29 @@
       30
     ],
     "tags": [
-      "RETURN_TO_BASE"
-    ]
+      "DAY_ONLY_WINDOW"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "BENELUX"
   },
-  "MOCK-000065": {
-    "billableShare": 0.1,
+  "MOCK-000057": {
+    "billableShare": 0.165,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-029",
     "is_synthetic": true,
-    "ltlPremium": 1.54,
+    "ltlPremium": 1.501,
     "pallet_count": 1,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 239.39,
+      "distance_km": 207.34,
+      "handling": 35.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 0.981946641707936,
-      "premium": 1.54,
+      "noise": 0.969468119321304,
+      "premium": 1.501,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.1,
+      "share": 0.165,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -1746,48 +1756,25 @@
       30
     ],
     "tags": [
-      "RETURN_TO_BASE"
-    ]
-  },
-  "MOCK-000066": {
-    "billableShare": 0.183,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4902,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 314.97,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9193956894648291,
-      "premium": 1.4902,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.183,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
+      "DAY_ONLY_WINDOW"
     ],
-    "tags": [
-      "RETURN_TO_BASE"
-    ]
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
   },
-  "MOCK-000067": {
+  "MOCK-000058": {
     "billableShare": 0.6,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-030",
     "is_synthetic": true,
     "ltlPremium": 1.24,
     "pallet_count": 6,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 86.61,
+      "distance_km": 283.09,
+      "handling": 210.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.1724751588453337,
+      "noise": 0.9864066667362914,
       "premium": 1.24,
       "rate": 0.85,
       "rate_provenance": "assumption",
@@ -1800,52 +1787,184 @@
       30
     ],
     "tags": [
-      "RETURN_TO_BASE"
-    ]
-  },
-  "MOCK-000068": {
-    "billableShare": 0.589,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.2466,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 98.03,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.1494183223351166,
-      "premium": 1.2466,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.589,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
+      "DAY_ONLY_WINDOW"
     ],
-    "tags": [
-      "RETURN_TO_BASE"
-    ]
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
   },
-  "MOCK-000069": {
-    "billableShare": 0.303,
+  "MOCK-000059": {
+    "billableShare": 0.229,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-031",
     "is_synthetic": true,
-    "ltlPremium": 1.4182000000000001,
+    "ltlPremium": 1.4626000000000001,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 98.03,
+      "distance_km": 485.27,
+      "handling": 70.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 1.0337324823789582,
+      "premium": 1.4626000000000001,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.229,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000060": {
+    "billableShare": 0.1,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-032",
+    "is_synthetic": true,
+    "ltlPremium": 1.54,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 496.63,
+      "handling": 35.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 1.1285406798919975,
+      "premium": 1.54,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.1,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000061": {
+    "billableShare": 0.2,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-032",
+    "is_synthetic": true,
+    "ltlPremium": 1.48,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 554.51,
+      "handling": 70.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.7638779882564383,
+      "premium": 1.48,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.2,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000062": {
+    "billableShare": 0.4,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-032",
+    "is_synthetic": true,
+    "ltlPremium": 1.3599999999999999,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 581.37,
+      "handling": 140.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.8056097604918508,
+      "premium": 1.3599999999999999,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.4,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000063": {
+    "billableShare": 0.928,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-032",
+    "is_synthetic": true,
+    "ltlPremium": 1.0432,
+    "pallet_count": 4,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 424.07,
+      "handling": 210.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 1.1629290873448834,
+      "premium": 1.0432,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.928,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "DAY_ONLY_WINDOW"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000064": {
+    "billableShare": 0.3,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-033",
+    "is_synthetic": true,
+    "ltlPremium": 1.42,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 239.61,
+      "handling": 105.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.276050871041482,
-      "premium": 1.4182000000000001,
+      "noise": 0.9453211805688252,
+      "premium": 1.42,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.303,
+      "share": 0.3,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -1855,20 +1974,427 @@
     ],
     "tags": [
       "RETURN_TO_BASE"
-    ]
+    ],
+    "zoneFrom": "PL-ZPM",
+    "zoneTo": "PL-WLK"
   },
-  "MOCK-000070": {
-    "billableShare": 1.0,
+  "MOCK-000065": {
+    "billableShare": 0.389,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-034",
     "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 10,
+    "ltlPremium": 1.3666,
+    "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 583.5,
+      "distance_km": 117.41,
+      "handling": 105.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 0.9315211808005003,
+      "noise": 0.8690027934185018,
+      "premium": 1.3666,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.389,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000066": {
+    "billableShare": 0.789,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-035",
+    "is_synthetic": true,
+    "ltlPremium": 1.1266,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 252.96,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8694884991402111,
+      "premium": 1.1266,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.789,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000067": {
+    "billableShare": 0.296,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-036",
+    "is_synthetic": true,
+    "ltlPremium": 1.4223999999999999,
+    "pallet_count": 1,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 107.83,
+      "handling": 52.5,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8963717129875254,
+      "premium": 1.4223999999999999,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.296,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000068": {
+    "billableShare": 0.14,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-037",
+    "is_synthetic": true,
+    "ltlPremium": 1.516,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 10.82,
+      "handling": 35.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.7317851373495274,
+      "premium": 1.516,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.14,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000069": {
+    "billableShare": 0.341,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-038",
+    "is_synthetic": true,
+    "ltlPremium": 1.3954,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 110.62,
+      "handling": 70.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.9570281856019694,
+      "premium": 1.3954,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.341,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000070": {
+    "billableShare": 0.155,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-039",
+    "is_synthetic": true,
+    "ltlPremium": 1.5070000000000001,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 125.64,
+      "handling": 35.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.9656847786812912,
+      "premium": 1.5070000000000001,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.155,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000071": {
+    "billableShare": 0.615,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-040",
+    "is_synthetic": true,
+    "ltlPremium": 1.2309999999999999,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 213.82,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.109895937789025,
+      "premium": 1.2309999999999999,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.615,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000072": {
+    "billableShare": 0.3,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-041",
+    "is_synthetic": true,
+    "ltlPremium": 1.42,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 43.32,
+      "handling": 105.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.935503629074393,
+      "premium": 1.42,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.3,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000073": {
+    "billableShare": 0.1,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-042",
+    "is_synthetic": true,
+    "ltlPremium": 1.54,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 385.07,
+      "handling": 35.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.873479895268005,
+      "premium": 1.54,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.1,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000074": {
+    "billableShare": 0.233,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-043",
+    "is_synthetic": true,
+    "ltlPremium": 1.4602,
+    "pallet_count": 3,
+    "pallet_type": "HALF_800x600",
+    "price_formula": {
+      "distance_km": 377.54,
+      "handling": 52.5,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.1910096688049423,
+      "premium": 1.4602,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.233,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-ZPM",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000075": {
+    "billableShare": 0.3,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-044",
+    "is_synthetic": true,
+    "ltlPremium": 1.42,
+    "pallet_count": 2,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 366.66,
+      "handling": 105.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.9932707245484086,
+      "premium": 1.42,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.3,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-POM",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000076": {
+    "billableShare": 0.3,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-045",
+    "is_synthetic": true,
+    "ltlPremium": 1.42,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 195.21,
+      "handling": 105.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.9033161366819237,
+      "premium": 1.42,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.3,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000077": {
+    "billableShare": 0.4,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-046",
+    "is_synthetic": true,
+    "ltlPremium": 1.3599999999999999,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 319.32,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.0450874550723968,
+      "premium": 1.3599999999999999,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.4,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "RETURN_TO_BASE"
+    ],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000078": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-047",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 8,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 213.58,
+      "handling": 420.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.7798970443237587,
       "premium": 1.0,
       "rate": 0.85,
       "rate_provenance": "assumption",
@@ -1882,24 +2408,65 @@
     ],
     "tags": [
       "RETURN_TO_BASE"
-    ]
+    ],
+    "zoneFrom": "PL-PDK",
+    "zoneTo": "PL-SIL"
   },
-  "MOCK-000071": {
-    "billableShare": 0.532,
+  "MOCK-000079": {
+    "billableShare": 0.137,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-048",
     "is_synthetic": true,
-    "ltlPremium": 1.2808,
+    "ltlPremium": 1.5177999999999998,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1456.88,
+      "handling": 35.0,
+      "lane": "PL->FR",
+      "min_fare": 60,
+      "noise": 0.2767975140663326,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "premium": 1.5177999999999998,
+      "rate": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 1.096258869314368,
+      "share": 0.137,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "UNPROFITABLE_DETOUR"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "FR-LYO"
+  },
+  "MOCK-000080": {
+    "billableShare": 0.379,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-049",
+    "is_synthetic": true,
+    "ltlPremium": 1.3726,
     "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 126.94,
-      "lane": "PL->PL",
+      "distance_km": 1456.88,
+      "handling": 105.0,
+      "lane": "PL->FR",
       "min_fare": 60,
-      "noise": 0.7638779882564383,
-      "premium": 1.2808,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.532,
+      "noise": 0.10719361194542253,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "premium": 1.3726,
+      "rate": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 1.1900151620250472,
+      "share": 0.379,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -1908,25 +2475,32 @@
       30
     ],
     "tags": [
-      "RETURN_TO_BASE"
-    ]
+      "UNPROFITABLE_DETOUR"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "FR-LYO"
   },
-  "MOCK-000072": {
-    "billableShare": 0.933,
+  "MOCK-000081": {
+    "billableShare": 0.962,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-050",
     "is_synthetic": true,
-    "ltlPremium": 1.0402,
+    "ltlPremium": 1.0228,
     "pallet_count": 6,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 291.56,
-      "lane": "PL->PL",
+      "distance_km": 1456.88,
+      "handling": 210.0,
+      "lane": "PL->FR",
       "min_fare": 60,
-      "noise": 0.8056097604918508,
-      "premium": 1.0402,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.933,
+      "noise": 0.0560703692905374,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "premium": 1.0228,
+      "rate": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 0.8917924977152747,
+      "share": 0.962,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -1935,52 +2509,32 @@
       30
     ],
     "tags": [
-      "RETURN_TO_BASE"
-    ]
-  },
-  "MOCK-000073": {
-    "billableShare": 0.181,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4914,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 323.25,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.0073933742302044,
-      "premium": 1.4914,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.181,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
+      "UNPROFITABLE_DETOUR"
     ],
-    "tags": [
-      "RETURN_TO_BASE"
-    ]
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "FR-LYO"
   },
-  "MOCK-000074": {
-    "billableShare": 0.271,
+  "MOCK-000082": {
+    "billableShare": 0.5,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-051",
     "is_synthetic": true,
-    "ltlPremium": 1.4374,
+    "ltlPremium": 1.3,
     "pallet_count": 5,
-    "pallet_type": "HALF_800x600",
+    "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 61.58,
-      "lane": "PL->PL",
+      "distance_km": 1456.88,
+      "handling": 175.0,
+      "lane": "PL->FR",
       "min_fare": 60,
-      "noise": 0.7714595058896396,
-      "premium": 1.4374,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.271,
+      "noise": 0.08073379484358634,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "premium": 1.3,
+      "rate": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 1.3207101850441645,
+      "share": 0.5,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -1989,25 +2543,412 @@
       30
     ],
     "tags": [
-      "RETURN_TO_BASE"
-    ]
+      "UNPROFITABLE_DETOUR"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "FR-LYO"
   },
-  "MOCK-000075": {
-    "billableShare": 0.12,
+  "MOCK-000083": {
+    "billableShare": 0.236,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-052",
     "is_synthetic": true,
-    "ltlPremium": 1.528,
+    "ltlPremium": 1.4584,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 1456.88,
+      "handling": 70.0,
+      "lane": "PL->FR",
+      "min_fare": 60,
+      "noise": 0.16178634867591024,
+      "noise_provenance": "assumption",
+      "override": "minimum_fare_detour",
+      "premium": 1.4584,
+      "rate": 0.6,
+      "rate_provenance": "source",
+      "sampled_noise": 1.1183312980568492,
+      "share": 0.236,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "UNPROFITABLE_DETOUR"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "FR-LYO"
+  },
+  "MOCK-000084": {
+    "billableShare": 0.7,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-053",
+    "is_synthetic": true,
+    "ltlPremium": 1.18,
+    "pair_id": "MOCK-PAIR-1",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 573.09,
+      "handling": 245.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.8991976301488676,
+      "premium": 1.18,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.7,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000085": {
+    "billableShare": 0.7,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-053",
+    "is_synthetic": true,
+    "ltlPremium": 1.18,
+    "pair_id": "MOCK-PAIR-1",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 573.09,
+      "handling": 245.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 0.8333402937159815,
+      "premium": 1.18,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.7,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000086": {
+    "billableShare": 0.7,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-054",
+    "is_synthetic": true,
+    "ltlPremium": 1.18,
+    "pair_id": "MOCK-PAIR-2",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 394.86,
+      "handling": 245.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.0706231648993982,
+      "premium": 1.18,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.7,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ],
+    "zoneFrom": "PL-POM",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000087": {
+    "billableShare": 0.7,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-054",
+    "is_synthetic": true,
+    "ltlPremium": 1.18,
+    "pair_id": "MOCK-PAIR-2",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 394.86,
+      "handling": 245.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.7304467828133873,
+      "premium": 1.18,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.7,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ],
+    "zoneFrom": "PL-POM",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000088": {
+    "billableShare": 0.7,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-055",
+    "is_synthetic": true,
+    "ltlPremium": 1.18,
+    "pair_id": "MOCK-PAIR-3",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 214.55,
+      "handling": 245.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.2411881317784135,
+      "premium": 1.18,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.7,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000089": {
+    "billableShare": 0.7,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-055",
+    "is_synthetic": true,
+    "ltlPremium": 1.18,
+    "pair_id": "MOCK-PAIR-3",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 214.55,
+      "handling": 245.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.2552492946314189,
+      "premium": 1.18,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.7,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000090": {
+    "billableShare": 0.7,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-056",
+    "is_synthetic": true,
+    "ltlPremium": 1.18,
+    "pair_id": "MOCK-PAIR-4",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 190.5,
+      "handling": 245.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.9142951476232695,
+      "premium": 1.18,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.7,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000091": {
+    "billableShare": 0.7,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-056",
+    "is_synthetic": true,
+    "ltlPremium": 1.18,
+    "pair_id": "MOCK-PAIR-4",
+    "pallet_count": 7,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 190.5,
+      "handling": 245.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.6846966041483937,
+      "premium": 1.18,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.7,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "MUTUALLY_EXCLUSIVE"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000092": {
+    "billableShare": 0.7,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-057",
+    "is_synthetic": true,
+    "ltlPremium": 1.18,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 452.79,
+      "handling": 140.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 1.1289989401763831,
+      "premium": 1.18,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.7,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "PROMPT_INJECTION"
+    ],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000093": {
+    "billableShare": 0.861,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-057",
+    "is_synthetic": true,
+    "ltlPremium": 1.0834,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 546.46,
+      "handling": 175.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 0.9543281294511426,
+      "premium": 1.0834,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.861,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "PROMPT_INJECTION"
+    ],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000094": {
+    "billableShare": 0.363,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-058",
+    "is_synthetic": true,
+    "ltlPremium": 1.3822,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 466.31,
+      "handling": 105.0,
+      "lane": "PL->CZ",
+      "min_fare": 60,
+      "noise": 0.8184068260049551,
+      "premium": 1.3822,
+      "rate": 0.93,
+      "rate_provenance": "source",
+      "share": 0.363,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [
+      "PROMPT_INJECTION"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "CZ-BOH"
+  },
+  "MOCK-000095": {
+    "billableShare": 0.132,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-058",
+    "is_synthetic": true,
+    "ltlPremium": 1.5208,
     "pallet_count": 1,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 348.98,
-      "lane": "PL->PL",
+      "distance_km": 364.82,
+      "handling": 35.0,
+      "lane": "PL->CZ",
       "min_fare": 60,
-      "noise": 1.0523478064473992,
-      "premium": 1.528,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.12,
+      "noise": 1.2579445819448645,
+      "premium": 1.5208,
+      "rate": 0.93,
+      "rate_provenance": "source",
+      "share": 0.132,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -2016,24 +2957,28 @@
       30
     ],
     "tags": [
-      "RETURN_TO_BASE"
-    ]
+      "ALT_TIME_FORMAT"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "CZ-BOH"
   },
-  "MOCK-000076": {
+  "MOCK-000096": {
     "billableShare": 0.637,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-058",
     "is_synthetic": true,
     "ltlPremium": 1.2178,
-    "pallet_count": 5,
-    "pallet_type": "EUR_1200x800",
+    "pallet_count": 4,
+    "pallet_type": "IND_1200x1000",
     "price_formula": {
-      "distance_km": 180.75,
-      "lane": "PL->PL",
+      "distance_km": 388.29,
+      "handling": 210.0,
+      "lane": "PL->CZ",
       "min_fare": 60,
-      "noise": 0.9514963995625333,
+      "noise": 0.8100380471817119,
       "premium": 1.2178,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
+      "rate": 0.93,
+      "rate_provenance": "source",
       "share": 0.637,
       "tariff_provenance": "assumption"
     },
@@ -2043,23 +2988,27 @@
       30
     ],
     "tags": [
-      "RETURN_TO_BASE"
-    ]
+      "ALT_TIME_FORMAT"
+    ],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "CZ-BOH"
   },
-  "MOCK-000077": {
+  "MOCK-000097": {
     "billableShare": 0.3,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-059",
     "is_synthetic": true,
     "ltlPremium": 1.42,
     "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 98.03,
-      "lane": "PL->PL",
+      "distance_km": 724.83,
+      "handling": 105.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 1.0174090121395,
+      "noise": 1.1004532403855076,
       "premium": 1.42,
-      "rate": 0.85,
+      "rate": 0.476,
       "rate_provenance": "assumption",
       "share": 0.3,
       "tariff_provenance": "assumption"
@@ -2070,588 +3019,29 @@
       30
     ],
     "tags": [
-      "RETURN_TO_BASE"
-    ]
-  },
-  "MOCK-000078": {
-    "billableShare": 0.469,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.3186,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 211.11,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9052766851481543,
-      "premium": 1.3186,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.469,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "RETURN_TO_BASE"
-    ]
-  },
-  "MOCK-000079": {
-    "billableShare": 0.674,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.1956,
-    "pallet_count": 6,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1456.88,
-      "lane": "PL->FR",
-      "min_fare": 60,
-      "noise": 0.08517858392236169,
-      "noise_provenance": "assumption",
-      "override": "minimum_fare_detour",
-      "premium": 1.1956,
-      "rate": 0.6,
-      "rate_provenance": "source",
-      "sampled_noise": 1.179586441417122,
-      "share": 0.674,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "UNPROFITABLE_DETOUR"
-    ]
-  },
-  "MOCK-000080": {
-    "billableShare": 0.144,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.5135999999999998,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1456.88,
-      "lane": "PL->FR",
-      "min_fare": 60,
-      "noise": 0.3149217147305448,
-      "noise_provenance": "assumption",
-      "override": "minimum_fare_detour",
-      "premium": 1.5135999999999998,
-      "rate": 0.6,
-      "rate_provenance": "source",
-      "sampled_noise": 1.034498856761702,
-      "share": 0.144,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "UNPROFITABLE_DETOUR"
-    ]
-  },
-  "MOCK-000081": {
-    "billableShare": 0.696,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.1824000000000001,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1456.88,
-      "lane": "PL->FR",
-      "min_fare": 60,
-      "noise": 0.08340701100324632,
-      "noise_provenance": "assumption",
-      "override": "minimum_fare_detour",
-      "premium": 1.1824000000000001,
-      "rate": 0.6,
-      "rate_provenance": "source",
-      "sampled_noise": 0.8760625731072111,
-      "share": 0.696,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "UNPROFITABLE_DETOUR"
-    ]
-  },
-  "MOCK-000082": {
-    "billableShare": 0.068,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.5592,
-    "pallet_count": 1,
-    "pallet_type": "HALF_800x600",
-    "price_formula": {
-      "distance_km": 1456.88,
-      "lane": "PL->FR",
-      "min_fare": 60,
-      "noise": 0.6473892443704726,
-      "noise_provenance": "assumption",
-      "override": "minimum_fare_detour",
-      "premium": 1.5592,
-      "rate": 0.6,
-      "rate_provenance": "source",
-      "sampled_noise": 1.2716153162212565,
-      "share": 0.068,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "UNPROFITABLE_DETOUR"
-    ]
-  },
-  "MOCK-000083": {
-    "billableShare": 0.714,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.1716,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1456.88,
-      "lane": "PL->FR",
-      "min_fare": 60,
-      "noise": 0.08205378967488017,
-      "noise_provenance": "assumption",
-      "override": "minimum_fare_detour",
-      "premium": 1.1716,
-      "rate": 0.6,
-      "rate_provenance": "source",
-      "sampled_noise": 0.9932707245484086,
-      "share": 0.714,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "UNPROFITABLE_DETOUR"
-    ]
-  },
-  "MOCK-000084": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pair_id": "MOCK-PAIR-1",
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 865.1,
-      "lane": "DE->PL",
-      "min_fare": 60,
-      "noise": 1.135097708663217,
-      "premium": 1.18,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "MUTUALLY_EXCLUSIVE"
-    ]
-  },
-  "MOCK-000085": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pair_id": "MOCK-PAIR-1",
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 865.1,
-      "lane": "DE->PL",
-      "min_fare": 60,
-      "noise": 1.1415990789504908,
-      "premium": 1.18,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "MUTUALLY_EXCLUSIVE"
-    ]
-  },
-  "MOCK-000086": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pair_id": "MOCK-PAIR-2",
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 228.19,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.7798970443237587,
-      "premium": 1.18,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "MUTUALLY_EXCLUSIVE"
-    ]
-  },
-  "MOCK-000087": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pair_id": "MOCK-PAIR-2",
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 228.19,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.8963658738356376,
-      "premium": 1.18,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "MUTUALLY_EXCLUSIVE"
-    ]
-  },
-  "MOCK-000088": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pair_id": "MOCK-PAIR-3",
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 61.58,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9834956863316343,
-      "premium": 1.18,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "MUTUALLY_EXCLUSIVE"
-    ]
-  },
-  "MOCK-000089": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pair_id": "MOCK-PAIR-3",
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 61.58,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.221000584409447,
-      "premium": 1.18,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "MUTUALLY_EXCLUSIVE"
-    ]
-  },
-  "MOCK-000090": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pair_id": "MOCK-PAIR-4",
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 323.25,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.156836563529038,
-      "premium": 1.18,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "MUTUALLY_EXCLUSIVE"
-    ]
-  },
-  "MOCK-000091": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pair_id": "MOCK-PAIR-4",
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 323.25,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.8968811469848487,
-      "premium": 1.18,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "MUTUALLY_EXCLUSIVE"
-    ]
-  },
-  "MOCK-000092": {
-    "billableShare": 0.3,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.42,
-    "pallet_count": 2,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 699.06,
-      "lane": "HU->PL",
-      "min_fare": 60,
-      "noise": 1.1142748036897172,
-      "premium": 1.42,
-      "rate": 0.5529999999999999,
-      "rate_provenance": "assumption",
-      "share": 0.3,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "PROMPT_INJECTION"
-    ]
-  },
-  "MOCK-000093": {
-    "billableShare": 0.173,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4962,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 737.85,
-      "lane": "CZ->PL",
-      "min_fare": 60,
-      "noise": 0.8923557265175482,
-      "premium": 1.4962,
-      "rate": 0.651,
-      "rate_provenance": "assumption",
-      "share": 0.173,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "PROMPT_INJECTION"
-    ]
-  },
-  "MOCK-000094": {
-    "billableShare": 0.1,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.54,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 969.77,
-      "lane": "PL->IT",
-      "min_fare": 60,
-      "noise": 1.1643156765906326,
-      "premium": 1.54,
-      "rate": 0.6,
-      "rate_provenance": "assumption",
-      "share": 0.1,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "PROMPT_INJECTION"
-    ]
-  },
-  "MOCK-000095": {
-    "billableShare": 0.541,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.2753999999999999,
-    "pallet_count": 5,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 663.58,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9882265529116925,
-      "premium": 1.2753999999999999,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.541,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
       "ALT_TIME_FORMAT"
-    ]
-  },
-  "MOCK-000096": {
-    "billableShare": 1.0,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 9,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 740.78,
-      "lane": "PL->AT",
-      "min_fare": 60,
-      "noise": 1.179271312101344,
-      "premium": 1.0,
-      "rate": 0.68,
-      "rate_provenance": "assumption",
-      "share": 1.0,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
     ],
-    "tags": [
-      "ALT_TIME_FORMAT"
-    ]
-  },
-  "MOCK-000097": {
-    "billableShare": 0.75,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.15,
-    "pallet_count": 5,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 583.5,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.2093403647305832,
-      "premium": 1.15,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.75,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "ALT_TIME_FORMAT"
-    ]
+    "zoneFrom": "DE-NOR",
+    "zoneTo": "PL-WLK"
   },
   "MOCK-000098": {
-    "billableShare": 0.708,
+    "billableShare": 0.131,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-060",
     "is_synthetic": true,
-    "ltlPremium": 1.1752,
-    "pallet_count": 4,
+    "ltlPremium": 1.5213999999999999,
+    "pallet_count": 1,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1012.84,
+      "distance_km": 733.43,
+      "handling": 35.0,
       "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 0.8886713563309248,
-      "premium": 1.1752,
+      "noise": 0.8013097210295346,
+      "premium": 1.5213999999999999,
       "rate": 0.476,
       "rate_provenance": "assumption",
-      "share": 0.708,
+      "share": 0.131,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -2661,22 +3051,26 @@
     ],
     "tags": [
       "ALT_TIME_FORMAT"
-    ]
+    ],
+    "zoneFrom": "DE-NOR",
+    "zoneTo": "PL-WLK"
   },
   "MOCK-000099": {
     "billableShare": 1.0,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-060",
     "is_synthetic": true,
     "ltlPremium": 1.0,
-    "pallet_count": 7,
-    "pallet_type": "IND_1200x1000",
+    "pallet_count": 10,
+    "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 86.16,
-      "lane": "PL->PL",
+      "distance_km": 581.45,
+      "handling": 350.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 0.9398848637609574,
+      "noise": 0.7634177016342379,
       "premium": 1.0,
-      "rate": 0.85,
+      "rate": 0.476,
       "rate_provenance": "assumption",
       "share": 1.0,
       "tariff_provenance": "assumption"
@@ -2688,102 +3082,27 @@
     ],
     "tags": [
       "ALT_TIME_FORMAT"
-    ]
+    ],
+    "zoneFrom": "DE-NOR",
+    "zoneTo": "PL-WLK"
   },
   "MOCK-000100": {
-    "billableShare": 0.681,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.1914,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 298.5,
-      "lane": "DE->PL",
-      "min_fare": 60,
-      "noise": 1.1329882427155442,
-      "premium": 1.1914,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 0.681,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "KEY_WITH_SPACE"
-    ]
-  },
-  "MOCK-000101": {
-    "billableShare": 0.706,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.1764000000000001,
-    "pallet_count": 9,
-    "pallet_type": "HALF_800x600",
-    "price_formula": {
-      "distance_km": 618.83,
-      "lane": "PL->DE",
-      "min_fare": 60,
-      "noise": 0.908665859210633,
-      "premium": 1.1764000000000001,
-      "rate": 0.68,
-      "rate_provenance": "source",
-      "share": 0.706,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": [
-      "KEY_WITH_SPACE"
-    ]
-  },
-  "MOCK-000102": {
-    "billableShare": 0.186,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4884,
-    "pallet_count": 1,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 633.66,
-      "lane": "PL->DE",
-      "min_fare": 60,
-      "noise": 0.9927913239680648,
-      "premium": 1.4884,
-      "rate": 0.68,
-      "rate_provenance": "source",
-      "share": 0.186,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000103": {
     "billableShare": 0.2,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-060",
     "is_synthetic": true,
     "ltlPremium": 1.48,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 898.78,
-      "lane": "PL->FR",
+      "distance_km": 657.45,
+      "handling": 70.0,
+      "lane": "DE->PL",
       "min_fare": 60,
-      "noise": 1.01075667465452,
+      "noise": 0.9577619290102373,
       "premium": 1.48,
-      "rate": 0.6,
-      "rate_provenance": "source",
+      "rate": 0.476,
+      "rate_provenance": "assumption",
       "share": 0.2,
       "tariff_provenance": "assumption"
     },
@@ -2792,249 +3111,30 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [
+      "KEY_WITH_SPACE"
+    ],
+    "zoneFrom": "DE-NOR",
+    "zoneTo": "PL-WLK"
   },
-  "MOCK-000104": {
-    "billableShare": 0.152,
+  "MOCK-000101": {
+    "billableShare": 0.153,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-061",
     "is_synthetic": true,
-    "ltlPremium": 1.5088,
+    "ltlPremium": 1.5082,
     "pallet_count": 1,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 370.29,
-      "lane": "AT->PL",
-      "min_fare": 60,
-      "noise": 0.8365720069165371,
-      "premium": 1.5088,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 0.152,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000105": {
-    "billableShare": 0.145,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.513,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 372.13,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9478947902818947,
-      "premium": 1.513,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.145,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000106": {
-    "billableShare": 0.888,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0672,
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 707.9,
-      "lane": "PL->HU",
-      "min_fare": 60,
-      "noise": 1.2420856755188454,
-      "premium": 1.0672,
-      "rate": 0.79,
-      "rate_provenance": "source",
-      "share": 0.888,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000107": {
-    "billableShare": 0.205,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4769999999999999,
-    "pallet_count": 1,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 630.56,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.8954843927126962,
-      "premium": 1.4769999999999999,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.205,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000108": {
-    "billableShare": 0.455,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.327,
-    "pallet_count": 3,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 508.37,
-      "lane": "PL->AT",
-      "min_fare": 60,
-      "noise": 0.9445704815761853,
-      "premium": 1.327,
-      "rate": 0.68,
-      "rate_provenance": "assumption",
-      "share": 0.455,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000109": {
-    "billableShare": 0.1,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.54,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1345.7,
-      "lane": "FR->PL",
-      "min_fare": 60,
-      "noise": 1.148858297296567,
-      "premium": 1.54,
-      "rate": 0.42,
-      "rate_provenance": "assumption",
-      "share": 0.1,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000110": {
-    "billableShare": 0.287,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4278,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1086.0,
-      "lane": "IT->PL",
-      "min_fare": 60,
-      "noise": 1.249805972256181,
-      "premium": 1.4278,
-      "rate": 0.42,
-      "rate_provenance": "assumption",
-      "share": 0.287,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000111": {
-    "billableShare": 0.74,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.156,
-    "pallet_count": 5,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 532.94,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9577619290102373,
-      "premium": 1.156,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.74,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000112": {
-    "billableShare": 0.188,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4872,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 412.1,
-      "lane": "PL->CZ",
-      "min_fare": 60,
-      "noise": 0.8812199872002433,
-      "premium": 1.4872,
-      "rate": 0.93,
-      "rate_provenance": "source",
-      "share": 0.188,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000113": {
-    "billableShare": 0.36,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.384,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 927.94,
+      "distance_km": 625.59,
+      "handling": 35.0,
       "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 1.1632955305150525,
-      "premium": 1.384,
+      "noise": 0.854879666733835,
+      "premium": 1.5082,
       "rate": 0.68,
       "rate_provenance": "source",
-      "share": 0.36,
+      "share": 0.153,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3042,49 +3142,30 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [
+      "KEY_WITH_SPACE"
+    ],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "DE-NOR"
   },
-  "MOCK-000114": {
-    "billableShare": 0.1,
+  "MOCK-000102": {
+    "billableShare": 0.178,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-062",
     "is_synthetic": true,
-    "ltlPremium": 1.54,
+    "ltlPremium": 1.4932,
     "pallet_count": 1,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1305.07,
-      "lane": "FR->PL",
-      "min_fare": 60,
-      "noise": 1.1787792832187605,
-      "premium": 1.54,
-      "rate": 0.42,
-      "rate_provenance": "assumption",
-      "share": 0.1,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000115": {
-    "billableShare": 0.4,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.3599999999999999,
-    "pallet_count": 4,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 326.64,
+      "distance_km": 241.48,
+      "handling": 35.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 0.9559462815512887,
-      "premium": 1.3599999999999999,
+      "noise": 0.9188053464353325,
+      "premium": 1.4932,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.4,
+      "share": 0.178,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3092,49 +3173,86 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "PL-OPW"
   },
-  "MOCK-000116": {
-    "billableShare": 0.464,
+  "MOCK-000103": {
+    "billableShare": 0.147,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-062",
     "is_synthetic": true,
-    "ltlPremium": 1.3216,
+    "ltlPremium": 1.5118,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 239.31,
+      "handling": 35.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.2499392364700166,
+      "premium": 1.5118,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.147,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000104": {
+    "billableShare": 0.312,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-062",
+    "is_synthetic": true,
+    "ltlPremium": 1.4127999999999998,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 260.0,
+      "handling": 70.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.0395161698803055,
+      "premium": 1.4127999999999998,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.312,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000105": {
+    "billableShare": 0.369,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-062",
+    "is_synthetic": true,
+    "ltlPremium": 1.3786,
     "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1413.99,
-      "lane": "PL->IT",
-      "min_fare": 60,
-      "noise": 0.9054168240831608,
-      "premium": 1.3216,
-      "rate": 0.6,
-      "rate_provenance": "assumption",
-      "share": 0.464,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000117": {
-    "billableShare": 0.45,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.33,
-    "pallet_count": 3,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 493.69,
+      "distance_km": 226.35,
+      "handling": 105.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.388773210561679,
-      "premium": 1.33,
+      "noise": 1.123791272082401,
+      "premium": 1.3786,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.45,
+      "share": 0.369,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3142,24 +3260,28 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-WLK",
+    "zoneTo": "PL-OPW"
   },
-  "MOCK-000118": {
-    "billableShare": 0.963,
+  "MOCK-000106": {
+    "billableShare": 1.0,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-063",
     "is_synthetic": true,
-    "ltlPremium": 1.0222,
-    "pallet_count": 7,
+    "ltlPremium": 1.0,
+    "pallet_count": 9,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 348.07,
+      "distance_km": 247.11,
+      "handling": 315.0,
       "lane": "PL->PL",
       "min_fare": 60,
       "noise": 1.019784886941881,
-      "premium": 1.0222,
+      "premium": 1.0,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.963,
+      "share": 1.0,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3167,23 +3289,27 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
   },
-  "MOCK-000119": {
+  "MOCK-000107": {
     "billableShare": 0.15,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-063",
     "is_synthetic": true,
     "ltlPremium": 1.51,
     "pallet_count": 1,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 887.21,
-      "lane": "PL->DE",
+      "distance_km": 236.88,
+      "handling": 35.0,
+      "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.0339353899559314,
+      "noise": 1.19737624411307,
       "premium": 1.51,
-      "rate": 0.68,
-      "rate_provenance": "source",
+      "rate": 0.85,
+      "rate_provenance": "assumption",
       "share": 0.15,
       "tariff_provenance": "assumption"
     },
@@ -3192,99 +3318,28 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
   },
-  "MOCK-000120": {
-    "billableShare": 0.162,
+  "MOCK-000108": {
+    "billableShare": 0.436,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-064",
     "is_synthetic": true,
-    "ltlPremium": 1.5028,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 478.33,
-      "lane": "DE->PL",
-      "min_fare": 60,
-      "noise": 1.0449867701112807,
-      "premium": 1.5028,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 0.162,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000121": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 379.5,
-      "lane": "PL->HU",
-      "min_fare": 60,
-      "noise": 1.088835126898977,
-      "premium": 1.18,
-      "rate": 0.79,
-      "rate_provenance": "source",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000122": {
-    "billableShare": 0.11,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.534,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 159.55,
-      "lane": "PL->SK",
-      "min_fare": 60,
-      "noise": 1.0775339824173003,
-      "premium": 1.534,
-      "rate": 0.93,
-      "rate_provenance": "source",
-      "share": 0.11,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000123": {
-    "billableShare": 0.557,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.2658,
+    "ltlPremium": 1.3384,
     "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 126.94,
+      "distance_km": 237.82,
+      "handling": 105.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 0.8027055701437141,
-      "premium": 1.2658,
+      "noise": 0.9849416015390897,
+      "premium": 1.3384,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.557,
+      "share": 0.436,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3292,22 +3347,200 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
   },
-  "MOCK-000124": {
+  "MOCK-000109": {
+    "billableShare": 0.21,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-064",
+    "is_synthetic": true,
+    "ltlPremium": 1.474,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 260.96,
+      "handling": 70.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8037291526089227,
+      "premium": 1.474,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.21,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000110": {
+    "billableShare": 0.701,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-065",
+    "is_synthetic": true,
+    "ltlPremium": 1.1794,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 258.3,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.3503092706603868,
+      "premium": 1.1794,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.701,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000111": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-065",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 254.91,
+      "handling": 210.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.1834208161793565,
+      "premium": 1.0,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000112": {
+    "billableShare": 0.3,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-066",
+    "is_synthetic": true,
+    "ltlPremium": 1.42,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 441.37,
+      "handling": 105.0,
+      "lane": "CZ->PL",
+      "min_fare": 60,
+      "noise": 1.035527792435048,
+      "premium": 1.42,
+      "rate": 0.651,
+      "rate_provenance": "assumption",
+      "share": 0.3,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "CZ-BOH",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000113": {
+    "billableShare": 0.2,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-066",
+    "is_synthetic": true,
+    "ltlPremium": 1.48,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 483.92,
+      "handling": 70.0,
+      "lane": "CZ->PL",
+      "min_fare": 60,
+      "noise": 0.8461464067095743,
+      "premium": 1.48,
+      "rate": 0.651,
+      "rate_provenance": "assumption",
+      "share": 0.2,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "CZ-BOH",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000114": {
+    "billableShare": 0.2,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-066",
+    "is_synthetic": true,
+    "ltlPremium": 1.48,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 432.3,
+      "handling": 70.0,
+      "lane": "CZ->PL",
+      "min_fare": 60,
+      "noise": 1.1527661737059018,
+      "premium": 1.48,
+      "rate": 0.651,
+      "rate_provenance": "assumption",
+      "share": 0.2,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "CZ-BOH",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000115": {
     "billableShare": 0.561,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-066",
     "is_synthetic": true,
     "ltlPremium": 1.2633999999999999,
-    "pallet_count": 3,
+    "pallet_count": 4,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 201.38,
-      "lane": "PL->PL",
+      "distance_km": 412.5,
+      "handling": 140.0,
+      "lane": "CZ->PL",
       "min_fare": 60,
-      "noise": 0.6391104227845675,
+      "noise": 1.1346492941567103,
       "premium": 1.2633999999999999,
-      "rate": 0.85,
+      "rate": 0.651,
       "rate_provenance": "assumption",
       "share": 0.561,
       "tariff_provenance": "assumption"
@@ -3317,149 +3550,28 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "CZ-BOH",
+    "zoneTo": "PL-SIL"
   },
-  "MOCK-000125": {
-    "billableShare": 0.2,
+  "MOCK-000116": {
+    "billableShare": 0.592,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-067",
     "is_synthetic": true,
-    "ltlPremium": 1.48,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 550.38,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9187833781015999,
-      "premium": 1.48,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.2,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000126": {
-    "billableShare": 0.71,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.174,
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 641.68,
-      "lane": "DE->PL",
-      "min_fare": 60,
-      "noise": 1.0174087727725876,
-      "premium": 1.174,
-      "rate": 0.476,
-      "rate_provenance": "assumption",
-      "share": 0.71,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000127": {
-    "billableShare": 0.385,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.369,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 532.94,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.1630560295847627,
-      "premium": 1.369,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.385,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000128": {
-    "billableShare": 0.277,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4338,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 470.75,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.7525389741361941,
-      "premium": 1.4338,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.277,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000129": {
-    "billableShare": 0.118,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.5292,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 270.63,
-      "lane": "PL->CZ",
-      "min_fare": 60,
-      "noise": 0.7797823050209962,
-      "premium": 1.5292,
-      "rate": 0.93,
-      "rate_provenance": "source",
-      "share": 0.118,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000130": {
-    "billableShare": 0.4,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.3599999999999999,
+    "ltlPremium": 1.2448000000000001,
     "pallet_count": 4,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 244.35,
+      "distance_km": 389.46,
+      "handling": 140.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.0237084107047973,
-      "premium": 1.3599999999999999,
+      "noise": 0.9750202926961086,
+      "premium": 1.2448000000000001,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.4,
+      "share": 0.592,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3467,20 +3579,53 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-POM"
   },
-  "MOCK-000131": {
-    "billableShare": 1.0,
+  "MOCK-000117": {
+    "billableShare": 0.439,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-067",
     "is_synthetic": true,
-    "ltlPremium": 1.0,
-    "pallet_count": 9,
-    "pallet_type": "IND_1200x1000",
+    "ltlPremium": 1.3366,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 372.13,
+      "distance_km": 395.37,
+      "handling": 105.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 0.8630830927466021,
+      "noise": 1.0237084107047973,
+      "premium": 1.3366,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.439,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-POM"
+  },
+  "MOCK-000118": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-067",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 4,
+    "pallet_type": "IND_1200x1000",
+    "price_formula": {
+      "distance_km": 440.28,
+      "handling": 210.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.1530592578187726,
       "premium": 1.0,
       "rate": 0.85,
       "rate_provenance": "assumption",
@@ -3492,20 +3637,198 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-POM"
   },
-  "MOCK-000132": {
+  "MOCK-000119": {
+    "billableShare": 0.187,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-067",
+    "is_synthetic": true,
+    "ltlPremium": 1.4878,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 341.99,
+      "handling": 35.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.9405353081675176,
+      "premium": 1.4878,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.187,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-POM"
+  },
+  "MOCK-000120": {
+    "billableShare": 0.562,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-068",
+    "is_synthetic": true,
+    "ltlPremium": 1.2628,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 515.56,
+      "handling": 105.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.973531246870084,
+      "premium": 1.2628,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.562,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-POM",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000121": {
+    "billableShare": 0.781,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-069",
+    "is_synthetic": true,
+    "ltlPremium": 1.1314,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 146.22,
+      "handling": 210.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.270818263223263,
+      "premium": 1.1314,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.781,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000122": {
+    "billableShare": 0.192,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-070",
+    "is_synthetic": true,
+    "ltlPremium": 1.4848,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 123.49,
+      "handling": 35.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8078169373242973,
+      "premium": 1.4848,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.192,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000123": {
+    "billableShare": 0.054,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-070",
+    "is_synthetic": true,
+    "ltlPremium": 1.5676,
+    "pallet_count": 1,
+    "pallet_type": "HALF_800x600",
+    "price_formula": {
+      "distance_km": 138.63,
+      "handling": 17.5,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.3812179368116382,
+      "premium": 1.5676,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.054,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000124": {
+    "billableShare": 0.348,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-070",
+    "is_synthetic": true,
+    "ltlPremium": 1.3912,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 114.34,
+      "handling": 105.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8444421411524045,
+      "premium": 1.3912,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.348,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000125": {
     "billableShare": 0.2,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-070",
     "is_synthetic": true,
     "ltlPremium": 1.48,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 305.76,
+      "distance_km": 220.27,
+      "handling": 70.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.3382817583405093,
+      "noise": 1.1553126474845592,
       "premium": 1.48,
       "rate": 0.85,
       "rate_provenance": "assumption",
@@ -3517,74 +3840,28 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-OPW",
+    "zoneTo": "PL-SIL"
   },
-  "MOCK-000133": {
-    "billableShare": 0.811,
+  "MOCK-000126": {
+    "billableShare": 0.221,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-071",
     "is_synthetic": true,
-    "ltlPremium": 1.1134,
-    "pallet_count": 4,
-    "pallet_type": "IND_1200x1000",
-    "price_formula": {
-      "distance_km": 155.76,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.973531246870084,
-      "premium": 1.1134,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.811,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000134": {
-    "billableShare": 0.292,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4247999999999998,
+    "ltlPremium": 1.4674,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 291.56,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.0125553607168514,
-      "premium": 1.4247999999999998,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.292,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000135": {
-    "billableShare": 0.1,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.54,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 344.18,
+      "distance_km": 725.53,
+      "handling": 70.0,
       "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 1.2713016281239125,
-      "premium": 1.54,
+      "noise": 1.147520273898658,
+      "premium": 1.4674,
       "rate": 0.68,
       "rate_provenance": "source",
-      "share": 0.1,
+      "share": 0.221,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3592,123 +3869,27 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
   },
-  "MOCK-000136": {
-    "billableShare": 0.7,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.18,
-    "pallet_count": 7,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 794.64,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 1.3812179368116382,
-      "premium": 1.18,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.7,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000137": {
-    "billableShare": 0.327,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4038,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 932.71,
-      "lane": "PL->NL",
-      "min_fare": 60,
-      "noise": 0.9639447194615903,
-      "premium": 1.4038,
-      "rate": 0.68,
-      "rate_provenance": "assumption",
-      "share": 0.327,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000138": {
-    "billableShare": 0.136,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.5184,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 292.87,
-      "lane": "SK->PL",
-      "min_fare": 60,
-      "noise": 1.1570819492199251,
-      "premium": 1.5184,
-      "rate": 0.651,
-      "rate_provenance": "assumption",
-      "share": 0.136,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000139": {
-    "billableShare": 0.244,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.4536,
-    "pallet_count": 2,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 835.05,
-      "lane": "PL->DE",
-      "min_fare": 60,
-      "noise": 0.8651292131485407,
-      "premium": 1.4536,
-      "rate": 0.68,
-      "rate_provenance": "source",
-      "share": 0.244,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000140": {
+  "MOCK-000127": {
     "billableShare": 0.239,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-071",
     "is_synthetic": true,
     "ltlPremium": 1.4566,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 567.24,
-      "lane": "PL->PL",
+      "distance_km": 625.53,
+      "handling": 70.0,
+      "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 0.7951490190272358,
+      "noise": 1.1205954567065863,
       "premium": 1.4566,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
+      "rate": 0.68,
+      "rate_provenance": "source",
       "share": 0.239,
       "tariff_provenance": "assumption"
     },
@@ -3717,49 +3898,28 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
   },
-  "MOCK-000141": {
-    "billableShare": 0.17,
+  "MOCK-000128": {
+    "billableShare": 0.111,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-071",
     "is_synthetic": true,
-    "ltlPremium": 1.498,
+    "ltlPremium": 1.5333999999999999,
     "pallet_count": 1,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 201.38,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.8176101477248605,
-      "premium": 1.498,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.17,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000142": {
-    "billableShare": 0.157,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.5057999999999998,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 500.9,
+      "distance_km": 631.0,
+      "handling": 35.0,
       "lane": "PL->DE",
       "min_fare": 60,
-      "noise": 0.9366311229182727,
-      "premium": 1.5057999999999998,
+      "noise": 1.3841587027096243,
+      "premium": 1.5333999999999999,
       "rate": 0.68,
       "rate_provenance": "source",
-      "share": 0.157,
+      "share": 0.111,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3767,24 +3927,57 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
   },
-  "MOCK-000143": {
-    "billableShare": 0.2,
+  "MOCK-000129": {
+    "billableShare": 0.999,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-071",
     "is_synthetic": true,
-    "ltlPremium": 1.48,
+    "ltlPremium": 1.0006,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 712.19,
+      "handling": 175.0,
+      "lane": "PL->DE",
+      "min_fare": 60,
+      "noise": 1.0443825507523248,
+      "premium": 1.0006,
+      "rate": 0.68,
+      "rate_provenance": "source",
+      "share": 0.999,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "DE-SAX"
+  },
+  "MOCK-000130": {
+    "billableShare": 0.212,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-072",
+    "is_synthetic": true,
+    "ltlPremium": 1.4727999999999999,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1155.91,
-      "lane": "IT->PL",
+      "distance_km": 498.06,
+      "handling": 70.0,
+      "lane": "DK->PL",
       "min_fare": 60,
-      "noise": 1.0964991999988625,
-      "premium": 1.48,
-      "rate": 0.42,
+      "noise": 1.178577587841348,
+      "premium": 1.4727999999999999,
+      "rate": 0.476,
       "rate_provenance": "assumption",
-      "share": 0.2,
+      "share": 0.212,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3792,22 +3985,26 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "DK",
+    "zoneTo": "PL-ZPM"
   },
-  "MOCK-000144": {
+  "MOCK-000131": {
     "billableShare": 0.107,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-073",
     "is_synthetic": true,
     "ltlPremium": 1.5358,
     "pallet_count": 1,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1413.99,
-      "lane": "IT->PL",
+      "distance_km": 220.52,
+      "handling": 35.0,
+      "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.0211812755273602,
+      "noise": 1.0982174238742797,
       "premium": 1.5358,
-      "rate": 0.42,
+      "rate": 0.85,
       "rate_provenance": "assumption",
       "share": 0.107,
       "tariff_provenance": "assumption"
@@ -3817,49 +4014,28 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
   },
-  "MOCK-000145": {
-    "billableShare": 0.17,
+  "MOCK-000132": {
+    "billableShare": 0.821,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-073",
     "is_synthetic": true,
-    "ltlPremium": 1.498,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 1032.67,
-      "lane": "PL->DK",
-      "min_fare": 60,
-      "noise": 1.2406674626258913,
-      "premium": 1.498,
-      "rate": 0.68,
-      "rate_provenance": "assumption",
-      "share": 0.17,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000146": {
-    "billableShare": 0.939,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.0366,
+    "ltlPremium": 1.1074,
     "pallet_count": 5,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 1087.23,
-      "lane": "PL->BE",
+      "distance_km": 339.03,
+      "handling": 175.0,
+      "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 0.8865002776658958,
-      "premium": 1.0366,
-      "rate": 0.68,
+      "noise": 1.3643765481319297,
+      "premium": 1.1074,
+      "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.939,
+      "share": 0.821,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3867,24 +4043,57 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
   },
-  "MOCK-000147": {
-    "billableShare": 0.2,
+  "MOCK-000133": {
+    "billableShare": 0.4,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-073",
     "is_synthetic": true,
-    "ltlPremium": 1.48,
+    "ltlPremium": 1.3599999999999999,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 230.53,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.0605614585031586,
+      "premium": 1.3599999999999999,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.4,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000134": {
+    "billableShare": 0.305,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-074",
+    "is_synthetic": true,
+    "ltlPremium": 1.417,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 630.56,
+      "distance_km": 171.12,
+      "handling": 70.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.0404072299827083,
-      "premium": 1.48,
+      "noise": 0.8729156066154373,
+      "premium": 1.417,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.2,
+      "share": 0.305,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3892,24 +4101,86 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
   },
-  "MOCK-000148": {
-    "billableShare": 0.518,
+  "MOCK-000135": {
+    "billableShare": 0.775,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-074",
     "is_synthetic": true,
-    "ltlPremium": 1.2892,
+    "ltlPremium": 1.135,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 240.79,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8413584420273287,
+      "premium": 1.135,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.775,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000136": {
+    "billableShare": 0.219,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-075",
+    "is_synthetic": true,
+    "ltlPremium": 1.4686,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 294.97,
+      "handling": 70.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.4254528973361122,
+      "premium": 1.4686,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.219,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000137": {
+    "billableShare": 0.464,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-075",
+    "is_synthetic": true,
+    "ltlPremium": 1.3216,
     "pallet_count": 3,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 252.69,
+      "distance_km": 258.78,
+      "handling": 105.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 1.0040785706504893,
-      "premium": 1.2892,
+      "noise": 0.9369849458409948,
+      "premium": 1.3216,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.518,
+      "share": 0.464,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3917,49 +4188,28 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
   },
-  "MOCK-000149": {
-    "billableShare": 0.159,
+  "MOCK-000138": {
+    "billableShare": 0.317,
     "generatorVersion": "offers-generator v3",
+    "groupId": "G-076",
     "is_synthetic": true,
-    "ltlPremium": 1.5046,
-    "pallet_count": 1,
-    "pallet_type": "EUR_1200x800",
-    "price_formula": {
-      "distance_km": 514.73,
-      "lane": "PL->PL",
-      "min_fare": 60,
-      "noise": 0.9951935004953749,
-      "premium": 1.5046,
-      "rate": 0.85,
-      "rate_provenance": "assumption",
-      "share": 0.159,
-      "tariff_provenance": "assumption"
-    },
-    "provenance": "generated_mock",
-    "service_minutes": [
-      30,
-      30
-    ],
-    "tags": []
-  },
-  "MOCK-000150": {
-    "billableShare": 0.2,
-    "generatorVersion": "offers-generator v3",
-    "is_synthetic": true,
-    "ltlPremium": 1.48,
+    "ltlPremium": 1.4098,
     "pallet_count": 2,
     "pallet_type": "EUR_1200x800",
     "price_formula": {
-      "distance_km": 658.38,
+      "distance_km": 177.9,
+      "handling": 70.0,
       "lane": "PL->PL",
       "min_fare": 60,
-      "noise": 0.8849702403373138,
-      "premium": 1.48,
+      "noise": 1.2967281773990746,
+      "premium": 1.4098,
       "rate": 0.85,
       "rate_provenance": "assumption",
-      "share": 0.2,
+      "share": 0.317,
       "tariff_provenance": "assumption"
     },
     "provenance": "generated_mock",
@@ -3967,6 +4217,356 @@
       30,
       30
     ],
-    "tags": []
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000139": {
+    "billableShare": 0.262,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-076",
+    "is_synthetic": true,
+    "ltlPremium": 1.4428,
+    "pallet_count": 2,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 124.57,
+      "handling": 70.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.9771846444408198,
+      "premium": 1.4428,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.262,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000140": {
+    "billableShare": 0.1,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-077",
+    "is_synthetic": true,
+    "ltlPremium": 1.54,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 337.52,
+      "handling": 35.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.1074882196275202,
+      "premium": 1.54,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.1,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-SIL"
+  },
+  "MOCK-000141": {
+    "billableShare": 0.4,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-078",
+    "is_synthetic": true,
+    "ltlPremium": 1.3599999999999999,
+    "pallet_count": 4,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 188.86,
+      "handling": 140.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8702946635326759,
+      "premium": 1.3599999999999999,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.4,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000142": {
+    "billableShare": 0.655,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-078",
+    "is_synthetic": true,
+    "ltlPremium": 1.207,
+    "pallet_count": 5,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 198.09,
+      "handling": 175.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.8851730030670418,
+      "premium": 1.207,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.655,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-SIL",
+    "zoneTo": "PL-CEN"
+  },
+  "MOCK-000143": {
+    "billableShare": 0.1,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-079",
+    "is_synthetic": true,
+    "ltlPremium": 1.54,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 311.06,
+      "handling": 35.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 1.1315404033744312,
+      "premium": 1.54,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.1,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000144": {
+    "billableShare": 0.512,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-079",
+    "is_synthetic": true,
+    "ltlPremium": 1.2928,
+    "pallet_count": 3,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 385.19,
+      "handling": 105.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 0.7410668524531295,
+      "premium": 1.2928,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.512,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000145": {
+    "billableShare": 0.119,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-079",
+    "is_synthetic": true,
+    "ltlPremium": 1.5286,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 427.98,
+      "handling": 35.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 1.0545095187630225,
+      "premium": 1.5286,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.119,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000146": {
+    "billableShare": 0.092,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-079",
+    "is_synthetic": true,
+    "ltlPremium": 1.5448,
+    "pallet_count": 1,
+    "pallet_type": "HALF_800x600",
+    "price_formula": {
+      "distance_km": 291.06,
+      "handling": 17.5,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 0.9528369371210176,
+      "premium": 1.5448,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.092,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "DE-SAX",
+    "zoneTo": "PL-OPW"
+  },
+  "MOCK-000147": {
+    "billableShare": 0.115,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-080",
+    "is_synthetic": true,
+    "ltlPremium": 1.5310000000000001,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 353.59,
+      "handling": 35.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 1.1300289938987025,
+      "premium": 1.5310000000000001,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.115,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-POM"
+  },
+  "MOCK-000148": {
+    "billableShare": 0.6,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-080",
+    "is_synthetic": true,
+    "ltlPremium": 1.24,
+    "pallet_count": 6,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 412.48,
+      "handling": 210.0,
+      "lane": "PL->PL",
+      "min_fare": 60,
+      "noise": 0.9665954040508333,
+      "premium": 1.24,
+      "rate": 0.85,
+      "rate_provenance": "assumption",
+      "share": 0.6,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "PL-CEN",
+    "zoneTo": "PL-POM"
+  },
+  "MOCK-000149": {
+    "billableShare": 0.154,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-081",
+    "is_synthetic": true,
+    "ltlPremium": 1.5076,
+    "pallet_count": 1,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 257.66,
+      "handling": 35.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 1.2140162313784002,
+      "premium": 1.5076,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 0.154,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "DE-BER",
+    "zoneTo": "PL-WLK"
+  },
+  "MOCK-000150": {
+    "billableShare": 1.0,
+    "generatorVersion": "offers-generator v3",
+    "groupId": "G-081",
+    "is_synthetic": true,
+    "ltlPremium": 1.0,
+    "pallet_count": 8,
+    "pallet_type": "EUR_1200x800",
+    "price_formula": {
+      "distance_km": 271.58,
+      "handling": 280.0,
+      "lane": "DE->PL",
+      "min_fare": 60,
+      "noise": 0.9795268684801903,
+      "premium": 1.0,
+      "rate": 0.476,
+      "rate_provenance": "assumption",
+      "share": 1.0,
+      "tariff_provenance": "assumption"
+    },
+    "provenance": "generated_mock",
+    "service_minutes": [
+      30,
+      30
+    ],
+    "tags": [],
+    "zoneFrom": "DE-BER",
+    "zoneTo": "PL-WLK"
   }
 }
