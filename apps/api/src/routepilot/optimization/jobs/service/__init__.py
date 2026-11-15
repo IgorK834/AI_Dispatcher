@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import contextlib
+import copy
 import hashlib
 import json
 import multiprocessing
@@ -56,7 +57,7 @@ from routepilot.optimization.jobs.repository import (
     PlanRow,
     StopRow,
 )
-from routepilot.optimization.jobs.results import plan_summary, store_result
+from routepilot.optimization.jobs.results import plan_summary, store_result, stored_metrics
 from routepilot.optimization.jobs.snapshots import build_snapshot
 from routepilot.routing.domain import GeoPoint, RoutingFailure
 from routepilot.routing.ports import RoutingProvider
@@ -197,7 +198,23 @@ class JobService:
                 raise DomainError("NOT_FOUND", 404)
             if row.status != "succeeded" or row.result is None:
                 raise DomainError("JOB_NOT_FINISHED")
-            return JobResult.model_validate(row.result["public"])
+            # FEAT-010 FR-11: the load metrics are computed on read, also for older stored jobs.
+            public = copy.deepcopy(row.result["public"])
+            summaries = [
+                plan
+                for driver in public["perDriver"]
+                for plans in driver["plans"].values()
+                for plan in plans
+            ]
+            stops: dict[UUID, list[StopRow]] = {UUID(plan["id"]): [] for plan in summaries}
+            for stop in session.scalars(select(StopRow).where(StopRow.route_plan_id.in_(stops))):
+                stops[stop.route_plan_id].append(stop)
+            for plan in summaries:
+                ep, kg, on_board = stored_metrics(
+                    row, UUID(plan["driverId"]), stops[UUID(plan["id"])]
+                )
+                plan.update(loadFactorEp=str(ep), loadFactorKg=str(kg), maxOrdersOnBoard=on_board)
+            return JobResult.model_validate(public)
 
     def result_metrics(self, job_id: UUID) -> dict[str, Any]:
         result = self.result(job_id)
@@ -440,7 +457,9 @@ class PlanService:
                     row.warnings = [*row.warnings, "GEOMETRY_APPROXIMATE"]
             calc = row.calculation
             return RoutePlan(
-                **plan_summary(row).model_dump(),
+                **plan_summary(
+                    row, stored_metrics(session.get_one(JobRow, row.job_id), row.driver_id, stops)
+                ).model_dump(),
                 revenue=Money(amount_minor=row.revenue_minor),
                 cost_total=Money(amount_minor=row.cost_total_minor),
                 calculation=Calculation(

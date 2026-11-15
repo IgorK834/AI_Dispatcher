@@ -19,6 +19,7 @@ from routepilot.optimization.engine.models import (
     Point,
     RoutePlan,
 )
+from routepilot.optimization.engine.plan_metrics import load_metrics
 from routepilot.optimization.engine.prefilter import pallet_equivalents
 
 
@@ -350,6 +351,9 @@ class ScheduleBuilder:
             warnings.add("LOADING_ORDER_NOT_MODELLED")
         if self.snapshot.matrix.fallback:
             warnings.add("ROUTING_FALLBACK")
+        load_factor_ep, load_factor_kg, max_orders_on_board = load_metrics(
+            label.legs, label.actions, self.driver.vehicle
+        )
         return RoutePlan(
             plan_ref=sha256(identity.encode()).hexdigest()[:24],
             driver_id=self.driver.id,
@@ -362,6 +366,9 @@ class ScheduleBuilder:
             home_reached=bool(required),
             cost_total_minor=cost.calculation.total,
             duration_min=int((label.state.t - label.departure).total_seconds() // 60),
+            load_factor_ep=load_factor_ep,
+            load_factor_kg=load_factor_kg,
+            max_orders_on_board=max_orders_on_board,
             warnings=sorted(warnings),
             stops=list(label.stops),
             legs=list(label.legs),

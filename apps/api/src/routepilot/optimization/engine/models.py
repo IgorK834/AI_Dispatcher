@@ -236,6 +236,10 @@ class RoutePlan(EngineModel):
     drive_min: int
     service_min: int
     wait_min: int
+    # FEAT-010 FR-10: reported only; no objective, rank or validator reads them.
+    load_factor_ep: Decimal = Decimal("0")
+    load_factor_kg: Decimal = Decimal("0")
+    max_orders_on_board: int = 0
     warnings: list[str]
     stops: list[PlanStop]
     legs: list[PlanLeg]
