@@ -97,6 +97,8 @@ def fixture_block(**changes: object) -> dict:
     return {
         "load_factor_ep": "0.4600",
         "load_factor_kg": "0.4000",
+        "load_factor_ep_loaded": "0.7600",
+        "load_factor_kg_loaded": "0.6700",
         "plans": 14,
         "plans_with_2plus_on_board": 7,
         "empty_km_share": "0.1100",
@@ -110,6 +112,7 @@ def test_consolidation_table_and_target_lines_say_met_or_not_met_without_failing
     module = load()
     text = "\n".join(module.consolidation_lines(fixture_block()))
     assert "46.0 %" in text and "40.0 %" in text and "7 of 14" in text and "18.6 %" in text
+    assert "76.0 %" in text and "67.0 %" in text  # fill on loaded kilometres only
     assert "Target A, partner share >= 50%: not met" in text
     assert "Target B, pallet fill >= 60% and >= 70% of plans" in text and ": not met (" in text
 
@@ -183,12 +186,16 @@ def test_benchmark_runs_carry_the_consolidation_block_and_the_summary_aggregates
         assert {
             "load_factor_ep",
             "load_factor_kg",
+            "load_factor_ep_loaded",
+            "load_factor_kg_loaded",
             "plans",
             "plans_with_2plus_on_board",
             "empty_km_share",
             "partner_share",
         } <= set(block)
         assert 0 <= float(block["load_factor_ep"]) <= 1 and 0 <= float(block["load_factor_kg"]) <= 1
+        # Excluding the empty legs can only raise the fill.
+        assert float(block["load_factor_ep_loaded"]) >= float(block["load_factor_ep"])
         assert block["plans_with_2plus_on_board"] <= block["plans"]
     summary = consolidation_summary(blocks)
     assert summary["plans"] == sum(b["plans"] for b in blocks)

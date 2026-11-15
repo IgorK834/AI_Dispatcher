@@ -1,6 +1,7 @@
 """Deterministic two-profile Branch-and-Bound with distinct offer-set top K."""
 
 from collections.abc import Callable
+from datetime import timedelta
 
 from routepilot.optimization.engine.costs import CostModel, revenue_in_profile_currency
 from routepilot.optimization.engine.models import (
@@ -90,6 +91,17 @@ def search_driver(
             and partial.fuel_l > top["fuel"][-1].fuel_l
         )
 
+    def on_time(label: Label, offer: OfferSnapshot, kind: str) -> bool:
+        """False when the stop cannot be served before its window closes.
+
+        Driving takes at least the matrix minutes; pauses and waiting only add to that. So an
+        arrival bound later than the window end means `ScheduleBuilder.extend` would reject the
+        move (`*_WINDOW_MISSED`): skipping it changes no result and saves the schedule work.
+        """
+        stop = offer.stops[0 if kind == "PICKUP" else 1]
+        _, drive = snapshot.matrix.leg(label.point, stop.point)
+        return label.state.t + timedelta(minutes=drive) <= stop.window_end
+
     def visit(builder: ScheduleBuilder, label: Label, eligible: list[OfferSnapshot]) -> None:
         nonlocal nodes, truncated
         if nodes >= snapshot.params.node_budget_per_driver or (
@@ -105,10 +117,16 @@ def search_driver(
                     top[objective] = rank_plans([*top[objective], plan], objective, k)
         if cannot_enter(label):
             return
-        moves = [Action(kind="DELIVERY", offer_id=oid) for oid in sorted(label.onboard)]
+        moves = [
+            Action(kind="DELIVERY", offer_id=oid)
+            for oid in sorted(label.onboard)
+            if on_time(label, by_id[oid], "DELIVERY")
+        ]
         if len(label.picked) < snapshot.params.max_offers_per_plan:
             moves.extend(
-                Action(kind="PICKUP", offer_id=o.id) for o in eligible if o.id not in label.picked
+                Action(kind="PICKUP", offer_id=o.id)
+                for o in eligible
+                if o.id not in label.picked and on_time(label, o, "PICKUP")
             )
         for action in moves:
             if truncated:
