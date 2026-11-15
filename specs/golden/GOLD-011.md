@@ -1,6 +1,6 @@
 # GOLD-011: Consolidation beats a chain
 
-- **Status:** proposed on 2026-11-15 — **waiting for the owner's approval**. Until then no golden test exists for this case (`apps/api/tests/golden/test_gold_011.py` and its entry in `cases.py` are not written). After approval the values are binding (a later change = spec change + human approval).
+- **Status:** approved by the owner on 2026-11-15 — the values are binding (a later change = spec change + human approval). The test is `apps/api/tests/golden/test_gold_011.py`.
 - **Covers:** FEAT-010 · AC-FEAT-010-13 · FR-6, FR-10, FR-13 · invariants 1–8, 10, 14, 17 ([`context.md`](../../context.md) → Optimization Engine Invariants).
 - **Conventions:** [`specs/golden/README.md`](README.md) (G1–G14). The prices follow FEAT-010 FR-6 as proposed in revision 3 (handling charge of 35 € per pallet equivalent). If the owner changes that tariff, the prices and every money value below must be recalculated.
 - **Data:** synthetic (`is_synthetic = true`); not real freight-exchange offers and not real people.
@@ -173,8 +173,9 @@ Load metrics (FEAT-010 FR-10):
 ## 5. Open questions
 
 - The return consignment adds only 34.00 € of profit over rank 2 (527.97 against 493.97): its revenue of 379 € barely covers a second day (driver 125.30, fuel 107.30, vehicle 57.40, accommodation 55.00). That is the honest result of the tariff and the cost profile; the case still fixes the consolidated set as the best plan.
-- A scratch run of the engine on these inputs (not committed) returned the same values as the arithmetic above. The golden test itself is written only after the owner approves this file.
+- A scratch run of the engine on these inputs (not committed) returned the same values as the arithmetic above. The golden test was written after the owner's approval.
 
 ## 6. Changelog
 
-- 2026-11-15: proposed (FEAT-010 FR-13). Not approved yet.
+- 2026-11-15: proposed (FEAT-010 FR-13).
+- 2026-11-15: approved by the owner; `test_gold_011.py` added.

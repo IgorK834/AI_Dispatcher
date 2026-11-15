@@ -6,12 +6,12 @@ owner: project owner
 requirements: [REQ-003, REQ-009, REQ-034]
 adrs: [ADR-0003, ADR-0014]
 modules: [freight (generator), optimization.engine (prefilter, models), optimization.jobs (plan read model), web features/plans, bench, specs/golden]
-revision: 3
+revision: 4
 ---
 
 # FEAT-010: LTL consolidation — realistic demo offers, partner-aware pool and load metrics
 
-> **Revision 2 was approved by the owner on 2026-11-15 (backlog owner action O-12). Revision 3 is a proposal drafted on the owner's instruction of the same day and waits for the owner's review** (FR-4a, FR-4b, the handling charge of FR-6 with the new AC-FEAT-010-05 prices, AC-FEAT-010-15, the towns of §6.2 and FEAT-002 §6.1, OQ-010-10). P1 (after the MVP).
+> **Approved by the owner on 2026-11-15 (revision 2 under backlog owner action O-12; revision 3 and the GOLD-011 values later the same day).** P1 (after the MVP).
 > Research and measurements behind this specification: [`docs/raport.md`](../docs/raport.md).
 > Every number marked *assumption* is a configurable modelling choice, not market data. Demo data stays synthetic (`is_synthetic = true`).
 
@@ -349,3 +349,4 @@ Agent evals: no new scenario. The fake-model agent tests (`make test-agents`) mu
 | 2 | 2026-11-15 | Status `draft` → `approved` by the owner (O-12, issue #115): §6.1–6.3 accepted as drafted; owner decisions on OQ-010-01 … 09 recorded (§11); REQ-034 added to the requirements. |
 | 3 | 2026-11-15 | Owner instruction after the first implementation run was reported `blocked`: with the tariff and the groups of revision 2 no demo driver had a profitable plan, because 69 of 140 timed offers could not reach their own delivery window (FEAT-002 FR-12 reused the pickup's clock window on the delivery day). Added FR-4a (reachable delivery windows) and AC-FEAT-010-15; OQ-010-07 reversed: 16 satellite towns in `cities.json` (§6.2), `routing-matrix.json` regenerated. The concrete rule of FR-4a and the list of towns were drafted by the coding agent and are open to review in the pull request. |
 | 3 (cont.) | 2026-11-15 | Second owner instruction of the day: at least 500 towns and a price check. 550 generated towns added (FEAT-002 §6.1); FR-4b (return groups); `ltl_handling_per_ep` added to FR-6 after the price research in `docs/raport.md` §3.6; AC-FEAT-010-04 and 05 follow the new formula; OQ-010-10 recorded. |
+| 4 | 2026-11-15 | The owner approved revision 3 (FR-4a, FR-4b, the handling charge of FR-6, the towns of §6.2 and FEAT-002 §6.1, AC-FEAT-010-15, OQ-010-10) and the values of `specs/golden/GOLD-011.md`. |
