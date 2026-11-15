@@ -3,6 +3,7 @@ import math
 import re
 from collections import Counter
 from datetime import date, datetime
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
@@ -10,12 +11,12 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from routepilot.freight.generator import TAG_RANGES, generate_offers, main
+from routepilot.freight.generator import TAG_RANGES, generate_offers, ltl_price, main
 
 
 @pytest.mark.ac("AC-FEAT-002-04")
 @pytest.mark.ac("AC-FEAT-002-06")
-@pytest.mark.ac("AC-FEAT-002-07")
+@pytest.mark.ac("AC-FEAT-010-04")
 def test_committed_offers_snapshot_price_and_tags() -> None:
     payload, enrichment = generate_offers(20261109, date(2026, 11, 16))
     root = Path(__file__).resolve().parents[5]
@@ -31,11 +32,9 @@ def test_committed_offers_snapshot_price_and_tags() -> None:
             assert "price" not in offer
         else:
             formula = info["price_formula"]
-            assert offer["price"]["amount"] == max(
-                120, round(formula["rate_eur_per_km"] * formula["distance_km"] * formula["noise"])
-            )
+            assert offer["price"]["amount"] == recomputed_price(formula)
         if "UNPROFITABLE_DETOUR" in tags:
-            assert offer["price"]["amount"] == 120 and offer["distance_km"] > 500
+            assert offer["price"]["amount"] == 60 and offer["distance_km"] > 500
             assert info["price_formula"]["noise_provenance"] == "assumption"
         if "INCOMPATIBLE_BODY" in tags:
             assert offer["vehicleProperties"]["body"] == ["REFRIGERATOR"]
@@ -89,7 +88,8 @@ def test_generated_offer_ranges(seed: int, reference: date) -> None:
     assert 0.35 <= domestic / 150 <= 0.55
 
 
-# --- AC-FEAT-002-04 .. 07 checked against the specification (§6.3, §6.4), not generator constants
+# --- AC-FEAT-002-04 .. 06 and AC-FEAT-010-02 .. 05 checked against the specifications
+# (FEAT-002 §6.3, §6.4; FEAT-010 FR-6, §6.1), not generator constants
 ROOT = Path(__file__).resolve().parents[5]
 OFFERS_FILE = ROOT / "data/mock/offers.timocom.json"
 ENRICHMENT_FILE = ROOT / "data/mock/offers.enrichment.json"
@@ -135,6 +135,36 @@ def haversine_125(a: tuple[float, float], b: tuple[float, float]) -> float:
         + math.cos(lat1) * math.cos(lat2) * math.sin((lon2 - lon1) / 2) ** 2
     )
     return round(6371 * 2 * math.asin(min(1, math.sqrt(h))) * 1.25, 2)
+
+
+# FEAT-010 FR-2: the offers-generator v2 index ranges (0-based, end exclusive) stay where they were.
+V2_TAG_INDICES = {
+    "NO_PRICE": (0, 6),
+    "NO_PALLETS": (6, 11),
+    "NO_COORDINATES": (11, 15),
+    "INCOMPATIBLE_BODY": (15, 20),
+    "INCOMPATIBLE_EQUIPMENT": (20, 24),
+    "TOO_HEAVY_ALL": (24, 28),
+    "HEAVY_FOR_8EP": (28, 38),
+    "TIGHT_WINDOW": (38, 53),
+    "DAY_ONLY_WINDOW": (53, 63),
+    "RETURN_TO_BASE": (63, 78),
+    "UNPROFITABLE_DETOUR": (78, 83),
+    "MUTUALLY_EXCLUSIVE": (83, 91),
+    "PROMPT_INJECTION": (91, 94),
+    "ALT_TIME_FORMAT": (94, 99),
+    "KEY_WITH_SPACE": (99, 101),
+}
+PALLET_FACTOR = {"EUR_1200x800": 1.0, "IND_1200x1000": 1.5, "HALF_800x600": 0.5}
+
+
+def half_up(value: float) -> int:
+    return math.floor(value + 0.5)
+
+
+def recomputed_price(formula: dict[str, Any]) -> int:
+    product = formula["rate"] * formula["distance_km"] * formula["share"]
+    return max(60, half_up(product * formula["premium"] * formula["noise"]))
 
 
 def committed() -> tuple[list[dict[str, Any]], dict[str, Any]]:
@@ -229,7 +259,7 @@ def test_each_tagged_offer_really_has_the_property_and_only_tagged_ones_do() -> 
                 assert place["address"]["geoCoordinate"] is not None
                 assert place["address"]["city"] in known_cities
         if "UNPROFITABLE_DETOUR" in tags:
-            assert offer["price"]["amount"] == 120 and offer["distance_km"] > 500
+            assert offer["price"]["amount"] == 60 and offer["distance_km"] > 500
             assert info["price_formula"]["noise_provenance"] == "assumption"
             assert info["price_formula"]["override"] == "minimum_fare_detour"
         injected = bool(
@@ -268,8 +298,19 @@ def test_mutually_exclusive_pairs_overlap_in_time_and_exceed_capacity_together()
         assert weight > 1085 or pallets > 10  # more than the largest demo van carries
 
 
-@pytest.mark.ac("AC-FEAT-002-07")
-def test_prices_recompute_from_the_recorded_lane_distance_and_noise() -> None:
+@pytest.mark.ac("AC-FEAT-010-02")
+def test_every_tag_sits_on_the_offer_ids_of_its_v2_index_range() -> None:
+    _, enrichment = committed()
+    for tag, (start, stop) in V2_TAG_INDICES.items():
+        tagged = {offer_id for offer_id, info in enrichment.items() if tag in info["tags"]}
+        assert tagged == {f"MOCK-{index + 1:06}" for index in range(start, stop)}, tag
+        assert len(tagged) >= (8 if tag == "MUTUALLY_EXCLUSIVE" else MINIMUM[tag])
+    known = set(V2_TAG_INDICES)
+    assert all(set(info["tags"]) <= known for info in enrichment.values())
+
+
+@pytest.mark.ac("AC-FEAT-010-04")
+def test_prices_recompute_from_the_recorded_tariff_values() -> None:
     offers, enrichment = committed()
     priced = [o for o in offers if "NO_PRICE" not in enrichment[o["id"]]["tags"]]
     assert len(priced) >= 144
@@ -278,11 +319,21 @@ def test_prices_recompute_from_the_recorded_lane_distance_and_noise() -> None:
         info = enrichment[offer["id"]]
         formula = info["price_formula"]
         amount = offer["price"]["amount"]
-        assert isinstance(amount, int) and not isinstance(amount, bool) and amount >= 120
+        assert isinstance(amount, int) and not isinstance(amount, bool) and amount >= 60
         assert offer["price"]["currency"] == "EUR"
-        assert amount == max(
-            120, round(formula["rate_eur_per_km"] * formula["distance_km"] * formula["noise"])
-        )
+        assert amount == recomputed_price(formula)
+        assert formula["min_fare"] == 60 and formula["tariff_provenance"] == "assumption"
+        # share and premium follow FR-6 for the offer's pallets (or its length) and mass.
+        weight = round(offer["weight_t"] * 1000)
+        if "pallet_count" in info:
+            eq = info["pallet_count"] * PALLET_FACTOR[info["pallet_type"]]
+        else:  # NO_PALLETS: derived from the length
+            eq = math.ceil(Decimal(str(offer["length_m"])) * Decimal("2.4"))
+        share = min(1, max(eq / 10, weight / 1000))
+        assert formula["share"] == pytest.approx(share) and 0 < formula["share"] <= 1
+        assert formula["premium"] == pytest.approx(1 + 0.6 * (1 - share))
+        assert info["billableShare"] == formula["share"]
+        assert info["ltlPremium"] == formula["premium"]
         # The recorded inputs themselves follow §6.3 and the haversine x 1.25 distance.
         first, last = offer["loadingPlaces"]
         a = CITY_TABLE.get((first["address"]["city"], first["address"]["country"]))
@@ -291,7 +342,7 @@ def test_prices_recompute_from_the_recorded_lane_distance_and_noise() -> None:
             assert formula["distance_km"] == haversine_125(
                 (a["lat"], a["lon"]), (b["lat"], b["lon"])
             )
-            assert formula["rate_eur_per_km"] == pytest.approx(
+            assert formula["rate"] == pytest.approx(
                 spec_rate(first["address"]["country"], last["address"]["country"])
             )
             assert formula["lane"] == f"{first['address']['country']}->{last['address']['country']}"
@@ -300,3 +351,23 @@ def test_prices_recompute_from_the_recorded_lane_distance_and_noise() -> None:
     mean = sum(log_noise) / len(log_noise)
     deviation = (sum((x - mean) ** 2 for x in log_noise) / len(log_noise)) ** 0.5
     assert abs(mean) < 0.05 and 0.11 < deviation < 0.19  # log-normal, sigma = 0.15
+
+
+@pytest.mark.ac("AC-FEAT-010-05")
+@pytest.mark.parametrize(
+    ("pallets", "weight_kg", "price"),
+    [
+        (1, 100, 60),  # 52.36 -> minimum fare
+        (4, 400, 185),  # 340 x 0.4 x 1.36 = 184.96
+        (10, 900, 340),  # full van
+        (2, 1000, 340),  # weight-bound: share 1
+    ],
+)
+def test_ltl_tariff_examples(pallets: int, weight_kg: int, price: int) -> None:
+    assert ltl_price(0.85, 400.0, Decimal(pallets), weight_kg, 1.0) == price
+
+
+@pytest.mark.ac("AC-FEAT-010-04")
+def test_enrichment_records_the_generator_version() -> None:
+    _, enrichment = committed()
+    assert {info["generatorVersion"] for info in enrichment.values()} == {"offers-generator v3"}

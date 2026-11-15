@@ -1,6 +1,7 @@
-"""Property tests of the offers generator for any seed (AC-FEAT-002-05)."""
+"""Property tests of the offers generator for any seed (AC-FEAT-002-05, AC-FEAT-010-03)."""
 
 import json
+import math
 import re
 from datetime import date, timedelta
 from pathlib import Path
@@ -17,6 +18,8 @@ CITIES = {
     for c in json.loads((ROOT / "data/mock/cities.json").read_text())["cities"]
 }
 UNKNOWN_PLACE = "MOCK Unknown Place"  # NO_COORDINATES offers: AC-FEAT-002-06 requires half of them
+PALLET_FACTOR = {"EUR_1200x800": 1.0, "IND_1200x1000": 1.5, "HALF_800x600": 0.5}
+MASS_OVERRIDE_TAGS = {"TOO_HEAVY_ALL", "HEAVY_FOR_8EP", "MUTUALLY_EXCLUSIVE"}  # FEAT-010 FR-3
 DATES = st.dates(min_value=date(2020, 1, 1), max_value=date(2040, 12, 31))
 
 
@@ -25,7 +28,12 @@ def minutes(value: str) -> int:
     return int(hours) * 60 + int(mins)
 
 
+def mass_for(eq: float, kg_per_ep: int) -> int:
+    return min(1085, max(40, math.floor(eq * kg_per_ep + 0.5)))
+
+
 @pytest.mark.ac("AC-FEAT-002-05")
+@pytest.mark.ac("AC-FEAT-010-03")
 @settings(deadline=None)
 @given(st.integers(), DATES)
 def test_every_offer_satisfies_the_ranges_of_fr_9_to_fr_12(seed: int, reference: date) -> None:
@@ -53,6 +61,10 @@ def test_every_offer_satisfies_the_ranges_of_fr_9_to_fr_12(seed: int, reference:
         assert 40 <= round(offer["weight_t"] * 1000) <= 1100
         if "pallet_count" in info:
             assert 1 <= info["pallet_count"] <= 10
+            if not MASS_OVERRIDE_TAGS & set(info["tags"]):
+                # FEAT-010 FR-3: mass follows the pallet equivalent, 50-200 kg per EP.
+                eq = info["pallet_count"] * PALLET_FACTOR[info["pallet_type"]]
+                assert mass_for(eq, 50) <= round(offer["weight_t"] * 1000) <= mass_for(eq, 200)
 
         loading = date.fromisoformat(first["earliestLoadingDate"])
         assert 0 <= (loading - reference).days < 7 and loading.weekday() < 5

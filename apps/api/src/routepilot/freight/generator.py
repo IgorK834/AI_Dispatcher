@@ -1,10 +1,11 @@
-"""Deterministic synthetic TIMOCOM-shaped demo offers (FEAT-002)."""
+"""Deterministic synthetic TIMOCOM-shaped demo offers (FEAT-002, offers-generator v3: FEAT-010)."""
 
 import argparse
 import json
 import math
 import random
 from datetime import UTC, date, datetime, time, timedelta
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
@@ -72,6 +73,19 @@ TAG_RANGES: dict[str, range] = {
     "KEY_WITH_SPACE": range(99, 101),
 }
 BASE_NAMES = ("Katowice", "Wrocław", "Poznań", "Łódź", "Kraków")
+GENERATOR_VERSION = "offers-generator v3"
+# FEAT-010 section 6.1: demo LTL tariff, all values are assumptions (not market data).
+LTL_REF_EP = 10  # assumption
+LTL_REF_KG = 1000  # assumption
+LTL_PREMIUM_MAX = 0.6  # assumption
+LTL_MIN_FARE = 60  # assumption, whole euros
+KG_PER_EP_RANGE = (50, 200)  # assumption
+PALLET_WEIGHTS = (26, 24, 18, 12, 7, 5, 3, 2, 2, 1)
+PALLET_FACTORS = {
+    "EUR_1200x800": Decimal("1"),
+    "IND_1200x1000": Decimal("1.5"),
+    "HALF_800x600": Decimal("0.5"),
+}
 
 
 def lane_rate(origin: str, destination: str) -> float:
@@ -102,6 +116,25 @@ def distance_km(
         + math.cos(lat1) * math.cos(lat2) * math.sin((lon2 - lon1) / 2) ** 2
     )
     return round(6371 * 2 * math.asin(min(1, math.sqrt(value))) * 1.25, 2)
+
+
+def _half_up(value: float) -> int:
+    return math.floor(value + 0.5)
+
+
+def ltl_share(eq: Decimal, weight_kg: int) -> float:
+    """Billable share of a full van (FEAT-010 FR-6)."""
+    return min(1.0, max(float(eq) / LTL_REF_EP, weight_kg / LTL_REF_KG))
+
+
+def ltl_premium(share: float) -> float:
+    return 1 + LTL_PREMIUM_MAX * (1 - share)
+
+
+def ltl_price(rate: float, distance_km: float, eq: Decimal, weight_kg: int, noise: float) -> int:
+    """Whole euros, rounded half-up once, never below the minimum fare (FEAT-010 FR-6)."""
+    share = ltl_share(eq, weight_kg)
+    return max(LTL_MIN_FARE, _half_up(rate * distance_km * share * ltl_premium(share) * noise))
 
 
 def _working(day: date) -> date:
@@ -141,11 +174,12 @@ def generate_offers(
         origin = rng.choice(polish if index in domestic or rng.random() < 0.6 else foreign)
         destinations = polish if origin[1] != "PL" or index in domestic else foreign
         destination = rng.choice(tuple(city for city in destinations if city != origin))
-        pallets = rng.choices(range(1, 11), weights=(20, 20, 18, 15, 8, 6, 5, 4, 2, 2))[0]
+        pallets = rng.choices(range(1, 11), weights=PALLET_WEIGHTS)[0]
         pallet_type = rng.choices(
             ("EUR_1200x800", "IND_1200x1000", "HALF_800x600"), weights=(85, 10, 5)
         )[0]
-        weight = rng.randint(40, 1085)
+        eq = pallets * PALLET_FACTORS[pallet_type]
+        weight = min(1085, max(40, _half_up(float(eq) * rng.uniform(*KG_PER_EP_RANGE))))
         if "TOO_HEAVY_ALL" in tags:
             weight = rng.randint(1086, 1100)
         if "HEAVY_FOR_8EP" in tags:
@@ -178,15 +212,20 @@ def generate_offers(
                 distance = distance_km(origin, destination)
             else:
                 window_hours = 2
-        factor = {"EUR_1200x800": 1, "IND_1200x1000": 1.5, "HALF_800x600": 0.5}[pallet_type]
-        length = math.ceil(pallets * factor / 2.4 * 10) / 10
+        eq = pallets * PALLET_FACTORS[pallet_type]
+        length = math.ceil(float(eq) / 2.4 * 10) / 10
+        if "NO_PALLETS" in tags:
+            # Priced from the pallet equivalent a reader derives from the length.
+            eq = Decimal(math.ceil(Decimal(str(length)) * Decimal("2.4")))
+        share = ltl_share(eq, weight)
+        premium = ltl_premium(share)
         noise = rng.lognormvariate(0, 0.15)
         rate = lane_rate(origin[1], destination[1])
         sampled_noise = noise
         if "UNPROFITABLE_DETOUR" in tags:
             # Owner-approved difficulty override, FEAT-002 FR-13/14 (2026-11-12).
-            noise = 120 / (rate * distance)
-        amount = max(120, round(rate * distance * noise))
+            noise = LTL_MIN_FARE / (rate * distance * share * premium)
+        amount = ltl_price(rate, distance, eq, weight, noise)
         places = []
         for stop_index, (city, day) in enumerate(((origin, pickup), (destination, delivery))):
             address: dict[str, Any] = {
@@ -245,11 +284,18 @@ def generate_offers(
             "tags": tags,
             "provenance": "generated_mock",
             "is_synthetic": True,
+            "generatorVersion": GENERATOR_VERSION,
+            "billableShare": share,
+            "ltlPremium": premium,
             "price_formula": {
                 "lane": f"{origin[1]}->{destination[1]}",
                 "distance_km": distance,
-                "rate_eur_per_km": rate,
+                "rate": rate,
+                "share": share,
+                "premium": premium,
                 "noise": noise,
+                "min_fare": LTL_MIN_FARE,
+                "tariff_provenance": "assumption",
                 "rate_provenance": "assumption"
                 if origin[1] != "PL" or destination[1] in ("PL", "AT", "NL", "BE", "DK", "IT")
                 else "source",
