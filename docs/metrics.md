@@ -47,25 +47,31 @@ once (FEAT-010). The targets are recorded as met or not met and are never assert
 |---|---|
 | Van fill, pallet places (EP·km), km-weighted | 44.1 % |
 | Van fill, payload (kg·km), km-weighted | 53.1 % |
+| Van fill on loaded kilometres only, pallet places | 56.4 % |
+| Van fill on loaded kilometres only, payload | 68.0 % |
 | Plans with 2 or more orders on board at once | 3 of 5 |
 | Empty kilometres, share of all kilometres | 22.3 % |
 | Offers with a consolidation partner (partner share) | 75.7 % |
+
+The first two rows include the empty kilometres (the drive to the first pickup and, when
+the planning horizon reaches `home_by`, the drive home), so they stay below the fill on
+loaded kilometres.
 
 Target A, partner share >= 50%: met (75.7 %).
 Target B, pallet fill >= 60% and >= 70% of plans with 2 or more orders on board (this demo run): not met (44.1 %, 60.0 %).
 
 ## Timings (vary between machines)
 
-Measured at 2026-11-15 19:25 UTC on Darwin arm64, Python 3.13.3.
+Measured at 2026-11-15 21:19 UTC on Darwin arm64, Python 3.13.3.
 Timings are reported, not asserted.
 
 | Metric | Value |
 |---|---|
-| Engine runtime p50 over 20 runs | 10.4 s |
-| Engine runtime p95 over 20 runs | 10.6 s |
+| Engine runtime p50 over 20 runs | 5.3 s |
+| Engine runtime p95 over 20 runs | 5.4 s |
 | Runs cut by the 30 s wall-clock safety | 0 of 20 |
-| NFR-002 target p95 <= 15 s | MET (p95 = 10.6 s) |
-| Question to `approval_required` (scripted fake model) | 1.52 s |
+| NFR-002 target p95 <= 15 s | MET (p95 = 5.4 s) |
+| Question to `approval_required` (scripted fake model) | 1.55 s |
 
 The NFR-002 target (p95 <= 15 s) is set for the engine defaults. This report uses reduced
 settings (see above), so the target line is an indication, not a verdict on NFR-002.

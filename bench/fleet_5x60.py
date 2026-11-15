@@ -187,6 +187,7 @@ def consolidation_block(
     chosen = [plans[a.plan_ref] for a in result.fleet["profit"].assignments]
     zero = Decimal(0)
     ep_km = ep_available = kg_km = kg_available = km = empty = zero
+    ep_loaded = kg_loaded = zero  # capacity over the loaded legs only
     for plan in chosen:
         vehicle = vehicles[plan.driver_id]
         for leg in plan.legs:
@@ -194,6 +195,9 @@ def consolidation_block(
             ep_available += leg.distance_km * vehicle.pallet_places
             kg_km += leg.distance_km * leg.load_kg
             kg_available += leg.distance_km * vehicle.payload_kg
+            if leg.load_kg > 0:
+                ep_loaded += leg.distance_km * vehicle.pallet_places
+                kg_loaded += leg.distance_km * vehicle.payload_kg
         km += plan.distance_km
         empty += plan.empty_km
 
@@ -203,6 +207,8 @@ def consolidation_block(
     return dict(
         load_factor_ep=ratio(ep_km, ep_available),
         load_factor_kg=ratio(kg_km, kg_available),
+        load_factor_ep_loaded=ratio(ep_km, ep_loaded),
+        load_factor_kg_loaded=ratio(kg_km, kg_loaded),
         plans=len(chosen),
         plans_with_2plus_on_board=sum(plan.max_orders_on_board >= 2 for plan in chosen),
         empty_km_share=ratio(empty, km),
@@ -213,6 +219,8 @@ def consolidation_block(
             ep_km_available=str(ep_available),
             kg_km=str(kg_km),
             kg_km_available=str(kg_available),
+            ep_km_loaded=str(ep_loaded),
+            kg_km_loaded=str(kg_loaded),
             km=str(km),
             empty_km=str(empty),
         ),
@@ -234,6 +242,8 @@ def consolidation_summary(blocks: list[dict[str, Any]]) -> dict[str, Any]:
     return dict(
         load_factor_ep=ratio("ep_km", "ep_km_available"),
         load_factor_kg=ratio("kg_km", "kg_km_available"),
+        load_factor_ep_loaded=ratio("ep_km", "ep_km_loaded"),
+        load_factor_kg_loaded=ratio("kg_km", "kg_km_loaded"),
         plans=plans,
         plans_with_2plus_on_board=sum(b["plans_with_2plus_on_board"] for b in blocks),
         empty_km_share=ratio("empty_km", "km"),

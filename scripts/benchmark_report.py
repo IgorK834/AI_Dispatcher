@@ -239,11 +239,20 @@ def consolidation_lines(block: dict[str, Any], bench: dict[str, Any] | None = No
     rows = [
         ("Van fill, pallet places (EP·km), km-weighted", pct(block["load_factor_ep"])),
         ("Van fill, payload (kg·km), km-weighted", pct(block["load_factor_kg"])),
+        ("Van fill on loaded kilometres only, pallet places", pct(block["load_factor_ep_loaded"])),
+        ("Van fill on loaded kilometres only, payload", pct(block["load_factor_kg_loaded"])),
         ("Plans with 2 or more orders on board at once", plans),
         ("Empty kilometres, share of all kilometres", pct(block["empty_km_share"])),
         ("Offers with a consolidation partner (partner share)", pct(block["partner_share"])),
     ]
-    lines = [*table(rows), ""]
+    lines = [
+        *table(rows),
+        "",
+        "The first two rows include the empty kilometres (the drive to the first pickup and, when",
+        "the planning horizon reaches `home_by`, the drive home), so they stay below the fill on",
+        "loaded kilometres.",
+        "",
+    ]
     lines.append(
         f"Target A, partner share >= {TARGET_PARTNER_SHARE:.0%}: "
         f"{verdict(Decimal(block['partner_share']) >= TARGET_PARTNER_SHARE)}"
