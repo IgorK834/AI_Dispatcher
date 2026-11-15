@@ -91,3 +91,107 @@ def test_agents_fake_adds_the_time_from_question_to_approval(tmp_path: Path) -> 
     out = tmp_path / "metrics.md"
     assert module.main([*SMALL, "--agents-fake", "--out", str(out)]) == 0
     assert "Question to `approval_required`" in out.read_text()
+
+
+def fixture_block(**changes: object) -> dict:
+    return {
+        "load_factor_ep": "0.4600",
+        "load_factor_kg": "0.4000",
+        "plans": 14,
+        "plans_with_2plus_on_board": 7,
+        "empty_km_share": "0.1100",
+        "partner_share": "0.1860",
+        **changes,
+    }
+
+
+@pytest.mark.ac("AC-FEAT-010-14")
+def test_consolidation_table_and_target_lines_say_met_or_not_met_without_failing() -> None:
+    module = load()
+    text = "\n".join(module.consolidation_lines(fixture_block()))
+    assert "46.0 %" in text and "40.0 %" in text and "7 of 14" in text and "18.6 %" in text
+    assert "Target A, partner share >= 50%: not met" in text
+    assert "Target B, pallet fill >= 60% and >= 70% of plans" in text and ": not met (" in text
+
+    good = fixture_block(
+        load_factor_ep="0.6400", plans_with_2plus_on_board=12, partner_share="0.7000"
+    )
+    text = "\n".join(module.consolidation_lines(good))
+    assert "Target A, partner share >= 50%: met" in text
+    assert ": met (64.0 %, 85.7 %)" in text
+
+    # A benchmark summary adds the 20-seed row and decides target B on it.
+    bench = {
+        **fixture_block(load_factor_ep="0.6100", plans=100, plans_with_2plus_on_board=71),
+        "runs": 20,
+    }
+    text = "\n".join(module.consolidation_lines(good, bench))
+    assert "Over 20 benchmark seeds" in text and "71 of 100 plans" in text
+    assert "(20 benchmark seeds): met (61.0 %, 71.0 %)" in text
+
+
+@pytest.mark.integration
+@pytest.mark.ac("AC-FEAT-010-14")
+def test_report_has_the_consolidation_table_and_it_is_the_same_in_two_runs(tmp_path: Path) -> None:
+    module = load()
+    first_file, second_file = tmp_path / "first.md", tmp_path / "second.md"
+    assert module.main([*SMALL, "--out", str(first_file)]) == 0
+    assert module.main([*SMALL, "--out", str(second_file)]) == 0
+    first = first_file.read_text()
+    section = first.split("## Consolidation", 1)[1].split("## Timings", 1)[0]
+    for heading in (
+        "Van fill, pallet places",
+        "Van fill, payload",
+        "2 or more orders on board",
+        "Empty kilometres",
+        "partner share",
+        "Target A",
+        "Target B",
+    ):
+        assert heading in section, heading
+    assert stable_part(first) == stable_part(second_file.read_text())
+
+
+@pytest.mark.integration
+@pytest.mark.ac("AC-FEAT-010-14")
+def test_benchmark_runs_carry_the_consolidation_block_and_the_summary_aggregates_it() -> None:
+    load()  # puts the repository root on the path
+    from bench.fleet_5x60 import (
+        REFERENCE_DATE,
+        SEEDS,
+        build_instance,
+        consolidation_block,
+        consolidation_summary,
+    )
+
+    from routepilot.freight.generator import generate_offers
+    from routepilot.optimization.engine import optimize
+
+    blocks = []
+    for seed in SEEDS[:2]:
+        source = build_instance(seed, fallback_parameters=True)
+        params = source.params.model_copy(
+            update={"horizon_days": 1, "max_offers_per_plan": 2, "top_k_per_driver": 2}
+        )
+        source = source.model_copy(update={"params": params})
+        blocks.append(
+            consolidation_block(
+                source, optimize(source), generate_offers(seed, REFERENCE_DATE)[0]["payload"]
+            )
+        )
+    for block in blocks:
+        assert {
+            "load_factor_ep",
+            "load_factor_kg",
+            "plans",
+            "plans_with_2plus_on_board",
+            "empty_km_share",
+            "partner_share",
+        } <= set(block)
+        assert 0 <= float(block["load_factor_ep"]) <= 1 and 0 <= float(block["load_factor_kg"]) <= 1
+        assert block["plans_with_2plus_on_board"] <= block["plans"]
+    summary = consolidation_summary(blocks)
+    assert summary["plans"] == sum(b["plans"] for b in blocks)
+    assert summary["plans_with_2plus_on_board"] == sum(
+        b["plans_with_2plus_on_board"] for b in blocks
+    )

@@ -6,6 +6,7 @@ import argparse
 import json
 import platform
 from datetime import UTC, date, datetime, time
+from decimal import Decimal
 from pathlib import Path
 from statistics import median, quantiles
 from time import perf_counter
@@ -15,6 +16,7 @@ import pytest
 
 from routepilot.compliance.models import DriverState
 from routepilot.fleet.generator import generate_fleet
+from routepilot.freight.consolidation import partner_share
 from routepilot.freight.domain.models import NormalizedOffer, RawOfferRecord
 from routepilot.freight.generator import generate_offers
 from routepilot.integrations.timocom.mapper import TimocomV3Mapper
@@ -23,6 +25,7 @@ from routepilot.optimization.engine.models import (
     CostProfile,
     DriverSnapshot,
     EngineParams,
+    EngineResult,
     EngineSnapshot,
     OfferSnapshot,
     Point,
@@ -168,6 +171,80 @@ def build_instance(seed: int, *, fallback_parameters: bool = False) -> EngineSna
     )
 
 
+def consolidation_block(
+    source: EngineSnapshot, result: EngineResult, offers: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """FEAT-010 FR-14: how full the vans of the `profit` fleet solution are (km-weighted)."""
+    plans = {
+        plan.plan_ref: plan
+        for plan in [
+            *(p for groups in result.per_driver.values() for g in groups.values() for p in g),
+            *result.fleet_candidates,
+            *result.baseline_plans,
+        ]
+    }
+    vehicles = {driver.id: driver.vehicle for driver in source.drivers}
+    chosen = [plans[a.plan_ref] for a in result.fleet["profit"].assignments]
+    zero = Decimal(0)
+    ep_km = ep_available = kg_km = kg_available = km = empty = zero
+    for plan in chosen:
+        vehicle = vehicles[plan.driver_id]
+        for leg in plan.legs:
+            ep_km += leg.distance_km * leg.load_pallet_eq
+            ep_available += leg.distance_km * vehicle.pallet_places
+            kg_km += leg.distance_km * leg.load_kg
+            kg_available += leg.distance_km * vehicle.payload_kg
+        km += plan.distance_km
+        empty += plan.empty_km
+
+    def ratio(part: Decimal, whole: Decimal) -> str:
+        return str((part / whole).quantize(Decimal("0.0001"))) if whole else "0.0000"
+
+    return dict(
+        load_factor_ep=ratio(ep_km, ep_available),
+        load_factor_kg=ratio(kg_km, kg_available),
+        plans=len(chosen),
+        plans_with_2plus_on_board=sum(plan.max_orders_on_board >= 2 for plan in chosen),
+        empty_km_share=ratio(empty, km),
+        partner_share=str(partner_share(offers)),
+        # Raw sums, so that the summary can weight by kilometres across runs.
+        sums=dict(
+            ep_km=str(ep_km),
+            ep_km_available=str(ep_available),
+            kg_km=str(kg_km),
+            kg_km_available=str(kg_available),
+            km=str(km),
+            empty_km=str(empty),
+        ),
+    )
+
+
+def consolidation_summary(blocks: list[dict[str, Any]]) -> dict[str, Any]:
+    """The same figures over all runs: kilometre-weighted fills and summed plan counts."""
+    total = {key: sum(Decimal(b["sums"][key]) for b in blocks) for key in blocks[0]["sums"]}
+
+    def ratio(part: str, whole: str) -> str:
+        return (
+            str((total[part] / total[whole]).quantize(Decimal("0.0001")))
+            if total[whole]
+            else "0.0000"
+        )
+
+    plans = sum(b["plans"] for b in blocks)
+    return dict(
+        load_factor_ep=ratio("ep_km", "ep_km_available"),
+        load_factor_kg=ratio("kg_km", "kg_km_available"),
+        plans=plans,
+        plans_with_2plus_on_board=sum(b["plans_with_2plus_on_board"] for b in blocks),
+        empty_km_share=ratio("empty_km", "km"),
+        partner_share=str(
+            (sum(Decimal(b["partner_share"]) for b in blocks) / len(blocks)).quantize(
+                Decimal("0.0001")
+            )
+        ),
+    )
+
+
 def run(seeds: tuple[int, ...], *, fallback_parameters: bool = False) -> dict[str, Any]:
     runs = []
     for seed in seeds:
@@ -187,6 +264,9 @@ def run(seeds: tuple[int, ...], *, fallback_parameters: bool = False) -> dict[st
             pool_sizes=pools,
             plans=sum(len(g["profit"]) for g in result.per_driver.values()),
             fleet_profit_minor=result.fleet["profit"].totals.net_profit_minor,
+            consolidation=consolidation_block(
+                source, result, generate_offers(seed, REFERENCE_DATE)[0]["payload"]
+            ),
         )
         print(json.dumps(row, sort_keys=True), flush=True)
         runs.append(row)
@@ -203,6 +283,7 @@ def run(seeds: tuple[int, ...], *, fallback_parameters: bool = False) -> dict[st
         target_p95_ms=TARGET_P95_MS,
         target_met=target_met,
         truncated_runs=sum(row["truncated"] for row in runs),
+        consolidation=consolidation_summary([row["consolidation"] for row in runs]),
         target_line=(
             f"target p95 <= {TARGET_P95_MS / 1000:g} s: "
             f"{'MET' if target_met else 'NOT MET'} (p95 = {p95 / 1000:.1f} s)"
@@ -231,6 +312,7 @@ def write_results(result: dict[str, Any], path: Path) -> None:
 
 @pytest.mark.bench
 @pytest.mark.ac("AC-FEAT-003-29")
+@pytest.mark.ac("AC-FEAT-010-14")
 def test_fleet_5x60() -> None:
     """20 seeded runs; records p50/p95, nodes, truncated flags and whether p95 <= 15 s.
 
@@ -245,6 +327,8 @@ def test_fleet_5x60() -> None:
         problems.append("runs do not use the 20 fixed seeds")
     if not all({"runtime_ms", "nodes", "truncated"} <= row.keys() for row in stored["runs"]):
         problems.append("a run lacks runtime_ms, nodes or truncated")
+    if not all("consolidation" in row for row in stored["runs"]) or "consolidation" not in summary:
+        problems.append("a run or the summary lacks the consolidation block (FEAT-010 FR-14)")
     if not {"p50_ms", "p95_ms", "nodes_p50", "truncated_runs", "target_met"} <= summary.keys():
         problems.append("summary lacks p50, p95, nodes, truncated count or the target flag")
     if not summary["target_line"].startswith("target p95 <= 15 s: "):
