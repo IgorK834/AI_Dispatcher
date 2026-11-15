@@ -22,6 +22,7 @@ Golden cases (`GOLD-001` … `GOLD-010`) are small scenarios with **hand-checkab
 | [GOLD-008](GOLD-008.md) | Weekend return | chain with a return offer, `home_by` | AC-FEAT-003-37 |
 | [GOLD-009](GOLD-009.md) | Fleet: one offer best for two drivers | exact assignment beats greedy | AC-FEAT-003-38 |
 | [GOLD-010](GOLD-010.md) | Industrial pallets overflow 8 places | 1.5 EUR equivalents | AC-FEAT-003-39 |
+| [GOLD-011](GOLD-011.md) | Consolidation beats a chain (FEAT-010) — **proposed, not approved; no test yet** | four orders on board, load factors | AC-FEAT-010-13 |
 
 ## Conventions G1–G14
 
