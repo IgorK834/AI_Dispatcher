@@ -154,6 +154,15 @@ jobs:
           uv run python ../../scripts/check_spec_touch.py --agent-docs
           uv run python ../../scripts/check_spec_touch.py --base "$CI_BASE_SHA"
           uv run python ../../scripts/trace.py --check
+      - name: 'Gate 11: documentation checks and clean-clone run'
+        if: ${{ !cancelled() }}
+        # FEAT-007 FR-4 to FR-7: README, DEVELOPMENT.md and the wording rules, then the README
+        # commands in this fresh checkout with no key in the environment (the run must take at
+        # most 10 minutes). The demo login passes Cloudflare's always-pass Turnstile test secret
+        # to the verification endpoint, like the sign-in scenario of Gate 7.
+        run: |
+          python3 scripts/check_docs.py --readme --development --wording
+          bash scripts/clean_clone_check.sh --here
   required:
     name: ci-full
     needs: checks
