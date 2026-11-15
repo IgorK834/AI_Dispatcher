@@ -11,6 +11,7 @@ from routepilot.fleet.domain.models import DriverStateCreate
 from routepilot.freight.generator import CITIES
 from routepilot.integrations.timocom.mock import MockFreightProvider
 from routepilot.optimization.engine.models import EngineParams
+from routepilot.shared.clock import FixedClock
 
 
 def prepare_fixture(services: SimpleNamespace, scenario: Scenario, root: Path) -> None:
@@ -20,6 +21,10 @@ def prepare_fixture(services: SimpleNamespace, scenario: Scenario, root: Path) -
     drivers = services.fleet.list_active()
     for driver in drivers[fixture["driver_count"] :]:
         services.fleet.delete_driver(driver.id, "eval-fixture")
+    # A state written at the same instant as the seeded one would lose the tie under a fixed
+    # clock (the versions share `valid_from`), so the fixture states are written a minute later.
+    real_clock = services.fleet.clock
+    services.fleet.clock = FixedClock(now + timedelta(minutes=1))
     for driver in drivers[: fixture["driver_count"]]:
         services.fleet.add_state(
             driver.id,
@@ -43,6 +48,7 @@ def prepare_fixture(services: SimpleNamespace, scenario: Scenario, root: Path) -
             ),
             "eval-fixture",
         )
+    services.fleet.clock = real_clock
     services.jobs.params = EngineParams(**fixture["params"])
     offers = load_fixture(root, scenario.offer_fixture)["offers"]
     cities = {row[0]: row for row in CITIES}

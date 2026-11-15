@@ -35,6 +35,7 @@ from routepilot.agents.models import ModelPolicy, ModelRegistry, ModelSpec, Prov
 from routepilot.agents.schemas import MessageCreate
 from routepilot.main import create_app
 from routepilot.shared.auth import Principal
+from routepilot.shared.clock import Clock, FixedClock
 from routepilot.shared.config import Settings
 from routepilot.shared.db.engine import migration_config
 from routepilot.shared.pagination import CursorCodec
@@ -159,6 +160,9 @@ def _provider_diagnostics(sink: list[str]) -> Any:
     return original
 
 
+OFFLINE_NOW = datetime(2026, 11, 16, 6, tzinfo=UTC)  # the offline campaign's fixed clock
+
+
 async def run_scenario(
     scenario: Scenario,
     *,
@@ -166,6 +170,7 @@ async def run_scenario(
     env_file: Path,
     budget: Any,
     work: Path,
+    clock: Clock | None = None,
 ) -> ScenarioResult:
     group = "injection" if scenario.injection else "agents"
     result = ScenarioResult(scenario.id, group)
@@ -186,7 +191,11 @@ async def run_scenario(
     )
     registry = offline_registry(settings, scenario) if mode == "offline" else None
     original_call = _provider_diagnostics(result.provider_errors)
-    app = create_app(settings, model_registry=registry)
+    # The offline run is a test: a fixed clock keeps the offer windows (relative to `now`) and so
+    # the result independent of the time of day. A live run uses the real clock.
+    if clock is None and mode == "offline":
+        clock = FixedClock(OFFLINE_NOW)
+    app = create_app(settings, model_registry=registry, clock=clock)
     services = app.state.services
     engine = app.state.engine
     _tool_diagnostics(services.tools, result.tool_error_details)

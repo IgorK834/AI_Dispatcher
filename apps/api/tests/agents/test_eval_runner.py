@@ -1,6 +1,7 @@
 """Offline harness checks for the AC-40/41 runner and the hard campaign ledger."""
 
 import asyncio
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
@@ -9,6 +10,7 @@ from evals.runner import ROOT, run_scenario, summarise
 from evals.schema import load_scenarios
 
 from routepilot.agents.guards import BudgetExceeded
+from routepilot.shared.clock import FixedClock
 
 
 @pytest.mark.ac("AC-FEAT-006-40")
@@ -33,7 +35,12 @@ def test_offline_run_uses_real_flow_and_never_assigns(tmp_path: Path, scenario_i
     scenario = next(s for s in load_scenarios(ROOT) if s.id == scenario_id)
     result = asyncio.run(
         run_scenario(
-            scenario, mode="offline", env_file=tmp_path / "none", budget=None, work=tmp_path
+            scenario,
+            mode="offline",
+            env_file=tmp_path / "none",
+            budget=None,
+            work=tmp_path,
+            clock=FixedClock(datetime(2026, 11, 16, 6, tzinfo=UTC)),  # no time-of-day dependence
         )
     )
     assert result.error is None
