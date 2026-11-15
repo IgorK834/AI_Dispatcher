@@ -1,13 +1,15 @@
 """Persist engine results atomically and convert them to public API documents."""
 
+from collections.abc import Sequence
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Any
 from uuid import UUID, uuid4
 
 from sqlalchemy.orm import Session
 
-from routepilot.optimization.engine.models import EngineResult
+from routepilot.optimization.engine.models import EngineResult, VehicleSnapshot
 from routepilot.optimization.engine.models import RoutePlan as EnginePlan
+from routepilot.optimization.engine.plan_metrics import stop_load_metrics
 from routepilot.optimization.jobs.domain import (
     Baselines,
     DriverPlans,
@@ -27,7 +29,31 @@ def scaled(value: Decimal, factor: int = 1000) -> int:
     return int((value * factor).to_integral_value(rounding=ROUND_HALF_UP))
 
 
-def plan_summary(row: PlanRow) -> PlanSummary:
+Metrics = tuple[Decimal, Decimal, int]
+
+
+def stored_metrics(job: JobRow, driver_id: UUID, stops: Sequence[StopRow]) -> Metrics:
+    """Load metrics of a stored plan from its stops and the vehicle of the job snapshot."""
+    vehicle = next(
+        driver["vehicle"]
+        for driver in job.request["snapshot"]["drivers"]
+        if driver["id"] == str(driver_id)
+    )
+    return stop_load_metrics(
+        (
+            (
+                stop.kind,
+                Decimal(stop.leg_m) / 1000,
+                Decimal(stop.load_pallet_eq_after),
+                stop.load_kg_after,
+            )
+            for stop in sorted(stops, key=lambda stop: stop.sequence)
+        ),
+        VehicleSnapshot(pallet_places=vehicle["pallet_places"], payload_kg=vehicle["payload_kg"]),
+    )
+
+
+def plan_summary(row: PlanRow, metrics: Metrics) -> PlanSummary:
     return PlanSummary.model_validate(
         dict(
             id=row.id,
@@ -47,6 +73,9 @@ def plan_summary(row: PlanRow) -> PlanSummary:
             finish_at=row.finish_at,
             home_reached=row.home_reached,
             warnings=row.warnings,
+            load_factor_ep=metrics[0],
+            load_factor_kg=metrics[1],
+            max_orders_on_board=metrics[2],
         )
     )
 
@@ -160,7 +189,17 @@ def store_result(session: Session, job: JobRow, result: EngineResult) -> None:
             DriverPlans(
                 driver_id=UUID(driver_id),
                 plans={
-                    key: [plan_summary(rows[plan.plan_ref]) for plan in value]
+                    key: [
+                        plan_summary(
+                            rows[plan.plan_ref],
+                            (
+                                plan.load_factor_ep,
+                                plan.load_factor_kg,
+                                plan.max_orders_on_board,
+                            ),
+                        )
+                        for plan in value
+                    ]
                     for key, value in variants.items()
                 },
             )

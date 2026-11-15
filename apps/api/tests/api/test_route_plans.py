@@ -1,7 +1,11 @@
 """Immutable stored schedule contracts and model-safe computed facts."""
 
 import asyncio
+import json
+import shutil
+import subprocess
 from decimal import Decimal
+from pathlib import Path
 from uuid import UUID, uuid4
 
 import pytest
@@ -172,3 +176,89 @@ def test_availability_rule_summary_and_comparison_are_computed_by_services(route
     assert comparison["deltas_vs_first"][0]["d_finish_min"] == int(
         (other.finish_at - base.finish_at).total_seconds() // 60
     )
+
+
+@pytest.mark.ac("AC-FEAT-010-11")
+def test_job_result_and_plan_detail_carry_the_engine_load_metrics(job_client):
+    client, (service, _plans, _assignments, _user, job_id) = job_client
+    with service.repository.session() as session:
+        from routepilot.optimization.jobs.repository import JobRow
+
+        stored = session.get_one(JobRow, job_id).result
+    engine_plans = {
+        stored["plan_ids"][plan["plan_ref"]]: plan
+        for variants in stored["engine"]["per_driver"].values()
+        for plans in variants.values()
+        for plan in plans
+    }
+    body = client.get(f"/api/v1/optimization-jobs/{job_id}/result").json()
+    summaries = [
+        plan for driver in body["perDriver"] for plans in driver["plans"].values() for plan in plans
+    ]
+    assert summaries
+    for summary in summaries:
+        engine = engine_plans[summary["id"]]
+        detail = client.get(f"/api/v1/route-plans/{summary['id']}").json()
+        for document in (summary, detail):
+            assert isinstance(document["loadFactorEp"], str)
+            assert isinstance(document["loadFactorKg"], str)
+            assert type(document["maxOrdersOnBoard"]) is int and document["maxOrdersOnBoard"] >= 0
+            assert 0 <= Decimal(document["loadFactorEp"]) <= 1
+            assert 0 <= Decimal(document["loadFactorKg"]) <= 1
+            assert Decimal(document["loadFactorEp"]) == Decimal(engine["load_factor_ep"])
+            assert Decimal(document["loadFactorKg"]) == Decimal(engine["load_factor_kg"])
+            assert document["maxOrdersOnBoard"] == engine["max_orders_on_board"]
+    assert any(Decimal(plan["loadFactorEp"]) > 0 for plan in summaries)
+    assert any(plan["maxOrdersOnBoard"] >= 1 for plan in summaries)
+
+
+@pytest.mark.ac("AC-FEAT-010-11")
+def test_a_job_stored_before_the_metrics_existed_still_gets_them_on_read(job_client):
+    client, (service, _plans, _assignments, _user, job_id) = job_client
+    from routepilot.optimization.jobs.repository import JobRow
+
+    before = client.get(f"/api/v1/optimization-jobs/{job_id}/result").json()
+    with service.repository.session() as session:
+        row = session.get_one(JobRow, job_id)
+        public = json.loads(json.dumps(row.result["public"]))
+        for driver in public["perDriver"]:
+            for plans in driver["plans"].values():
+                for plan in plans:
+                    for key in ("loadFactorEp", "loadFactorKg", "maxOrdersOnBoard"):
+                        del plan[key]
+        row.result = {**row.result, "public": public}
+        session.commit()
+    assert client.get(f"/api/v1/optimization-jobs/{job_id}/result").json() == before
+
+
+@pytest.mark.ac("AC-FEAT-010-11")
+def test_openapi_declares_the_load_metrics_and_only_adds_to_the_committed_main_contract():
+    root = Path(__file__).resolve().parents[4]
+    contract = json.loads((root / "contracts/openapi.json").read_text())
+    schemas = contract["components"]["schemas"]
+    for name in ("PlanSummary", "RoutePlan"):
+        properties = schemas[name]["properties"]
+        assert properties["loadFactorEp"]["type"] == "string"
+        assert properties["loadFactorKg"]["type"] == "string"
+        assert properties["maxOrdersOnBoard"]["type"] == "integer"
+        assert {"loadFactorEp", "loadFactorKg", "maxOrdersOnBoard"} <= set(
+            schemas[name]["required"]
+        )
+    # No breaking change against main: every path, operation, schema, property and required
+    # request field of the old contract is still there (new response fields are additions).
+    old = json.loads(
+        subprocess.run(
+            [shutil.which("git") or "git", "show", "main:contracts/openapi.json"],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+    )
+    for path, operations in old["paths"].items():
+        assert set(operations) <= set(contract["paths"][path]), path
+    for name, schema in old["components"]["schemas"].items():
+        new = schemas[name]
+        assert set(schema.get("properties", {})) <= set(new.get("properties", {})), name
+        added = set(new.get("required", [])) - set(schema.get("required", []))
+        assert added <= {"loadFactorEp", "loadFactorKg", "maxOrdersOnBoard"}, name

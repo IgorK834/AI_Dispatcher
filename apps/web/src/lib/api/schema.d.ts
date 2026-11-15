@@ -1498,8 +1498,14 @@ export interface components {
              * @enum {string}
              */
             kind: "optimized" | "baseline_single" | "baseline_greedy";
+            /** Loadfactorep */
+            loadFactorEp: string;
+            /** Loadfactorkg */
+            loadFactorKg: string;
             /** Marginpct */
             marginPct: string;
+            /** Maxordersonboard */
+            maxOrdersOnBoard: number;
             netProfit: components["schemas"]["routepilot__optimization__jobs__domain__Money"];
             /** Offerids */
             offerIds: string[];
@@ -1708,8 +1714,14 @@ export interface components {
              * @enum {string}
              */
             kind: "optimized" | "baseline_single" | "baseline_greedy";
+            /** Loadfactorep */
+            loadFactorEp: string;
+            /** Loadfactorkg */
+            loadFactorKg: string;
             /** Marginpct */
             marginPct: string;
+            /** Maxordersonboard */
+            maxOrdersOnBoard: number;
             netProfit: components["schemas"]["routepilot__optimization__jobs__domain__Money"];
             /** Offerids */
             offerIds: string[];

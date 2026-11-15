@@ -106,6 +106,10 @@ class PlanSummary(Schema):
     finish_at: datetime
     home_reached: bool
     warnings: list[str]
+    # FEAT-010 FR-11: computed on read from the stored stops and the vehicle's limits.
+    load_factor_ep: Decimal
+    load_factor_kg: Decimal
+    max_orders_on_board: int
 
 
 class Calculation(Schema):
