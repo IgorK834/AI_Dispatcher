@@ -246,9 +246,19 @@ def test_openapi_declares_the_load_metrics_and_only_adds_to_the_committed_main_c
         )
     # No breaking change against main: every path, operation, schema, property and required
     # request field of the old contract is still there (new response fields are additions).
+    # CI checks out a detached merge commit: there is no local `main`, only `origin/main`.
+    git = shutil.which("git") or "git"
+    base = next(
+        ref
+        for ref in ("main", "origin/main")
+        if subprocess.run(
+            [git, "rev-parse", "--verify", "--quiet", f"{ref}^{{commit}}"], cwd=root, check=False
+        ).returncode
+        == 0
+    )
     old = json.loads(
         subprocess.run(
-            [shutil.which("git") or "git", "show", "main:contracts/openapi.json"],
+            [git, "show", f"{base}:contracts/openapi.json"],
             cwd=root,
             capture_output=True,
             text=True,
