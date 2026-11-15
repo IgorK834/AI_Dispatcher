@@ -1,17 +1,17 @@
 ---
 id: FEAT-010
 title: LTL consolidation — realistic demo offers, partner-aware pool and load metrics
-status: draft
+status: approved
 owner: project owner
-requirements: [REQ-003, REQ-009]
+requirements: [REQ-003, REQ-009, REQ-034]
 adrs: [ADR-0003, ADR-0014]
 modules: [freight (generator), optimization.engine (prefilter, models), optimization.jobs (plan read model), web features/plans, bench, specs/golden]
-revision: 1
+revision: 2
 ---
 
 # FEAT-010: LTL consolidation — realistic demo offers, partner-aware pool and load metrics
 
-> **Draft, P1 (after the MVP).** Nothing here is implemented. It may not be implemented until the owner sets the status to `approved` (backlog owner action O-12).
+> **Approved by the owner on 2026-11-15 (revision 2, backlog owner action O-12). P1 (after the MVP).** Nothing here is implemented yet.
 > Research and measurements behind this specification: [`docs/raport.md`](../docs/raport.md).
 > Every number marked *assumption* is a configurable modelling choice, not market data. Demo data stays synthetic (`is_synthetic = true`).
 
@@ -299,6 +299,20 @@ Agent evals: no new scenario. The fake-model agent tests (`make test-agents`) mu
 
 ## 11. Open questions
 
+**Owner decisions (2026-11-15, O-12, issue #115):** all proposed defaults in this table are accepted.
+
+| ID | Decision |
+|---|---|
+| OQ-010-01 | The tariff constants and the kg per EP range are those of §6.1, all with provenance `assumption`. |
+| OQ-010-02 | The zones of §6.2 and the corridors and weights of §6.3 are accepted as listed. |
+| OQ-010-03 | The load metrics are computed on read from `route_stops` and the vehicle's limits. No migration. |
+| OQ-010-04 | FEAT-002 revision 5 marks FR-10, the mass part of FR-11, FR-13 and AC-FEAT-002-07 as superseded by FEAT-010 for `offers-generator v3` (AC-FEAT-002-07 withdrawn, AC-FEAT-002-04 … 06 stay). The FEAT-003 changelog marks the FR-17 ranking and OQ-003-10 as superseded by FEAT-010 FR-8. |
+| OQ-010-05 | REQ-034 (P1) is added to `specs/requirements.md` with the proposed text and the traceability row REQ-034 → FEAT-010 → AC-FEAT-010-01 … 14. |
+| OQ-010-06 | FR-2 keeps the tagged ids. Untagged ids referenced by evals and agent tests are checked after each regeneration and listed in the completion report. Live `ai-evals` are not re-run. |
+| OQ-010-07 | No satellite towns in this feature. |
+| OQ-010-08 | Agent tools and prompts are unchanged in this feature. |
+| OQ-010-09 | The pool-partner distance is the matrix distance of the snapshot's `TravelMatrix`. |
+
 | ID | Question | Proposed default | Blocks |
 |---|---|---|---|
 | OQ-010-01 | Tariff constants and kg per EP (§6.1). | as in §6.1, all `assumption` | AC-04, 05 |
@@ -316,3 +330,4 @@ Agent evals: no new scenario. The fake-model agent tests (`make test-agents`) mu
 | Revision | Date | Change |
 |---|---|---|
 | 1 | 2026-11-15 | Initial draft from `docs/raport.md` (LTL research and measurements). |
+| 2 | 2026-11-15 | Status `draft` → `approved` by the owner (O-12, issue #115): §6.1–6.3 accepted as drafted; owner decisions on OQ-010-01 … 09 recorded (§11); REQ-034 added to the requirements. |

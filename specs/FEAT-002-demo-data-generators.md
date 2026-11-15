@@ -318,3 +318,4 @@ No change.
 | 2 | 2026-11-11 | Owner decisions on the open questions recorded (§11); statutory per-diem values in the cost profile |
 | 3 | 2026-11-11 | Status `draft` → `approved` by the owner |
 | 4 | 2026-11-12 | Owner clarified FR-13/14: the five minimum-fare detour examples override the normal price multiplier and record the effective multiplier, sampled noise and assumption provenance. |
+| 5 | 2026-11-15 | Owner decision (FEAT-010 OQ-010-04): FR-10, the mass part of FR-11, FR-13 and AC-FEAT-002-07 are superseded by FEAT-010 (FR-3, FR-4, FR-6; AC-FEAT-010-03 … 06) for `offers-generator v3`. AC-FEAT-002-07 is withdrawn; AC-FEAT-002-04 … 06 stay. |

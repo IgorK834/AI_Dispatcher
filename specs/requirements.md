@@ -43,6 +43,7 @@ Priorities: **P0** = MVP (deadline 2026-11-15); **P1** = only if time allows; **
 | REQ-031 | Carbon footprint: kg CO₂ for every plan and variant (litres of diesel × emission factor), comparison of variants | P0 | FEAT-003, FEAT-005 |
 | REQ-032 | Local run without Docker, a database server or API keys; data seed on first start; explicit CORS between `localhost:3000` and `localhost:8000` | P0 | FEAT-000, FEAT-001, FEAT-002, FEAT-007 |
 | REQ-033 | Delivery documentation: `README.md` (description, technologies, step-by-step run of API and web, how AI tools were used), a `.mp4`/`.gif` recording in the repo, instruction files for coding agents in the repo | P0 | FEAT-007, FEAT-009, FEAT-000 |
+| REQ-034 | Demo offers and plans reflect LTL consolidation: size-based prices, grouped lanes, partner-aware pool, load metrics | P1 | FEAT-010 |
 
 Note on REQ-012: the report writes the profile names as `PL_DOMESTIC_EMPLOYEE` / `EU_561_VAN_INTERNATIONAL`. The identifiers used in code and specifications are `pl_domestic_employee_v1` / `eu561_van_international_v1` (`context.md` → Core Domain Rules 6–8).
 
@@ -122,6 +123,7 @@ AC IDs refer to section 7 of each FEAT file. Ranges are inclusive. This table is
 | REQ-033 | FEAT-007 | AC-FEAT-007-05, 06 |
 | | FEAT-009 | AC-FEAT-009-01 … 04 |
 | | FEAT-000 | AC-FEAT-000-13 |
+| REQ-034 | FEAT-010 | AC-FEAT-010-01 … 14 |
 | NFR-001 | FEAT-003 | AC-FEAT-003-07 |
 | NFR-002 | FEAT-003 | AC-FEAT-003-27, 29 |
 | NFR-003 | FEAT-003 | AC-FEAT-003-01 … 13, 25 |
