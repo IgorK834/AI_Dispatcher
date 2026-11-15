@@ -76,7 +76,7 @@ AC IDs refer to section 7 of each FEAT file. Ranges are inclusive. This table is
 | REQ-001 | FEAT-001 | AC-FEAT-001-12 … 14 |
 | | FEAT-002 | AC-FEAT-002-09 … 12 |
 | REQ-002 | FEAT-002 | AC-FEAT-002-13, 14, 20 |
-| REQ-003 | FEAT-002 | AC-FEAT-002-04 … 07, 18, 19 |
+| REQ-003 | FEAT-002 | AC-FEAT-002-04 … 06, 18, 19 (AC-FEAT-002-07 withdrawn, replaced by AC-FEAT-010-04) |
 | REQ-004 | FEAT-002 | AC-FEAT-002-01 … 03, 16 |
 | REQ-005 | FEAT-001 | AC-FEAT-001-20 … 22, 25 … 29, 33 |
 | | FEAT-005 | AC-FEAT-005-01 … 03 |
