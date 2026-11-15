@@ -63,9 +63,11 @@ jobs:
           cd apps/api
           uv run pytest tests ../../scripts/tests --ignore=tests/db --ignore=tests/agents --ignore=tests/security -m 'not integration' --cov=routepilot --cov-branch --cov-report=term-missing
           cd ../..
-          pnpm --filter web test
+          pnpm --filter web test:coverage
       - name: 'Gate 3a: runtime agents with fake models'
         if: ${{ !cancelled() }}
+        env:
+          PYTEST_ADDOPTS: --cov=routepilot --cov-branch --cov-append --cov-report=
         run: make test-agents
       - name: 'Gate 4: contract drift, compatibility and schemathesis subset'
         if: ${{ !cancelled() }}
@@ -78,7 +80,17 @@ jobs:
         run: gitleaks git --redact --log-opts="$CI_BASE_SHA..HEAD" --config .gitleaks.toml
       - name: 'Gate 8c: auth, CSRF and CORS security tests'
         if: ${{ !cancelled() }}
+        env:
+          PYTEST_ADDOPTS: --cov=routepilot --cov-branch --cov-append --cov-report=
         run: bash scripts/ci/pytest_optional.sh tests/security
+      - name: 'Gate 3b: coverage thresholds per package'
+        if: ${{ !cancelled() }}
+        # Gates 3, 3a and 8c write to one coverage data file; this step prints the per-package
+        # numbers and fails when a package is below its threshold (context.md, Testing Standards).
+        run: |
+          cd apps/api
+          uv run coverage xml
+          uv run python ../../scripts/ci/check_coverage.py coverage.xml
       - name: 'Gate 9: production web build and API smoke'
         if: ${{ !cancelled() }}
         run: |
