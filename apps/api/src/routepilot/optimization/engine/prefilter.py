@@ -1,4 +1,4 @@
-"""Fixed-order offer checks and conservative pallet equivalents (FR-15-19)."""
+"""Fixed-order offer checks, pallet equivalents and the pool cut (FR-15-19, FEAT-010 FR-8)."""
 
 from datetime import timedelta
 from decimal import ROUND_CEILING, Decimal
@@ -109,5 +109,25 @@ def offer_pool(
             ratio = Decimal(revenue) / distance if distance else Decimal("Infinity")
             return -ratio, offer.id
 
-        pool = sorted(pool, key=key)[: snapshot.params.max_pool_per_driver]
+        # FEAT-010 FR-8: the best half by ratio, then pool partners of kept offers, then by ratio.
+        params = snapshot.params
+        ranked = sorted(pool, key=key)
+        kept = ranked[: (params.max_pool_per_driver + 1) // 2]
+        rest = ranked[len(kept) :]
+
+        def partner(a: OfferSnapshot, b: OfferSnapshot) -> bool:
+            pickups, _ = snapshot.matrix.leg(a.stops[0].point, b.stops[0].point)
+            deliveries, _ = snapshot.matrix.leg(a.stops[1].point, b.stops[1].point)
+            return (
+                pickups <= params.pool_partner_pickup_km
+                and deliveries <= params.pool_partner_delivery_km
+            )
+
+        while len(kept) < params.max_pool_per_driver:
+            found = next((o for o in rest if any(partner(o, k) for k in kept)), None)
+            if found is None:
+                break
+            kept.append(found)
+            rest.remove(found)
+        pool = kept + rest[: params.max_pool_per_driver - len(kept)]
     return sorted(pool, key=lambda item: item.id), rejected, truncated
