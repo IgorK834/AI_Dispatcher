@@ -256,9 +256,10 @@ class RouteValidator:
                 # each maximal segment proves the same minute limits without minute-wise loops.
                 remaining = activity.minutes
                 while remaining:
-                    step = min(
-                        remaining, int((next_week_boundary(state) - state.t).total_seconds() // 60)
-                    )
+                    # Less than a whole minute to the boundary still charges one minute; a step
+                    # of 0 would never end this loop (`advance_clock` splits that minute).
+                    to_boundary = int((next_week_boundary(state) - state.t).total_seconds() // 60)
+                    step = min(remaining, max(1, to_boundary))
                     driving = activity.kind == "DRIVE"
                     limits = rules.remaining(state)
                     if (
