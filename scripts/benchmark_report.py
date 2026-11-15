@@ -19,7 +19,7 @@ import tempfile
 import time
 from dataclasses import dataclass
 from datetime import UTC, datetime
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 from statistics import median, quantiles
 from typing import Any
@@ -52,7 +52,9 @@ def parse_args(argv: list[str]) -> Config:
     )
     parser.add_argument("--seed", type=int, default=DEMO_SEED)
     parser.add_argument("--runs", type=int, default=20, help="timed engine runs (FR-8: 20)")
-    parser.add_argument("--horizon-days", type=int, default=5)
+    # FEAT-010: with the grouped demo offers a 5-day search runs for over an hour per run, a 2-day
+    # search for about ten seconds, so the report keeps 2 days (the file states the setting used).
+    parser.add_argument("--horizon-days", type=int, default=2)
     parser.add_argument("--max-offers-per-plan", type=int, default=3)
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--agents-fake", action="store_true", help="also time question -> approval")
@@ -219,7 +221,7 @@ def table(rows: list[tuple[str, str]]) -> list[str]:
 
 
 def pct(value: str | Decimal) -> str:
-    return f"{Decimal(value) * 100:.1f} %"
+    return f"{(Decimal(value) * 100).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP)} %"
 
 
 def verdict(met: bool) -> str:

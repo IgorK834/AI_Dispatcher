@@ -7,7 +7,7 @@ the README quotes comes from this file. The data is synthetic (`is_synthetic = t
 
 - Demo data: seed `20261109`, reference date `2026-11-16`, 5 drivers, 150 synthetic offers
   (the generators of the committed demo data).
-- Engine settings: horizon 5 days, at most 3 offers per plan,
+- Engine settings: horizon 2 days, at most 3 offers per plan,
   top 5 plans per driver. Other parameters are the engine defaults.
   The defaults for the first three are 5 days, 6 offers and 10 plans;
   fewer offers and plans per driver keep 20 timed runs under ten minutes.
@@ -19,17 +19,17 @@ Measured on the `profit` fleet solution of one engine run without a wall-clock c
 
 | Metric | Value |
 |---|---|
-| Fleet profit, `profit` solution | EUR 70.12 |
-| Fleet profit, `baseline_single` | EUR 20.30 |
-| Fleet profit, `baseline_greedy` | EUR 20.30 |
-| `profit` against `baseline_single` | EUR 49.82 (+245.4 %) |
-| `profit` against `baseline_greedy` | EUR 49.82 (+245.4 %) |
-| Drivers with a plan | 2 of 5 |
-| Empty kilometres, share of all kilometres | 4.6 % |
-| Capacity use, EP·km over available EP·km | 28.9 % |
-| Capacity use, kg·km over available kg·km | 73.2 % |
-| Drivers with a plan who are home before `home_by` | 100.0 % |
-| Search nodes | 38298 |
+| Fleet profit, `profit` solution | EUR 1,303.10 |
+| Fleet profit, `baseline_single` | EUR 938.93 |
+| Fleet profit, `baseline_greedy` | EUR 1,127.29 |
+| `profit` against `baseline_single` | EUR 364.17 (+38.8 %) |
+| `profit` against `baseline_greedy` | EUR 175.81 (+15.6 %) |
+| Drivers with a plan | 5 of 5 |
+| Empty kilometres, share of all kilometres | 22.3 % |
+| Capacity use, EP·km over available EP·km | 44.1 % |
+| Capacity use, kg·km over available kg·km | 53.1 % |
+| Drivers with a plan who are home before `home_by` | 0.0 % |
+| Search nodes | 27900 |
 | Search stopped by the node budget | no |
 
 Definitions: empty kilometres are the legs without load; EP·km and kg·km sum, over every
@@ -38,18 +38,34 @@ and are divided by the distance times the vehicle's capacity (pallet places or p
 The engine plans the way home only when `home_by` lies inside the planning horizon and
 then ends the plan at the home base on time; with a shorter horizon no plan returns home.
 
+## Consolidation (identical between runs)
+
+How full the vans of the `profit` fleet solution are and how many orders they carry at
+once (FEAT-010). The targets are recorded as met or not met and are never asserted.
+
+| Metric | Value |
+|---|---|
+| Van fill, pallet places (EP·km), km-weighted | 44.1 % |
+| Van fill, payload (kg·km), km-weighted | 53.1 % |
+| Plans with 2 or more orders on board at once | 3 of 5 |
+| Empty kilometres, share of all kilometres | 22.3 % |
+| Offers with a consolidation partner (partner share) | 75.7 % |
+
+Target A, partner share >= 50%: met (75.7 %).
+Target B, pallet fill >= 60% and >= 70% of plans with 2 or more orders on board (this demo run): not met (44.1 %, 60.0 %).
+
 ## Timings (vary between machines)
 
-Measured at 2026-11-15 14:04 UTC on Darwin arm64, Python 3.13.3.
+Measured at 2026-11-15 19:25 UTC on Darwin arm64, Python 3.13.3.
 Timings are reported, not asserted.
 
 | Metric | Value |
 |---|---|
-| Engine runtime p50 over 20 runs | 15.2 s |
-| Engine runtime p95 over 20 runs | 15.3 s |
+| Engine runtime p50 over 20 runs | 10.4 s |
+| Engine runtime p95 over 20 runs | 10.6 s |
 | Runs cut by the 30 s wall-clock safety | 0 of 20 |
-| NFR-002 target p95 <= 15 s | NOT MET (p95 = 15.3 s) |
-| Question to `approval_required` (scripted fake model) | 1.24 s |
+| NFR-002 target p95 <= 15 s | MET (p95 = 10.6 s) |
+| Question to `approval_required` (scripted fake model) | 1.52 s |
 
 The NFR-002 target (p95 <= 15 s) is set for the engine defaults. This report uses reduced
 settings (see above), so the target line is an indication, not a verdict on NFR-002.
