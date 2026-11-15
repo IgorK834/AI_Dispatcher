@@ -1,12 +1,15 @@
 """Documentation checks of FEAT-007 (FR-5, FR-6, FR-7).
 
-Usage: check_docs.py [--readme] [--development] [--wording] [--root DIR]
+Usage: check_docs.py [--readme] [--development] [--wording] [--media] [--root DIR]
 
 --readme       the twelve README sections in order, a Mermaid diagram in the architecture section,
                a Polish summary of at most 25 lines at the end, resolvable relative links, and the
                commands of README steps 1 and 2 (API and web) repeated in `clean_clone_check.sh`
 --development  the 14 sections of DEVELOPMENT.md and a standards-matrix row with existing proof
                references for every delivery standard (1-6, 7a-7e, 8a-8e)
+--media        `docs/media/` (FEAT-009 §4.3): at least one of `demo.mp4` / `demo.gif`, each within
+               its size limit, the MP4 between 120 and 240 s (read from the file; no `ffprobe`
+               needed) and the ten screenshots as PNG files of at most 1 MB
 --wording      over every Markdown file: no term of `scripts/docs_denylist.txt`; the working-time
                notice in the files that define schedules; no "implemented" claim in the README
                status table for a feature whose specification is not `implemented`
@@ -16,6 +19,7 @@ Exit code 1 when a check fails; every problem is printed on its own line.
 
 import argparse
 import re
+import struct
 import sys
 from collections.abc import Iterator
 from pathlib import Path
@@ -50,6 +54,27 @@ SCHEDULE_FILES = (
     "specs/golden/GOLD-*.md",
 )
 SKIPPED_FOLDERS = {".git", "node_modules", ".venv", ".next", ".pytest_cache", "fixtures"}
+
+# FEAT-009 section 4.3: names and limits of the demo media.
+MEDIA_FOLDER = "docs/media"
+MP4_MAX_BYTES = 25 * 1024 * 1024
+GIF_MAX_BYTES = 10 * 1024 * 1024
+PNG_MAX_BYTES = 1024 * 1024
+MP4_SECONDS = (120, 240)
+SCREENSHOT_SIZE = (1440, 900)
+SCREENSHOTS = [
+    "01-login",
+    "02-fleet",
+    "03-driver-form",
+    "04-offers",
+    "05-ai-dispatcher-trace",
+    "06-plan-variants-co2",
+    "07-plan-timeline",
+    "08-approval-card",
+    "09-optimizer-no-ai",
+    "10-pl-locale",
+]
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 LINK = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 COMMENT = re.compile(r"\s+#.*$")
@@ -168,6 +193,95 @@ def check_readme(root: Path) -> list[str]:
     return problems
 
 
+def mp4_seconds(path: Path) -> float | None:
+    """Duration from the `mvhd` box of the file, or None when it cannot be read."""
+    try:
+        with path.open("rb") as handle:
+            size = path.stat().st_size
+
+            def boxes(start: int, end: int) -> Iterator[tuple[bytes, int, int]]:
+                position = start
+                while position + 8 <= end:
+                    handle.seek(position)
+                    length, kind = struct.unpack(">I4s", handle.read(8))
+                    header = 8
+                    if length == 1:
+                        length = struct.unpack(">Q", handle.read(8))[0]
+                        header = 16
+                    elif length == 0:
+                        length = end - position
+                    if length < header:
+                        return
+                    yield kind, position + header, position + length
+                    position += length
+
+            for kind, start, end in boxes(0, size):
+                if kind != b"moov":
+                    continue
+                for inner, inner_start, _ in boxes(start, end):
+                    if inner != b"mvhd":
+                        continue
+                    handle.seek(inner_start)
+                    payload = handle.read(32)
+                    if payload[0] == 1:
+                        timescale, duration = struct.unpack(">IQ", payload[20:32])
+                    else:
+                        timescale, duration = struct.unpack(">II", payload[12:20])
+                    return duration / timescale if timescale else None
+    except (OSError, struct.error, IndexError):
+        return None
+    return None
+
+
+def png_size(path: Path) -> tuple[int, int] | None:
+    head = path.read_bytes()[:24]
+    if head[:8] != PNG_SIGNATURE or head[12:16] != b"IHDR":
+        return None
+    width, height = struct.unpack(">II", head[16:24])
+    return width, height
+
+
+def media_present(root: Path) -> bool:
+    return any((root / MEDIA_FOLDER / name).exists() for name in ("demo.mp4", "demo.gif"))
+
+
+def check_media(root: Path) -> list[str]:
+    """FEAT-009 AC-01 and AC-03: the demo files exist within their limits."""
+    folder = root / MEDIA_FOLDER
+    problems: list[str] = []
+    mp4, gif = folder / "demo.mp4", folder / "demo.gif"
+    if not mp4.exists() and not gif.exists():
+        problems.append(f"{MEDIA_FOLDER}: neither demo.mp4 nor demo.gif exists")
+    if mp4.exists():
+        if mp4.stat().st_size > MP4_MAX_BYTES:
+            problems.append(f"demo.mp4 is larger than {MP4_MAX_BYTES // 1024 // 1024} MB")
+        seconds = mp4_seconds(mp4)
+        low, high = MP4_SECONDS
+        if seconds is None:
+            problems.append("demo.mp4: the duration cannot be read (is it an MP4 file?)")
+        elif not low <= seconds <= high:
+            problems.append(f"demo.mp4 lasts {seconds:.0f} s, not {low}-{high} s")
+    if gif.exists():
+        if gif.stat().st_size > GIF_MAX_BYTES:
+            problems.append(f"demo.gif is larger than {GIF_MAX_BYTES // 1024 // 1024} MB")
+        if gif.read_bytes()[:6] not in (b"GIF87a", b"GIF89a"):
+            problems.append("demo.gif is not a GIF file")
+    for name in SCREENSHOTS:
+        path = folder / "screenshots" / f"{name}.png"
+        if not path.exists():
+            problems.append(f"{MEDIA_FOLDER}/screenshots/{name}.png is missing")
+            continue
+        size = png_size(path)
+        if size is None:
+            problems.append(f"{path.name} is not a PNG file")
+        elif size != SCREENSHOT_SIZE:
+            expected = f"{SCREENSHOT_SIZE[0]} x {SCREENSHOT_SIZE[1]}"
+            problems.append(f"{path.name} is {size[0]} x {size[1]}, not {expected}")
+        if path.stat().st_size > PNG_MAX_BYTES:
+            problems.append(f"{path.name} is larger than 1 MB")
+    return problems
+
+
 def table_rows(section: str) -> Iterator[list[str]]:
     for line in section.splitlines():
         if line.startswith("|") and not re.match(r"^\|[\s:|-]+\|$", line):
@@ -276,10 +390,11 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--readme", action="store_true")
     parser.add_argument("--development", action="store_true")
     parser.add_argument("--wording", action="store_true")
+    parser.add_argument("--media", action="store_true")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args(argv)
-    if not (args.readme or args.development or args.wording):
-        parser.error("choose at least one of --readme, --development, --wording")
+    if not (args.readme or args.development or args.wording or args.media):
+        parser.error("choose at least one of --readme, --development, --wording, --media")
 
     problems: list[str] = []
     if args.readme:
@@ -288,6 +403,8 @@ def main(argv: list[str]) -> int:
         problems += check_development(args.root)
     if args.wording:
         problems += check_wording(args.root)
+    if args.media:
+        problems += check_media(args.root)
     for problem in problems:
         print(problem)
     if problems:
