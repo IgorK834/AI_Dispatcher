@@ -316,6 +316,8 @@ Never use `float` for money. Never call `datetime.now()` in domain code — inje
 
 On start the API checks the marker `seed_version` in the `app_meta` table. If it is missing, the API creates the `admin` and `demo` accounts from `.env`, the default cost profile, the demo fleet and the demo offers (FEAT-002), then writes the marker. The seed is idempotent: a second start changes nothing.
 
+**Data format.** The demo offers are generated, but their structure is the payload of the TIMOCOM Freight Exchange API v3.0.6: names, nesting and enumeration values come from the official OpenAPI file, and the mapper and its fixtures follow that file (ADR-0003, FEAT-002). The values are synthetic, and fields the API does not define are kept as separate enrichment with provenance. No real TIMOCOM data is used.
+
 ### 5.5 Path to PostgreSQL (post-MVP)
 
 Models and queries use no dialect-specific functions, so the same code runs on PostgreSQL 17. What changes: the connection URL, the checkpointer package (`langgraph-checkpoint-postgres`), and the job queue (a separate worker container with `SELECT … FOR UPDATE SKIP LOCKED`). See ADR-0002 and ADR-0008.

@@ -91,12 +91,13 @@ Full versions: [`docs/development-log.md`](development-log.md).
 
 ## 8. Honest limits
 
-- Synthetic data only; no connection to a freight exchange.
+- Synthetic data only; no connection to a freight exchange. The offers have the structure of the TIMOCOM Freight Exchange API v3.0.6 payload (taken from its OpenAPI file), but every value is generated.
 - The working-time model is a simplification and never certifies compliance.
 - Distances come from a straight-line matrix with a circuity factor, not from road routing.
 - Cost and tariff parameters marked "assumption" are not market data.
 - The exact search suits about 5 vans; the 15 s runtime target is not met at the defaults.
 - Loading order and 2D pallet placement are not modelled.
+- The project is a first version and needs improvements that are planned for later (section 9); none of them is claimed as done.
 
 ## 9. What comes next
 
