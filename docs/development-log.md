@@ -4,6 +4,8 @@ RoutePilot AI is an MVP with a deadline of 2026-11-15, later a portfolio project
 
 > The work/driving/rest schedule is a planning estimate based on a simplified model of selected rules (Polish Act on Drivers' Working Time; Regulation (EC) No 561/2006). It does not certify legal compliance.
 
+The project is a first version that needs improvements, and they are planned for later (section 3); the open items below are not finished work. The demo offers have the structure of the TIMOCOM Freight Exchange API v3.0.6 payload, taken from its OpenAPI file, with generated values and separate enrichment for fields the API does not define; no real data is used.
+
 Status words: **solved** (fixed and tested), **mitigated** (better, a limit remains), **open** (decision or work still ahead).
 
 ## 1. Summary
