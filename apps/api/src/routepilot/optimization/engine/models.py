@@ -131,6 +131,8 @@ class EngineParams(EngineModel):
     max_offers_per_plan: int = Field(default=6, gt=0)
     top_k_per_driver: int = Field(default=10, gt=0)
     max_pool_per_driver: int = Field(default=60, gt=0)
+    pool_partner_pickup_km: Decimal = Field(default=Decimal("80"), gt=0)  # assumption
+    pool_partner_delivery_km: Decimal = Field(default=Decimal("150"), gt=0)  # assumption
     node_budget_per_driver: int = Field(default=1_500_000, gt=0)
     max_first_deadhead_km: Decimal = Decimal("350")
     default_service_min: int = 30
