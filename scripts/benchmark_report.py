@@ -28,6 +28,10 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUT = ROOT / "docs" / "metrics.md"
 DEMO_SEED = 20261109  # the seed of the committed demo data (Makefile: SEED)
 TARGET_P95_MS = 15000  # NFR-002
+# FEAT-010 section 5: recorded as met or not met, never asserted.
+TARGET_PARTNER_SHARE = Decimal("0.50")  # target A
+TARGET_LOAD_FACTOR_EP = Decimal("0.60")  # target B, km-weighted
+TARGET_PLANS_2PLUS = Decimal("0.70")  # target B, share of plans
 
 
 @dataclass(frozen=True)
@@ -39,6 +43,7 @@ class Config:
     top_k: int
     agents_fake: bool = False
     out: Path = DEFAULT_OUT
+    bench_json: Path | None = None
 
 
 def parse_args(argv: list[str]) -> Config:
@@ -52,6 +57,11 @@ def parse_args(argv: list[str]) -> Config:
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--agents-fake", action="store_true", help="also time question -> approval")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    parser.add_argument(
+        "--bench-json",
+        type=Path,
+        help="result file of bench/fleet_5x60.py: adds the 20-seed consolidation row (FEAT-010)",
+    )
     args = parser.parse_args(argv)
     return Config(
         seed=args.seed,
@@ -61,6 +71,7 @@ def parse_args(argv: list[str]) -> Config:
         top_k=args.top_k,
         agents_fake=args.agents_fake,
         out=args.out,
+        bench_json=args.bench_json,
     )
 
 
@@ -88,10 +99,14 @@ def share(part: Decimal | int, whole: Decimal | int) -> float:
 
 def compute_metrics(config: Config) -> dict[str, Any]:
     """The non-timing metrics of FR-8 from one engine run without a wall-clock cut-off."""
+    source = instance(config)  # also puts the repository on the import path
+    from bench.fleet_5x60 import REFERENCE_DATE, consolidation_block
+
+    from routepilot.freight.generator import generate_offers
     from routepilot.optimization.engine import optimize
 
-    source = instance(config)
     result = optimize(source)  # no `elapsed_ms`: the search stops by its node budget only
+    offers = generate_offers(config.seed, REFERENCE_DATE)[0]["payload"]
     plans = {
         plan.plan_ref: plan
         for plan in [
@@ -140,6 +155,7 @@ def compute_metrics(config: Config) -> dict[str, Any]:
         "drivers_home_by_pct": share(sum(p.home_reached for p in chosen), len(chosen)),
         "nodes": result.stats.nodes,
         "search_truncated": result.stats.truncated,
+        "consolidation": consolidation_block(source, result, offers),
     }
 
 
@@ -200,6 +216,70 @@ def signed(item: dict[str, Any]) -> str:
 
 def table(rows: list[tuple[str, str]]) -> list[str]:
     return ["| Metric | Value |", "|---|---|", *(f"| {name} | {value} |" for name, value in rows)]
+
+
+def pct(value: str | Decimal) -> str:
+    return f"{Decimal(value) * 100:.1f} %"
+
+
+def verdict(met: bool) -> str:
+    return "met" if met else "not met"
+
+
+def consolidation_lines(block: dict[str, Any], bench: dict[str, Any] | None = None) -> list[str]:
+    """The "Consolidation" table and the target lines (FEAT-010 FR-14); targets are not asserted."""
+    plans = f"{block['plans_with_2plus_on_board']} of {block['plans']}"
+    share_of_plans = (
+        Decimal(block["plans_with_2plus_on_board"]) / block["plans"]
+        if block["plans"]
+        else Decimal(0)
+    )
+    rows = [
+        ("Van fill, pallet places (EP·km), km-weighted", pct(block["load_factor_ep"])),
+        ("Van fill, payload (kg·km), km-weighted", pct(block["load_factor_kg"])),
+        ("Plans with 2 or more orders on board at once", plans),
+        ("Empty kilometres, share of all kilometres", pct(block["empty_km_share"])),
+        ("Offers with a consolidation partner (partner share)", pct(block["partner_share"])),
+    ]
+    lines = [*table(rows), ""]
+    lines.append(
+        f"Target A, partner share >= {TARGET_PARTNER_SHARE:.0%}: "
+        f"{verdict(Decimal(block['partner_share']) >= TARGET_PARTNER_SHARE)}"
+        f" ({pct(block['partner_share'])})."
+    )
+    scope = "this demo run"
+    if bench is not None:
+        block, scope = bench, f"{bench['runs']} benchmark seeds"
+        share_of_plans = (
+            Decimal(block["plans_with_2plus_on_board"]) / block["plans"]
+            if block["plans"]
+            else Decimal(0)
+        )
+        lines.insert(
+            1,
+            f"Over {scope}: van fill {pct(block['load_factor_ep'])} of pallet places and "
+            f"{pct(block['load_factor_kg'])} of payload; {block['plans_with_2plus_on_board']} of "
+            f"{block['plans']} plans carry 2 or more orders at once.",
+        )
+    both = (
+        Decimal(block["load_factor_ep"]) >= TARGET_LOAD_FACTOR_EP
+        and share_of_plans >= TARGET_PLANS_2PLUS
+    )
+    lines.append(
+        f"Target B, pallet fill >= {TARGET_LOAD_FACTOR_EP:.0%} and >= {TARGET_PLANS_2PLUS:.0%} "
+        f"of plans with 2 or more orders on board ({scope}): {verdict(both)} "
+        f"({pct(block['load_factor_ep'])}, {pct(share_of_plans)})."
+    )
+    return lines
+
+
+def load_bench_summary(path: Path | None) -> dict[str, Any] | None:
+    if path is None:
+        return None
+    import json
+
+    stored = json.loads(path.read_text())
+    return {**stored["summary"]["consolidation"], "runs": stored["summary"]["count"]}
 
 
 def render(config: Config, metrics: dict[str, Any], timings: dict[str, Any]) -> str:
@@ -270,6 +350,13 @@ def render(config: Config, metrics: dict[str, Any], timings: dict[str, Any]) -> 
         "and are divided by the distance times the vehicle's capacity (pallet places or payload).",
         "The engine plans the way home only when `home_by` lies inside the planning horizon and",
         "then ends the plan at the home base on time; with a shorter horizon no plan returns home.",
+        "",
+        "## Consolidation (identical between runs)",
+        "",
+        "How full the vans of the `profit` fleet solution are and how many orders they carry at",
+        "once (FEAT-010). The targets are recorded as met or not met and are never asserted.",
+        "",
+        *consolidation_lines(metrics["consolidation"], load_bench_summary(config.bench_json)),
         "",
         "## Timings (vary between machines)",
         "",
