@@ -148,11 +148,12 @@ Troubleshooting (ports in use, missing tools, resetting the database): [`DEVELOP
 - **Agent instructions are committed.** [`AGENTS.md`](AGENTS.md) is the tool-agnostic entry point with behavioural rules; [`CLAUDE.md`](CLAUDE.md) imports it and adds Claude Code notes; [`context.md`](context.md) holds the project rules (module boundaries, invariants, testing, when to stop and ask).
 - **What AI does not decide.** Specifications, ADRs, migrations, prompts and merges need my approval.
 
-**Three concrete examples**
+**Four concrete examples**
 
 1. **A brief and its completion report.** Every task starts as a GitHub issue generated from the [`backlog`](backlog.md): the specification, the acceptance criteria (ACs) in scope, the allowed paths and the required gates. The agent ends with a completion report in the pull request: changes, AC → test, gates run, and what it could not verify. [Pull request 110](https://github.com/IgorK834/AI_Dispatcher/pull/110) is one: it lists the changed files, the tests that name `AC-FEAT-004-15` and `AC-FEAT-003-25`, the gate results and the remaining risks.
 2. **A defect caught by a gate.** The first `ci-full` runs stalled. Gate 7 (browser scenarios) hung at the *Assign* step: the optimisation worker was forked from the web server and kept its open client connections alive, so the browser reused a dead socket. The fix starts the worker with `spawn`, and a regression test (`AC-FEAT-004-15`) fails on the old behaviour. Gate 3a then hung in the working-time validator, which looped for ever when an activity ended less than one minute before the Monday week boundary; a unit test that reproduces it (`AC-FEAT-003-25`) came first, then the fix. Both were found by reading the run logs, not by guessing.
 3. **A manual correction.** The first measurement of the agents on a live model showed that they skipped lookups the questions required, so I approved a second version of two prompts that states the missing rules, and measured again. The first campaign had also used 484 835 of its 500 000 tokens, so every later campaign runs under a hard ledger that reserves a model call's whole token cap before the call is sent. Prompt changes and paid runs stay with me: an agent may propose them, never start them. Details and the measurements: [`docs/reports/FEAT-006-live-evals-2026-11-14.md`](docs/reports/FEAT-006-live-evals-2026-11-14.md) and [`evals/README.md`](evals/README.md).
+4. **A result that did not match the plan.** I asked for fuller vans. Research showed that the demo plans were chains because the data priced and placed offers like full-van loads, so FEAT-010 changed the data, not the solver. The first new tariff left the fleet without profit, so a price check against public examples added a per-pallet charge. The fill target of 60 % still failed, because 40 % of the kilometres are empty whatever the data or the search; I did not tune constants to hit it and recorded it as an open question. The whole story, with symptoms, fixes and what comes next, is in [`docs/development-log.md`](docs/development-log.md).
 
 ## 8. Demo
 
@@ -191,11 +192,21 @@ RoutePilotAI/
 - **Estimates.** Distances, travel times, fuel, tolls and CO₂ are estimates. Cost parameters marked "assumption" in [`docs/report.md`](docs/report.md) §17.4 are not market facts.
 - **Pallet geometry is approximated.** Capacity uses declared pallet places and euro-pallet equivalents; loading order is not modelled for curtain-siders.
 - **Small scale.** The optimizer is exact for a fleet of about 5 vans; larger fleets need a different solver.
-- **Engine runtime depends on the settings.** The search grows quickly with the offers per plan and the plans kept per driver. [`docs/metrics.md`](docs/metrics.md) reports the timings of a reduced setting and does not claim the runtime target for the engine defaults.
+- **Engine runtime depends on the settings.** The search grows quickly with the offers per plan and the plans kept per driver. [`docs/metrics.md`](docs/metrics.md) reports the timings of a reduced setting and does not claim the runtime target for the engine defaults. At the defaults a run takes minutes and is cut by the 30 s per-driver safety limit, so the 15 s target (NFR-002) is **not met**; a search speed-up of about four times did not change that.
+- **Van fill is below its target.** About 40 % of the kilometres of the profit plans are empty (the drive to the first pickup and the drive home before the weekend), so the fill over all kilometres is about 40 %, against a target of 60 %. On loaded kilometres it is 56 % of the pallet places and 68 % of the payload ([`docs/metrics.md`](docs/metrics.md)). The target is an open question for the owner (OQ-010-11).
+- **Demo data is generated, including its towns.** 605 places: 55 named ones and 550 generated points around them. Prices and the per-pallet handling charge are assumptions checked against a few public price examples, not a tariff ([`docs/raport.md`](docs/raport.md) §3.6). The routing matrix is a 10 MB straight-line matrix, not road routing.
 
 ## 11. Roadmap (after the MVP)
 
-PostgreSQL and self-hosted deployment (Docker Compose on a VPS), event-driven screening of new offers, driver messaging (Telegram/SMS/WhatsApp) with approvals, a real freight-exchange integration, self-hosted routing, tachograph data, larger fleets.
+**Next, in order** (reasons and effort: [`docs/development-log.md` §3](docs/development-log.md#3-how-it-will-be-improved)):
+
+1. Label dominance in the exact search, to move towards the 15 s target without losing exactness, then a decision on the runtime defaults.
+2. A better definition of the fill target, and the cause of empty kilometres shown in the plan view.
+3. Real towns and a road-routing matrix for the demo data, and a tariff calibrated against a published table.
+4. Load metrics in the answers of the dispatcher agent, and a nightly benchmark in CI that records trends.
+5. Loading order and 2D pallet placement.
+
+**Later:** PostgreSQL and self-hosted deployment (Docker Compose on a VPS), event-driven screening of new offers, driver messaging (Telegram/SMS/WhatsApp) with approvals, a real freight-exchange integration, self-hosted routing, tachograph data, larger fleets.
 
 ## 12. Documentation map
 
@@ -210,6 +221,10 @@ PostgreSQL and self-hosted deployment (Docker Compose on a VPS), event-driven sc
 | [`docs/adr/`](docs/adr/README.md) | Why: architecture decisions and rejected alternatives |
 | [`docs/design/`](docs/design/README.md) | How it looks: design system "Clear Route v3", tokens, components, screen mockups |
 | [`docs/report.md`](docs/report.md) | Research, sources and rationale |
+| [`docs/raport.md`](docs/raport.md) | Research on part-load (LTL) transport, measurements of the demo data and the price check |
+| [`docs/development-log.md`](docs/development-log.md) | Problems met during the build, how each was solved, and how it will be improved |
+| [`docs/walkthrough.md`](docs/walkthrough.md) | A 10–15 minute presentation guide: architecture, decisions, numbers, demo script, questions and answers |
+| [`docs/metrics.md`](docs/metrics.md) | Generated measurements: profit, fill, consolidation, timings |
 
 ---
 
@@ -225,4 +240,5 @@ RoutePilot AI to aplikacja webowa fullstack: **AI Spedytor** dla małej floty bu
 - **Uruchomienie:** dwa terminale, bez Dockera i bez kluczy API — kroki w sekcji 6 powyżej.
 - **Dane:** wyłącznie syntetyczne (oznaczenie w interfejsie: „DANE SYNTETYCZNE”); to nie są realne oferty ani realne osoby.
 - **Zastrzeżenie:** „Harmonogram pracy, jazdy i odpoczynków jest estymacją planistyczną opartą na uproszczonym modelu wybranych przepisów (ustawa o czasie pracy kierowców; rozporządzenie (WE) nr 561/2006). Nie stanowi potwierdzenia zgodności z przepisami.”
+- **Ograniczenia (15.11.2026):** cel czasu działania silnika (15 s) i cel wypełnienia busów (60 %) nie są osiągnięte — przyczyny, pomiary i plan poprawek: `docs/development-log.md`; opis do prezentacji projektu: `docs/walkthrough.md`.
 - **Dokumentacja** jest po angielsku: `DEVELOPMENT.md`, `context.md`, `specs/`, `docs/`, `backlog.md`.

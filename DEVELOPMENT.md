@@ -574,6 +574,22 @@ Both formats are defined in [`context.md` → Specification Templates](context.m
 
 Specification status `approved`; golden case values; ADRs and changes to `context.md`; breaking API changes; migrations; changes to invariants, objectives, legal rules or validators; prompts, model policy, tool allowlists and new agent tools; new runtime dependencies or services; CI workflows and secrets; anything on remote systems; real or personal data; publishing media and releases; force pushes and history rewrites. Full list: [`context.md` → Human Approval Requirements](context.md#human-approval-requirements).
 
+### 10.6 Problems met and lessons
+
+The long form, with symptoms, diagnoses, fixes and the improvement plan, is in [`docs/development-log.md`](docs/development-log.md). The short form:
+
+| Problem | What was done | Lesson |
+|---|---|---|
+| Plans were chains of single orders at about 46 % fill | Traced to the demo data, not the solver; FEAT-010 changed prices, lanes, mass, pool cut, metrics | Measure before changing the engine |
+| First size-based tariff left the fleet unprofitable | Price research; a per-pallet handling charge | Check model constants against an outside source |
+| Half of the generated delivery windows were unreachable | Windows derived from pickup, service and drive time; property test | Test generated data with the engine's own rules |
+| The exact search misses the 15 s target | Profile; a window bound skips 92 % of failing moves, 4× nodes per second, same results | Profile first; check that the fix can move the metric |
+| Fill target (60 %) is not reachable | Report shows fill on loaded kilometres; owner decision recorded as OQ-010-11 | Do not tune constants to hit a target |
+| Tests depended on the time of day or on a local branch | Fixed clock in the offline evals; the contract test finds `origin/main` | Inject the clock; do not rely on state CI lacks |
+| Specification needed a revision after approval | Stop with a `blocked` report, proposal, owner approval, then tests | Stop and ask instead of working around |
+
+How these will be improved (label dominance in the search, runtime defaults, real demo towns and routing, a calibrated tariff, a nightly benchmark): [`docs/development-log.md` §3](docs/development-log.md#3-how-it-will-be-improved). A presentation guide with questions and answers: [`docs/walkthrough.md`](docs/walkthrough.md).
+
 ---
 
 ## 11. Runtime AI design for maintainers
