@@ -2726,9 +2726,21 @@
             "title": "Kind",
             "type": "string"
           },
+          "loadFactorEp": {
+            "title": "Loadfactorep",
+            "type": "string"
+          },
+          "loadFactorKg": {
+            "title": "Loadfactorkg",
+            "type": "string"
+          },
           "marginPct": {
             "title": "Marginpct",
             "type": "string"
+          },
+          "maxOrdersOnBoard": {
+            "title": "Maxordersonboard",
+            "type": "integer"
           },
           "netProfit": {
             "$ref": "#/components/schemas/routepilot__optimization__jobs__domain__Money"
@@ -2783,7 +2795,10 @@
           "durationMin",
           "finishAt",
           "homeReached",
-          "warnings"
+          "warnings",
+          "loadFactorEp",
+          "loadFactorKg",
+          "maxOrdersOnBoard"
         ],
         "title": "PlanSummary",
         "type": "object"
@@ -3176,9 +3191,21 @@
             "title": "Kind",
             "type": "string"
           },
+          "loadFactorEp": {
+            "title": "Loadfactorep",
+            "type": "string"
+          },
+          "loadFactorKg": {
+            "title": "Loadfactorkg",
+            "type": "string"
+          },
           "marginPct": {
             "title": "Marginpct",
             "type": "string"
+          },
+          "maxOrdersOnBoard": {
+            "title": "Maxordersonboard",
+            "type": "integer"
           },
           "netProfit": {
             "$ref": "#/components/schemas/routepilot__optimization__jobs__domain__Money"
@@ -3252,6 +3279,9 @@
           "finishAt",
           "homeReached",
           "warnings",
+          "loadFactorEp",
+          "loadFactorKg",
+          "maxOrdersOnBoard",
           "revenue",
           "costTotal",
           "calculation",
