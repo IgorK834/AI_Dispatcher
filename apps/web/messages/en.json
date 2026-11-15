@@ -696,6 +696,13 @@
       "declaredOnly": "Interior dimensions unknown, so no floor plan is drawn.",
       "illustrative": "Positions are illustrative. The engine checks pallet places and mass; it does not model loading order for curtain-siders, which open on both sides.",
       "alt": "Van floor from above. {where}: {used} of {places} pallet places used, {kg} of {max}."
+    },
+    "fill": {
+      "label": "Van fill",
+      "value": "{ep} of pallet places · {kg} of payload",
+      "onBoard": "Orders on board",
+      "upTo": "up to {count}",
+      "partEmpty": "Single orders in a chain — the van runs mostly part-empty"
     }
   },
   "optimizer": {

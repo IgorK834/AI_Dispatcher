@@ -24,6 +24,9 @@
     "finishAt": "2026-11-17T06:55:00Z",
     "homeReached": false,
     "warnings": ["LOADING_ORDER_NOT_MODELLED", "SERVICE_TIME_DEFAULTED"],
+    "loadFactorEp": "0.5149",
+    "loadFactorKg": "0.4797",
+    "maxOrdersOnBoard": 2,
     "revenue": {
       "amountMinor": 78000,
       "currency": "EUR"
@@ -333,6 +336,9 @@
     "finishAt": "2026-11-16T09:30:00Z",
     "homeReached": false,
     "warnings": ["LOADING_ORDER_NOT_MODELLED", "SERVICE_TIME_DEFAULTED"],
+    "loadFactorEp": "0.4000",
+    "loadFactorKg": "0.3502",
+    "maxOrdersOnBoard": 1,
     "revenue": {
       "amountMinor": 19000,
       "currency": "EUR"
@@ -488,6 +494,9 @@
     "finishAt": "2026-11-16T09:30:00Z",
     "homeReached": false,
     "warnings": ["LOADING_ORDER_NOT_MODELLED", "SERVICE_TIME_DEFAULTED"],
+    "loadFactorEp": "0.4000",
+    "loadFactorKg": "0.3502",
+    "maxOrdersOnBoard": 1,
     "revenue": {
       "amountMinor": 19000,
       "currency": "EUR"

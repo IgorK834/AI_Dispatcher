@@ -8,6 +8,7 @@ import {
   formatMass,
   formatMoney,
   formatPalletEquivalents,
+  formatPercent,
 } from './index';
 
 const NBSP = ' ';
@@ -57,5 +58,12 @@ describe('[AC-FEAT-005-24] formatting through lib/format', () => {
     expect(formatFuel(76.601, 'en')).toBe('76.6 l');
     expect(formatFuel(76.601, 'pl')).toBe('76,6 l');
     expect(formatCo2(199.16, 'en')).toBe('199 kg CO₂');
+  });
+
+  it('[AC-FEAT-010-12] formats a share as a whole percentage in both locales', () => {
+    expect(formatPercent(0.46, 'en')).toBe('46%');
+    expect(formatPercent(0.46, 'pl')).toBe(`46${NBSP}%`);
+    expect(formatPercent(0, 'en')).toBe('0%');
+    expect(formatPercent(1, 'pl')).toBe(`100${NBSP}%`);
   });
 });

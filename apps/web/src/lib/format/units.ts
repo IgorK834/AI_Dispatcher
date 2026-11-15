@@ -34,3 +34,12 @@ export function formatFuel(litres: number, locale: AppLocale): string {
 export function formatCo2(kg: number, locale: AppLocale): string {
   return `${numberFormat(locale, { maximumFractionDigits: 0 }).format(kg)} kg CO₂`;
 }
+
+/**
+ * A share of 0 … 1 as a whole percentage: "46%" in English, "46 %" (no-break space) in Polish.
+ * The sign is placed here because the ICU data of the runtime decides the Polish spacing otherwise.
+ */
+export function formatPercent(share: number, locale: AppLocale): string {
+  const value = numberFormat(locale, { maximumFractionDigits: 0 }).format(share * 100);
+  return locale === 'pl' ? `${value}\u00a0%` : `${value}%`;
+}
