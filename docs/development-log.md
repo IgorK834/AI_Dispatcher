@@ -24,6 +24,7 @@ Status words: **solved** (fixed and tested), **mitigated** (better, a limit rema
 | P10 | Live agents skipped required lookups; one paid campaign nearly used its whole budget | solved by process | `evals/README.md` |
 | P11 | Stacked pull requests, generated files and local tooling got in the way | solved by process | section 4 |
 | P12 | A specification needed a revision after approval | solved by process | FEAT-010 revisions 2 → 4 |
+| P13 | Recording the live AI scenes cost much more than planned and hit three limits | mitigated, **open** | section 2, P13 |
 
 ## 2. Problems in detail
 
@@ -100,6 +101,17 @@ The first live measurement of the agents showed skipped lookups, so two prompts 
 
 The tariff, the delivery windows and the town list all needed a revision after FEAT-010 was approved. The coding agent stopped with a `blocked` report instead of working around it, proposed the change, and the owner approved revision 3 and the golden values before the golden test was written. The specification now has four revisions and a changelog for each.
 
+### P13 Recording the live AI scenes
+
+- **Symptom.** Five takes of one chat question were needed. The first two stopped before any proposal; the third and fifth ended with the model's honest "no feasible plan"; only the fourth reached the approval card. About 256 000 of the 300 000 tokens the owner allowed were spent, so the Reject and Approve clicks could not be recorded.
+- **Diagnosis, in the order it appeared.**
+  1. The tool-call limit (6 per agent) was used up by "list the drivers and check five drivers". A fleet-wide question needs more.
+  2. The per-run token budget (60 000) is used up by a multi-agent run: the Freight Scout's context grows with every tool result (6 000 → 10 700 input tokens), and the guard reserves the full output cap (8 192) before each call. One complete run costs about 50 000–76 000 tokens at these settings.
+  3. With a free question the Freight Scout picked refrigerated offers and the planner correctly found no plan. Naming the offers made the run reach a proposal.
+- **Fix for the recording.** Environment settings only: 12 tool calls, 90 000 tokens per run, dispatcher thinking level `low`, a daily cap equal to what was left of the allowance, and a question that names the driver and two offers. No code changed. Waiting parts are shown four times faster and say so on screen.
+- **Left.** The Reject / Approve clicks are not in the video. Two product observations came out of it: the chat keeps its conversation only in the page's memory, so after a reload a pending approval card cannot be reached from the UI (the request stays valid on the server for 30 minutes); and the trace summary shows "0 tokens" while a run waits for approval and the real total only after it finishes.
+- **Lesson.** Estimate a live run from the measured tokens of earlier runs before agreeing a budget, and stop at the allowance: the work stopped at 256 288 tokens although it was not finished.
+
 ## 3. How it will be improved
 
 Ordered by value for the effort. "Needs approval" means a change to a default, an ADR or a specification that only the owner may make.
@@ -117,6 +129,9 @@ Ordered by value for the effort. "Needs approval" means a change to a default, a
 | I9 | **Loading order and 2D pallet placement.** Today loading order is not modelled for curtain-siders. | More realistic capacity. | yes (P2 in the MVP boundaries) |
 | I10 | **Larger fleets.** Add a heuristic or a general solver behind the same port. | The exact search is for about 5 vans. | ADR |
 | I11 | **PostgreSQL and a VPS** with Docker Compose, as designed in ADR-0002 and ADR-0007. | The portfolio version. | outside the MVP |
+| I12 | **Chat that survives a reload.** Keep the thread id in the URL or the session, restore the conversation and the pending approval card. | A pending approval is unreachable after a page refresh. | no (frontend only) |
+| I13 | **Cheaper agent runs.** Trim what a tool result adds to the next model call, cap the Freight Scout's detail look-ups, and make the default tool-call and run budgets fit a fleet-wide question. | A run costs 50 000–76 000 tokens and the defaults stop it early. | yes (budget defaults, prompts, `ai-evals`) |
+| I14 | **Record the approval clicks** (Reject, then Approve) on a live model once I13 makes a run cheaper, and replace the single screenshot that now serves as both 05 and 08. | AC-FEAT-009-02 asks for them. | yes (paid run, new allowance) |
 
 A test-quality item sits next to these: add a check that no domain or test code reads the system clock outside an injected `Clock`, so that P6 cannot return.
 
