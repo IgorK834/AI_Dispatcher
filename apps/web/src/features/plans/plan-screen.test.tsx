@@ -1,7 +1,7 @@
 import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import en from '../../../messages/en.json';
 import { driver } from '@/test/fixtures/fleet';
 import { goldPlan, goldPlans } from '@/test/fixtures/gold-001';
@@ -17,6 +17,10 @@ vi.mock('next/navigation', async () => (await import('@/test/navigation')).navig
 beforeEach(() => {
   navigation.reset('/plans/x', 'job=job-1');
   vi.stubEnv('NEXT_PUBLIC_MAP_STYLE_URL', '');
+});
+
+afterEach(() => {
+  vi.useRealTimers();
 });
 
 const posted: { assignments: unknown[]; explanations: unknown[] } = {
@@ -80,6 +84,10 @@ function mockApi(plan = goldPlan) {
 
 describe('plan screen', () => {
   it('renders the plan with variants from the job, the top view and the vehicle card', async () => {
+    // The route progress reads the clock: only `Date` is pinned, to a day before the fixture
+    // plan departs (2026-11-16 05:00Z), so the test does not depend on the day it runs.
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-11-15T12:00:00Z'));
     mockApi();
     renderApp(<PlanScreen planId={goldPlan.id} />);
     expect(
