@@ -235,3 +235,117 @@ Reported, not fixed (these files are outside this task):
 - 2026-11-12 — 002/4 and 002/5 audited against their issues with tests on the real application (`tests/db/test_import.py`, `tests/unit/integrations/test_mock_provider.py`, `tests/integration/test_first_start_seed.py`, `tests/api/test_admin_demo_data.py`, `tests/unit/test_seed_fleet_target.py`; a `no_network` fixture in `tests/conftest.py`); 002/5 moves to `done` (AC-FEAT-002-16 now has tests). Fixed: `DUPLICATE_IN_BATCH` (§8) is now enforced by `ImportService` — the second record with the same id in one payload counts as `failed` and stores nothing; `make seed-fleet` was still a stub and now regenerates `fleet.json`, `offers.timocom.json` and `offers.enrichment.json` byte for byte (variables `SEED`, `REFERENCE_DATE` and the output paths can be overridden). Open for the owner: (1) AC-FEAT-002-18 says every driver state has `is_synthetic = true`, but `driver_states` has no such column (FEAT-001 §6.1, migration `0001_initial`); the test checks `source = 'generated_mock'` and the owning driver's flag instead; (2) `ImportService.run` imports a whole batch in one transaction, not one short transaction per step as the 002/4 tip suggests, and a crash mid-batch leaves no batch row; (3) the seed and reset live in `routepilot/bootstrap.py` (composition root) instead of the suggested `fleet/service/seed.py` and `fleet/api/admin_demo_data.py`; (4) `FreightSearchQuery.loading_from`/`loading_to` are timezone-aware datetimes, not dates as in the 002/4 issue.
 - 2026-11-15 — FEAT-010 (LTL consolidation, `draft`, P1) added from `docs/raport.md`: owner action O-12 and slices 010/1 … 010/6 (§5). Every AC-FEAT-010-01 … 14 belongs to exactly one slice. Nothing may start before O-12.
 - 2026-11-15 — FEAT-010 approved (revision 4: handling charge, generated towns, delivery windows, return groups; GOLD-011 approved). Slices 010/1 … 010/6 are in review as PRs #123 … #129 (#123 is O-12).
+- 2026-11-18 — §9 added: the evolution backlog from [`docs/research/2026-11-17-ai-dispatcher-evolution.md`](docs/research/2026-11-17-ai-dispatcher-evolution.md) with owner actions O-13 … O-21 and slices 011/1 … 017/3 for the **draft** specifications FEAT-011 … FEAT-017 and the **proposed** ADR-0016 … ADR-0018. Every AC of FEAT-011 … FEAT-017 belongs to exactly one slice. Nothing in §9 may start before its owner action is closed. Sections 1–8 are unchanged.
+
+---
+
+## 9. Evolution backlog (after the MVP)
+
+> **Status (2026-11-18):** **proposals only.** FEAT-011 … FEAT-017 are `draft` and ADR-0016 … ADR-0018 are `proposed`. Nothing here is approved, and nothing here is implemented. A slice may start only when its specification is `approved` (its owner action below is closed), its dependencies are merged, and its brief exists.
+> **Source:** [`docs/research/2026-11-17-ai-dispatcher-evolution.md`](docs/research/2026-11-17-ai-dispatcher-evolution.md) (§11 roadmap, §12 backlog, §17 first tasks). If this section disagrees with a specification, the specification wins; report the difference.
+> **Issues:** `scripts/create_github_issues.sh` renders every owner action and slice below (data in `scripts/github_issues/30-evolution.sh`); milestones are the three phases.
+
+The legend of this file applies. The slice size uses the same agent-hour scale as §4 (one slice = one task brief = one PR, ≤ ~400 manual lines). The research note's S/M/L estimates in days or weeks are per epic, not per slice.
+
+### 9.1 Phases
+
+| Phase | Scope | Success criteria (targets, not measurements) | Explicitly excluded |
+|---|---|---|---|
+| 1 — Operational planning foundation | rotations and availability (FEAT-011); engine reliability and cycle-aware planning (FEAT-012); weekly-rest-due rejection (013/1); DB-enforced assignment integrity and stale-plan rejection (014/1–2); benchmark grid (017/1) | 5×60 at defaults p95 ≤ 30 s with no skipped international pass; 100 % of plans home by the deadline or with a feasible charged return; GOLD-012 green; two concurrent approvals of one offer → one assignment; fleet calendar in EN/PL | OR-Tools; the event pipeline; execution tracking; weekly rest insertion away from home |
+| 2 — Intelligent dispatch automation | compliance v2 (013/2–6); lifecycle and execution (014/3–5); events, proposals, `ApprovalService` (FEAT-015); agent tools (016/1–5); CP-SAT fleet selection (017/2) | scenarios 3, 4, 6 and 8 of the research note pass as integration tests; P14–P17 green; 20 vans × 7 days p95 ≤ 120 s; ≥ 90 % committed stops kept after a 10 % arrival step; evals ≥ 27/30 kept | real exchanges; driver messaging; telematics; documents; vehicles > 3.5 t; PostgreSQL |
+| 3 — Production platform | OR-Tools candidate generator behind the gate (017/3); single-agent experiment (016/6); later specifications for documents, messaging, heavier vehicles, PostgreSQL and VPS | 50 vans × 7 days p95 ≤ 300 s with 100 % feasibility; owner decision on the gate report | auto-approval; scraping; paid exchange APIs without a contract; behavioural driver scoring |
+
+### 9.2 Owner actions
+
+| # | Action | Needed by | Status |
+|---|---|---|---|
+| O-13 | Review the research note, the draft specifications FEAT-011 … 017 and ADR-0016 … 0018; commit and push them (issue links point to `main`). | every §9 slice | todo |
+| O-14 | Review and approve FEAT-011 (driver rotations); answer OQ-011-01 … 05. 🔒 | 011/1 … 011/6 | todo |
+| O-15 | Review and approve FEAT-012 and accept ADR-0016 (job-level budget, `profit_v2`, new invariants P14 and P17); update `context.md` → Optimization Engine Invariants; approve the GOLD-012 values. 🔒 | 012/1 … 012/6 | todo |
+| O-16 | Review and approve FEAT-013 and accept ADR-0018; approve the new golden cases for v2. 🔒 | 013/1 … 013/6 | todo |
+| O-17 | Review and approve FEAT-014; review its migrations (`assignment_offers`, lifecycle states, `stop_events`). 🔒 | 014/1 … 014/5 | todo |
+| O-18 | Review and approve FEAT-015, accept ADR-0017, and decide the `context.md` AI rule 3 wording for REST approvals of deterministic proposals (OQ-015-04). 🔒 | 015/1 … 015/5 | todo |
+| O-19 | Review and approve FEAT-016; approve the new tools, allowlists and prompt versions; agree an `ai-evals` token budget. 🔒 | 016/1 … 016/6 | todo |
+| O-20 | Review and approve FEAT-017 and the runtime dependency `ortools` (licence, size, versions). 🔒 | 017/1 … 017/3 | todo |
+| O-21 | Have the legal questions of research note §6.7 and FEAT-013 §11 checked by a professional (in-vehicle rest after the 2020 change, the Polish art. 22 carve-outs, the 561 week time base, 28/7 rotations against Art. 8(8a)). | 013/3, 013/6 | todo |
+
+### 9.3 FEAT-011 — Driver rotations and availability · [spec](specs/FEAT-011-driver-rotations-and-availability.md) (`draft`)
+
+| Slice | Scope | ACs (AC-FEAT-011-…) | Depends | Lock | Status |
+|---|---|---|---|---|---|
+| 011/1 | Pure `fleet/domain/rotation.py`: patterns, windows, exceptions, legacy fallback, return-period warning | 01–07 | O-14 | — | todo |
+| 011/2 | Migration (3 tables), repositories and CRUD for patterns, rotations and exceptions; commitment conflicts; schema without free text | 08–12 | 011/1 | 🔒 migrations, `contracts/openapi.json` | todo |
+| 011/3 | Availability endpoints for one driver and for the fleet | 13, 14 | 011/2 | `contracts/openapi.json` | todo |
+| 011/4 | Snapshot integration: windows → `available_from`, deadline, `DRIVER_OFF_DUTY`, rotation versions in the digest | 15–17 | 011/3, 012/3 | — | todo |
+| 011/5 | Demo rotations in the fleet generator | 18 | 011/2 | `data/mock/fleet.json` | todo |
+| 011/6 | Rotation editor and fleet calendar (EN/PL) | 19, 20 | 011/3 | `apps/web/messages/*.json` | todo |
+
+### 9.4 FEAT-012 — Engine reliability and cycle-aware planning · [spec](specs/FEAT-012-engine-reliability-and-cycle-aware-planning.md) (`draft`)
+
+| Slice | Scope | ACs (AC-FEAT-012-…) | Depends | Lock | Status |
+|---|---|---|---|---|---|
+| 012/1 | Job-level time budget, `truncatedDrivers`, separate shares for the domestic and international passes | 01–03 | O-15 | — | todo |
+| 012/2 | Label dominance and incumbent seeding | 04, 05 | 012/1 | — | todo |
+| 012/3 | One `home_requirement()` replacing four copies of the home rule (no behaviour change) | 06 | O-15 | — | todo |
+| 012/4 | Return replay (`HOME_BY_AT_RISK`), `return_reserve`, `profit_v2`, P14 and P17 | 07–10 | 012/3 | — | todo |
+| 012/5 | `baseline_return_empty`, invariant 15 extended, GOLD-012 | 11, 12 | 012/4 | 🔒 golden values | todo |
+| 012/6 | Read model and contract fields; plan screen shows plan profit, return reserve and cycle profit (EN/PL) | 13, 14 | 012/5 | `contracts/openapi.json`, `apps/web/messages/*.json` | todo |
+
+### 9.5 FEAT-013 — Working-time profiles v2 · [spec](specs/FEAT-013-compliance-profiles-v2.md) (`draft`)
+
+| Slice | Scope | ACs (AC-FEAT-013-…) | Depends | Lock | Status |
+|---|---|---|---|---|---|
+| 013/1 | `last_weekly_rest_end` in `DriverState`; `WEEKLY_REST_DUE`; P15; validator check | 01–04 | O-16, 012/3 | 🔒 golden values | todo |
+| 013/2 | Shared rule table for rules and validator; v1 unchanged; v1 replay | 05, 06, 15 | 013/1 | — | todo |
+| 013/3 | v2 driving options: 10 h extension, 15 + 30 split, reduced daily rest | 07–09 | 013/2, O-21 | 🔒 golden values | todo |
+| 013/4 | Weekly rest insertion with accommodation, reduced weekly rest, compensation ledger, migration | 10–12, 16 | 013/3 | 🔒 migrations, 🔒 golden values | todo |
+| 013/5 | Four-week return as `HomeRequirement` kind `legal_return` | 13 | 013/4, 011/4 | — | todo |
+| 013/6 | Profile selection by mass and operation, `unsupported_v1`, PL domestic v2 company-policy parameters | 14, 17 | 013/2, O-21 | — | todo |
+
+### 9.6 FEAT-014 — Assignment integrity, lifecycle and execution · [spec](specs/FEAT-014-commitments-and-execution.md) (`draft`)
+
+| Slice | Scope | ACs (AC-FEAT-014-…) | Depends | Lock | Status |
+|---|---|---|---|---|---|
+| 014/1 | `assignment_offers` with partial unique indexes, `BEGIN IMMEDIATE`, migration with backfill | 01–03 | O-17 | 🔒 migrations | todo |
+| 014/2 | `PLAN_STALE` on driver-state and rotation changes; cancel bumps offer versions | 04–06 | 014/1, 011/4 | `contracts/openapi.json` | todo |
+| 014/3 | Lifecycle states, dispatch and complete endpoints, stop events | 07–09 | 014/1 | 🔒 migrations, `contracts/openapi.json` | todo |
+| 014/4 | Committed prefix in snapshots; driver state from execution | 10, 11 | 014/3, 011/4 | — | todo |
+| 014/5 | Assignments screen with stop recording (EN/PL) | 12 | 014/3 | `apps/web/messages/*.json` | todo |
+
+### 9.7 FEAT-015 — Event-driven evaluation and proposals · [spec](specs/FEAT-015-event-driven-proposals.md) (`draft`)
+
+| Slice | Scope | ACs (AC-FEAT-015-…) | Depends | Lock | Status |
+|---|---|---|---|---|---|
+| 015/1 | Outbox, relay, job kinds, leases, cancel | 01–04 | O-18, 014/1 | 🔒 migrations, `contracts/openapi.json` | todo |
+| 015/2 | `OfferEvaluationService`: insertion after the committed prefix, P16 | 05–07 | 015/1, 014/4, 012/4 | — | todo |
+| 015/3 | `ReplanService`: delays and withdrawn offers | 08, 09 | 015/2 | — | todo |
+| 015/4 | Proposals, one `ApprovalService` (REST and graph), eager expiry, no-LLM path | 10–13 | 015/2 | 🔒 migrations, `contracts/openapi.json` | todo |
+| 015/5 | Approval inbox and alerts (EN/PL) | 14 | 015/4 | `apps/web/messages/*.json` | todo |
+
+### 9.8 FEAT-016 — Agent tools for planning · [spec](specs/FEAT-016-agent-tools-for-planning.md) (`draft`)
+
+| Slice | Scope | ACs (AC-FEAT-016-…) | Depends | Lock | Status |
+|---|---|---|---|---|---|
+| 016/1 | `driver_calendar` read tool | 01 | O-19, 011/3 | 🔒 tool allowlist | todo |
+| 016/2 | `evaluate_insertion` and `compare_cycle_options` read tools | 02, 03 | O-19, 015/2, 012/5 | 🔒 tool allowlist | todo |
+| 016/3 | `amend_assignment` write tool behind `interrupt()` | 04, 05 | O-19, 015/4 | 🔒 write tool | todo |
+| 016/4 | Job handles, run recovery, `durability="sync"` | 06–08 | O-19 | — | todo |
+| 016/5 | Prompt versions and eval scenarios 31–38 (offline; live within the budget) | 09, 10 | 016/1, 016/2, 016/3, 016/4 | 🔒 prompts, 🔒 paid `ai-evals` | todo |
+| 016/6 | Experiment: single dispatcher agent vs supervisor | 11 | 016/5 | 🔒 paid `ai-evals` | todo |
+
+### 9.9 FEAT-017 — Larger fleets · [spec](specs/FEAT-017-larger-fleets.md) (`draft`)
+
+| Slice | Scope | ACs (AC-FEAT-017-…) | Depends | Lock | Status |
+|---|---|---|---|---|---|
+| 017/1 | Benchmark grid, scaled generators, metrics report | 01–03 | O-20, 011/5 | — | todo |
+| 017/2 | `FleetSelector` port, CP-SAT set packing, DFS fallback | 04–07 | 017/1, 012/5 | 🔒 new dependency (`pyproject.toml`, `uv.lock`) | todo |
+| 017/3 | `CandidateGenerator` port, OR-Tools PDPTW generator with repair, adoption-gate report | 08–10 | 017/2 | — | todo |
+
+### 9.10 Documentation drift found while writing this section
+
+Reported, not fixed (outside this task; the owner decides):
+
+- `context.md:4` still says "implementation has not started"; `AGENTS.md` §3 and `DEVELOPMENT.md` still mark `apps/api`, `apps/web`, `contracts/` and the Makefile commands as *(planned)*. They exist.
+- `context.md:105-106` describes a weekly rest ≥ 35 h and "weekly rest at base"; the engine enforces no weekly rest (FEAT-013 addresses it).
+- `context.md` rule 7 attributes the 6 h break and the 60 h weekly cap to the Act for domestic vans; art. 22 of the Act may exempt vans ≤ 3.5 t (FEAT-013 OQ-013-01, O-21).
+- `scripts/github_issues/12-feat-002.sh` still lists AC-FEAT-002-07 for slice 002/2, but that AC is withdrawn, so a full run of `scripts/create_github_issues.sh` stops with "AC-FEAT-002-07 not found". Running with `--only` works.

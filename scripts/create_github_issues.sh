@@ -27,6 +27,7 @@
 #
 # Requirements: bash 3.2+, awk, grep, sed; gh (authenticated, `gh auth status`) unless --dry-run.
 # The script sends only the content of this repository's documents to GitHub. It contains no secrets.
+# Milestones: one per MVP day, "After the MVP", and "Phase 1/2/3" for the evolution backlog (backlog.md §9).
 
 set -euo pipefail
 
@@ -40,7 +41,7 @@ ONLY=""
 USE_LABELS=1
 USE_MILESTONES=1
 
-usage() { sed -n '2,30p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; }
+usage() { sed -n '2,31p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; }
 die() { printf 'error: %s\n' "$*" >&2; exit 1; }
 log() { printf '%s\n' "$*" >&2; }
 
@@ -147,6 +148,13 @@ feat_name() {
     007) echo "Quality, README, ci-full" ;;
     009) echo "Demo media and release" ;;
     010) echo "LTL consolidation and load metrics" ;;
+    011) echo "Driver rotations and availability" ;;
+    012) echo "Engine reliability and cycle-aware planning" ;;
+    013) echo "Working-time profiles v2 and rest ledger" ;;
+    014) echo "Assignment integrity, lifecycle and execution" ;;
+    015) echo "Event-driven evaluation and proposals" ;;
+    016) echo "Agent tools for planning" ;;
+    017) echo "Larger fleets" ;;
     *) die "unknown FEAT-$1" ;;
   esac
 }
@@ -161,6 +169,9 @@ day_title() {
     2026-11-14) echo "Quality and README" ;;
     2026-11-15) echo "Recording and release" ;;
     post-MVP) echo "After the MVP" ;;
+    phase-1) echo "Operational planning foundation" ;;
+    phase-2) echo "Intelligent dispatch automation" ;;
+    phase-3) echo "Production platform" ;;
     *) die "unknown day $1" ;;
   esac
 }
@@ -173,6 +184,9 @@ day_done() {
     2026-11-14) echo "a clean clone starts by following the README; \`ci-full\` is green" ;;
     2026-11-15) echo "the public repository is complete: recording, screenshots, tag \`v0.1.0\`" ;;
     post-MVP) echo "not part of the MVP" ;;
+    phase-1) echo "the phase 1 success criteria of \`backlog.md\` §9.1 are met (rotations, cycle-aware plans, a bounded engine, DB-enforced assignments)" ;;
+    phase-2) echo "the phase 2 success criteria of \`backlog.md\` §9.1 are met (compliance v2, execution, proposals, agent tools, CP-SAT selection)" ;;
+    phase-3) echo "the phase 3 success criteria of \`backlog.md\` §9.1 are met" ;;
   esac
 }
 day_fallback() {
@@ -184,10 +198,13 @@ day_fallback() {
     2026-11-14) echo "E2E smoke only (cut order item 7)" ;;
     2026-11-15) echo "a recording of the shorter fallback scenario" ;;
     post-MVP) echo "—" ;;
+    phase-1|phase-2|phase-3) echo "move the slice to the next phase; never weaken an AC" ;;
   esac
 }
+is_phase() { case "$1" in phase-*) return 0 ;; *) return 1 ;; esac; }
 milestone_of() {
   [ "$1" = "post-MVP" ] && { echo "After the MVP"; return; }
+  is_phase "$1" && { printf 'Phase %s — %s' "${1#phase-}" "$(day_title "$1")"; return; }
   printf '%s — %s' "$1" "$(day_title "$1")"
 }
 
@@ -227,7 +244,11 @@ sec_header() {
   printf '| Epic | FEAT-%s — %s ([spec](%s/%s), status `%s`, revision %s) |\n' "$I_FEAT" "$(feat_name "$I_FEAT")" "$BLOB" "$spec" "$status" "$rev"
   if [ "$I_PRIORITY" = "P0" ]; then printf '| Priority | %s (MVP, must have) |\n' "$I_PRIORITY"
   else printf '| Priority | %s (after the MVP; only with an approved specification) |\n' "$I_PRIORITY"; fi
-  printf '| Delivery checkpoint | %s — %s (`context.md` → Delivery Deadline) |\n' "$I_DAY" "$(day_title "$I_DAY")"
+  if is_phase "$I_DAY"; then
+    printf '| Delivery checkpoint | %s (`backlog.md` §9.1) |\n' "$(milestone_of "$I_DAY")"
+  else
+    printf '| Delivery checkpoint | %s — %s (`context.md` → Delivery Deadline) |\n' "$I_DAY" "$(day_title "$I_DAY")"
+  fi
   if [ -n "$I_CATCHUP" ]; then
     printf '| Catch-up proposal | %s (`backlog.md` §3 — needs the owner'"'"'s decision) |\n' "$I_CATCHUP"
   fi
@@ -485,7 +506,11 @@ render_owner() {
   printf '| Who | the owner (human) — a coding agent cannot do this alone (`context.md` → Operations that need human confirmation) |\n'
   printf '| Needed by | %s — %s |\n' "$I_DAY" "$(day_title "$I_DAY")"
   printf '| Size | %s |\n' "$I_SIZE"
-  printf '| Backlog | [`backlog.md`](%s/backlog.md) §2, row %s |\n\n' "$BLOB" "$I_ID"
+  if is_phase "$I_DAY"; then
+    printf '| Backlog | [`backlog.md`](%s/backlog.md) §9.2, row %s |\n\n' "$BLOB" "$I_ID"
+  else
+    printf '| Backlog | [`backlog.md`](%s/backlog.md) §2, row %s |\n\n' "$BLOB" "$I_ID"
+  fi
   printf '## 📚 Why\n\n%s\n' "$T_WHY"
   printf '## 🛠️ Steps\n\n%s\n' "$T_STEPS"
   [ -n "$T_DECISIONS" ] && printf '## 🧾 Decisions and open points\n\n%s\n' "$T_DECISIONS"
@@ -521,6 +546,17 @@ FEAT-006|c5def5|Runtime agents
 FEAT-007|c5def5|Quality, README, ci-full
 FEAT-009|c5def5|Demo media and release
 FEAT-010|c5def5|LTL consolidation and load metrics
+FEAT-011|c5def5|Driver rotations and availability
+FEAT-012|c5def5|Engine reliability and cycle-aware planning
+FEAT-013|c5def5|Working-time profiles v2 and rest ledger
+FEAT-014|c5def5|Assignment integrity, lifecycle and execution
+FEAT-015|c5def5|Event-driven evaluation and proposals
+FEAT-016|c5def5|Agent tools for planning
+FEAT-017|c5def5|Larger fleets
+P2|d4c5f9|Later phase; needs an approved specification
+phase:1|0e8a16|Evolution backlog phase 1 — operational planning foundation
+phase:2|fbca04|Evolution backlog phase 2 — intelligent dispatch automation
+phase:3|d93f0b|Evolution backlog phase 3 — production platform
 area:infra|fbca04|Tooling, CI, scripts
 area:backend|1d76db|FastAPI, SQLite, services
 area:data|0052cc|Demo data, generators, TIMOCOM format
@@ -545,11 +581,14 @@ ensure_milestones() {
   [ "$USE_MILESTONES" -eq 1 ] || return 0
   local existing day title
   existing=$(gh api "repos/$REPO/milestones?state=all&per_page=100" --jq '.[].title')
-  for day in 2026-11-10 2026-11-11 2026-11-12 2026-11-13 2026-11-14 2026-11-15 post-MVP; do
+  for day in 2026-11-10 2026-11-11 2026-11-12 2026-11-13 2026-11-14 2026-11-15 post-MVP phase-1 phase-2 phase-3; do
     title=$(milestone_of "$day")
     if ! printf '%s\n' "$existing" | grep -qxF "$title"; then
       log "milestone: creating '$title'"
-      if [ "$day" = "post-MVP" ]; then
+      if is_phase "$day"; then
+        gh api "repos/$REPO/milestones" --method POST -f title="$title" \
+          -f description="Evolution backlog (backlog.md §9). Done when: $(day_done "$day")." >/dev/null
+      elif [ "$day" = "post-MVP" ]; then
         gh api "repos/$REPO/milestones" --method POST -f title="$title" \
           -f description="Owner actions that are not needed for the MVP." >/dev/null
       else
@@ -568,6 +607,7 @@ item_labels() {
     for a in $I_AREA; do out="$out area:$a"; done
     [ "$I_APPROVAL" = "yes" ] && out="$out needs-approval"
   fi
+  if is_phase "$I_DAY"; then out="$out phase:${I_DAY#phase-}"; fi
   printf '%s' "$out"
 }
 
