@@ -2,7 +2,7 @@
 
 This folder holds **what to build**: requirements, feature specifications with acceptance criteria, and golden cases. Rules live in [`context.md`](../context.md); rationale in [`docs/report.md`](../docs/report.md); decisions in [`docs/adr/`](../docs/adr/README.md); how-to in [`DEVELOPMENT.md`](../DEVELOPMENT.md).
 
-> **Status (2026-11-11):** FEAT-000 … FEAT-007 and FEAT-009 are `approved` by the owner; FEAT-008 (P1) is `draft`. Nothing is implemented. *(2026-11-15: FEAT-010 (P1, after the MVP) added and `approved` by the owner, revision 4; GOLD-011 approved.)*
+> **Status (2026-11-11):** FEAT-000 … FEAT-007 and FEAT-009 are `approved` by the owner; FEAT-008 (P1) is `draft`. Nothing is implemented. *(2026-11-15: FEAT-010 (P1, after the MVP) added and `approved` by the owner, revision 4; GOLD-011 approved.)* *(2026-11-18: FEAT-011 … FEAT-017 (after the MVP, from [`docs/research/2026-11-17-ai-dispatcher-evolution.md`](../docs/research/2026-11-17-ai-dispatcher-evolution.md)) added as `draft`; none is approved; slices and owner actions are in [`backlog.md`](../backlog.md) §9.)*
 
 ## How specifications work
 
@@ -59,7 +59,7 @@ The tag names the test type: `unit`, `property`, `golden`, `contract`, `db`, `in
 
 | File | Content | Priority |
 |---|---|---|
-| [`requirements.md`](requirements.md) | REQ-001 … REQ-033, NFR-001 … NFR-015, traceability table | — |
+| [`requirements.md`](requirements.md) | REQ-001 … REQ-040, NFR-001 … NFR-020, traceability table | — |
 | [`_template.md`](_template.md) | FEAT template with the Agent Tool Spec block | — |
 | [`FEAT-000-monorepo-and-ci.md`](FEAT-000-monorepo-and-ci.md) | workspace, tooling, `ci-fast`, scripts, agent-instruction files | P0 |
 | [`FEAT-001-domain-sqlite-crud-auth.md`](FEAT-001-domain-sqlite-crud-auth.md) | SQLite, migrations, CRUD endpoints, CORS + CSRF, auth, audit | P0 |
@@ -72,6 +72,13 @@ The tag names the test type: `unit`, `property`, `golden`, `contract`, `db`, `in
 | [`FEAT-008-p1-offer-text-and-road-alternatives.md`](FEAT-008-p1-offer-text-and-road-alternatives.md) | offer text interpretation, road alternatives, risk rating | P1 |
 | [`FEAT-009-demo-media.md`](FEAT-009-demo-media.md) | demo video script, recording settings, screenshots | P0 |
 | [`FEAT-010-ltl-consolidation.md`](FEAT-010-ltl-consolidation.md) | LTL consolidation: offers-generator v3 (size-based tariff, grouped lanes), partner-aware pool, plan load metrics, GOLD-011 (`approved`) | P1 |
+| [`FEAT-011-driver-rotations-and-availability.md`](FEAT-011-driver-rotations-and-availability.md) | rotation patterns, calendar exceptions, derived duty windows, availability API, fleet calendar (`draft`) | Post |
+| [`FEAT-012-engine-reliability-and-cycle-aware-planning.md`](FEAT-012-engine-reliability-and-cycle-aware-planning.md) | job-level time budget, both profile passes, dominance, `home_requirement()`, return reserve, `profit_v2`, GOLD-012 (`draft`) | Post |
+| [`FEAT-013-compliance-profiles-v2.md`](FEAT-013-compliance-profiles-v2.md) | weekly-rest clock, rule table, 561 v2 options, weekly rest insertion, compensation, four-week return, profile selection (`draft`) | Post |
+| [`FEAT-014-commitments-and-execution.md`](FEAT-014-commitments-and-execution.md) | DB-enforced assignment uniqueness, stale-plan rejection, lifecycle, stop events, committed prefix (`draft`) | Post |
+| [`FEAT-015-event-driven-proposals.md`](FEAT-015-event-driven-proposals.md) | outbox, job kinds, offer evaluation, replanning, proposals, one `ApprovalService` (`draft`) | Post |
+| [`FEAT-016-agent-tools-for-planning.md`](FEAT-016-agent-tools-for-planning.md) | agent tools `driver_calendar`, `evaluate_insertion`, `compare_cycle_options`, `amend_assignment`, job handles, run recovery (`draft`) | Post |
+| [`FEAT-017-larger-fleets.md`](FEAT-017-larger-fleets.md) | benchmark grid, CP-SAT fleet selection, optional OR-Tools candidate generator (`draft`) | Post |
 | [`golden/`](golden/README.md) | GOLD-001 … GOLD-010 with shown arithmetic | P0 |
 
 Suggested implementation order: FEAT-000 → FEAT-001 → FEAT-002 → FEAT-003 → FEAT-004 → FEAT-006 → FEAT-005 → FEAT-007 → FEAT-009; FEAT-008 only if time allows ([`context.md` → Next Implementation Tasks](../context.md#next-implementation-tasks)).

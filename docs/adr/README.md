@@ -21,6 +21,11 @@ Each ADR records one decision: the context, what was decided, which alternatives
 | [ADR-0013](ADR-0013-llm-providers.md) | LangChain `init_chat_model`, model policy per role, optional key | §15.3, §22.3 |
 | [ADR-0014](ADR-0014-van-capacity.md) | Mass + EUR-pallet equivalents + declared pallet places; 2D geometry after the MVP | §16.2, §16.3 |
 | [ADR-0015](ADR-0015-frontend-ui-components-and-design-system.md) | Own design system "Clear Route v3" on Tailwind + Radix UI primitives; no shadcn/ui (accepted 2026-11-11) | §9 (superseded in part); [`docs/design/`](../design/README.md) |
+| [ADR-0016](ADR-0016-staged-optimizer-evolution.md) | **Proposed (2026-11-18).** Job-level time budget, cycle-aware objective `profit_v2`, CP-SAT fleet selection and an optional OR-Tools candidate generator; amends ADR-0004 | research note §7 |
+| [ADR-0017](ADR-0017-event-driven-proposals.md) | **Proposed (2026-11-18).** Transactional outbox, job kinds, deterministic proposals and one `ApprovalService`; no new runtime agent; amends ADR-0006, ADR-0008 | research note §8, §9.3 |
+| [ADR-0018](ADR-0018-compliance-profiles-v2-and-rest-ledger.md) | **Proposed (2026-11-18).** Versioned working-time profiles v2, a shared rule table and a rest ledger; amends ADR-0011 | research note §6 |
+
+ADR-0016 … ADR-0018 come from [`docs/research/2026-11-17-ai-dispatcher-evolution.md`](../research/2026-11-17-ai-dispatcher-evolution.md). They are `proposed`, not binding, until the owner accepts them (backlog owner actions O-15 … O-20).
 
 Rules:
 
